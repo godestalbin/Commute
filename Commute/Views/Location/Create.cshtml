@@ -1,0 +1,13 @@
+﻿@* Create/Update location - View for UI dialog *@
+@model Commute.Models.Location
+
+@using(Html.BeginForm("Create", "Location", FormMethod.Post))
+{
+    @*<input type="text" name="Name" />
+    <input type="text" name="EmailAddress" />*@
+    @Html.DisplayFor(model => model.Id)
+    @Html.Hidden("Id", @Model.Id)
+    @Html.EditorFor(model => model.Name )
+    @Html.ValidationMessageFor(model => model.Name)
+    <input type="submit" value="Submit" />
+}

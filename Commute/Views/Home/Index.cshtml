@@ -2,6 +2,14 @@
 
 <h2>Index 2012-10-30 16:00</h2>
 
+@*Menu*@
+<ul>
+    <li>Home</li>
+    <li>@Html.ActionLink("List location", "List", "Location")</li>
+    <li>@Html.ActionLink("Create location", "Create", "Location")</li>
+    <li>Update location</li>
+</ul>
+
 <ul>
     @foreach (var user in Model)
     {

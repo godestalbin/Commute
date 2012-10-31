@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2012 for Web
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Commute", "Mvc001\Commute.csproj", "{30D8A656-F3D5-42E6-A30F-74F8E22C2E97}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Commute", "Commute\Commute.csproj", "{30D8A656-F3D5-42E6-A30F-74F8E22C2E97}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
