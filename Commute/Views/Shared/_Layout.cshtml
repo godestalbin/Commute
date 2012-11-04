@@ -7,13 +7,17 @@
     <link rel="shortcut icon" type="image/png" href="/Blue car 32px">
 
     <title>@ViewBag.Title</title>
-    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/css") @* site style *@
+    @Styles.Render("~/Content/themes/base/css")  @* jQuey UI base style *@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
+    <div class="top_stripe"></div>
     @RenderBody()
 
-    @Scripts.Render("~/bundles/jquery")
-    @RenderSection("scripts", required: false)
+    @Scripts.Render("~/bundles/jquery") @* jQuey 1.7.1 *@
+    @Scripts.Render("~/bundles/jqueryui") @* jQuey 1.8.20 *@
+    @Scripts.Render("~/bundles/jqueryval") @* jQuey validation *@
+    @RenderSection("scripts", required: false) @* scripts included in the view *@
 </body>
 </html>

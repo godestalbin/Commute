@@ -1,0 +1,28 @@
+﻿@model Commute.Models.Location
+@using Commute.Properties;
+
+@Html.DisplayFor(model => model.Id )
+@Html.LabelFor(model => model.Name)
+@Html.EditorFor(model => model.Name )
+@Html.ValidationMessageFor(model => model.Name)
+
+@* Hidden fields *@
+<input id="hfId" type="hidden" value="@Model.Id"/>
+<input id="hfLatitude" type="hidden" value="@Model.Latitude"/>
+<input id="hfLongitude" type="hidden" value="@Model.Longitude"/>
+
+<div id="divMap" style="width:700px;height:500px;">
+
+<script>
+    $(document).ready(function () {
+        
+        //Update modal title: Creation/Update
+        if (@Model.Id == "" ) {
+            $('.ui-dialog-title').text("@Resources.Location_create"); //Create new location
+        }
+        else $('.ui-dialog-title').text("@Resources.Location_update"); //Update location
+
+        InitializeLocationMap()
+
+    });
+</script>

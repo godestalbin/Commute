@@ -9,18 +9,31 @@ namespace Commute.Models
     public class Context : DbContext
     {
         public DbSet<Location> Locations { get; set; }
+        public DbSet<Route> Route { get; set; }
+        public DbSet<RouteWayPoint> RouteWayPoint { get; set; }
         public DbSet<User> Users { get; set; }
         
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<Context, Configuration>());
 
-            //Set the precision for decimal - cannot compile
-            modelBuilder.Entity<Location>().Property(location => location.Name).HasMaxLength(100); //Annotation does not work on AppHarbor
+            //Set the precision for decimal - does not work on AppHarbor
+
+            //Location
+            modelBuilder.Entity<Location>().Property(location => location.Name).HasMaxLength(100);
             modelBuilder.Entity<Location>().Property(location => location.Latitude).HasPrecision(18, 14);
             modelBuilder.Entity<Location>().Property(location => location.Longitude).HasPrecision(18, 14);
-            //modelBuilder.Entity<Location>().Property(object => object.Latitude).HasPrecision(12, 10);
-            //http://stackoverflow.com/questions/3504660/entity-framework-code-first-decimal-precision
+
+            //Route
+            modelBuilder.Entity<Route>().Property(model => model.StartLatitude).HasPrecision(18, 14);
+            modelBuilder.Entity<Route>().Property(model => model.StartLongitude).HasPrecision(18, 14);
+            modelBuilder.Entity<Route>().Property(model => model.EndLatitude).HasPrecision(18, 14);
+            modelBuilder.Entity<Route>().Property(model => model.EndLongitude).HasPrecision(18, 14);
+
+            //RouteWayPoint
+            modelBuilder.Entity<RouteWayPoint>().Property(model => model.Latitude).HasPrecision(18, 14);
+            modelBuilder.Entity<RouteWayPoint>().Property(model => model.Longitude).HasPrecision(18, 14);
+
         }
     }
 }

@@ -10,6 +10,7 @@ namespace Commute.Models
     {
         [Required]
         [StringLength(100)]
+        [Display(Name = "Location_name", ResourceType = typeof(Properties.Resources))]
         public string Name { get; set; }
         [DisplayFormat(DataFormatString = "{0:###.##############}")]
         public Nullable<decimal> Latitude { get; set; }

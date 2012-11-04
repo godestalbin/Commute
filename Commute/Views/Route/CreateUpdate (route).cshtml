@@ -1,0 +1,91 @@
+﻿@model Commute.Models.Route
+
+
+@{
+    ViewBag.Title = "Route/CreateUpdate";
+}
+
+
+<h2>Route/CreateUpdate</h2>
+
+<input id="hfId" type="hidden" value="@Model.Id"/>
+<input id="hfUserId" type="hidden" value="@Model.UserId"/>
+<input id="hfStartLatitude" type="hidden" value="@Model.StartLatitude"/>
+<input id="hfStartLongitude" type="hidden" value="@Model.StartLongitude"/>
+<input id="hfEndLatitude" type="hidden" value="@Model.EndLatitude"/>
+<input id="hfEndLongitude" type="hidden" value="@Model.EndLongitude"/>
+
+<div id="divMap" style="width:700px;height:500px;">
+
+@section scripts {
+<script>
+    //----------
+    //Functions
+    //----------
+
+    function InitializeRouteMap() {
+        //TMP - later we should get center in another way
+        var mapCenter = new google.maps.LatLng(39.907004, 116.39759); //Center on Beijing Tian An Men
+
+        var zoomControl = {
+            //position: google.maps.ControlPosition.TOP_LEFT,
+            style: google.maps.ZoomControlStyle.SMALL
+        }
+        //Define map properties
+        var mapProp = {
+            zoom: 12,
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            panControl: false,
+            streetViewControl: false,
+            zoomControlOptions: zoomControl
+        };
+        //Display the map in the div
+        var map = new google.maps.Map(document.getElementById("divMap"), mapProp);
+        //Force map to expand to div
+        setTimeout(function () { google.maps.event.trigger(map, 'resize'); map.setCenter(mapCenter); }, 100);
+
+        //Add map click event
+        google.maps.event.addListener(map, 'click', function (event) {
+            if ($('#hfStartLatitude').val() == 0) { //Start point not created yet
+                CreateMarker(event.latLng, 1, true, 'http://chart.apis.google.com/chart?chst=d_map_pin_letter_withshadow&chld=A|6BC54D|000000'); //Create new marker with location clicked
+                $('#hfStartLatitude').val(event.latLng.lat()); //Register start point
+                $('#hfStartLongitude').val(event.latLng.lng());
+            }
+            else if ($('#hfEndLatitude').val() == 0) { //End point not created yet
+                CreateMarker(event.latLng, 255, true, 'http://chart.apis.google.com/chart?chst=d_map_pin_letter_withshadow&chld=B|6BC54D|000000'); //Create new marker with location clicked
+                $('#hfEndLatitude').val(event.latLng.lat()); //Register end point
+                $('#hfEndLongitude').val(event.latLng.lng());
+            }
+        });
+
+        function CreateMarker(location, id, draggable, icon) {
+            //optional draggable: default = true
+            draggable = typeof draggable !== 'undefined' ? draggable : true;
+
+            var marker = new google.maps.Marker({
+                position: location,
+                id: id,
+                draggable: draggable,
+                icon: icon,
+                map: map
+            });
+            //Add marker event to track drag end
+            google.maps.event.addListener(marker, 'dragend', function (event) {
+                //Update hidden field with lat/lng
+                alert(marker.id);
+                $('#hfLatitude').val(event.latLng.lat());
+                $('#hfLongitude').val(event.latLng.lng());
+            });
+        }
+
+
+
+    }
+
+    jQuery(document).ready(function () {
+        InitializeRouteMap();
+    });
+
+</script>
+<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyC0KjUdM6DpNQAggngGkuKLFvoHw-lJ0H4&sensor=false"></script>
+}

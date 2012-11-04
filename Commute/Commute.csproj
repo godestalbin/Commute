@@ -128,17 +128,27 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LocationController.cs" />
+    <Compile Include="Controllers\RouteController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Configuration.cs" />
     <Compile Include="Models\Context.cs" />
+    <Compile Include="Models\RouteView.cs" />
+    <Compile Include="Models\RouteWayPoint.cs" />
     <Compile Include="Models\Entity.cs" />
     <Compile Include="Models\Location.cs" />
+    <Compile Include="Models\Route.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Commute.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -226,12 +236,26 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Location\Create.cshtml" />
     <Content Include="Views\Location\List.cshtml" />
+    <Content Include="Views\Location\CreateUpdate.cshtml" />
+    <Content Include="Views\Route\Index.cshtml" />
+    <Content Include="Views\Route\Details.cshtml" />
+    <Content Include="Views\Route\Create.cshtml" />
+    <Content Include="Views\Route\Edit.cshtml" />
+    <Content Include="Views\Route\Delete.cshtml" />
+    <Content Include="Views\Route\CreateUpdate.cshtml" />
+    <Content Include="Views\Route\CreateUpdate %28route%29.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

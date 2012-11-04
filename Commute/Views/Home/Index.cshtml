@@ -1,4 +1,7 @@
 ﻿@model IEnumerable<Commute.Models.User>
+@using Commute.Properties;
+
+<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyC0KjUdM6DpNQAggngGkuKLFvoHw-lJ0H4&sensor=false"></script>
 
 <h2>Index 2012-10-30 16:00</h2>
 
@@ -10,16 +13,121 @@
     <li>Update location</li>
 </ul>
 
-<ul>
-    @foreach (var user in Model)
-    {
-        <li>@user.Name (@user.EmailAddress)</li>
-    }
-</ul>
+@* Create/Update location image button and div to display UI dialog *@
+<img id="imgCreateUpdateLocation" class="icon_map" src="@Url.Content("~/Content/Images/Empty.png")" width="1" height="1" />
+<div id="divCreateUpdateLocation"></div> @*Create location UI dialog*@
 
-@using(Html.BeginForm("Create", "Home", FormMethod.Post))
-{
-    <input type="text" name="Name" />
-    <input type="text" name="EmailAddress" />
-    <input type="submit" value="Submit" />
+
+@section scripts {
+<script>
+    jQuery(document).ready(function () {
+
+        //Create update location
+
+        //Update location click
+        $('#imgCreateUpdateLocation').click(function () {
+            //Open (create) update location UI dialog
+            $('#divCreateUpdateLocation').load("/Location/CreateUpdate/" + $('#iptLocationId').val(), function () {
+                $(this).dialog('open');
+            });
+        });
+
+        //UI dialog to create update location
+        //Create new location UI dialog
+        $('#divCreateUpdateLocation').dialog({
+            autoOpen: false,
+            width: 800,
+            height: 400, //600,
+            resizable: false,
+            modal: true,
+            //title: "Create new location",
+            //resizeStop: function(event, ui) {google.maps.event.trigger(map, 'resize')  },
+            //open: function (event, ui) { google.maps.event.trigger(map, 'resize'); },
+            //map.setCenter(mapCenter); },
+            //open is called after document is loaded
+            //open: function() {alert("Initializing");InitializeMap();alert("Done");}, //alert(map);$('#divMap').css("width","200px");$('#divMap').css("height","200px");},
+            //open: function() {InitializeMap();},
+            buttons: {
+                '@Resources.Save': function () {
+                    //if ($('#hfId').val() == 0) { //Create new location
+                        $.post("@Url.Action("CreateUpdate","Location")",
+                    {
+                        Id: $('#hfId').val(),
+                        name: $('#Name').val(),
+                        latitude: $('#hfLatitude').val(),
+                        longitude: $('#hfLongitude').val()
+                    },
+                    function (data, status, xhr) {
+                        if (data.Success) {
+                            $('#divCreateUpdateLocation').dialog("close");
+                        }
+                        else {
+                        }
+                    });
+                },
+                '@Resources.Cancel': function () {
+                    $(this).dialog("close");
+                }
+            }
+        });
+
+    }); //jQuery(document).ready
+
+    //----------
+    //Functions
+    //----------
+
+    function InitializeLocationMap() {
+        //TMP - later we should get center in another way
+        var mapCenter = new google.maps.LatLng(39.907004, 116.39759); //Center on Beijing Tian An Men
+
+        var zoomControl = {
+            //position: google.maps.ControlPosition.TOP_LEFT,
+            style: google.maps.ZoomControlStyle.SMALL
+        }
+        //Define map properties
+        var mapProp = {
+            zoom: 12,
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            panControl: false,
+            streetViewControl: false,
+            zoomControlOptions: zoomControl
+        };
+        //Display the map in the div
+        var map = new google.maps.Map(document.getElementById("divMap"), mapProp);
+        //Force map to expand to div
+        setTimeout(function () { google.maps.event.trigger(map, 'resize'); map.setCenter(mapCenter); }, 100);
+
+        //Add map click event
+        google.maps.event.addListener(map, 'click', function (event) {
+            if ($('#hfLatitude').val() == 0) { //If not coordinates allow to create new marker on map click
+                CreateMarker(event.latLng, true); //Create new marker with location clicked
+                $('#hfLatitude').val(event.latLng.lat());
+                $('#hfLongitude').val(event.latLng.lng());
+            }
+        });
+
+        function CreateMarker(location, draggable, icon) {
+            //optional draggable: default = true
+            draggable = typeof draggable !== 'undefined' ? draggable : true;
+
+            var marker = new google.maps.Marker({
+                position: location,
+                draggable: draggable,
+                icon: icon,
+                map: map
+            });
+            //Add marker event to track drag end
+            google.maps.event.addListener(marker, 'dragend', function (event) {
+                //Update hidden field with lat/lng
+                $('#hfLatitude').val(event.latLng.lat());
+                $('#hfLongitude').val(event.latLng.lng());
+            });
+        }
+
+
+
+    }
+
+</script>
 }

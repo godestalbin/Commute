@@ -30,22 +30,39 @@ namespace Commute.Controllers
                 location.Longitude = loc.Longitude;
                 db.Locations.Add(location);
                 db.SaveChanges();
-                //return Json(new { Success = true });
             }
             return RedirectToAction("List");
         }
 
-        //Partial (modal) to update existing location
-        public ActionResult Update(int locationId = 0)
+        //Partial (modal) to create or update location
+        public ActionResult CreateUpdate(int id = 0)
         {
-            Location a = db.Locations.Find(1);
-            Location location = db.Locations.Find(locationId);
+            Location a = db.Locations.Find(id);
+            Location location = db.Locations.Find(id);
+            //Location not found, create new location
+            if (location == null) location = new Location();
 
-            var linq = from l in db.Locations
-                       orderby l.Name
-                       select new Location { Id = l.Id, Name = l.Name, Latitude = l.Latitude, Longitude = l.Longitude };
-            return PartialView("Create", location);
+            return PartialView("CreateUpdate", location);
         }
+
+        [HttpPost()]
+        [ActionName("CreateUpdate")]
+        public ActionResult CreateUpdatePost(Location loc)
+        {
+            if (ModelState.IsValid)
+            {
+                Location location;
+                if (loc.Id == 0) location = new Location();
+                else location = db.Locations.Find(loc.Id);
+                location.Name = loc.Name;
+                location.Latitude = loc.Latitude;
+                location.Longitude = loc.Longitude;
+                if (loc.Id == 0) db.Locations.Add(location);
+                db.SaveChanges();
+            }
+            return RedirectToAction("List");
+        }
+
 
         //List all location - TMP for testing
         public ActionResult List()
