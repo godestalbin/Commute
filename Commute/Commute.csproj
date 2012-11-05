@@ -149,6 +149,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Commute.css" />
+    <Content Include="Content\Images\Blue car 32px.png" />
     <Content Include="Content\Images\Commute icon.png" />
     <Content Include="Content\Images\Empty.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
