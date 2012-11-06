@@ -1,0 +1,50 @@
+﻿@model Commute.Models.User
+@using Commute.Properties
+
+@{ ViewBag.Title = @Resources.Update_account; }
+
+<h2>Edit</h2>
+
+
+    <table>
+        <tr>
+            <td>
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+    <table>
+        <tr>
+            <td>@Html.LabelFor(model => model.Id)</td>
+            <td><div class="non-editable-data">@String.Format("{0:00000000}",@Model.Id)</div></td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(model => model.Account)</td>
+            <td><div class="non-editable-data">@Model.Account</td>
+            @Html.Hidden("Account", @Model.Password) @*Account name need to be posted*@
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(model => model.EmailAddress)</td>
+            <td>
+                @Html.EditorFor(model => model.EmailAddress)
+                @Html.ValidationMessageFor(model => model.EmailAddress)
+                @Html.Hidden("Password", @Model.Password) @*Password is mandatory so we include it here*@
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="@Resources.Update_data" /></td>
+        </tr>
+    </table>
+}
+
+            </td>
+            <td>
+                <img id="userImage" class="user-image" src="@Url.Content(Resources.Dir_image_upload + "/" + @String.Format("{0:00000000}", @Model.Id) + ".jpg?" + DateTime.Now.Millisecond)"/>
+                @Html.Partial("UploadFile")
+            </td>
+        </tr>
+    </table>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

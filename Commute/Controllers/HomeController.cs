@@ -14,12 +14,12 @@ namespace Commute.Controllers
         public ActionResult Index()
         {
             ViewBag.Title = "Home/Index";
-            return View(_context.Users);
+            return View(_context.User);
         }
 
         public ActionResult Create(User user)
         {
-            _context.Users.Add(user);
+            _context.User.Add(user);
             _context.SaveChanges();
 
             return RedirectToAction("Index");

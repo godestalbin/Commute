@@ -61,11 +61,11 @@ namespace Commute.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to account does not exist in Phonebook.
+        ///   Looks up a localized string similar to Account name.
         /// </summary>
-        public static string Account_not_in_Phonebook {
+        public static string Account {
             get {
-                return ResourceManager.GetString("Account not in Phonebook", resourceCulture);
+                return ResourceManager.GetString("Account", resourceCulture);
             }
         }
         
@@ -124,6 +124,24 @@ namespace Commute.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Create account.
+        /// </summary>
+        public static string Create_account {
+            get {
+                return ResourceManager.GetString("Create account", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /Content/Images/Upload/.
+        /// </summary>
+        public static string Dir_image_upload {
+            get {
+                return ResourceManager.GetString("Dir image upload", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You are now a driver, drive safe.
         /// </summary>
         public static string Driver_created {
@@ -169,11 +187,29 @@ namespace Commute.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to E-mail address.
+        /// </summary>
+        public static string Email {
+            get {
+                return ResourceManager.GetString("Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Database error.
         /// </summary>
         public static string Error_database_access {
             get {
                 return ResourceManager.GetString("Error database access", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to String is too long.
+        /// </summary>
+        public static string Error_string_too_long {
+            get {
+                return ResourceManager.GetString("Error string too long", resourceCulture);
             }
         }
         
@@ -232,6 +268,15 @@ namespace Commute.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Login.
+        /// </summary>
+        public static string Login {
+            get {
+                return ResourceManager.GetString("Login", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This field is mandatory.
         /// </summary>
         public static string Mandatory {
@@ -246,6 +291,33 @@ namespace Commute.Properties {
         public static string No_record {
             get {
                 return ResourceManager.GetString("No record", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password.
+        /// </summary>
+        public static string Password {
+            get {
+                return ResourceManager.GetString("Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Confirm password.
+        /// </summary>
+        public static string Password_confirm {
+            get {
+                return ResourceManager.GetString("Password confirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Picture.
+        /// </summary>
+        public static string Picture {
+            get {
+                return ResourceManager.GetString("Picture", resourceCulture);
             }
         }
         
@@ -291,6 +363,42 @@ namespace Commute.Properties {
         public static string To {
             get {
                 return ResourceManager.GetString("To", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update.
+        /// </summary>
+        public static string Update {
+            get {
+                return ResourceManager.GetString("Update", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update account.
+        /// </summary>
+        public static string Update_account {
+            get {
+                return ResourceManager.GetString("Update account", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update data.
+        /// </summary>
+        public static string Update_data {
+            get {
+                return ResourceManager.GetString("Update data", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update picture.
+        /// </summary>
+        public static string Update_picture {
+            get {
+                return ResourceManager.GetString("Update picture", resourceCulture);
             }
         }
     }

@@ -1,0 +1,45 @@
+﻿@* Virtual view to host the UI dialog and scripts for Route/CreateUpdate *@
+@using Commute.Properties;
+
+<div id="divCreateUpdateRoute"></div> @*Create route UI dialog*@
+
+<script>
+    jQuery(document).ready(function () {
+        //UI dialog to create update location
+        //Create new location UI dialog
+        $('#divCreateUpdateLocation').dialog({
+            autoOpen: false,
+            width: 800,
+            height: 400, //600,
+            resizable: false,
+            modal: true,
+            buttons: {
+                '@Resources.Save': function () {
+                    //if ($('#hfId').val() == 0) { //Create new location
+                    $.post("@Url.Action("CreateUpdate","Route")",
+                {
+                    Id: $('#hfId').val(),
+                    name: $('#Name').val(),
+                    latitude: $('#hfLatitude').val(),
+                    longitude: $('#hfLongitude').val()
+                },
+                function (data, status, xhr) {
+                    if (data.Success) {
+                        $('#divCreateUpdateLocation').dialog("close");
+                    }
+                    else {
+                    }
+                });
+                },
+                '@Resources.Cancel': function () {
+                    $(this).dialog("close");
+                }
+            }
+        });
+
+        //Load Route/CreateUpdate UI dialog
+        $('#divCreateUpdateRoute').load("/Route/CreateUpdate/" + $('#iptRouteId').val(), function () {
+            $(this).dialog('open');
+        });
+    })
+</script>

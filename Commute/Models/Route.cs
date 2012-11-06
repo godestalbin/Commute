@@ -11,6 +11,7 @@ namespace Commute.Models
         [DisplayFormat(DataFormatString = "{0:###}")]
         public int UserId { get; set; }
         public bool IsSeek { get; set; } //false=offering route, true=seeking for this route
+        public string Name { get; set; }
         [DisplayFormat(DataFormatString = "{0:###.##############}")]
         public Nullable<decimal> StartLatitude { get; set; }
         [DisplayFormat(DataFormatString = "{0:###.##############}")]

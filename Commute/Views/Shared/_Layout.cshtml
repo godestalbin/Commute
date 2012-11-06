@@ -12,8 +12,10 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="top_stripe"></div>
+    @Html.Partial("_Menu")
+    <div class="main-body">
     @RenderBody()
+    </div>
 
     @Scripts.Render("~/bundles/jquery") @* jQuey 1.7.1 *@
     @Scripts.Render("~/bundles/jqueryui") @* jQuey 1.8.20 *@

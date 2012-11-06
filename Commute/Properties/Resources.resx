@@ -117,30 +117,42 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Account not in Phonebook" xml:space="preserve"> <value>account does not exist in Phonebook</value> </data>
+  <data name="Account" xml:space="preserve"> <value>Account name</value> </data>
   <data name="Added to car" xml:space="preserve"> <value>Added to this car</value> </data>
   <data name="Already in car" xml:space="preserve"> <value>Already in this car</value> </data>
   <data name="Application name" xml:space="preserve"> <value>Commute</value> </data>
   <data name="Cancel" xml:space="preserve"> <value>Cancel</value> </data>
   <data name="Connection agenda" xml:space="preserve"> <value>Connection agenda</value> </data>
+  <data name="Create account" xml:space="preserve"> <value>Create account</value> </data>
   <data name="Driver created" xml:space="preserve"> <value>You are now a driver, drive safe</value> </data>
   <data name="Driver deleted" xml:space="preserve"> <value>Driver removed from connection</value> </data>
   <data name="Driver for this connection" xml:space="preserve"> <value>You are already the driver for this connection</value> </data>
   <data name="Driver not passenger" xml:space="preserve"> <value>You are the driver for this connection, not a passenger</value> </data>
   <data name="Driver updated" xml:space="preserve"> <value>You are now the driver</value> </data>
+  <data name="Dir image upload" xml:space="preserve"> <value>/Content/Images/Upload/</value> </data>
   <data name="Connection not found" xml:space="preserve"> <value>Connection not found</value> </data>
+  <data name="Email" xml:space="preserve"> <value>E-mail address</value> </data>
   <data name="Error database access" xml:space="preserve"> <value>Database error</value> </data>
+  <data name="Error string too long" xml:space="preserve"> <value>String is too long</value> </data>
   <data name="From" xml:space="preserve"> <value>From</value> </data>
   <data name="Location are the same" xml:space="preserve"> <value>The 2 locations are the same</value> </data>
   <data name="Location create" xml:space="preserve"> <value>Create new location</value> </data>
   <data name="Location name" xml:space="preserve"> <value>Location name</value> </data>
   <data name="Location update" xml:space="preserve"> <value>Update location</value> </data>
   <data name="Location type" xml:space="preserve"> <value>Type</value> </data>
+  <data name="Login" xml:space="preserve"> <value>Login</value> </data>
   <data name="Mandatory" xml:space="preserve"> <value>This field is mandatory</value> </data>
   <data name="No record" xml:space="preserve"> <value>This record does not exists</value> </data>
+  <data name="Password" xml:space="preserve"> <value>Password</value> </data>
+  <data name="Password confirm" xml:space="preserve"> <value>Confirm password</value> </data>
+  <data name="Picture" xml:space="preserve"> <value>Picture</value> </data>
   <data name="Removed from car" xml:space="preserve"> <value>Removed from this car</value> </data>
   <data name="Save" xml:space="preserve"> <value>Save</value> </data>
   <data name="Specify seat in car" xml:space="preserve"> <value>Select the maximum number of passengers you can drive (driver not included)</value> </data>
   <data name="Time updated" xml:space="preserve"> <value>Updated time</value> </data>
   <data name="To" xml:space="preserve"> <value>To</value> </data>
+  <data name="Update" xml:space="preserve"> <value>Update</value> </data>
+  <data name="Update account" xml:space="preserve"> <value>Update account</value> </data>
+  <data name="Update data" xml:space="preserve"> <value>Update data</value> </data>
+  <data name="Update picture" xml:space="preserve"> <value>Update picture</value> </data>
 </root>

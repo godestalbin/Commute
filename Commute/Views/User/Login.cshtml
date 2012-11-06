@@ -1,0 +1,28 @@
+﻿@model Commute.Models.User
+@using Commute.Properties
+
+@{ ViewBag.Title = @Resources.Login; }
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+    <table>
+        <tr>
+            <td>@Html.LabelFor(model => model.Account)</td>
+            <td>
+                @Html.EditorFor(model => model.Account)
+                @Html.ValidationMessageFor(model => model.Account)
+            </td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(model => model.Password)</td>
+            <td>
+                @Html.EditorFor(model => model.Password)
+                @Html.ValidationMessageFor(model => model.Password)
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="@Resources.Login" /></td>
+        </tr>
+    </table>
+}

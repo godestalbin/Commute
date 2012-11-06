@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace Commute.Models
 {
@@ -11,10 +12,11 @@ namespace Commute.Models
         public DbSet<Location> Locations { get; set; }
         public DbSet<Route> Route { get; set; }
         public DbSet<RouteWayPoint> RouteWayPoint { get; set; }
-        public DbSet<User> Users { get; set; }
-        
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
+        public DbSet<User> User { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder) {
+            //Remove plural for table names
+            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<Context, Configuration>());
 
             //Set the precision for decimal - does not work on AppHarbor
