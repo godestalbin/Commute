@@ -16,21 +16,26 @@ namespace Commute.Controllers
         private Context db = new Context();
         
         //Login
+        [AllowAnonymous]
         public ActionResult Login()
         {
             return View();
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public ActionResult Login(User userLogin)
         {
             User user = (from u in db.User
                          where u.Account == userLogin.Account
                          select u).FirstOrDefault();
-            if (user != null && user.Password == userLogin.Password)
+            if (user == null) ModelState.AddModelError("Account", Resources.Error_unknown_account);
+            else if (user.Password == userLogin.Password)
             {
                 System.Web.Security.FormsAuthentication.SetAuthCookie(user.Account,false); //false no persistent cookie
+                return RedirectToAction("Index", "Home");
             }
+            else ModelState.AddModelError("Password", Resources.Error_wrong_password);
             return View();
         }
 

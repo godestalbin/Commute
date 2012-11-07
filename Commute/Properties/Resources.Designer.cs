@@ -214,6 +214,24 @@ namespace Commute.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This account does not exists.
+        /// </summary>
+        public static string Error_unknown_account {
+            get {
+                return ResourceManager.GetString("Error unknown account", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wrong password, did you forget it...too bad !.
+        /// </summary>
+        public static string Error_wrong_password {
+            get {
+                return ResourceManager.GetString("Error wrong password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to From.
         /// </summary>
         public static string From {

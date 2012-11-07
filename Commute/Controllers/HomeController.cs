@@ -14,6 +14,7 @@ namespace Commute.Controllers
         public ActionResult Index()
         {
             ViewBag.Title = "Home/Index";
+            if (User.Identity.IsAuthenticated) ViewBag.userName = User.Identity.Name;
             return View(_context.User);
         }
 

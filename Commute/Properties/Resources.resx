@@ -155,4 +155,6 @@
   <data name="Update account" xml:space="preserve"> <value>Update account</value> </data>
   <data name="Update data" xml:space="preserve"> <value>Update data</value> </data>
   <data name="Update picture" xml:space="preserve"> <value>Update picture</value> </data>
+  <data name="Error unknown account" xml:space="preserve"> <value>This account does not exists</value> </data>
+  <data name="Error wrong password" xml:space="preserve"> <value>Wrong password, did you forget it...too bad !</value> </data>
 </root>
