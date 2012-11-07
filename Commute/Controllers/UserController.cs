@@ -40,12 +40,14 @@ namespace Commute.Controllers
         }
 
         //Register
+        [AllowAnonymous]
         public ActionResult Register()
         {
             return View();
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public ActionResult Register(User user)
         {
             if (ModelState.IsValid)
