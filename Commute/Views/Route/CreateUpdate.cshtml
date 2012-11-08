@@ -150,10 +150,24 @@ function CreateMarker(location, id, draggable, icon) {
                 UpdateRoute();
             }
         });
+        //TMP
+        //Add maker event to display marker coordinates
+        google.maps.event.addListener(marker, "mouseover", function(event) {
+            //alert(marker.position.lat().toString() + "/" + marker.position.lng().toString());
+            //new google.maps.infoWindow({
+            //    map: map,
+            //    position: event.latLng,
+            //    content: "Hello" //marker.position.lat().toString() + "/" + marker.position.lng().toString()
+            //});
+            ////infowindow.open(map);
+        });
     } //CreateMarker
 
     //Refresh the route on the map with data in routeWayPoint
     function UpdateRoute() {
+
+        if (routeWayPoint.length < 2 ) return; //Less than 2 points no route to display
+
         //Create directionService to request route to Google
         var directionsService = new google.maps.DirectionsService();
 
@@ -187,7 +201,7 @@ function CreateMarker(location, id, draggable, icon) {
     //Synchronous Ajax to get route and way points
     function GetWayPoint() {
         $.ajax({ 
-            'async': false, 'url': '/Route/WayPoint/', 'type': 'get', 'dataType': 'json',
+            'async': false, 'url': '/Route/WayPoint?id=' + @Model.Id, 'type': 'get', 'dataType': 'json',
             'success': function (data) {
                 routeWayPoint = data.Data;
                 //alert(1);

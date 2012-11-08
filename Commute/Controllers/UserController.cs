@@ -5,9 +5,12 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using System.IO;
+using System.Web.Security; //Form authentication
+using System.IO; //Upload file (write file on server)
 using Commute.Models;
 using Commute.Properties;
+using Amazon.S3.Model;
+using Amazon.S3;
 
 namespace Commute.Controllers
 {
@@ -32,11 +35,19 @@ namespace Commute.Controllers
             if (user == null) ModelState.AddModelError("Account", Resources.Error_unknown_account);
             else if (user.Password == userLogin.Password)
             {
-                System.Web.Security.FormsAuthentication.SetAuthCookie(user.Account,false); //false no persistent cookie
-                return RedirectToAction("Index", "Home");
+                FormsAuthentication.SetAuthCookie(user.Account,false); //false no persistent cookie
+                Session["userId"] = user.Id;
+                return RedirectToAction("List", "Route", new { userId = user.Id }); //Later should be Home/Index
             }
             else ModelState.AddModelError("Password", Resources.Error_wrong_password);
             return View();
+        }
+
+        //Logoff
+        public ActionResult Logout()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Index", "Home");
         }
 
         //Register
@@ -84,19 +95,40 @@ namespace Commute.Controllers
 
         //Upload (post only)
         [HttpPost]
-        public ActionResult UploadFile()
+        public ActionResult UploadFile(Entity entity)
         {
             foreach (string file in Request.Files)
             {
                 HttpPostedFileBase postFile = Request.Files[file] as HttpPostedFileBase;
                 if (postFile.ContentLength == 0)
                     continue;
-                string savedFileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + Resources.Dir_image_upload, String.Format("{0:00000000}", Request.RequestContext.RouteData.Values["id"]) + Path.GetExtension(postFile.FileName));
-                postFile.SaveAs(savedFileName);
+                //Save on the server - Cannot be used for App Harbour
+                //string savedFileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + Resources.Dir_image_upload, String.Format("{0:00000000}", entity.Id ) + Path.GetExtension(postFile.FileName));
+                //postFile.SaveAs(savedFileName);
 
                 //Need to save the extension in database if we want to display different type of files.
+
+                //Now save to Amazon S3
+                UploadToAmazonService(postFile, String.Format("{0:00000000}", entity.Id) + Path.GetExtension(postFile.FileName));
             }
-            return RedirectToAction("Edit", Request.RequestContext.RouteData.Values["id"]);
+            return RedirectToAction("Edit", new {id=entity.Id});
+        }
+
+        private void UploadToAmazonService(HttpPostedFileBase file, string filename)
+        {
+            string bucketName = System.Configuration.ConfigurationManager.AppSettings["AWSPublicFilesBucket"]; //commute bucket
+
+            string publicFile = "Pictures/" + filename; //We have Pictures folder in the bucket
+
+            PutObjectRequest request = new PutObjectRequest();
+            request.WithBucketName(bucketName);
+            request.WithKey(publicFile);
+            request.WithInputStream(file.InputStream);
+            request.AutoCloseStream = true;
+            request.CannedACL = S3CannedACL.PublicRead; //Read access for everyone
+
+            AmazonS3 client = Amazon.AWSClientFactory.CreateAmazonS3Client(); //uses AWSAccessKey and AWSSecretKey defined in Web.config
+            using (S3Response r = client.PutObject(request)) { }
         }
 
 

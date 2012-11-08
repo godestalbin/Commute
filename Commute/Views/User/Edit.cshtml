@@ -3,14 +3,11 @@
 
 @{ ViewBag.Title = @Resources.Update_account; }
 
-<h2>Edit</h2>
-
-
     <table>
         <tr>
             <td>
 @using (Html.BeginForm()) {
-    @Html.ValidationSummary(true)
+@Html.ValidationSummary(true)
     <table>
         <tr>
             <td>@Html.LabelFor(model => model.Id)</td>
@@ -38,8 +35,8 @@
 
             </td>
             <td>
-                <img id="userImage" class="user-image" src="@Url.Content(Resources.Dir_image_upload + "/" + @String.Format("{0:00000000}", @Model.Id) + ".jpg?" + DateTime.Now.Millisecond)"/>
-                @Html.Partial("UploadFile")
+                <img id="userImage" class="user-image" src="@Url.Content(Resources.Amazon_picture_HTTP + @String.Format("{0:00000000}", @Model.Id) + ".jpg?" + DateTime.Now.Millisecond)"/>
+                @Html.Partial("UploadFile", new Commute.Models.Entity { Id = @Model.Id } )
             </td>
         </tr>
     </table>

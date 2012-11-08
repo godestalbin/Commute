@@ -19,6 +19,7 @@ div.top_stripe {
     position: fixed;
     left: 10px;
     top: 10px;
+    z-index: 10;
     background: url("/Content/Images/Commute icon.png") 0px -31px;
     background-repeat: repeat-x;
     border-radius: 2px;
@@ -34,13 +35,31 @@ div.menu {
     font-weight:800;
     color: #b4b6ee;
     position:absolute;
-    right: 0px;
+    right: 200px;
     top: 0px;
+    z-index: 100;
+}
+div.login-menu {
+    position:absolute;
+    right: 0px;
+    top: 3px;
+    font-weight:800;
+    color: #b4b6ee;
+    background-color: rgba(234, 231, 231, 0.50);
+    border-radius: 10px;
 }
 div.non-editable-data {
     border-radius: 5px;
     background-color: #d4bfbf;
     border:  solid 1px #808080;
+}
+/* table */
+table {
+    vertical-align: top;
+    /*border: 1px;*/
+}
+td {
+    vertical-align: top;
 }
 /* input */
 input {
@@ -55,4 +74,10 @@ input.input-file-upload {
 img.user-image {
     border: solid 1px;
     border-radius: 10px;
+}
+/* li */
+li.anonymous {
+    text-emphasis:  circle;
+    text-decoration: wavy;
+    color: red;
 }

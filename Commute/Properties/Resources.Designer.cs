@@ -88,6 +88,15 @@ namespace Commute.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to https://s3-eu-west-1.amazonaws.com/commute/Pictures/.
+        /// </summary>
+        public static string Amazon_picture_HTTP {
+            get {
+                return ResourceManager.GetString("Amazon picture HTTP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Commute.
         /// </summary>
         public static string Application_name {
@@ -417,6 +426,15 @@ namespace Commute.Properties {
         public static string Update_picture {
             get {
                 return ResourceManager.GetString("Update picture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Welcome.
+        /// </summary>
+        public static string Welcome {
+            get {
+                return ResourceManager.GetString("Welcome", resourceCulture);
             }
         }
     }

@@ -247,7 +247,7 @@
     <Content Include="Views\Location\Create.cshtml" />
     <Content Include="Views\Location\List.cshtml" />
     <Content Include="Views\Location\CreateUpdate.cshtml" />
-    <Content Include="Views\Route\Index.cshtml" />
+    <Content Include="Views\Route\List.cshtml" />
     <Content Include="Views\Route\Details.cshtml" />
     <Content Include="Views\Route\Create.cshtml" />
     <Content Include="Views\Route\Edit.cshtml" />
@@ -264,6 +264,7 @@
     <Content Include="Views\Shared\_Menu.cshtml" />
     <Content Include="Views\User\UploadFile.cshtml" />
     <Content Include="Views\User\Login.cshtml" />
+    <Content Include="Views\Shared\_LoginMenu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

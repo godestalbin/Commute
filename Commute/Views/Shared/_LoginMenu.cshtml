@@ -1,0 +1,22 @@
+﻿@using Commute.Properties
+
+<div class="top_stripe">
+    <div class="login-menu">
+        <table>
+            <tr>
+                <td><span>@if ( @ViewBag.userName != null ) { <span>@Resources.Welcome @ViewBag.userName ID=@ViewBag.userId</span> }</td>
+                <td style="width: 20px"></td>
+                <td>
+            @if ( @ViewBag.userName == null ) {
+                <div class="anonymous">@Html.ActionLink("Login", "Login", "User")</div>
+                <div class="anonymous">@Html.ActionLink("Register", "Register", "User")</div>
+            }
+            else {
+                <div>@Html.ActionLink("Logout", "Logout", "User")</div>
+                <div>@Html.ActionLink("Account", "Edit", "User", new { id = @ViewBag.userId }, null)</div>
+            }
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

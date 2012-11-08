@@ -9,12 +9,12 @@ using Commute.Models;
 
 namespace Commute.Controllers
 {
-    public class RouteController : Controller
+    public class RouteController : BaseController
     {
         private Context db = new Context();
 
         //Create or update route
-        public ActionResult CreateUpdate(int id = 1)
+        public ActionResult CreateUpdate(int id = 0)
         {
             //Simple route with 2 points
             //Route route = db.Route.Find(id);
@@ -38,15 +38,24 @@ namespace Commute.Controllers
         public ActionResult CreateUpdate(RouteWayPointView[] routeView)
         {
             //For now routeView cannot be null: it as a start and an end
-            var routeId = routeView[0].RouteId;
+            var routeId = routeView[0].RouteId; //routeId=0 this is a route creation
             
             //Retrieve the route
-            Route route = db.Route.Find(routeId);
+            Route route = null;
+            if( routeId > 0) route = db.Route.Find(routeId);
+            if (route == null)
+            {
+                //If we create a new route we need an active session to find user ID
+                if (Session["userId"] == null) return RedirectToAction("Login", "User"); //Expired session, go to User/Login
+                route = new Route();
+                route.UserId = (int)Session["userId"];
+            }
             //Update the route
             route.StartLatitude = routeView[0].Latitude;
             route.StartLongitude = routeView[0].Longitude;
             route.EndLatitude = routeView[1].Latitude;
             route.EndLongitude = routeView[1].Longitude;
+            if (routeId == 0) db.Route.Add(route); //routeId=0, add the new route
             db.SaveChanges();
 
             //Delete previous way points
@@ -66,7 +75,7 @@ namespace Commute.Controllers
         }
 
         //Return way points for the specified route id
-        public JsonResult WayPoint(int id = 1)
+        public JsonResult WayPoint(int id = 0)
         {
             //Get the specified route
             var linqRoute = from r in db.Route
@@ -84,6 +93,16 @@ namespace Commute.Controllers
             JsonResult jsonResult = Json(routeWayPoint);
             return Json(Json(routeWayPoint), JsonRequestBehavior.AllowGet);
         }
+
+        //List route for authenticated user
+        public ActionResult List(int userId)
+        {
+            var routeList = from r in db.Route
+                            where r.UserId == userId
+                            select r;
+            return View(routeList.ToList());
+        }
+
 
         //Default controller generated automatically
         

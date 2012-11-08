@@ -7,21 +7,40 @@ using Commute.Models;
 
 namespace Commute.Controllers
 {
-    public class HomeController : Controller
+    public class BaseController : Controller
     {
-        private readonly Context _context = new Context();
+        public readonly Context db = new Context();
+
+        protected override void OnActionExecuting(ActionExecutingContext ctx)
+        {
+            base.OnActionExecuting(ctx);
+            if (User.Identity.IsAuthenticated) ViewBag.userName = User.Identity.Name;
+            if (Session["userId"] == null) //Need to get user ID from database
+            {
+                User user = (from u in db.User
+                             where u.Account == User.Identity.Name
+                             select u).FirstOrDefault();
+                Session["userId"] = user.Id;
+            }
+            ViewBag.userId = Session["userId"];
+        }
+    }
+
+    public class HomeController : BaseController
+    {
+        //private readonly Context _context = new Context();
 
         public ActionResult Index()
         {
             ViewBag.Title = "Home/Index";
-            if (User.Identity.IsAuthenticated) ViewBag.userName = User.Identity.Name;
-            return View(_context.User);
+            //if (User.Identity.IsAuthenticated) ViewBag.userName = User.Identity.Name;
+            return View(db.User);
         }
 
         public ActionResult Create(User user)
         {
-            _context.User.Add(user);
-            _context.SaveChanges();
+            db.User.Add(user);
+            db.SaveChanges();
 
             return RedirectToAction("Index");
         }

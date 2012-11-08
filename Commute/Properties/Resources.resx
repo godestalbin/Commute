@@ -157,4 +157,6 @@
   <data name="Update picture" xml:space="preserve"> <value>Update picture</value> </data>
   <data name="Error unknown account" xml:space="preserve"> <value>This account does not exists</value> </data>
   <data name="Error wrong password" xml:space="preserve"> <value>Wrong password, did you forget it...too bad !</value> </data>
+  <data name="Welcome" xml:space="preserve"> <value>Welcome</value> </data>
+  <data name="Amazon picture HTTP" xml:space="preserve"> <value>https://s3-eu-west-1.amazonaws.com/commute/Pictures/</value> </data>
 </root>

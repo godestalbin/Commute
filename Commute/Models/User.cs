@@ -29,6 +29,7 @@ namespace Commute.Models
         public bool Picture { get; set; }
     }
 
+    //Class to register new account
     public class RegisterUser : Entity
     {
         [Display(Name = "Account", ResourceType = typeof(Properties.Resources))]
@@ -51,16 +52,19 @@ namespace Commute.Models
         public string EmailAddress { get; set; }
     }
 
-    public class LoginUser
-    {
-        [Display(Name = "Account", ResourceType = typeof(Properties.Resources))]
-        [Required(ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "Mandatory")]
-        [StringLength(20, ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "Error_string_too_long")]
-        public string Account { get; set; }
-        [Display(Name = "Password", ResourceType = typeof(Properties.Resources))]
-        [Required(ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "Mandatory")]
-        [StringLength(20, ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "Error_string_too_long")]
-        [DataType(DataType.Password)]
-        public string Password { get; set; }
-    }
+    //Not used
+    //public class LoginUser
+    //{
+    //    [Display(Name = "Account", ResourceType = typeof(Properties.Resources))]
+    //    [Required(ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "Mandatory")]
+    //    [StringLength(20, ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "Error_string_too_long")]
+    //    public string Account { get; set; }
+    //    [Display(Name = "Password", ResourceType = typeof(Properties.Resources))]
+    //    [Required(ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "Mandatory")]
+    //    [StringLength(20, ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "Error_string_too_long")]
+    //    [DataType(DataType.Password)]
+    //    public string Password { get; set; }
+    //}
+
+
 }
