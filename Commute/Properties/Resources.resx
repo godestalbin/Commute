@@ -159,4 +159,6 @@
   <data name="Error wrong password" xml:space="preserve"> <value>Wrong password, did you forget it...too bad !</value> </data>
   <data name="Welcome" xml:space="preserve"> <value>Welcome</value> </data>
   <data name="Amazon picture HTTP" xml:space="preserve"> <value>https://s3-eu-west-1.amazonaws.com/commute/Pictures/</value> </data>
+  <data name="Route list" xml:space="preserve"> <value>My routes</value> </data>
+  <data name="Route create update" xml:space="preserve"> <value>Route</value> </data>
 </root>

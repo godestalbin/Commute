@@ -1,12 +1,9 @@
 ﻿@model Commute.Models.RouteView
+@using Commute.Properties
 
 
-@{
-    ViewBag.Title = "Route/CreateUpdate";
-}
+@{ ViewBag.Title = @Resources.Route_create_update; }
 
-
-<h2>Route/CreateUpdate</h2>
 
 <input id="hfId" type="hidden" value="@Model.Id"/>
 <input id="hfUserId" type="hidden" value="@Model.UserId"/>

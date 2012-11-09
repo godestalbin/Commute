@@ -14,7 +14,7 @@ using Amazon.S3;
 
 namespace Commute.Controllers
 {
-    public class UserController : Controller
+    public class UserController : BaseController
     {
         private Context db = new Context();
         
@@ -130,7 +130,6 @@ namespace Commute.Controllers
             AmazonS3 client = Amazon.AWSClientFactory.CreateAmazonS3Client(); //uses AWSAccessKey and AWSSecretKey defined in Web.config
             using (S3Response r = client.PutObject(request)) { }
         }
-
 
         //-----------------------------------------
         //Default controller action auto generated - not used

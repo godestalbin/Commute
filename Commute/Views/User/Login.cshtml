@@ -9,14 +9,14 @@
         <tr>
             <td>@Html.LabelFor(model => model.Account)</td>
             <td>
-                @Html.EditorFor(model => model.Account)
+                @Html.TextBoxFor(model => model.Account, new { id = "iptAccount" })
                 @Html.ValidationMessageFor(model => model.Account)
             </td>
         </tr>
         <tr>
             <td>@Html.LabelFor(model => model.Password)</td>
             <td>
-                @Html.EditorFor(model => model.Password)
+                @Html.EditorFor( model => model.Password)
                 @Html.ValidationMessageFor(model => model.Password)
             </td>
         </tr>
@@ -25,4 +25,12 @@
             <td><input type="submit" value="@Resources.Login" /></td>
         </tr>
     </table>
+}
+
+@section scripts {
+<script>
+    jQuery(document).ready(function () {
+        $('#iptAccount').focus();
+    });
+</script>
 }

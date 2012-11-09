@@ -1,10 +1,11 @@
 ﻿<div class="top_stripe">
-    <div class="menu">
-        <ul>
-            <li>@Html.ActionLink("Login", "Login", "User")</li>
-            <li>@Html.ActionLink("Register", "Register", "User")</li>
-            <li>@Html.ActionLink("Route", "CreateUpdate", "Route")</li>
-            <li>@Html.ActionLink("Route list", "List", "Route", new { userId = @ViewBag.userId }, null)</li>
-        </ul>
-    </div>
 </div>
+<div class="menu">
+    <ul class="menu">
+        <li class="menu">@Html.ActionLink("Login", "Login", "User", null, new { @class="a.menu" })</li>
+        <li class="menu">@Html.ActionLink("Register", "Register", "User")</li>
+        <li class="menu">@Html.ActionLink("Route", "CreateUpdate", "Route")</li>
+        <li class="menu">@Html.ActionLink("Route list", "List", "Route", new { userId = @ViewBag.userId }, null)</li>
+    </ul>
+</div>
+

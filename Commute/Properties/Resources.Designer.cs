@@ -358,6 +358,24 @@ namespace Commute.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Route.
+        /// </summary>
+        public static string Route_create_update {
+            get {
+                return ResourceManager.GetString("Route create update", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to My routes.
+        /// </summary>
+        public static string Route_list {
+            get {
+                return ResourceManager.GetString("Route list", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Save.
         /// </summary>
         public static string Save {

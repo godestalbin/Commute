@@ -1,22 +1,20 @@
 ﻿@using Commute.Properties
 
-<div class="top_stripe">
     <div class="login-menu">
-        <table>
-            <tr>
-                <td><span>@if ( @ViewBag.userName != null ) { <span>@Resources.Welcome @ViewBag.userName ID=@ViewBag.userId</span> }</td>
-                <td style="width: 20px"></td>
-                <td>
-            @if ( @ViewBag.userName == null ) {
-                <div class="anonymous">@Html.ActionLink("Login", "Login", "User")</div>
-                <div class="anonymous">@Html.ActionLink("Register", "Register", "User")</div>
-            }
-            else {
-                <div>@Html.ActionLink("Logout", "Logout", "User")</div>
-                <div>@Html.ActionLink("Account", "Edit", "User", new { id = @ViewBag.userId }, null)</div>
-            }
-                </td>
-            </tr>
-        </table>
+        <div class="login-data">
+        @if ( @ViewBag.userName != null ) { <span>@Resources.Welcome @ViewBag.userName ID=@ViewBag.userId</span> }
+        @if ( @ViewBag.userName == null ) {
+            <div>@Html.ActionLink("Login", "Login", "User")
+            @Html.ActionLink("Register", "Register", "User")</div>
+        }
+        else {
+            <div>@Html.ActionLink("Logout", "Logout", "User")
+            @Html.ActionLink("Account", "Edit", "User", new { id = @ViewBag.userId }, null)</div>
+        }
+        </div>
+        @if (@ViewBag.userName != null )
+        {
+            <img class="small-user-picture" src="@Url.Content(Resources.Amazon_picture_HTTP + @String.Format("{0:00000000}", @ViewBag.userId) + ".jpg?" + DateTime.Now.Millisecond)" />
+        }
     </div>
-</div>
+

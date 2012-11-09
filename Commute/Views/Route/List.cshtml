@@ -1,10 +1,7 @@
 ﻿@model IEnumerable<Commute.Models.Route>
+@using Commute.Properties
 
-@{
-    ViewBag.Title = "Index";
-}
-
-<h2>Index</h2>
+@{ ViewBag.Title = @Resources.Route_list; }
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -67,3 +64,12 @@
 }
 
 </table>
+
+@* TMP to show we can drag the user picture only in the view it is necessary *@
+@section scripts {
+<script>
+    jQuery(document).ready(function () {
+        $(".small-user-picture").draggable({ revert: true });
+    });
+</script>
+}

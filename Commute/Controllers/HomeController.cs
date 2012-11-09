@@ -14,15 +14,23 @@ namespace Commute.Controllers
         protected override void OnActionExecuting(ActionExecutingContext ctx)
         {
             base.OnActionExecuting(ctx);
-            if (User.Identity.IsAuthenticated) ViewBag.userName = User.Identity.Name;
-            if (Session["userId"] == null) //Need to get user ID from database
+            if (User.Identity.IsAuthenticated)
             {
-                User user = (from u in db.User
-                             where u.Account == User.Identity.Name
-                             select u).FirstOrDefault();
-                Session["userId"] = user.Id;
+                Session["userName"] = User.Identity.Name;
+                ViewBag.userName = Session["userName"];
+                if (Session["userId"] == null) //Need to get user ID from database
+                {
+                    User user = (from u in db.User
+                                 where u.Account == User.Identity.Name
+                                 select u).FirstOrDefault();
+                    Session["userId"] = user.Id;
+                }
+                ViewBag.userId = Session["userId"];
             }
-            ViewBag.userId = Session["userId"];
+            else {
+                Session["userName"] = null;
+                Session["userId"] = null;
+            }
         }
     }
 

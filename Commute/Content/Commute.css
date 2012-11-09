@@ -13,7 +13,7 @@ height: 20px;
 background: url("/Content/Images/Commute icon.png") 0px 0px;
 }
 /* div */
-div.top_stripe {
+div.top_stripe { /*road image displayed at top, takes too much space on mobile*/
     width: 98%;
     height: 50px;
     position: fixed;
@@ -33,20 +33,29 @@ div.main-body {
 }
 div.menu {
     font-weight:800;
-    color: #b4b6ee;
+    color: #fcff00;
     position:absolute;
-    right: 200px;
+    left: 50px;
     top: 0px;
-    z-index: 100;
+    z-index: 11;
+}
+ul.menu li.menu {
+    color: #fcff00; /*yellow*/
+    font-size: 1.3em;
+    display: inline;
 }
 div.login-menu {
-    position:absolute;
+    position:fixed;
     right: 0px;
     top: 3px;
     font-weight:800;
     color: #b4b6ee;
     background-color: rgba(234, 231, 231, 0.50);
     border-radius: 10px;
+    z-index: 11;
+}
+div.login-data { /*Account name, links for account*/
+    margin-right: 45px; /*space for small-user-picture*/
 }
 div.non-editable-data {
     border-radius: 5px;
@@ -60,6 +69,15 @@ table {
 }
 td {
     vertical-align: top;
+}
+h1 {
+    position:fixed;
+    top: -10px;
+    left: 10px;
+    z-index: 11;
+    background-color: rgba(255, 234, 0, 0.56);
+    border-radius: 10px;
+    padding: 5px;
 }
 /* input */
 input {
@@ -75,9 +93,12 @@ img.user-image {
     border: solid 1px;
     border-radius: 10px;
 }
-/* li */
-li.anonymous {
-    text-emphasis:  circle;
-    text-decoration: wavy;
-    color: red;
+img.small-user-picture {
+    position:absolute;
+    right: 2px;
+    top: 2px;
+    width: 37px;
+    height: 50px;
+    border: solid 1px;
+    border-radius: 5px;
 }
