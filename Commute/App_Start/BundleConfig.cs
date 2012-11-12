@@ -13,7 +13,7 @@ namespace Commute
                         "~/Scripts/jquery-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
-                        "~/Scripts/jquery-ui-{version}.js"));
+                        "~/Scripts/jquery-ui-{version}.custom.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.unobtrusive*",
@@ -29,6 +29,7 @@ namespace Commute
                         "~/Content/Commute.css"));
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
+                        "~/Content/themes/hot-sneaks/jquery-ui-{version}.custom.css",
                         "~/Content/themes/base/jquery.ui.core.css",
                         "~/Content/themes/base/jquery.ui.resizable.css",
                         "~/Content/themes/base/jquery.ui.selectable.css",
