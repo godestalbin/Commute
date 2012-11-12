@@ -376,6 +376,15 @@ namespace Commute.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to New route.
+        /// </summary>
+        public static string Route_new {
+            get {
+                return ResourceManager.GetString("Route new", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Save.
         /// </summary>
         public static string Save {

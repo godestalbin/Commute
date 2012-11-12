@@ -13,7 +13,8 @@ namespace Commute
                         "~/Scripts/jquery-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
-                        "~/Scripts/jquery-ui-{version}.custom.js"));
+                        "~/Scripts/jquery-ui-{version}.custom.js",
+                        "~/Scripts/query.mobile.custom.min.js")); //jQuery mobile
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.unobtrusive*",
@@ -41,7 +42,10 @@ namespace Commute
                         "~/Content/themes/base/jquery.ui.tabs.css",
                         "~/Content/themes/base/jquery.ui.datepicker.css",
                         "~/Content/themes/base/jquery.ui.progressbar.css",
-                        "~/Content/themes/base/jquery.ui.theme.css"));
+                        "~/Content/themes/base/jquery.ui.theme.css",
+                        "~/Content/UImobile/jquery.mobile.custom.min.css",
+                        "~/Content/UImobile/jquery.mobile.custom.structure.min.css",
+                        "~/Content/UImobile/jquery.mobile.custom.theme.min.css"));
         }
     }
 }

@@ -228,6 +228,12 @@
     <Content Include="Content\themes\hot-sneaks\images\ui-icons_ffffff_256x240.png" />
     <Content Include="Content\themes\hot-sneaks\jquery-ui-1.9.1.custom.css" />
     <Content Include="Content\themes\hot-sneaks\jquery-ui-1.9.1.custom.min.css" />
+    <Content Include="Content\UImobile\jquery.mobile.custom.css" />
+    <Content Include="Content\UImobile\jquery.mobile.custom.min.css" />
+    <Content Include="Content\UImobile\jquery.mobile.custom.structure.css" />
+    <Content Include="Content\UImobile\jquery.mobile.custom.structure.min.css" />
+    <Content Include="Content\UImobile\jquery.mobile.custom.theme.css" />
+    <Content Include="Content\UImobile\jquery.mobile.custom.theme.min.css" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
@@ -237,6 +243,8 @@
     <Content Include="Scripts\jquery-1.8.2.min.js" />
     <Content Include="Scripts\jquery-ui-1.9.1.custom.js" />
     <Content Include="Scripts\jquery-ui-1.9.1.custom.min.js" />
+    <Content Include="Scripts\jquery.mobile.custom.js" />
+    <Content Include="Scripts\jquery.mobile.custom.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
