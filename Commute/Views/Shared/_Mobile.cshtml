@@ -1,0 +1,68 @@
+﻿@using Commute.Properties
+<!DOCTYPE html> 
+<html> 
+<head> 
+	<title>@ViewBag.title</title> 
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+    <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+</head> 
+<body> 
+
+<div data-role="page">
+
+	<div data-role="header">
+        <div class="ui-grid-b">
+            <div class="ui-block-a"><a href="#popupNested" data-rel="popup" data-role="button" data-inline="true">@Resources.Menu</a></div>
+		    <div class="ui-block-b"><h2>@ViewBag.title</h2></div>
+        </div>
+	</div>
+
+    @*Menu to be defined later*@
+    		<div data-role="popup" id="popupNested" data-theme="none">
+			<div data-role="collapsible-set" data-theme="b" data-content-theme="c" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" style="margin:0; width:250px;">
+				<div data-role="collapsible" data-inset="false">
+					<h2>@Resources.Route</h2>
+					<ul data-role="listview">
+						<li><a href="/Route/CreateUpdate"  data-ajax="false">@Resources.Route_new</a></li>
+						<li><a href="/Route/List?userId=@ViewBag.userId"  data-ajax="false">@Resources.Route_list</a></li>
+					</ul>
+				</div><!-- /collapsible -->
+				<div data-role="collapsible" data-inset="false">
+					<h2>@Resources.User</h2>
+					<ul data-role="listview">
+						<li><a href="/User/Edit"  data-ajax="false">@Resources.User_account</a></li>
+						<li><a href="/User/Register"  data-ajax="false">@Resources.User_registration</a></li>
+						<li><a href="/User/Login"  data-ajax="false">@Resources.User_login</a></li>
+						<li><a href="/User/Logout"  data-ajax="false">@Resources.User_logout</a></li>
+					</ul>
+				</div><!-- /collapsible -->
+				<div data-role="collapsible" data-inset="false">
+					<h2>Ocean Creatures</h2>
+					<ul data-role="listview">
+						<li><a href="/Home/NotImplemented" data-rel="dialog" class="ui-btn-right">Fish</a></li>
+						<li><a href="../dialog.html" data-rel="dialog">Octopus</a></li>
+						<li><a href="../dialog.html" data-rel="dialog">Shark</a></li>
+						<li><a href="../dialog.html" data-rel="dialog">Starfish</a></li>
+					</ul>
+				</div><!-- /collapsible -->
+				<div data-role="collapsible" data-inset="false">
+					<h2>Wild Animals</h2>
+					<ul data-role="listview">
+						<li><a href="../dialog.html" data-rel="dialog">Lion</a></li>
+						<li><a href="../dialog.html" data-rel="dialog">Monkey</a></li>
+						<li><a href="../dialog.html" data-rel="dialog">Tiger</a></li>
+						<li><a href="../dialog.html" data-rel="dialog">Zebra</a></li>
+					</ul>
+				</div><!-- /collapsible -->
+			</div><!-- /collapsible set -->
+		</div><!-- /popup -->
+
+	<div data-role="content">
+        @RenderBody()
+	</div><!-- /content -->
+
+</div><!-- /page -->
+</body>
+</html>

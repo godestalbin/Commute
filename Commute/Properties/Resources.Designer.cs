@@ -313,6 +313,24 @@ namespace Commute.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Map.
+        /// </summary>
+        public static string Map {
+            get {
+                return ResourceManager.GetString("Map", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Menu.
+        /// </summary>
+        public static string Menu {
+            get {
+                return ResourceManager.GetString("Menu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This record does not exists.
         /// </summary>
         public static string No_record {
@@ -360,9 +378,27 @@ namespace Commute.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Route.
         /// </summary>
+        public static string Route {
+            get {
+                return ResourceManager.GetString("Route", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Route.
+        /// </summary>
         public static string Route_create_update {
             get {
                 return ResourceManager.GetString("Route create update", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Route no.
+        /// </summary>
+        public static string Route_id {
+            get {
+                return ResourceManager.GetString("Route id", resourceCulture);
             }
         }
         
@@ -385,11 +421,29 @@ namespace Commute.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Search route.
+        /// </summary>
+        public static string Route_search {
+            get {
+                return ResourceManager.GetString("Route search", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Save.
         /// </summary>
         public static string Save {
             get {
                 return ResourceManager.GetString("Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search.
+        /// </summary>
+        public static string Search {
+            get {
+                return ResourceManager.GetString("Search", resourceCulture);
             }
         }
         
@@ -453,6 +507,51 @@ namespace Commute.Properties {
         public static string Update_picture {
             get {
                 return ResourceManager.GetString("Update picture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User.
+        /// </summary>
+        public static string User {
+            get {
+                return ResourceManager.GetString("User", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User account.
+        /// </summary>
+        public static string User_account {
+            get {
+                return ResourceManager.GetString("User account", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User login.
+        /// </summary>
+        public static string User_login {
+            get {
+                return ResourceManager.GetString("User login", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User logout.
+        /// </summary>
+        public static string User_logout {
+            get {
+                return ResourceManager.GetString("User logout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User registration.
+        /// </summary>
+        public static string User_registration {
+            get {
+                return ResourceManager.GetString("User registration", resourceCulture);
             }
         }
         

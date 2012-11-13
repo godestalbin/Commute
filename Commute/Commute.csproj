@@ -290,6 +290,10 @@
     <Content Include="Views\User\UploadFile.cshtml" />
     <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\Shared\_LoginMenu.cshtml" />
+    <Content Include="Views\Route\Search.cshtml" />
+    <Content Include="Views\Shared\_Mobile.cshtml" />
+    <Content Include="Views\Route\ListMobile.cshtml" />
+    <Content Include="Views\Home\NotImplemented.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

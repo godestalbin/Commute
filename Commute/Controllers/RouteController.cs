@@ -6,12 +6,39 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Commute.Models;
+using Commute.Properties;
 
 namespace Commute.Controllers
 {
     public class RouteController : BaseController
     {
         private Context db = new Context();
+
+        //Search
+        [AllowAnonymous]
+        public ActionResult Search(int id) //First attempt to use jQuery mobile not completed
+            //id=route ID, search route closed to the provided route ID
+        {
+            Route searchRoute = db.Route.Find(id);
+            decimal maxDist = 0.5M;
+            var routeList = from r in db.Route
+                            where Math.Abs((decimal)(r.StartLatitude - searchRoute.StartLatitude)) + Math.Abs((decimal)(r.StartLongitude - searchRoute.StartLongitude)) + Math.Abs((decimal)(r.EndLatitude - searchRoute.EndLatitude)) + Math.Abs((decimal)(r.EndLongitude - searchRoute.EndLongitude)) < maxDist
+                            && r.UserId != searchRoute.UserId
+                            select r; // new { r.Id, dist = Math.Abs((decimal)(r.StartLatitude - searchRoute.StartLatitude)) + Math.Abs((decimal)(r.StartLongitude - searchRoute.StartLongitude)) + Math.Abs((decimal)(r.EndLatitude - searchRoute.EndLatitude)) + Math.Abs((decimal)(r.EndLongitude - searchRoute.EndLongitude)) };
+            ViewBag.Title = Resources.Route_search;
+            return View(routeList.ToList());
+        }
+
+        //Route list with jQuery mobile
+        [AllowAnonymous]
+        public ActionResult ListMobile(int userId = 1) //Route list for mobile
+        {
+            var routeList = from r in db.Route
+                            where r.UserId == userId
+                            select r;
+            ViewBag.Title = Resources.Route_list;
+            return View(routeList.ToList());
+        }
 
         //Create or update route
         public ActionResult CreateUpdate(int id = 0)

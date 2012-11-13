@@ -1,0 +1,17 @@
+﻿@model IEnumerable<Commute.Models.Route>
+@using Commute.Properties
+
+@{
+    Layout = "~/Views/Shared/_Mobile.cshtml";
+}
+
+<div class="ui-grid-b"> @*3-columns*@
+    <div class="ui-block-a">@Resources.Route_id</div>
+    <div class="ui-block-b"></div>
+    <div class="ui-block-c"></div>
+@foreach (var item in Model) {
+	<div class="ui-block-a"><strong>@item.Id</strong> route name not implemented yet</div>
+	<div class="ui-block-b"><a href="/Route/CreateUpdate/@item.Id" data-role="button" data-mini="true" data-ajax="false">@Resources.Map</a></div>
+	<div class="ui-block-b"><a href="/Route/Search/@item.Id" data-role="button" data-mini="true">@Resources.Search</a></div>
+}
+    </div><!-- /grid-a -->

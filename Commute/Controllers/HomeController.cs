@@ -45,6 +45,12 @@ namespace Commute.Controllers
             return View(db.User);
         }
 
+        [AllowAnonymous]
+        public ActionResult NotImplemented()
+        {
+            return PartialView();
+        }
+
         public ActionResult Create(User user)
         {
             db.User.Add(user);
