@@ -5,13 +5,24 @@
     Layout = "~/Views/Shared/_Mobile.cshtml";
 }
 
+@* Popup *@
+<div data-role="popup" id="popupMap" data-overlay-theme="a" data-theme="a" data-corners="false" data-tolerance="15,15">
+
+    <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+	 
+    <iframe src="/Route/Map/1" width="480" height="320" seamless></iframe>
+	 
+</div>
+@* Button Open Map *@
+<a href="#popupMap" data-rel="popup" data-position-to="window" data-role="button" data-theme="b" data-inline="true">Open Map</a>
 <div class="ui-grid-b"> @*3-columns*@
     <div class="ui-block-a">@Resources.Route_id</div>
     <div class="ui-block-b"></div>
     <div class="ui-block-c"></div>
 @foreach (var item in Model) {
 	<div class="ui-block-a"><strong>@item.Id</strong> route name not implemented yet</div>
-	<div class="ui-block-b"><a href="/Route/CreateUpdate/@item.Id" data-role="button" data-mini="true" data-ajax="false">@Resources.Map</a></div>
-	<div class="ui-block-b"><a href="/Route/Search/@item.Id" data-role="button" data-mini="true">@Resources.Search</a></div>
+    @*<div class="ui-block-b"><a href="#popupMap" data-rel="popup" data-position-to="window" data-role="button" data-theme="b" data-inline="true">Open Map</a></div>*@
+	<div class="ui-block-b"><a href="/Route/CreateUpdateMobile/@item.Id" data-role="button" data-mini="true" data-ajax="false" data-theme="b" data-inline="true">@Resources.Map</a></div>
+	<div class="ui-block-b"><a href="/Route/Search/@item.Id" data-role="button" data-mini="true" data-theme="b" data-inline="true">@Resources.Search</a></div>
 }
     </div><!-- /grid-a -->

@@ -153,7 +153,7 @@
   <data name="Picture" xml:space="preserve"> <value>Picture</value> </data>
   <data name="Removed from car" xml:space="preserve"> <value>Removed from this car</value> </data>
   <data name="Route" xml:space="preserve"> <value>Route</value> </data>
-  <data name="Route create update" xml:space="preserve"> <value>Route</value> </data>
+  <data name="Route create update" xml:space="preserve"> <value>Define route</value> </data>
   <data name="Route id" xml:space="preserve"> <value>Route no</value> </data>
   <data name="Route new" xml:space="preserve"> <value>New route</value> </data>
   <data name="Route list" xml:space="preserve"> <value>My routes</value> </data>

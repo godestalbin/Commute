@@ -16,6 +16,7 @@
         <div class="ui-grid-b">
             <div class="ui-block-a"><a href="#popupNested" data-rel="popup" data-role="button" data-inline="true">@Resources.Menu</a></div>
 		    <div class="ui-block-b"><h2>@ViewBag.title</h2></div>
+            <div class="ui-block-c">@ViewBag.userId - @ViewBag.userName</div>
         </div>
 	</div>
 
@@ -26,6 +27,7 @@
 					<h2>@Resources.Route</h2>
 					<ul data-role="listview">
 						<li><a href="/Route/CreateUpdate"  data-ajax="false">@Resources.Route_new</a></li>
+						<li><a href="/Route/ListMobile?userId=@ViewBag.userId"  data-ajax="false">@Resources.Route_list</a></li>
 						<li><a href="/Route/List?userId=@ViewBag.userId"  data-ajax="false">@Resources.Route_list</a></li>
 					</ul>
 				</div><!-- /collapsible -->
@@ -34,7 +36,7 @@
 					<ul data-role="listview">
 						<li><a href="/User/Edit"  data-ajax="false">@Resources.User_account</a></li>
 						<li><a href="/User/Register"  data-ajax="false">@Resources.User_registration</a></li>
-						<li><a href="/User/Login"  data-ajax="false">@Resources.User_login</a></li>
+						<li><a href="/User/LoginMobile"  data-ajax="false">@Resources.User_login</a></li>
 						<li><a href="/User/Logout"  data-ajax="false">@Resources.User_logout</a></li>
 					</ul>
 				</div><!-- /collapsible -->
@@ -64,5 +66,6 @@
 	</div><!-- /content -->
 
 </div><!-- /page -->
+    <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyC0KjUdM6DpNQAggngGkuKLFvoHw-lJ0H4&sensor=false"></script>
 </body>
 </html>

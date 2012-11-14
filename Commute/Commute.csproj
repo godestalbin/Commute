@@ -255,6 +255,8 @@
     <Content Include="Scripts\knockout-2.1.0.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Views\Route\CreateUpdateMobile.cshtml" />
+    <None Include="Views\Route\Map.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -294,6 +296,7 @@
     <Content Include="Views\Shared\_Mobile.cshtml" />
     <Content Include="Views\Route\ListMobile.cshtml" />
     <Content Include="Views\Home\NotImplemented.cshtml" />
+    <Content Include="Views\User\LoginMobile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

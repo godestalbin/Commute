@@ -62,7 +62,7 @@ namespace Commute.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateUpdate(RouteWayPointView[] routeView)
+        public string CreateUpdate(RouteWayPointView[] routeView)
         {
             //For now routeView cannot be null: it as a start and an end
             var routeId = routeView[0].RouteId; //routeId=0 this is a route creation
@@ -73,7 +73,7 @@ namespace Commute.Controllers
             if (route == null)
             {
                 //If we create a new route we need an active session to find user ID
-                if (Session["userId"] == null) return RedirectToAction("Login", "User"); //Expired session, go to User/Login
+                if (Session["userId"] == null) return "/User/Login/"; // RedirectToAction("Login", "User"); //Expired session, go to User/Login
                 route = new Route();
                 route.UserId = (int)Session["userId"];
             }
@@ -98,10 +98,27 @@ namespace Commute.Controllers
                 db.RouteWayPoint.Add(new RouteWayPoint(routeView[i]));
             }
             db.SaveChanges();
-            return View(CreateUpdate(route.Id)); //Return
+            //return RedirectToAction("ListMobile", "Route", new { userId = Session["userId"] }); //View(CreateUpdate(route.Id));
+            return "/Route/ListMobile?userId=" + Session["userId"];
         }
 
+        //CreateUpdateMobile
+        [AllowAnonymous]
+        public ActionResult CreateUpdateMobile(int id = 0)
+        {
+            Route route = db.Route.Find(id); //Retrieve route
+            if (route == null) route = new Route(); //Create a new route if none retrieved
+            IEnumerable<RouteWayPoint> routeWayPoint = from rwp in db.RouteWayPoint
+                                                       where rwp.RouteId == id
+                                                       select rwp;
+
+            RouteView routeView = new RouteView(route, routeWayPoint, Json(routeWayPoint));
+            return View(routeView);
+        }
+
+
         //Return way points for the specified route id
+        [AllowAnonymous]
         public JsonResult WayPoint(int id = 0)
         {
             //Get the specified route

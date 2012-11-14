@@ -1,0 +1,38 @@
+﻿@model Commute.Models.User
+@using Commute.Properties
+
+@{
+    Layout = "~/Views/Shared/_Mobile.cshtml";
+    ViewBag.Title = @Resources.Login;
+}
+
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+    <table>
+        <tr>
+            <td>@Html.LabelFor(model => model.Account)</td>
+            <td>
+                @Html.TextBoxFor(model => model.Account, new { id = "iptAccount" })
+                @Html.ValidationMessageFor(model => model.Account)
+            </td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(model => model.Password)</td>
+            <td>
+                @Html.EditorFor( model => model.Password)
+                @Html.ValidationMessageFor(model => model.Password)
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="@Resources.Login" /></td>
+        </tr>
+    </table>
+}
+
+<script>
+    jQuery(document).ready(function () {
+        $('#iptAccount').focus();
+    });
+</script>

@@ -27,7 +27,7 @@ namespace Commute.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public ActionResult Login(User userLogin)
+        public ActionResult LoginMobile(User userLogin)
         {
             User user = (from u in db.User
                          where u.Account == userLogin.Account
@@ -37,9 +37,16 @@ namespace Commute.Controllers
             {
                 FormsAuthentication.SetAuthCookie(user.Account,false); //false no persistent cookie
                 Session["userId"] = user.Id;
-                return RedirectToAction("List", "Route", new { userId = user.Id }); //Later should be Home/Index
+                return RedirectToAction("ListMobile", "Route", new { userId = user.Id }); //Later should be Home/Index
             }
             else ModelState.AddModelError("Password", Resources.Error_wrong_password);
+            return View();
+        }
+
+        //LoginMobile
+        [AllowAnonymous]
+        public ActionResult LoginMobile()
+        {
             return View();
         }
 
