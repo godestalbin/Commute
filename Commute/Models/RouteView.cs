@@ -10,7 +10,8 @@ namespace Commute.Models
     public class RouteView : Entity
     {
         public int UserId { get; set; }
-        public bool IsSeek { get; set; } //false=offering route, true=seeking for this route
+        public bool IsOffer { get; set; } //false=offering route, true=seeking for this route
+        public string Name { get; set; }
         public IEnumerable<RouteWayPoint> RouteWayPoint { get; set; }
         public JsonResult JsonRoute { get; set; }
 
@@ -18,7 +19,8 @@ namespace Commute.Models
         {
             Id = route.Id;
             UserId = route.UserId;
-            IsSeek = route.IsSeek;
+            IsOffer = route.IsOffer;
+            Name = route.Name;
             RouteWayPoint = routeWayPoint;
             JsonRoute = jsonRoute;
         }

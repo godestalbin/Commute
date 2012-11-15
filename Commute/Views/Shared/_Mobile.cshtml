@@ -3,19 +3,30 @@
 <html> 
 <head> 
 	<title>@ViewBag.title</title> 
+
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 	<meta name="viewport" content="width=device-width, initial-scale=1"> 
-    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+    <meta name="description" content="Share your car to commute between home and work with others or find a car in your area to commute to work. Going to work can be fun: Save fuel, save money and make new friends to share a happy time when commuting from home to work and from work to home. This is the green way to go to work. Help saving the planet. Reduce gaz emission" />
+    <link rel="shortcut icon" type="image/png" href="/Content/Images/Blue car 32px.png">
+    <link rel="apple-touch-icon" href="/Content/Images/Blue car 32px.png"/> @*Shortcut for web app link (iPhone & android)*@
+
+@*    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
     <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
-    <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>*@
+    <link rel="stylesheet" href="/Content/UImobile/jquery.mobile-1.2.0.min.css" />
+    <script src="/Scripts/jquery-1.8.2.min.js"></script>
+    <script src="/Scripts/jquery.mobile-1.2.0.min.js"></script>
 </head> 
 <body> 
 
 <div data-role="page">
 
-	<div data-role="header">
+	<div <div class="ui-bar ui-bar-b">
         <div class="ui-grid-b">
-            <div class="ui-block-a"><a href="#popupNested" data-rel="popup" data-role="button" data-inline="true">@Resources.Menu</a></div>
-		    <div class="ui-block-b"><h2>@ViewBag.title</h2></div>
+            <div class="ui-block-a"><a href="#popupNested" data-rel="popup" data-role="button" data-mini="true" data-inline="true">@Resources.Menu</a></div>
+		    <div class="ui-block-b"><h4>@ViewBag.title</h4></div>
             <div class="ui-block-c">@ViewBag.userId - @ViewBag.userName</div>
         </div>
 	</div>

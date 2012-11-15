@@ -340,6 +340,15 @@ namespace Commute.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Offer.
+        /// </summary>
+        public static string Offer {
+            get {
+                return ResourceManager.GetString("Offer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Password.
         /// </summary>
         public static string Password {
@@ -385,7 +394,7 @@ namespace Commute.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Route.
+        ///   Looks up a localized string similar to Define route.
         /// </summary>
         public static string Route_create_update {
             get {
@@ -444,6 +453,15 @@ namespace Commute.Properties {
         public static string Search {
             get {
                 return ResourceManager.GetString("Search", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Seek.
+        /// </summary>
+        public static string Seek {
+            get {
+                return ResourceManager.GetString("Seek", resourceCulture);
             }
         }
         

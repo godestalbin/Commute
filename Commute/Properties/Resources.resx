@@ -148,6 +148,7 @@
   <data name="Map" xml:space="preserve"> <value>Map</value> </data>
   <data name="Menu" xml:space="preserve"> <value>Menu</value> </data>
   <data name="No record" xml:space="preserve"> <value>This record does not exists</value> </data>
+  <data name="Offer" xml:space="preserve"> <value>Offer</value> </data>
   <data name="Password" xml:space="preserve"> <value>Password</value> </data>
   <data name="Password confirm" xml:space="preserve"> <value>Confirm password</value> </data>
   <data name="Picture" xml:space="preserve"> <value>Picture</value> </data>
@@ -160,6 +161,7 @@
   <data name="Route search" xml:space="preserve"> <value>Search route</value> </data>
   <data name="Save" xml:space="preserve"> <value>Save</value> </data>
   <data name="Search" xml:space="preserve"> <value>Search</value> </data>
+  <data name="Seek" xml:space="preserve"> <value>Seek</value> </data>
   <data name="Specify seat in car" xml:space="preserve"> <value>Select the maximum number of passengers you can drive (driver not included)</value> </data>
   <data name="Time updated" xml:space="preserve"> <value>Updated time</value> </data>
   <data name="To" xml:space="preserve"> <value>To</value> </data>

@@ -78,6 +78,7 @@ namespace Commute.Controllers
                 route.UserId = (int)Session["userId"];
             }
             //Update the route
+            //route.Name = routeView[0].
             route.StartLatitude = routeView[0].Latitude;
             route.StartLongitude = routeView[0].Longitude;
             route.EndLatitude = routeView[1].Latitude;
@@ -116,6 +117,7 @@ namespace Commute.Controllers
             return View(routeView);
         }
 
+        //On post we use CreateUpdate
 
         //Return way points for the specified route id
         [AllowAnonymous]
