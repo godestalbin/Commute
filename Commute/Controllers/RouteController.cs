@@ -14,7 +14,37 @@ namespace Commute.Controllers
     {
         private Context db = new Context();
 
-        //Search
+        //Display route
+        [AllowAnonymous]
+        public ActionResult View(int id = 0)
+        {
+            Route route = db.Route.Find(id); //Retrieve route
+            if (route == null) route = new Route(); //Create a new route if none retrieved
+            IEnumerable<RouteWayPoint> routeWayPoint = from rwp in db.RouteWayPoint
+                                                       where rwp.RouteId == id
+                                                       select rwp;
+            JsonResult a = Json(routeWayPoint);
+
+            //if (routeWayPoint == null) routeWayPoint = new RouteWayPoint(); //Create new way points if none retrieved
+
+            RouteView routeView = new RouteView(route, routeWayPoint, Json(routeWayPoint));
+            return View(routeView);
+        }
+
+        //SearchAll - Search (for on the fly route) for non logged used
+        //For now we just list all routes in the database
+        [AllowAnonymous]
+        public ActionResult SearchAll() //First attempt to use jQuery mobile not completed
+        //id=route ID, search route closed to the provided route ID
+        {
+            var routeList = from r in db.Route
+                            select r;
+            ViewBag.Title = Resources.Route_search;
+            return View(routeList.ToList());
+        }
+
+
+        //Search - Search for logged used: Search route near another route
         [AllowAnonymous]
         public ActionResult Search(int id) //First attempt to use jQuery mobile not completed
             //id=route ID, search route closed to the provided route ID
@@ -62,6 +92,7 @@ namespace Commute.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public string CreateUpdate(RouteWayPointView[] routeView)
         {
             //For now routeView cannot be null: it as a start and an end
@@ -118,6 +149,20 @@ namespace Commute.Controllers
         }
 
         //On post we use CreateUpdate
+
+
+        //UpdateRoute
+        //Called after post CreateUpdate to save route IsOffer and Name
+        [AllowAnonymous]
+        [HttpPost]
+        public string  UpdateRoute( int id, bool isOffer, string name ) {
+            Route route = db.Route.Find(id);
+            route.IsOffer = isOffer;
+            route.Name = name;
+            db.SaveChanges();
+
+            return "Ok";
+        }
 
         //Return way points for the specified route id
         [AllowAnonymous]

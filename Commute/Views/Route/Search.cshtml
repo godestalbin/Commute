@@ -9,7 +9,7 @@
     <div class="ui-block-a">@Resources.Route_id</div>
     <div class="ui-block-b"></div>
 @foreach (var item in Model) {
-	<div class="ui-block-a"><strong>@item.Id</strong> route name not implemented yet</div>
-	<div class="ui-block-b"><a href="Route/CreateUpdate/@item.Id" data-role="button" data-mini="true" data-ajax="false">@Resources.Map</a></div>
+	<div class="ui-block-a"><strong>@item.Id</strong><span> - @item.Name</span></div>
+	<div class="ui-block-b"><a href="/Route/View/@item.Id" data-role="button" data-mini="true" data-inline="true" data-ajax="false">@Resources.Map</a></div>
 }
     </div><!-- /grid-a -->

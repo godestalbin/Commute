@@ -28,8 +28,10 @@ namespace Commute.Controllers
                 ViewBag.userId = Session["userId"];
             }
             else {
-                Session["userName"] = null;
-                Session["userId"] = null;
+                //Session["userName"] = "a"; //null;
+                //Session["userId"] = 1; //null;
+                //ViewBag.userName = Session["userName"];
+                //ViewBag.userId = Session["userId"];
             }
         }
     }

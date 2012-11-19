@@ -1,0 +1,16 @@
+﻿@model IEnumerable<Commute.Models.Route>
+@using Commute.Properties
+
+@{
+    Layout = "~/Views/Shared/_Mobile.cshtml";
+}
+<p>You can used this screen to find the route proposed by other users</p>
+<div class="ui-grid-c"> @*2-columns*@
+    <div class="ui-block-a">@Resources.Route_id</div>
+    <div class="ui-block-b"></div>
+@foreach (var item in Model) {
+	<div class="ui-block-a"><strong>@item.Id</strong><span> - @item.Name</span></div>
+    <div class="ui-block-b">@if (@item.IsOffer) { @Resources.Offer } else { @Resources.Seek }</div>
+	<div class="ui-block-c"><a href="/Route/View/@item.Id" data-role="button" data-mini="true" data-inline="true" data-ajax="false">@Resources.Map</a></div>
+}
+    </div><!-- /grid-a -->

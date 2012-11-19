@@ -175,4 +175,5 @@
   <data name="User logout" xml:space="preserve"> <value>User logout</value> </data>
   <data name="User registration" xml:space="preserve"> <value>User registration</value> </data>
   <data name="Welcome" xml:space="preserve"> <value>Welcome</value> </data>
+  <data name="Help" xml:space="preserve"> <value>Help</value> </data>
 </root>

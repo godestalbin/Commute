@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html> 
+<html> 
+<head> 
+</head> 
+<body> 
+
+
+<iframe id="ifrDocumentation" seamless src="https://s3-eu-west-1.amazonaws.com/commute/Documentation/Commute+documentation.html" scrolling="no" style="width: 100%; border: 0px none transparent; padding: 0px;"></iframe>
+
+<script>
+    function resize() {
+        //alert(document.documentElement.offsetHeight);
+        var height = document.documentElement.offsetHeight; //$(html).height();
+
+        var myArray = ['setHeight', document.documentElement.offsetHeight];
+
+        // Backwards – send message to parent
+        window.parent.postMessage(myArray, '*');
+    }
+    //window.onresize = resize;
+
+    function tmp(e) {
+    }
+
+    window.addEventListener('message', function (e) {
+        var $iframe = $('#ifrDocumentation');
+
+        var message = e.data.split(',');
+        tmp(message);
+
+        var eventName = message[0];
+        var data = message[1];
+
+        switch (eventName) {
+            case 'setHeight':
+                alert(data);
+                $iframe.height(data);
+                break;
+        }
+    }, false);
+
+
+alert( "Heere");
+
+//    $(document).ready(function () {
+        //$('some selector', frames['nameOfMyIframe'].document).doStuff()
+        //alert($("#ifrDocumentation").contents().find("#divDocumentation").height());
+        //setTimeout(function () { alert($('#divDocumentation').height()); }, 10000);
+        //$('#ifrDocumentation').css('height', 800);
+//    });
+</script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+﻿@{
+    ViewBag.Title = "Help";
+    Layout = "~/Views/Shared/_Mobile.cshtml";
+}
+
+<iframe id="ifrDocumentation" seamless src="https://s3-eu-west-1.amazonaws.com/commute/Documentation/Commute+documentation.html" scrolling="no" style="width: 100%; border: 0px none transparent; padding: 0px;"></iframe>
+
+<script>
+    function resize() {
+        //alert(document.documentElement.offsetHeight);
+        var height = document.documentElement.offsetHeight; //$(html).height();
+
+        var myArray = ['setHeight', document.documentElement.offsetHeight];
+
+        // Backwards – send message to parent
+        window.parent.postMessage(myArray, '*');
+    }
+    //window.onresize = resize;
+
+    function tmp(e) {
+    }
+
+    window.addEventListener('message', function (e) {
+        //var $iframe = $('#ifrDocumentation');
+
+        var message = e.data.split(',');
+        //tmp(message);
+
+        var eventName = message[0];
+        var data = message[1];
+
+        switch (eventName) {
+            case 'setHeight':
+                //Set the size of the iframe according to the divDocumentation (help.html) size sent
+                $('#ifrDocumentation').height(data);
+                //alert(data);
+                break;
+        }
+    }, false);
+
+    $(document).ready(function () {
+        //$('#ifrDocumentation').css('height', 800);
+    });
+</script>

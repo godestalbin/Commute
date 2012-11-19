@@ -129,6 +129,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\HelpController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LocationController.cs" />
     <Compile Include="Controllers\RouteController.cs" />
@@ -152,6 +153,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="a6NOEw1OHHXpBV2ZeC5-W35B2QM.html" />
     <Content Include="Content\Commute.css" />
     <Content Include="Content\Images\Blue car 32px.png" />
     <Content Include="Content\Images\Commute icon.png" />
@@ -228,6 +230,8 @@
     <Content Include="Content\themes\hot-sneaks\images\ui-icons_ffffff_256x240.png" />
     <Content Include="Content\themes\hot-sneaks\jquery-ui-1.9.1.custom.css" />
     <Content Include="Content\themes\hot-sneaks\jquery-ui-1.9.1.custom.min.css" />
+    <Content Include="Content\UImobile\images\ajax-loader.gif" />
+    <Content Include="Content\UImobile\images\icons-18-white.png" />
     <Content Include="Content\UImobile\jquery.mobile-1.2.0.min.css" />
     <Content Include="Content\UImobile\jquery.mobile.custom.css" />
     <Content Include="Content\UImobile\jquery.mobile.custom.min.css" />
@@ -257,6 +261,9 @@
     <Content Include="Scripts\modernizr-2.5.3.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Views\Route\CreateUpdateMobile.cshtml" />
+    <Content Include="Views\Route\View.cshtml" />
+    <Content Include="Views\Help\Help.cshtml" />
+    <Content Include="Views\Route\SearchAll.cshtml" />
     <None Include="Views\Route\Map.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
