@@ -153,7 +153,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="a6NOEw1OHHXpBV2ZeC5-W35B2QM.html" />
+    <Content Include="Content\Commute mobile.css" />
     <Content Include="Content\Commute.css" />
     <Content Include="Content\Images\Blue car 32px.png" />
     <Content Include="Content\Images\Commute icon.png" />
@@ -264,6 +264,7 @@
     <Content Include="Views\Route\View.cshtml" />
     <Content Include="Views\Help\Help.cshtml" />
     <Content Include="Views\Route\SearchAll.cshtml" />
+    <Content Include="Views\Route\SetRoute.cshtml" />
     <None Include="Views\Route\Map.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

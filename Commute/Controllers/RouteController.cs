@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Objects.SqlClient;
 using Commute.Models;
 using Commute.Properties;
 
@@ -34,15 +35,43 @@ namespace Commute.Controllers
         //SearchAll - Search (for on the fly route) for non logged used
         //For now we just list all routes in the database
         [AllowAnonymous]
-        public ActionResult SearchAll() //First attempt to use jQuery mobile not completed
+        public ActionResult SearchAll(decimal startLat = 0, decimal startLng = 0, decimal endLat = 0, decimal endLng = 0)
         //id=route ID, search route closed to the provided route ID
         {
-            var routeList = from r in db.Route
-                            select r;
+            IQueryable<RouteSearch> routeList;
+            if (startLat == 0 || startLng == 0 || endLat == 0 || endLng == 0)
+            { //All routes
+                routeList = from r in db.Route
+                            select new RouteSearch { Id = r.Id, UserId = r.UserId, IsOffer = r.IsOffer, Name = r.Name, StartDistance = 0, EndDistance = 0 };
+            }
+            else //Search matching routes
+            {
+                decimal maxDist = 5; //Distance approximation allowed in kilometers
+
+                routeList = from r in db.Route
+                            where SqlFunctions.Acos(SqlFunctions.Sin((double) SqlFunctions.Radians(r.StartLatitude)) * SqlFunctions.Sin((double)SqlFunctions.Radians(startLat)) + SqlFunctions.Cos((double)SqlFunctions.Radians(r.StartLatitude)) * SqlFunctions.Cos((double)SqlFunctions.Radians(startLat)) * SqlFunctions.Cos((double)SqlFunctions.Radians(startLng) - (double)SqlFunctions.Radians(r.StartLongitude))) * 6371 < (double)maxDist &&
+                            SqlFunctions.Acos(SqlFunctions.Sin((double)SqlFunctions.Radians(r.EndLatitude)) * SqlFunctions.Sin((double)SqlFunctions.Radians(endLat)) + SqlFunctions.Cos((double)SqlFunctions.Radians(r.EndLatitude)) * SqlFunctions.Cos((double)SqlFunctions.Radians(endLat)) * SqlFunctions.Cos((double)SqlFunctions.Radians(endLng) - (double)SqlFunctions.Radians(r.EndLongitude))) * 6371 < (double)maxDist
+                            select new RouteSearch { Id = r.Id, UserId = r.UserId, IsOffer = r.IsOffer, Name = r.Name, StartDistance = SqlFunctions.Acos(SqlFunctions.Sin((double)SqlFunctions.Radians(r.StartLatitude)) * SqlFunctions.Sin((double)SqlFunctions.Radians(startLat)) + SqlFunctions.Cos((double)SqlFunctions.Radians(r.StartLatitude)) * SqlFunctions.Cos((double)SqlFunctions.Radians(startLat)) * SqlFunctions.Cos((double)SqlFunctions.Radians(startLng) - (double)SqlFunctions.Radians(r.StartLongitude))) * 6371, EndDistance = SqlFunctions.Acos(SqlFunctions.Sin((double)SqlFunctions.Radians(r.EndLatitude)) * SqlFunctions.Sin((double)SqlFunctions.Radians(endLat)) + SqlFunctions.Cos((double)SqlFunctions.Radians(r.EndLatitude)) * SqlFunctions.Cos((double)SqlFunctions.Radians(endLat)) * SqlFunctions.Cos((double)SqlFunctions.Radians(endLng) - (double)SqlFunctions.Radians(r.EndLongitude))) * 6371 };
+            }
             ViewBag.Title = Resources.Route_search;
             return View(routeList.ToList());
         }
 
+        //Allow anonymous user to define a route to search existing route
+        [AllowAnonymous]
+        public ActionResult SetRoute()
+        {
+                RouteView routeView = new RouteView();
+                return View(routeView);
+        }
+
+        //Not used - to be deleted
+        [AllowAnonymous]
+        [HttpPost]
+        public ActionResult SetRoute(RouteWayPointView[] routeView)
+        {
+            return View("SearchAll");
+        }
 
         //Search - Search for logged used: Search route near another route
         [AllowAnonymous]

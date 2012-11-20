@@ -241,6 +241,15 @@ namespace Commute.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Forum.
+        /// </summary>
+        public static string Forum {
+            get {
+                return ResourceManager.GetString("Forum", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to From.
         /// </summary>
         public static string From {

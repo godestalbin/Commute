@@ -1,6 +1,6 @@
 ﻿body {
     background: #dcd0d0;
-}
+    }
 /* Sprites defined in Commute icon.png*/
 img.road_stripe {
 width: 110px;
@@ -101,4 +101,7 @@ img.small-user-picture {
     height: 50px;
     border: solid 1px;
     border-radius: 5px;
+}
+div.ui-body-c {
+    font-family: Tahoma;
 }

@@ -1,0 +1,259 @@
+﻿@model Commute.Models.RouteView
+@using Commute.Properties
+
+@{
+    Layout = "~/Views/Shared/_Mobile.cshtml";
+}
+
+
+@{ ViewBag.Title = @Resources.Route_create_update; }
+
+
+<input id="hfId" type="hidden" value="@Model.Id"/>
+<input id="hfUserId" type="hidden" value="@Model.UserId"/>
+<input id="hfJsonRoute" type="hidden" value="@Model.JsonRoute"/>
+
+<div style="position:absolute; left: 2px; top: 52px; right: 0px;">
+<button id="btnSearch" type="submit" data-mini="true" data-theme="b" data-inline="true" style="float:right;display:inline-block;">@Resources.Search</button>
+</div>
+
+<div id="divMap" style="width:100%;position: absolute; top: 100px; left: 0px; bottom: 0px;" /> @*style="width:700px;height:500px;">*@
+
+
+<script>
+    //Global variables
+    var routeWayPoint //an array of WayPoint 0=start, 1=end, next are real way points
+    var map //Google map
+    var directionsDisplay //display route
+
+    //----------
+    //Functions
+    //----------
+
+    function InitializeRouteMap() {
+        //alert(routeWayPoint.length);
+
+        //TMP - later we should get center in another way
+        var mapCenter = new google.maps.LatLng(39.907004, 116.39759); //Center on Beijing Tian An Men
+
+        var zoomControl = {
+            //position: google.maps.ControlPosition.TOP_LEFT,
+            style: google.maps.ZoomControlStyle.SMALL
+        }
+        //Define map properties
+        var mapProp = {
+            zoom: 12,
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            panControl: false,
+            streetViewControl: false,
+            zoomControlOptions: zoomControl
+        };
+        //Display the map in the div
+        map = new google.maps.Map(document.getElementById("divMap"), mapProp);
+        //Expand the size of the div for the map
+        //$('#divMap').css("height", "200px");
+        //Force map to expand to div
+        setTimeout(function () { google.maps.event.trigger(map, 'resize'); map.setCenter(mapCenter); }, 100);
+
+        //Display start and end point
+        //var p = new google.maps.LatLng(routeWayPoint[0].Latitude, routeWayPoint[0].Longitude)
+        //alert(routeWayPoint[0].Latitude + "/" + routeWayPoint[0].Longitude)
+        
+
+        //Display the way points
+        for (i = 0; i < routeWayPoint.length; i++) {
+            switch (i) {
+                case 0: //Start point
+                    CreateMarker(new google.maps.LatLng(routeWayPoint[0].Latitude, routeWayPoint[0].Longitude), 1, true, 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=A|6BC54D|000000');
+                    break;
+                case 1: //End point
+                    CreateMarker(new google.maps.LatLng(routeWayPoint[1].Latitude, routeWayPoint[1].Longitude), 2, true, 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=B|6BC54D|000000');
+                    break;
+                default: //Way points
+                    CreateMarker(new google.maps.LatLng(routeWayPoint[i].Latitude, routeWayPoint[i].Longitude), i + 1, true);
+            }
+
+        }
+
+        //Create object to display route
+        var rendererOptions = {
+            //preserveViewport: true, //Do not resize map on start/end point
+            suppressMarkers: true //Do not display default A, B, C makers
+        };
+        directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions);
+        directionsDisplay.setMap(map);
+        
+        //Display the route
+        UpdateRoute();
+
+        //Add map click event
+        google.maps.event.addListener(map, 'click', function (event) {
+            if (routeWayPoint.length == 0) { //Start point not created yet
+                CreateMarker(event.latLng, 1, true, 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=A|6BC54D|000000'); //Create new marker with location clicked
+                //routeWayPoint.push({ RouteId: @Model.Id, LineId: 1, Latitude: event.latLng.lat(), Longitude: event.latLng.lng() });
+                //$('#hfStartLatitude').val(event.latLng.lat()); //Register start point
+                //$('#hfStartLongitude').val(event.latLng.lng());
+            }
+            else if (routeWayPoint.length == 1) { //End point not created yet
+                CreateMarker(event.latLng, 2, true, 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=B|6BC54D|000000'); //Create new marker with location clicked
+                //routeWayPoint.push({ RouteId: @Model.Id, LineId: 2, Latitude: event.latLng.lat(), Longitude: event.latLng.lng() });
+                //$('#hfEndLatitude').val(event.latLng.lat()); //Register end point
+                //$('#hfEndLongitude').val(event.latLng.lng());
+                UpdateRoute();
+            }
+        });
+
+    } //InitializeRouteMap
+
+function CreateMarker(location, id, draggable, icon) {
+    //id(=RouteWayPoint.LineId):1=start, 2=end, 3...=way points
+    //optional draggable: default = true
+    draggable = typeof draggable !== 'undefined' ? draggable : true;
+
+    var marker = new google.maps.Marker({
+        position: location,
+        id: id,
+        draggable: draggable,
+        icon: icon,
+        map: map
+    });
+    if ( routeWayPoint.length >= id )
+        routeWayPoint[marker.id - 1].marker = marker; //Keep the marker in the array
+    else {
+        routeWayPoint.push({RouteId: @Model.Id, LineId: routeWayPoint.length + 1, Latitude: location.lat(), Longitude: location.lng(), marker: marker});
+        }
+
+            //Add marker event to track drag end
+        google.maps.event.addListener(marker, 'dragend', function (event) {
+            //Update lat/lng in routeWayPoint array
+            routeWayPoint[marker.id - 1].Latitude = event.latLng.lat();
+            routeWayPoint[marker.id - 1].Longitude = event.latLng.lng();
+            UpdateRoute();
+        });
+            //Add marker event to track double click: remove marker
+        google.maps.event.addListener(marker, 'dblclick', function (event) {
+            if ( marker.id > 2 ) { //start/end point cannot be deleted
+                marker.setMap(null); //Delete marker
+                //Update next markers id
+                for (var i= marker.id; i < routeWayPoint.length; i++) {
+                    routeWayPoint[i].marker.id -= 1;
+                    routeWayPoint[i].LineId -= 1;
+                }
+                routeWayPoint.splice(marker.id - 1, 1) //Remove marker from way point
+                UpdateRoute();
+            }
+        });
+        //TMP
+        //Add maker event to display marker coordinates
+        google.maps.event.addListener(marker, "mouseover", function(event) {
+            //alert(marker.position.lat().toString() + "/" + marker.position.lng().toString());
+            //new google.maps.infoWindow({
+            //    map: map,
+            //    position: event.latLng,
+            //    content: "Hello" //marker.position.lat().toString() + "/" + marker.position.lng().toString()
+            //});
+            ////infowindow.open(map);
+        });
+    } //CreateMarker
+
+    //Refresh the route on the map with data in routeWayPoint
+    function UpdateRoute() {
+
+        if (routeWayPoint.length < 2 ) return; //Less than 2 points no route to display
+
+        //Create directionService to request route to Google
+        var directionsService = new google.maps.DirectionsService();
+
+        //Initialize waypoint array
+        var waypoint;
+        var waypoints = [];
+        for (i = 2; i < routeWayPoint.length; i++) {
+            waypoint = {
+                location: new google.maps.LatLng(routeWayPoint[i].Latitude, routeWayPoint[i].Longitude)
+               }
+            waypoints.push(waypoint);
+        }
+
+        //Request the route to google
+        var request = {
+            origin: new google.maps.LatLng(routeWayPoint[0].Latitude, routeWayPoint[0].Longitude),
+            destination: new google.maps.LatLng(routeWayPoint[1].Latitude, routeWayPoint[1].Longitude),
+            waypoints: waypoints,
+            travelMode: google.maps.DirectionsTravelMode.DRIVING,
+            optimizeWaypoints: true
+        };
+        directionsService.route(request, function (response, status) {
+            if (status == google.maps.DirectionsStatus.OK) {
+                directionsDisplay.setDirections({routes: []});
+                directionsDisplay.setDirections(response); //Display route
+                //alert("Route displayed");
+
+                ////After the route is displayed first time do not allow the map viewport to resize
+                rendererOptions = {
+                    preserveViewport: true, //Do not resize map on start/end point
+                    suppressMarkers: true //Do not display default A, B, C makers
+                };
+                setTimeout(function () { directionsDisplay.setOptions(rendererOptions); }, 1000);
+                
+            }
+            else alert(status + "/" + response);
+        });
+    }
+
+    //Synchronous Ajax to get route and way points
+    function GetWayPoint() {
+        $.ajax({ 
+            'async': false, 'url': '/Route/WayPoint/' + @Model.Id, 'type': 'get', 'dataType': 'json', //?id=
+            'success': function (data) {
+                routeWayPoint = data.Data;
+            }
+        });
+    }
+
+    //                
+
+    function CheckResult() {
+        for (i = 0; i < routeWayPoint.length; i++) {
+            alert(routeWayPoint[i].LineId + ", " + routeWayPoint[i].Latitude);
+        }
+    }
+
+    function RouteToPost() {
+        var routeToPost = [];
+        for ( i=0; i<routeWayPoint.length; i++) {
+            routeToPost.push({ LineId: routeWayPoint[i].LineId, Latitude: routeWayPoint[i].Latitude, Longitude: routeWayPoint[i].Longitude })
+        }
+        for ( i=0; i<routeWayPoint.length; i++) {
+            routeWayPoint[i].marker = null;
+        }
+        return routeToPost;
+    }
+
+    function UpdateRoute(data) {
+        var j = $('#iptName').val();
+        var i = $('#selIsSeek').val();
+        $.ajax({ 
+            url: '/Route/UpdateRoute/', type: 'post',
+            data: { id: @Model.Id, isOffer: $('#selIsSeek').val(), name: $('#iptName').val()}
+        });
+    }
+
+    function tmp() {}
+
+    jQuery(document).ready(function () {
+        //alert("Ready");
+        GetWayPoint(); //Synchronous AJAX to get waypoint necessary to draw map
+        InitializeRouteMap();
+
+        //Search button click
+        $("#btnSearch").click(function() {
+            tmp();
+            if ( routeWayPoint.length >= 2 )
+                window.location = "/Route/SearchAll?startLat=" + routeWayPoint[0].Latitude + "&startLng=" + routeWayPoint[0].Longitude + "&endLat=" + routeWayPoint[1].Latitude + "&endLng=" + routeWayPoint[1].Longitude;
+            else window.location = "/Route/SearchAll";
+
+        });
+
+    });
+
+</script>
