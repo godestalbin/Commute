@@ -35,7 +35,7 @@ namespace Commute.Controllers
             if (user == null) ModelState.AddModelError("Account", Resources.Error_unknown_account);
             else if (user.Password == userLogin.Password)
             {
-                FormsAuthentication.SetAuthCookie(user.Account,false); //false no persistent cookie
+                FormsAuthentication.SetAuthCookie(user.Account,true); //false no persistent cookie
                 Session["userId"] = user.Id;
                 return RedirectToAction("ListMobile", "Route", new { userId = user.Id }); //Later should be Home/Index
             }
