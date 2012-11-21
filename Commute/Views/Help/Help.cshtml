@@ -3,7 +3,7 @@
     Layout = "~/Views/Shared/_Mobile.cshtml";
 }
 
-<iframe id="ifrDocumentation" seamless src="https://s3-eu-west-1.amazonaws.com/commute/Documentation/Commute+documentation.html" scrolling="no" style="width: 100%; border: 0px none transparent; padding: 0px;"></iframe>
+<iframe id="ifrDocumentation" src="https://s3-eu-west-1.amazonaws.com/commute/Documentation/Commute+documentation.html" scrolling="no" style="width: 100%; border: 0px none transparent; padding: 0px;"></iframe>
 
 <script>
     function resize() {
@@ -18,13 +18,20 @@
     //window.onresize = resize;
 
     function tmp(e) {
+        alert(e);
     }
 
     window.addEventListener('message', function (e) {
         //var $iframe = $('#ifrDocumentation');
-
-        var message = e.data.split(',');
+        //alert(e.data[0]);
+        //var message = e.data.split(',');
         //tmp(message);
+
+        var data
+        if ($.browser.msie) { //For IE we don't receive an array but a string
+            message = e.data.split(',');
+        }
+        else message = e.data;
 
         var eventName = message[0];
         var data = message[1];
