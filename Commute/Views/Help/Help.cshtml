@@ -39,7 +39,7 @@
         switch (eventName) {
             case 'setHeight':
                 //Set the size of the iframe according to the divDocumentation (help.html) size sent
-                $('#ifrDocumentation').height(data);
+                $('#ifrDocumentation').height( 20 + parseInt(data));
                 //alert(data);
                 break;
         }
