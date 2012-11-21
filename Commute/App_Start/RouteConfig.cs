@@ -16,7 +16,7 @@ namespace Commute
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Route", action = "SearchAll", id = UrlParameter.Optional }
+                defaults: new { controller = "Home", action = "Welcome", id = UrlParameter.Optional }
             );
         }
     }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Commute.Models;
+using Commute.Properties;
 
 namespace Commute.Controllers
 {
@@ -39,6 +40,13 @@ namespace Commute.Controllers
     public class HomeController : BaseController
     {
         //private readonly Context _context = new Context();
+
+        [AllowAnonymous]
+        public ActionResult Welcome()
+        {
+            //ViewBag.Title = Resources.Welcome; done in the view
+            return View();
+        }
 
         public ActionResult Index()
         {

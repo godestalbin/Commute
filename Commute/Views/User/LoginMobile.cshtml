@@ -6,7 +6,6 @@
     ViewBag.Title = @Resources.Login;
 }
 
-
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
     <table>
@@ -20,19 +19,24 @@
         <tr>
             <td>@Html.LabelFor(model => model.Password)</td>
             <td>
-                @Html.EditorFor( model => model.Password)
+                @Html.EditorFor(model => model.Password)
                 @Html.ValidationMessageFor(model => model.Password)
             </td>
         </tr>
         <tr>
             <td></td>
-            <td><input type="submit" value="@Resources.Login" /></td>
+            <td><input type="submit" value="@Resources.Login"  data-inline="true"/></td>
         </tr>
     </table>
 }
 
+@section Scripts {
+
 <script>
     jQuery(document).ready(function () {
+        alert("Focus");
         $('#iptAccount').focus();
     });
 </script>
+
+}

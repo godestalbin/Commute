@@ -265,6 +265,7 @@
     <Content Include="Views\Help\Help.cshtml" />
     <Content Include="Views\Route\SearchAll.cshtml" />
     <Content Include="Views\Route\SetRoute.cshtml" />
+    <Content Include="Views\Home\Welcome.cshtml" />
     <None Include="Views\Route\Map.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -306,6 +307,7 @@
     <Content Include="Views\Route\ListMobile.cshtml" />
     <Content Include="Views\Home\NotImplemented.cshtml" />
     <Content Include="Views\User\LoginMobile.cshtml" />
+    <Content Include="Views\User\RegisterOld.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

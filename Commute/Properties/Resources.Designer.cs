@@ -214,6 +214,24 @@ namespace Commute.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This account already exists.
+        /// </summary>
+        public static string Error_duplicate_account {
+            get {
+                return ResourceManager.GetString("Error duplicate account", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This does not look like a valid mail address.
+        /// </summary>
+        public static string Error_invalid_mail {
+            get {
+                return ResourceManager.GetString("Error invalid mail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to String is too long.
         /// </summary>
         public static string Error_string_too_long {
@@ -390,6 +408,15 @@ namespace Commute.Properties {
         public static string Picture {
             get {
                 return ResourceManager.GetString("Picture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Register.
+        /// </summary>
+        public static string Register {
+            get {
+                return ResourceManager.GetString("Register", resourceCulture);
             }
         }
         
@@ -597,6 +624,30 @@ namespace Commute.Properties {
         public static string Welcome {
             get {
                 return ResourceManager.GetString("Welcome", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Welcome to Commute, the green and friendly way to commute.
+        ///- Define the commute route you seek/offer
+        ///- Find other commuters with similar route
+        ///- Get in touch with them to commute together
+        ///- Keep track of the expenses to share
+        ///
+        ///First, create an account to join Commute community..
+        /// </summary>
+        public static string Welcome_message {
+            get {
+                return ResourceManager.GetString("Welcome message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Alternatively, you can view available routes for your commute path witout creating an account..
+        /// </summary>
+        public static string Welcome_view_route {
+            get {
+                return ResourceManager.GetString("Welcome view route", resourceCulture);
             }
         }
     }

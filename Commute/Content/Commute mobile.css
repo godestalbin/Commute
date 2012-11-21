@@ -1,4 +1,38 @@
-﻿div.ui-body-c {
+﻿body {
+    /*background: #dcd0d0;*/
     font-family: Tahoma;
-    font-size: 0.8em;
+    font-size: .9em;
+}
+div.ui-body-c {
+    font-family: Tahoma;
+    font-size: 1em;
+}input.ui-body-c {
+    font-family: Tahoma;
+    font-size: 1em;
+    padding-top: 0.1em;
+    padding-bottom: 0em;
+    margin-top: 0.1em;
+}
+span.ui-btn-inner {
+    font-family: Tahoma;
+    font-size: 1em;
+}
+label.ui-input-text {
+    font-family: Tahoma;
+    font-size: 1em;
+}
+input.account {
+    width: 10em;
+    display: inline;
+}
+input.password {
+    width: 10em;
+    display: inline;
+}
+input.email {
+    width: 20em;
+    display: inline;
+}
+.field-validation-error {
+    color: red;
 }

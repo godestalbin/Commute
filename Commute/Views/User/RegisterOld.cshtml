@@ -1,56 +1,59 @@
 ﻿@model Commute.Models.RegisterUser
-@using Commute.Properties
 
 @{
-    Layout = "~/Views/Shared/_Mobile.cshtml";
-    ViewBag.Title = @Resources.Register;
+    ViewBag.Title = "Register";
 }
 
 @using (Html.BeginForm()) {
-    @Html.ValidationSummary(true)
+@Html.ValidationSummary(true)
+
     <table>
         <tr>
             <td>@Html.LabelFor(model => model.Account)</td>
             <td>
-                @Html.TextBoxFor(model => model.Account, new { @class = "account" })
+                @Html.EditorFor(model => model.Account)
                 @Html.ValidationMessageFor(model => model.Account)
             </td>
         </tr>
         <tr>
             <td>@Html.LabelFor(model => model.Password)</td>
             <td>
-                @Html.TextBoxFor(model => model.Password, new { @class = "password" })
+                @Html.EditorFor(model => model.Password)
                 @Html.ValidationMessageFor(model => model.Password)
             </td>
         </tr>
         <tr>
             <td>@Html.LabelFor(model => model.ConfirmedPassword)</td>
             <td>
-                @Html.TextBoxFor(model => model.ConfirmedPassword, new { @class = "password" })
+                @Html.EditorFor(model => model.ConfirmedPassword)
                 @Html.ValidationMessageFor(model => model.ConfirmedPassword)
             </td>
         </tr>
         <tr>
             <td>@Html.LabelFor(model => model.EmailAddress)</td>
             <td>
-                @Html.TextBoxFor(model => model.EmailAddress, new { @class = "email" } )
+                @Html.EditorFor(model => model.EmailAddress)
                 @Html.ValidationMessageFor(model => model.EmailAddress)
             </td>
         </tr>
     </table>
+@*        <div class="editor-label">
+            @Html.LabelFor(model => model.Picture)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Picture)
+            @Html.ValidationMessageFor(model => model.Picture)
+        </div>*@
 
         <p>
-            <input type="submit" value="@Resources.Create_account"  data-inline="true" data-mini="true" />
+            <input type="submit" value="Create" />
         </p>
 }
 
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
 @section Scripts {
-
-<script>
-    jQuery(document).ready(function () {
-        $('#Account').focus();
-    });
-</script>
-
-@Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryval")
 }

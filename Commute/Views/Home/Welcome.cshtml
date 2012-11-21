@@ -1,0 +1,14 @@
+﻿@using Commute.Properties
+
+@{
+    Layout = "~/Views/Shared/_Mobile.cshtml";
+    ViewBag.Title = @Resources.Welcome;
+}
+
+@Html.Raw( @Resources.Welcome_message.Replace("\r\n", "<br />").Replace("Commute", "<b>Commute</b>") )
+<br />
+<a href="/User/Register" data-role="button" data-inline="true" data-mini="true">@Resources.Register</a>
+<br />
+@Html.Raw( @Resources.Welcome_view_route.Replace("\r\n", "<br />") )
+<br />
+<a href="/Route/SearchAll" data-role="button" data-inline="true" data-mini="true">@Resources.Route_search</a>

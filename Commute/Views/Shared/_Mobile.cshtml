@@ -58,6 +58,7 @@
 				</div><!-- /collapsible -->
                 @*<div data-role="listview" data-inset="false">*@
                     <ul data-role="listview">
+                    <li ><a href="/Home/Welcome"  data-ajax="false">@Resources.Welcome</a></li>
                     <li ><a href="/Help/Help"  data-ajax="false">@Resources.Help</a></li>
                     <li ><a href="http://commute.freeforums.org/" target="_blank" data-ajax="false">@Resources.Forum</a></li>
                     </ul>
@@ -70,6 +71,7 @@
 	</div><!-- /content -->
 
 </div><!-- /page -->
+@RenderSection("scripts", required: false)
 <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyC0KjUdM6DpNQAggngGkuKLFvoHw-lJ0H4&sensor=false"></script>
 
 <script src="//static.getclicky.com/js" type="text/javascript"></script>

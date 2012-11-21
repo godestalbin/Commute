@@ -68,6 +68,12 @@ namespace Commute.Controllers
         [AllowAnonymous]
         public ActionResult Register(User user)
         {
+            //Check account is free
+            int count = db.User.Count(u => u.Account == user.Account);
+            if ( count > 0 ) {
+                ModelState.AddModelError("Account", Resources.Error_duplicate_account);
+                return View();
+            }
             if (ModelState.IsValid)
             {
                 db.User.Add(user);

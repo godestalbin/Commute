@@ -24,6 +24,7 @@ namespace Commute.Models
         [Display(Name = "Email", ResourceType = typeof(Properties.Resources))]
         [Required]
         [StringLength(100)]
+        [RegularExpression(".+@.+\\..+", ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "Error_invalid mail")]
         public string EmailAddress { get; set; }
         
         public bool Picture { get; set; }
@@ -49,22 +50,8 @@ namespace Commute.Models
         [Display(Name = "Email", ResourceType = typeof(Properties.Resources))]
         [Required]
         [StringLength(100)]
+        [RegularExpression(".+@.+\\..+", ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "Error_invalid_mail")]
         public string EmailAddress { get; set; }
     }
-
-    //Not used
-    //public class LoginUser
-    //{
-    //    [Display(Name = "Account", ResourceType = typeof(Properties.Resources))]
-    //    [Required(ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "Mandatory")]
-    //    [StringLength(20, ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "Error_string_too_long")]
-    //    public string Account { get; set; }
-    //    [Display(Name = "Password", ResourceType = typeof(Properties.Resources))]
-    //    [Required(ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "Mandatory")]
-    //    [StringLength(20, ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "Error_string_too_long")]
-    //    [DataType(DataType.Password)]
-    //    public string Password { get; set; }
-    //}
-
 
 }
