@@ -6,7 +6,11 @@
     ViewBag.Title = @Resources.Register;
 }
 
-@using (Html.BeginForm()) {
+@using (Html.BeginForm((string)null, (string)null, FormMethod.Post, new Dictionary<string, object>
+    {
+        { "data-ajax", "false" }, 
+    }))
+    {
     @Html.ValidationSummary(true)
     <table>
         <tr>

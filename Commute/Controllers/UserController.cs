@@ -78,7 +78,7 @@ namespace Commute.Controllers
             {
                 db.User.Add(user);
                 db.SaveChanges();
-                return RedirectToAction("Edit", "User", user.Id); //Show user data in Edit view
+                return RedirectToAction("Login", "User", user.Id); //Show user data in Edit view
             }
             return View();
         }
