@@ -1,10 +1,7 @@
 ﻿@model Commute.Models.User
 @using Commute.Properties
 
-@{
-    Layout = "~/Views/Shared/_Mobile.cshtml";
-    ViewBag.Title = @Resources.Login;
-}
+@{ ViewBag.Title = @Resources.Login; }
 
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
@@ -19,24 +16,21 @@
         <tr>
             <td>@Html.LabelFor(model => model.Password)</td>
             <td>
-                @Html.EditorFor(model => model.Password)
+                @Html.EditorFor( model => model.Password)
                 @Html.ValidationMessageFor(model => model.Password)
             </td>
         </tr>
         <tr>
             <td></td>
-            <td><input type="submit" value="@Resources.Login"  data-inline="true"/></td>
+            <td><input type="submit" value="@Resources.Login" /></td>
         </tr>
     </table>
 }
 
-@section Scripts {
-
+@section scripts {
 <script>
     jQuery(document).ready(function () {
-        alert("Focus");
         $('#iptAccount').focus();
     });
 </script>
-
 }

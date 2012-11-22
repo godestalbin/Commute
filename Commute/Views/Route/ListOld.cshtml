@@ -1,0 +1,78 @@
+﻿@model IEnumerable<Commute.Models.Route>
+@using Commute.Properties
+
+@{ ViewBag.Title = @Resources.Route_list; }
+
+<p>
+    @Html.ActionLink(@Resources.Route_new, "CreateUpdate")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsOffer)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StartLatitude)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StartLongitude)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EndLatitude)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EndLongitude)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.ActionLink(item.Id.ToString(), "CreateUpdate", "Route", new { id = @item.Id }, null)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsOffer)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StartLatitude)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StartLongitude)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EndLatitude)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EndLongitude)
+        </td>
+        <td>
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+        </td>
+    </tr>
+}
+
+</table>
+
+@* TMP to show we can drag the user picture only in the view it is necessary *@
+@section scripts {
+<script>
+    jQuery(document).ready(function () {
+        $(".small-user-picture").draggable({
+            revert: true,
+            start: function(event) {
+                event.preventDefault(); //Test to make drag working on mobile
+            },
+        });
+    });
+</script>
+}

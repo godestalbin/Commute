@@ -27,10 +27,12 @@
 	<div <div class="ui-bar ui-bar-b">
         <div class="ui-grid-b">
             <div class="ui-block-a"><a href="#popupNested" data-rel="popup" data-role="button" data-mini="true" data-inline="true">@Resources.Menu</a></div>
-		    <div class="ui-block-b"><h4>@ViewBag.title</h4></div>
-            <div class="ui-block-c">@if (@ViewBag.userId > 0 ) { <span>@ViewBag.userId - @ViewBag.userName</span>  } 
-                else { <span>Guest</span>
-                <a href="/User/LoginMobile" data-role="button" data-mini="true" data-inline="true">@Resources.Login</a>
+		    <div class="ui-block-b"><h5>@ViewBag.title</h5></div>
+            <div class="ui-block-c">@if (@ViewBag.userId > 0 ) { <span>@ViewBag.userId - @ViewBag.userName</span>
+                <a href="/User/Logout/" data-role="button" data-ajax="false" data-mini="true" data-inline="true">@Resources.Logout</a>
+            } 
+                else { <span>@Resources.Guest</span>
+                <a href="/User/Login/" data-role="button" data-ajax="false" data-mini="true" data-inline="true">@Resources.Login</a>
             }
             </div>
         </div>
@@ -44,16 +46,16 @@
 					<ul data-role="listview">
 						<li><a href="/Route/SearchAll"  data-ajax="false">@Resources.Search</a></li>
 						<li><a href="/Route/CreateUpdateMobile"  data-ajax="false">@Resources.Route_new</a></li>
-						<li><a href="/Route/ListMobile?userId=@ViewBag.userId"  data-ajax="false">@Resources.Route_list</a></li>
+						<li><a href="/Route/List"  data-ajax="false">@Resources.Route_list</a></li>
 					</ul>
 				</div><!-- /collapsible -->
 				<div data-role="collapsible" data-inset="false">
 					<h2>@Resources.User</h2>
 					<ul data-role="listview">
 						<li><a href="/User/Edit"  data-ajax="false">@Resources.User_account</a></li>
-						<li><a href="/User/Register"  data-ajax="false">@Resources.User_registration</a></li>
-						<li><a href="/User/LoginMobile"  data-ajax="false">@Resources.User_login</a></li>
-						<li><a href="/User/Logout"  data-ajax="false">@Resources.User_logout</a></li>
+						<li><a href="/User/Register"  data-ajax="false">@Resources.Register</a></li>
+						<li><a href="/User/Login"  data-ajax="false">@Resources.Login</a></li>
+						<li><a href="/User/Logout"  data-ajax="false">@Resources.Logout</a></li>
 					</ul>
 				</div><!-- /collapsible -->
                 @*<div data-role="listview" data-inset="false">*@

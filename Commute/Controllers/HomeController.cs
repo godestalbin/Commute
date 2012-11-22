@@ -11,12 +11,15 @@ namespace Commute.Controllers
     public class BaseController : Controller
     {
         public readonly Context db = new Context();
+        protected int userId;
+        protected string userName;
 
         protected override void OnActionExecuting(ActionExecutingContext ctx)
         {
             base.OnActionExecuting(ctx);
             if (User.Identity.IsAuthenticated)
             {
+                userName = User.Identity.Name;
                 Session["userName"] = User.Identity.Name;
                 ViewBag.userName = Session["userName"];
                 if (Session["userId"] == null) //Need to get user ID from database
@@ -27,8 +30,11 @@ namespace Commute.Controllers
                     Session["userId"] = user.Id;
                 }
                 ViewBag.userId = Session["userId"];
+                userId = (int)Session["userId"]; ;
             }
             else {
+                userId = 0;
+                userName = "";
                 //Session["userName"] = "a"; //null;
                 //Session["userId"] = 1; //null;
                 //ViewBag.userName = Session["userName"];

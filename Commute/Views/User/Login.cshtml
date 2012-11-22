@@ -1,9 +1,16 @@
 ﻿@model Commute.Models.User
 @using Commute.Properties
 
-@{ ViewBag.Title = @Resources.Login; }
+@{
+    Layout = "~/Views/Shared/_Mobile.cshtml";
+    ViewBag.Title = @Resources.Login;
+}
 
-@using (Html.BeginForm()) {
+@using (Html.BeginForm((string)null, (string)null, FormMethod.Post, new Dictionary<string, object>
+    {
+        { "data-ajax", "false" }, 
+    }))
+{
     @Html.ValidationSummary(true)
     <table>
         <tr>
@@ -16,21 +23,23 @@
         <tr>
             <td>@Html.LabelFor(model => model.Password)</td>
             <td>
-                @Html.EditorFor( model => model.Password)
+                @Html.EditorFor(model => model.Password)
                 @Html.ValidationMessageFor(model => model.Password)
             </td>
         </tr>
         <tr>
             <td></td>
-            <td><input type="submit" value="@Resources.Login" /></td>
+            <td><input type="submit" value="@Resources.Login"  data-ajax="false" data-inline="true"/></td>
         </tr>
     </table>
 }
 
-@section scripts {
+@section Scripts {
+
 <script>
     jQuery(document).ready(function () {
         $('#iptAccount').focus();
     });
 </script>
+
 }

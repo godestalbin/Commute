@@ -277,6 +277,15 @@ namespace Commute.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Guest.
+        /// </summary>
+        public static string Guest {
+            get {
+                return ResourceManager.GetString("Guest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Help.
         /// </summary>
         public static string Help {
@@ -336,6 +345,15 @@ namespace Commute.Properties {
         public static string Login {
             get {
                 return ResourceManager.GetString("Login", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Logout.
+        /// </summary>
+        public static string Logout {
+            get {
+                return ResourceManager.GetString("Logout", resourceCulture);
             }
         }
         
@@ -628,13 +646,29 @@ namespace Commute.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Read the quick start documentation to have an overview of Commute features..
+        /// </summary>
+        public static string Welcome_help {
+            get {
+                return ResourceManager.GetString("Welcome help", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to First, create an account to join Commute community.
+        /// </summary>
+        public static string Welcome_join {
+            get {
+                return ResourceManager.GetString("Welcome join", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Welcome to Commute, the green and friendly way to commute.
         ///&lt;div&gt;- Define the commute route you seek/offer&lt;/div&gt;
         ///&lt;div&gt;- Find other commuters with similar route&lt;/div&gt;
         ///&lt;div&gt;- Get in touch with them to commute together&lt;/div&gt;
-        ///&lt;div&gt;- Keep track of the expenses to share&lt;/div&gt;
-        ///
-        ///First, create an account to join Commute community..
+        ///&lt;div&gt;- Keep track of the expenses to share&lt;/div&gt;.
         /// </summary>
         public static string Welcome_message {
             get {

@@ -20,6 +20,13 @@ namespace Commute.Controllers
         
         //Login
         [AllowAnonymous]
+        public ActionResult LoginOld()
+        {
+            return View();
+        }
+
+        //LoginMobile
+        [AllowAnonymous]
         public ActionResult Login()
         {
             return View();
@@ -27,7 +34,7 @@ namespace Commute.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public ActionResult LoginMobile(User userLogin)
+        public ActionResult Login(User userLogin)
         {
             User user = (from u in db.User
                          where u.Account == userLogin.Account
@@ -35,18 +42,11 @@ namespace Commute.Controllers
             if (user == null) ModelState.AddModelError("Account", Resources.Error_unknown_account);
             else if (user.Password == userLogin.Password)
             {
-                FormsAuthentication.SetAuthCookie(user.Account,true); //false no persistent cookie
+                FormsAuthentication.SetAuthCookie(user.Account,true); //true=Persistent cookie
                 Session["userId"] = user.Id;
-                return RedirectToAction("ListMobile", "Route", new { userId = user.Id }); //Later should be Home/Index
+                return RedirectToAction("List", "Route"); //, new { userId = user.Id }); //Later should be Home/Index
             }
             else ModelState.AddModelError("Password", Resources.Error_wrong_password);
-            return View();
-        }
-
-        //LoginMobile
-        [AllowAnonymous]
-        public ActionResult LoginMobile()
-        {
             return View();
         }
 
@@ -54,7 +54,7 @@ namespace Commute.Controllers
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Welcome", "Home");
         }
 
         //Register

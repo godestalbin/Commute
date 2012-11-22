@@ -284,7 +284,7 @@
     <Content Include="Views\Location\Create.cshtml" />
     <Content Include="Views\Location\List.cshtml" />
     <Content Include="Views\Location\CreateUpdate.cshtml" />
-    <Content Include="Views\Route\List.cshtml" />
+    <Content Include="Views\Route\ListOld.cshtml" />
     <Content Include="Views\Route\Details.cshtml" />
     <Content Include="Views\Route\Create.cshtml" />
     <Content Include="Views\Route\Edit.cshtml" />
@@ -300,13 +300,13 @@
     <Content Include="Views\User\Register.cshtml" />
     <Content Include="Views\Shared\_Menu.cshtml" />
     <Content Include="Views\User\UploadFile.cshtml" />
-    <Content Include="Views\User\Login.cshtml" />
+    <Content Include="Views\User\LoginOld.cshtml" />
     <Content Include="Views\Shared\_LoginMenu.cshtml" />
     <Content Include="Views\Route\Search.cshtml" />
     <Content Include="Views\Shared\_Mobile.cshtml" />
-    <Content Include="Views\Route\ListMobile.cshtml" />
+    <Content Include="Views\Route\List.cshtml" />
     <Content Include="Views\Home\NotImplemented.cshtml" />
-    <Content Include="Views\User\LoginMobile.cshtml" />
+    <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\User\RegisterOld.cshtml" />
   </ItemGroup>
   <ItemGroup>

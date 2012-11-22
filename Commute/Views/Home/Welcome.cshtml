@@ -5,10 +5,13 @@
     ViewBag.Title = @Resources.Welcome;
 }
 
-@Html.Raw( @Resources.Welcome_message.Replace("\r\n", "<br>").Replace("Commute", "<b>Commute</b>") )
+@Html.Raw( @Resources.Welcome_message.Replace("Commute", "<b>Commute</b>") )
 <br>
+@Html.Raw( @Resources.Welcome_join.Replace("Commute", "<b>Commute</b>") )
 <a href="/User/Register" data-role="button" data-inline="true" data-mini="true">@Resources.Register</a>
 <br>
-@Html.Raw( @Resources.Welcome_view_route.Replace("\r\n", "<br>") )
+@Html.Raw( @Resources.Welcome_help.Replace("Commute", "<b>Commute</b>") )
+<a href="/Help/Help" data-role="button" data-inline="true" data-mini="true">@Resources.Help</a>
 <br>
+@Html.Raw( @Resources.Welcome_view_route.Replace("\r\n", "<br>") )
 <a href="/Route/SearchAll" data-role="button" data-inline="true" data-mini="true">@Resources.Route_search</a>

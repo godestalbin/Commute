@@ -1,78 +1,19 @@
 ﻿@model IEnumerable<Commute.Models.Route>
 @using Commute.Properties
 
-@{ ViewBag.Title = @Resources.Route_list; }
+@{
+    Layout = "~/Views/Shared/_Mobile.cshtml";
+}
 
-<p>
-    @Html.ActionLink(@Resources.Route_new, "CreateUpdate")
-</p>
-<table>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Id)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UserId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsOffer)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.StartLatitude)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.StartLongitude)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EndLatitude)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EndLongitude)
-        </th>
-        <th></th>
-    </tr>
-
+@* Button Open Map *@
+<div class="ui-grid-b"> @*3-columns*@
+    <div class="ui-block-a">@Resources.Route_id</div>
+    <div class="ui-block-b"></div>
+    <div class="ui-block-c"></div>
 @foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.ActionLink(item.Id.ToString(), "CreateUpdate", "Route", new { id = @item.Id }, null)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UserId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsOffer)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.StartLatitude)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.StartLongitude)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EndLatitude)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EndLongitude)
-        </td>
-        <td>
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-        </td>
-    </tr>
+	<div class="ui-block-a"><strong>@item.Id</strong> @item.Name</div>
+    @*<div class="ui-block-b"><a href="#popupMap" data-rel="popup" data-position-to="window" data-role="button" data-theme="b" data-inline="true">Open Map</a></div>*@
+	<div class="ui-block-b"><a href="/Route/CreateUpdateMobile/@item.Id" data-role="button" data-mini="true" data-ajax="false" data-theme="b" data-inline="true">@Resources.Map</a></div>
+	<div class="ui-block-b"><a href="/Route/Search/@item.Id" data-role="button" data-mini="true" data-theme="b" data-inline="true">@Resources.Search</a></div>
 }
-
-</table>
-
-@* TMP to show we can drag the user picture only in the view it is necessary *@
-@section scripts {
-<script>
-    jQuery(document).ready(function () {
-        $(".small-user-picture").draggable({
-            revert: true,
-            start: function(event) {
-                event.preventDefault(); //Test to make drag working on mobile
-            },
-        });
-    });
-</script>
-}
+    </div><!-- /grid-a -->
