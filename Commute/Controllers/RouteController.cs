@@ -167,7 +167,7 @@ namespace Commute.Controllers
             }
             db.SaveChanges();
             //return RedirectToAction("ListMobile", "Route", new { userId = Session["userId"] }); //View(CreateUpdate(route.Id));
-            return "/Route/ListMobile?userId=" + Session["userId"];
+            return "/Route/List"; //Mobile?userId=" + Session["userId"];
         }
 
         //CreateUpdateMobile
