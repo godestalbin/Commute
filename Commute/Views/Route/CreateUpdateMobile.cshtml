@@ -29,9 +29,10 @@
         }
 	</select>
 </div>
-    @Html.TextBoxFor(model => model.Name, new { id="iptName", style = "width:30%;display:inline;"})
+    @Html.TextBoxFor(model => model.Name, new { id="iptName", style = "width:45%;display:inline;"})
     @Html.ValidationMessageFor(model => model.Name)
-<button id="btnSave" type="submit" data-mini="true" data-theme="b" data-inline="true" >@Resources.Save</button> <button id="btnCancel" type="button" data-mini="true" data-theme="b" data-inline="true" style="float:right;display:inline-block;">@Resources.Cancel</button>
+    <button id="btnSave" type="submit" data-mini="true" data-theme="b" data-inline="true" data-icon="check" data-iconpos="notext" >@Resources.Save</button>
+    <button id="btnCancel" type="button" data-mini="true" data-theme="b" data-inline="true" data-icon="delete" data-iconpos="notext" style="float:right;display:inline-block;">@Resources.Cancel</button>
 </div>
 }
 
@@ -107,7 +108,7 @@
         directionsDisplay.setMap(map);
         
         //Display the route
-        UpdateRoute();
+        UpdateGoogleRoute();
 
         //Add map click event
         google.maps.event.addListener(map, 'click', function (event) {
@@ -122,12 +123,12 @@
                 //routeWayPoint.push({ RouteId: @Model.Id, LineId: 2, Latitude: event.latLng.lat(), Longitude: event.latLng.lng() });
                 //$('#hfEndLatitude').val(event.latLng.lat()); //Register end point
                 //$('#hfEndLongitude').val(event.latLng.lng());
-                UpdateRoute();
+                UpdateGoogleRoute();
             }
             else {
                 CreateMarker(event.latLng, routeWayPoint.length + 1); //Create new marker with location clicked
                 //routeWayPoint.push({ RouteId: @Model.Id, LineId: 2, Latitude: event.latLng.lat(), Longitude: event.latLng.lng() });
-                UpdateRoute();
+                UpdateGoogleRoute();
             }
         });
 
@@ -156,7 +157,7 @@ function CreateMarker(location, id, draggable, icon) {
             //Update lat/lng in routeWayPoint array
             routeWayPoint[marker.id - 1].Latitude = event.latLng.lat();
             routeWayPoint[marker.id - 1].Longitude = event.latLng.lng();
-            UpdateRoute();
+            UpdateGoogleRoute();
         });
             //Add marker event to track double click: remove marker
         google.maps.event.addListener(marker, 'dblclick', function (event) {
@@ -168,7 +169,7 @@ function CreateMarker(location, id, draggable, icon) {
                     routeWayPoint[i].LineId -= 1;
                 }
                 routeWayPoint.splice(marker.id - 1, 1) //Remove marker from way point
-                UpdateRoute();
+                UpdateGoogleRoute();
             }
         });
         //TMP
@@ -185,7 +186,7 @@ function CreateMarker(location, id, draggable, icon) {
     } //CreateMarker
 
     //Refresh the route on the map with data in routeWayPoint
-    function UpdateRoute() {
+    function UpdateGoogleRoute() {
 
         if (routeWayPoint.length < 2 ) return; //Less than 2 points no route to display
 
@@ -230,8 +231,9 @@ function CreateMarker(location, id, draggable, icon) {
 
     //Synchronous Ajax to get route and way points
     function GetWayPoint() {
+        var milliseconds = new Date().getMilliseconds();
         $.ajax({ 
-            'async': false, 'url': '/Route/WayPoint/' + @Model.Id, 'type': 'get', 'dataType': 'json', //?id=
+            'async': false, 'url': '/Route/WayPoint/' + @Model.Id + '?' + milliseconds, 'type': 'get', 'dataType': 'json',
             'success': function (data) {
                 routeWayPoint = data.Data;
             }

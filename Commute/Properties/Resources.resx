@@ -179,13 +179,13 @@
   <data name="Forum" xml:space="preserve"> <value>Forum</value> </data>
   <data name="Welcome view route" xml:space="preserve"> <value>Alternatively, you can view available routes for your commute path witout creating an account.</value> </data>
   <data name="Register" xml:space="preserve"> <value>Register</value> </data>
-  <data name="Welcome message" xml:space="preserve"> <value>Welcome to Commute, the green and friendly way to commute.
-- Define the commute route you seek/offer
-- Find other commuters with similar route
-- Get in touch with them to commute together
-- Keep track of the expenses to share
-
-First, create an account to join Commute community.</value> </data>
   <data name="Error duplicate account" xml:space="preserve"> <value>This account already exists</value> </data>
   <data name="Error invalid mail" xml:space="preserve"> <value>This does not look like a valid mail address</value> </data>
+  <data name="Welcome message" xml:space="preserve"> <value>Welcome to Commute, the green and friendly way to commute.
+&lt;div&gt;- Define the commute route you seek/offer&lt;/div&gt;
+&lt;div&gt;- Find other commuters with similar route&lt;/div&gt;
+&lt;div&gt;- Get in touch with them to commute together&lt;/div&gt;
+&lt;div&gt;- Keep track of the expenses to share&lt;/div&gt;
+
+First, create an account to join Commute community.</value> </data>
 </root>

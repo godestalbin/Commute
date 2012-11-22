@@ -196,6 +196,7 @@ namespace Commute.Controllers
         //Return way points for the specified route id
         [AllowAnonymous]
         public JsonResult WayPoint(int id = 0)
+        //timeStamp is milliseconds to force refresh
         {
             //Get the specified route
             var linqRoute = from r in db.Route

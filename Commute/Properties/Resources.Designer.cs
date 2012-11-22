@@ -629,10 +629,10 @@ namespace Commute.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to Welcome to Commute, the green and friendly way to commute.
-        ///- Define the commute route you seek/offer
-        ///- Find other commuters with similar route
-        ///- Get in touch with them to commute together
-        ///- Keep track of the expenses to share
+        ///&lt;div&gt;- Define the commute route you seek/offer&lt;/div&gt;
+        ///&lt;div&gt;- Find other commuters with similar route&lt;/div&gt;
+        ///&lt;div&gt;- Get in touch with them to commute together&lt;/div&gt;
+        ///&lt;div&gt;- Keep track of the expenses to share&lt;/div&gt;
         ///
         ///First, create an account to join Commute community..
         /// </summary>
