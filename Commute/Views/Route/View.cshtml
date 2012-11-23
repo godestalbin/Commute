@@ -48,6 +48,7 @@
     var myRouteWayPoint = [];
     var map //Google map
     var directionsDisplay //display route
+    var myRouteDirectionsDisplay //display route
 
     //----------
     //Functions
@@ -83,31 +84,21 @@
         //alert(routeWayPoint[0].Latitude + "/" + routeWayPoint[0].Longitude)
         
 
-        //Display the way points
-        for (i = 0; i < routeWayPoint.length; i++) {
-            switch (i) {
-                case 0: //Start point
-                    CreateMarker(new google.maps.LatLng(routeWayPoint[0].Latitude, routeWayPoint[0].Longitude), 1, true, 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=A|6BC54D|000000');
-                    break;
-                case 1: //End point
-                    CreateMarker(new google.maps.LatLng(routeWayPoint[1].Latitude, routeWayPoint[1].Longitude), 2, true, 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=B|6BC54D|000000');
-                    break;
-                default: //Way points
-                    CreateMarker(new google.maps.LatLng(routeWayPoint[i].Latitude, routeWayPoint[i].Longitude), i + 1, true);
-            }
-
-        }
+        DisplayRouteMarker(routeWayPoint);
 
         //Create object to display route
         var rendererOptions = {
             //preserveViewport: true, //Do not resize map on start/end point
+            //polylineOptions: polyOptions,
             suppressMarkers: true //Do not display default A, B, C makers
         };
         directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions);
         directionsDisplay.setMap(map);
+        myRouteDirectionsDisplay = new google.maps.DirectionsRenderer(rendererOptions);
+        myRouteDirectionsDisplay.setMap(map);
         
         //Display the route
-        UpdateRoute(routeWayPoint);
+        UpdateRoute(routeWayPoint, directionsDisplay);
 
         //Add map click event
 @*        google.maps.event.addListener(map, 'click', function (event) {
@@ -132,6 +123,22 @@
         });*@
 
     } //InitializeRouteMap
+
+function DisplayRouteMarker(routeWayPoint) {
+    //Display the way points
+    for (i = 0; i < routeWayPoint.length; i++) {
+        switch (i) {
+            case 0: //Start point
+                CreateMarker(new google.maps.LatLng(routeWayPoint[0].Latitude, routeWayPoint[0].Longitude), 1, true, 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=A|6BC54D|000000');
+                break;
+            case 1: //End point
+                CreateMarker(new google.maps.LatLng(routeWayPoint[1].Latitude, routeWayPoint[1].Longitude), 2, true, 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=B|6BC54D|000000');
+                break;
+            default: //Way points
+                CreateMarker(new google.maps.LatLng(routeWayPoint[i].Latitude, routeWayPoint[i].Longitude), i + 1, true);
+        }
+    }
+}
 
 function CreateMarker(location, id, draggable, icon) {
     //id(=RouteWayPoint.LineId):1=start, 2=end, 3...=way points
@@ -185,7 +192,7 @@ function CreateMarker(location, id, draggable, icon) {
     } //CreateMarker
 
     //Refresh the route on the map with data in routeWayPoint
-    function UpdateRoute(routeWayPoint) {
+    function UpdateRoute(routeWayPoint, directionsDisplay) {
 
         if (routeWayPoint.length < 2 ) return; //Less than 2 points no route to display
 
@@ -217,11 +224,8 @@ function CreateMarker(location, id, draggable, icon) {
                 //alert("Route displayed");
 
                 //////After the route is displayed first time do not allow the map viewport to resize
-                //rendererOptions = {
-                //    preserveViewport: true, //Do not resize map on start/end point
-                //    suppressMarkers: true //Do not display default A, B, C makers
-                //};
-                //setTimeout(function () { directionsDisplay.setOptions(rendererOptions); }, 1000);
+
+                //setTimeout(function () { directionsDisplay.setOptions(rendererOptions); }, 10);
                 
             }
             else alert(status + "/" + response);
@@ -276,7 +280,19 @@ function CreateMarker(location, id, draggable, icon) {
         var myRouteId = querystring[1];
         GetWayPoint(myRouteId, myRouteWayPoint); //Synchronous AJAX to get waypoint necessary to draw map for my route
         InitializeRouteMap();
-        UpdateRoute(myRouteWayPoint);
+
+        DisplayRouteMarker(myRouteWayPoint);
+        var polyOptions = {
+            strokeColor: "#40b723",
+            strokeWeight: 5
+        }
+        rendererOptions = {
+            preserveViewport: true, //Do not resize map on start/end point
+            polylineOptions: polyOptions,
+            suppressMarkers: true //Do not display default A, B, C makers
+        };
+        directionsDisplay.setOptions(rendererOptions);
+        UpdateRoute(myRouteWayPoint, myRouteDirectionsDisplay);
 
         //Useless if we move to UI dialog
         $("#btnSave").click(function() {
