@@ -1,42 +1,17 @@
 ﻿@model Commute.Models.RouteView
 @using Commute.Properties
 
-@{
-    Layout = "~/Views/Shared/_Mobile.cshtml";
-}
 
-
-@{ ViewBag.Title = @Resources.Route_create_update + " no " + @Model.Id; }
+@{ ViewBag.Title = @Resources.Route_create_update; }
 
 
 <input id="hfId" type="hidden" value="@Model.Id"/>
 <input id="hfUserId" type="hidden" value="@Model.UserId"/>
 <input id="hfJsonRoute" type="hidden" value="@Model.JsonRoute"/>
 
-@using (Html.BeginForm()) {
-    @Html.ValidationSummary(true)
-<div style="position:absolute; left: 2px; top: 52px; right: 0px;">
-    <div data-role="fieldcontain" style="display:inline; position:relative; margin-top: 15px; padding-top: 10px;">
-	<select id="selIsSeek" data-role="slider" data-mini="true" style="position:absolute; top: 100px; margin-top: 150px;" >
-		@if (@Model.IsOffer)
-  {
-        <option value="false">@Resources.Seek</option>
-		<option value="true"  selected = "true" >@Resources.Offer</option>
-        }
-        else {
-        <option value="false" selected = "false" >@Resources.Seek</option>
-		<option value="true">@Resources.Offer</option>
-        }
-	</select>
-</div>
-    @Html.TextBoxFor(model => model.Name, new { id="iptName", style = "width:45%;display:inline;"})
-    @Html.ValidationMessageFor(model => model.Name)
-    <button id="btnSave" type="submit" data-mini="true" data-theme="b" data-inline="true" data-icon="check" data-iconpos="notext" >@Resources.Save</button>
-    <button id="btnCancel" type="button" data-mini="true" data-theme="b" data-inline="true" data-icon="delete" data-iconpos="notext" style="float:right;display:inline-block;">@Resources.Cancel</button>
-</div>
-}
+<button id="btnSave" type="button">Save</button>
 
-<div id="divMap" style="width:100%;position: absolute; top: 100px; left: 0px; bottom: 0px;" /> @*style="width:700px;height:500px;">*@
+<div id="divMap" style="width:700px;height:500px;">
 
 
     <div id="debug0"></div>
@@ -44,6 +19,7 @@
     <div id="debug2"></div>
 
 
+@section scripts {
 <script>
     //Global variables
     var routeWayPoint //an array of WayPoint 0=start, 1=end, next are real way points
@@ -55,8 +31,9 @@
     //----------
 
     function InitializeRouteMap() {
-        //alert(routeWayPoint.length);
-
+        //alert(2);
+        var date = new Date();
+        $('#debug2').html("InitializeRouteMap started: " + date.getTime());
         //TMP - later we should get center in another way
         var mapCenter = new google.maps.LatLng(39.907004, 116.39759); //Center on Beijing Tian An Men
 
@@ -74,8 +51,6 @@
         };
         //Display the map in the div
         map = new google.maps.Map(document.getElementById("divMap"), mapProp);
-        //Expand the size of the div for the map
-        //$('#divMap').css("height", "200px");
         //Force map to expand to div
         setTimeout(function () { google.maps.event.trigger(map, 'resize'); map.setCenter(mapCenter); }, 100);
 
@@ -101,14 +76,14 @@
 
         //Create object to display route
         var rendererOptions = {
-            //preserveViewport: true, //Do not resize map on start/end point
+            //preserveViewport: true //Do not resize map on start/end point
             suppressMarkers: true //Do not display default A, B, C makers
         };
         directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions);
         directionsDisplay.setMap(map);
         
         //Display the route
-        UpdateGoogleRoute();
+        UpdateRoute()
 
         //Add map click event
         google.maps.event.addListener(map, 'click', function (event) {
@@ -123,12 +98,12 @@
                 //routeWayPoint.push({ RouteId: @Model.Id, LineId: 2, Latitude: event.latLng.lat(), Longitude: event.latLng.lng() });
                 //$('#hfEndLatitude').val(event.latLng.lat()); //Register end point
                 //$('#hfEndLongitude').val(event.latLng.lng());
-                UpdateGoogleRoute();
+                UpdateRoute();
             }
             else {
                 CreateMarker(event.latLng, routeWayPoint.length + 1); //Create new marker with location clicked
                 //routeWayPoint.push({ RouteId: @Model.Id, LineId: 2, Latitude: event.latLng.lat(), Longitude: event.latLng.lng() });
-                UpdateGoogleRoute();
+                UpdateRoute();
             }
         });
 
@@ -157,7 +132,7 @@ function CreateMarker(location, id, draggable, icon) {
             //Update lat/lng in routeWayPoint array
             routeWayPoint[marker.id - 1].Latitude = event.latLng.lat();
             routeWayPoint[marker.id - 1].Longitude = event.latLng.lng();
-            UpdateGoogleRoute();
+            UpdateRoute();
         });
             //Add marker event to track double click: remove marker
         google.maps.event.addListener(marker, 'dblclick', function (event) {
@@ -169,7 +144,7 @@ function CreateMarker(location, id, draggable, icon) {
                     routeWayPoint[i].LineId -= 1;
                 }
                 routeWayPoint.splice(marker.id - 1, 1) //Remove marker from way point
-                UpdateGoogleRoute();
+                UpdateRoute();
             }
         });
         //TMP
@@ -186,7 +161,7 @@ function CreateMarker(location, id, draggable, icon) {
     } //CreateMarker
 
     //Refresh the route on the map with data in routeWayPoint
-    function UpdateGoogleRoute() {
+    function UpdateRoute() {
 
         if (routeWayPoint.length < 2 ) return; //Less than 2 points no route to display
 
@@ -209,21 +184,12 @@ function CreateMarker(location, id, draggable, icon) {
             destination: new google.maps.LatLng(routeWayPoint[1].Latitude, routeWayPoint[1].Longitude),
             waypoints: waypoints,
             travelMode: google.maps.DirectionsTravelMode.DRIVING,
-            optimizeWaypoints: true
+            //optimizeWaypoints: true
         };
         directionsService.route(request, function (response, status) {
             if (status == google.maps.DirectionsStatus.OK) {
                 directionsDisplay.setDirections({routes: []});
                 directionsDisplay.setDirections(response); //Display route
-                //alert("Route displayed");
-
-                ////After the route is displayed first time do not allow the map viewport to resize
-                rendererOptions = {
-                    preserveViewport: true, //Do not resize map on start/end point
-                    suppressMarkers: true //Do not display default A, B, C makers
-                };
-                setTimeout(function () { directionsDisplay.setOptions(rendererOptions); }, 1000);
-                
             }
             else alert(status + "/" + response);
         });
@@ -231,11 +197,13 @@ function CreateMarker(location, id, draggable, icon) {
 
     //Synchronous Ajax to get route and way points
     function GetWayPoint() {
-        var milliseconds = new Date().getMilliseconds();
         $.ajax({ 
-            'async': false, 'url': '/Route/WayPoint/' + @Model.Id + '?' + milliseconds, 'type': 'get', 'dataType': 'json',
+            'async': false, 'url': '/Route/WayPoint?id=' + @Model.Id, 'type': 'get', 'dataType': 'json',
             'success': function (data) {
                 routeWayPoint = data.Data;
+                //alert(1);
+                var date = new Date();
+                $('#debug1').html("InitializeRouteMap started: " + date.getTime());
             }
         });
     }
@@ -259,17 +227,9 @@ function CreateMarker(location, id, draggable, icon) {
         return routeToPost;
     }
 
-    function UpdateRoute(data) {
-        var j = $('#iptName').val();
-        var i = $('#selIsSeek').val();
-        $.ajax({ 
-            url: '/Route/UpdateRoute/', type: 'post',
-            data: { id: @Model.Id, isOffer: $('#selIsSeek').val(), name: $('#iptName').val()}
-        });
-    }
-
     jQuery(document).ready(function () {
-        //alert("Ready");
+        var date = new Date();
+        $('#debug0').html("<p>Starting: </p>"); // + date.getTime());
         GetWayPoint(); //Synchronous AJAX to get waypoint necessary to draw map
         InitializeRouteMap();
 
@@ -280,30 +240,16 @@ function CreateMarker(location, id, draggable, icon) {
             }
             var routeToPost = JSON.stringify(routeWayPoint); //JSON.stringify(RouteToPost());
             $.ajax({ 
-                url: '/Route/CreateUpdate/', 'type': 'post',
-                data: routeToPost,
-                //dataType: 'json',
+                'url': '/Route/CreateUpdate/', 'type': 'post',
+                'data': routeToPost,
+                dataType: 'json',
                 contentType: 'application/json; charset=utf-8',
-                success: function (data, textStatus, jqXHR) {
-                    var nextView = data;
-                    UpdateRoute(data);
-                    window.location = data;
-                },
-                error: function (jqXHR, data) {
-                    window.location = data;
+                'success': function (data) {
                 }
-                //statusCode: {
-                //    302: function(jqXHR) {
-                //        test(jqXHR);
-                //        // your code
-                //    }
-                //}
             });
-        });
-
-        $("#btnCancel").click(function() {
-            window.location = "/Route/List"; //Mobile?userId=" + @Model.UserId;
         });
     });
 
 </script>
+<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyC0KjUdM6DpNQAggngGkuKLFvoHw-lJ0H4&sensor=false"></script>
+}

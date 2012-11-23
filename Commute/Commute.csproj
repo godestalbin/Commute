@@ -261,12 +261,14 @@
     <Content Include="Scripts\knockout-2.1.0.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Views\Route\CreateUpdateMobile.cshtml" />
+    <Content Include="Views\Route\CreateUpdate.cshtml" />
     <Content Include="Views\Route\View.cshtml" />
     <Content Include="Views\Help\Help.cshtml" />
     <Content Include="Views\Route\SearchAll.cshtml" />
     <Content Include="Views\Route\SetRoute.cshtml" />
     <Content Include="Views\Home\Welcome.cshtml" />
+    <Content Include="Views\Route\Geolocation.cshtml" />
+    <Content Include="Views\Route\SearchOld.cshtml" />
     <None Include="Views\Route\Map.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -290,7 +292,7 @@
     <Content Include="Views\Route\Create.cshtml" />
     <Content Include="Views\Route\Edit.cshtml" />
     <Content Include="Views\Route\Delete.cshtml" />
-    <Content Include="Views\Route\CreateUpdate.cshtml" />
+    <Content Include="Views\Route\CreateUpdateOld.cshtml" />
     <Content Include="Views\Route\CreateUpdate %28route%29.cshtml" />
     <Content Include="Views\Route\Base.cshtml" />
     <Content Include="Views\User\Index.cshtml" />

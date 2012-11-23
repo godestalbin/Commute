@@ -28,7 +28,7 @@ namespace Commute.Controllers
 
             //if (routeWayPoint == null) routeWayPoint = new RouteWayPoint(); //Create new way points if none retrieved
 
-            RouteView routeView = new RouteView(route, routeWayPoint, Json(routeWayPoint));
+            RouteView routeView = new RouteView(route); //, routeWayPoint, Json(routeWayPoint));
             return View(routeView);
         }
 
@@ -74,17 +74,32 @@ namespace Commute.Controllers
         }
 
         //Search - Search for logged used: Search route near another route
-        [AllowAnonymous]
         public ActionResult Search(int id) //First attempt to use jQuery mobile not completed
             //id=route ID, search route closed to the provided route ID
         {
             Route searchRoute = db.Route.Find(id);
-            decimal maxDist = 0.5M;
+            //decimal maxDist = 0.5M;
+            //var routeList = from r in db.Route
+            //                where Math.Abs((decimal)(r.StartLatitude - searchRoute.StartLatitude)) + Math.Abs((decimal)(r.StartLongitude - searchRoute.StartLongitude)) + Math.Abs((decimal)(r.EndLatitude - searchRoute.EndLatitude)) + Math.Abs((decimal)(r.EndLongitude - searchRoute.EndLongitude)) < maxDist
+            //                && r.UserId != searchRoute.UserId
+            //                select r; // new { r.Id, dist = Math.Abs((decimal)(r.StartLatitude - searchRoute.StartLatitude)) + Math.Abs((decimal)(r.StartLongitude - searchRoute.StartLongitude)) + Math.Abs((decimal)(r.EndLatitude - searchRoute.EndLatitude)) + Math.Abs((decimal)(r.EndLongitude - searchRoute.EndLongitude)) };
+            //ViewBag.Title = Resources.Route_search;
+            //return View(routeList.ToList());
+
+            decimal maxDist = 5; //Distance approximation allowed in kilometers
+            double startLat = Math.PI * (double)searchRoute.StartLatitude / 180.0;
+            double startLng = Math.PI * (double)searchRoute.StartLongitude / 180.0;
+            double endLat = Math.PI * (double)searchRoute.EndLatitude / 180.0;
+            double endLng = Math.PI * (double)searchRoute.EndLongitude / 180.0;
+
             var routeList = from r in db.Route
-                            where Math.Abs((decimal)(r.StartLatitude - searchRoute.StartLatitude)) + Math.Abs((decimal)(r.StartLongitude - searchRoute.StartLongitude)) + Math.Abs((decimal)(r.EndLatitude - searchRoute.EndLatitude)) + Math.Abs((decimal)(r.EndLongitude - searchRoute.EndLongitude)) < maxDist
-                            && r.UserId != searchRoute.UserId
-                            select r; // new { r.Id, dist = Math.Abs((decimal)(r.StartLatitude - searchRoute.StartLatitude)) + Math.Abs((decimal)(r.StartLongitude - searchRoute.StartLongitude)) + Math.Abs((decimal)(r.EndLatitude - searchRoute.EndLatitude)) + Math.Abs((decimal)(r.EndLongitude - searchRoute.EndLongitude)) };
+                            where SqlFunctions.Acos(SqlFunctions.Sin((double) SqlFunctions.Radians(r.StartLatitude)) * SqlFunctions.Sin(startLat) + SqlFunctions.Cos((double)SqlFunctions.Radians(r.StartLatitude)) * SqlFunctions.Cos(startLat) * SqlFunctions.Cos(startLng - (double)SqlFunctions.Radians(r.StartLongitude))) * 6371 < (double)maxDist &&
+                            SqlFunctions.Acos(SqlFunctions.Sin((double)SqlFunctions.Radians(r.EndLatitude)) * SqlFunctions.Sin(endLat) + SqlFunctions.Cos((double)SqlFunctions.Radians(r.EndLatitude)) * SqlFunctions.Cos(endLat) * SqlFunctions.Cos(endLng - (double)SqlFunctions.Radians(r.EndLongitude))) * 6371 < (double)maxDist &&
+                            r.UserId != searchRoute.UserId
+                            select new RouteSearch { Id = r.Id, UserId = r.UserId, IsOffer = r.IsOffer, Name = r.Name, StartDistance = SqlFunctions.Acos(SqlFunctions.Sin((double) SqlFunctions.Radians(r.StartLatitude)) * SqlFunctions.Sin(startLat) + SqlFunctions.Cos((double)SqlFunctions.Radians(r.StartLatitude)) * SqlFunctions.Cos(startLat) * SqlFunctions.Cos(startLng - (double)SqlFunctions.Radians(r.StartLongitude))) * 6371, EndDistance = SqlFunctions.Acos(SqlFunctions.Sin((double)SqlFunctions.Radians(r.EndLatitude)) * SqlFunctions.Sin(endLat) + SqlFunctions.Cos((double)SqlFunctions.Radians(r.EndLatitude)) * SqlFunctions.Cos(endLat) * SqlFunctions.Cos(endLng - (double)SqlFunctions.Radians(r.EndLongitude))) * 6371 };
+
             ViewBag.Title = Resources.Route_search;
+            ViewBag.routeId = searchRoute.Id;
             return View(routeList.ToList());
         }
 
@@ -107,23 +122,16 @@ namespace Commute.Controllers
         }
 
         //Create or update route
+        [AllowAnonymous]
         public ActionResult CreateUpdate(int id = 0)
         {
-            //Simple route with 2 points
-            //Route route = db.Route.Find(id);
-            //if (route == null ) route = new Route();
-            //return View(route);
-
             Route route = db.Route.Find(id); //Retrieve route
             if (route == null) route = new Route(); //Create a new route if none retrieved
             IEnumerable<RouteWayPoint> routeWayPoint = from rwp in db.RouteWayPoint
                                                        where rwp.RouteId == id
-                                                        select rwp;
-            JsonResult a = Json(routeWayPoint);
+                                                       select rwp;
 
-            //if (routeWayPoint == null) routeWayPoint = new RouteWayPoint(); //Create new way points if none retrieved
-
-            RouteView routeView = new RouteView(route, routeWayPoint, Json(routeWayPoint));
+            RouteView routeView = new RouteView(route); //, routeWayPoint, Json(routeWayPoint));
             return View(routeView);
         }
 
@@ -167,27 +175,13 @@ namespace Commute.Controllers
             }
             db.SaveChanges();
             //return RedirectToAction("ListMobile", "Route", new { userId = Session["userId"] }); //View(CreateUpdate(route.Id));
-            return "/Route/List"; //Mobile?userId=" + Session["userId"];
-        }
-
-        //CreateUpdateMobile
-        [AllowAnonymous]
-        public ActionResult CreateUpdateMobile(int id = 0)
-        {
-            Route route = db.Route.Find(id); //Retrieve route
-            if (route == null) route = new Route(); //Create a new route if none retrieved
-            IEnumerable<RouteWayPoint> routeWayPoint = from rwp in db.RouteWayPoint
-                                                       where rwp.RouteId == id
-                                                       select rwp;
-
-            RouteView routeView = new RouteView(route, routeWayPoint, Json(routeWayPoint));
-            return View(routeView);
+            return route.Id.ToString(); //Mobile?userId=" + Session["userId"];
         }
 
         //On post we use CreateUpdate
 
 
-        //UpdateRoute
+        //UpdateRoute (route header data)
         //Called after post CreateUpdate to save route IsOffer and Name
         [AllowAnonymous]
         [HttpPost]
@@ -197,7 +191,7 @@ namespace Commute.Controllers
             route.Name = name;
             db.SaveChanges();
 
-            return "Ok";
+            return "/Route/List";
         }
 
         //Return way points for the specified route id
@@ -220,6 +214,27 @@ namespace Commute.Controllers
                                                 select new RouteWayPointView { RouteId = rwp.RouteId, LineId = (byte)(rwp.LineId + 2), Latitude = rwp.Latitude, Longitude = rwp.Longitude });
             JsonResult jsonResult = Json(routeWayPoint);
             return Json(Json(routeWayPoint), JsonRequestBehavior.AllowGet);
+        }
+
+        //Create or update route
+        public ActionResult CreateUpdateOld(int id = 0)
+        {
+            //Simple route with 2 points
+            //Route route = db.Route.Find(id);
+            //if (route == null ) route = new Route();
+            //return View(route);
+
+            Route route = db.Route.Find(id); //Retrieve route
+            if (route == null) route = new Route(); //Create a new route if none retrieved
+            IEnumerable<RouteWayPoint> routeWayPoint = from rwp in db.RouteWayPoint
+                                                       where rwp.RouteId == id
+                                                       select rwp;
+            JsonResult a = Json(routeWayPoint);
+
+            //if (routeWayPoint == null) routeWayPoint = new RouteWayPoint(); //Create new way points if none retrieved
+
+            RouteView routeView = new RouteView(route); //, routeWayPoint, Json(routeWayPoint));
+            return View(routeView);
         }
 
         //List route for authenticated user
@@ -250,6 +265,12 @@ namespace Commute.Controllers
             db.Route.Remove(route);
             db.SaveChanges();
             return RedirectToAction("List", new { userId=Session["userId"]});
+        }
+
+        //Test geolocation with HTML5
+        public ActionResult Geolocation()
+        {
+            return View();
         }
 
         //Default controller generated automatically

@@ -4,7 +4,7 @@
 @{ ViewBag.Title = @Resources.Route_list; }
 
 <p>
-    @Html.ActionLink(@Resources.Route_new, "CreateUpdate")
+    @Html.ActionLink(@Resources.Route_new, "CreateUpdateOld")
 </p>
 <table>
     <tr>
@@ -35,7 +35,7 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.ActionLink(item.Id.ToString(), "CreateUpdate", "Route", new { id = @item.Id }, null)
+            @Html.ActionLink(item.Id.ToString(), "CreateUpdateOld", "Route", new { id = @item.Id }, null)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.UserId)

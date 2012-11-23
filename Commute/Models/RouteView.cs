@@ -12,21 +12,21 @@ namespace Commute.Models
         public int UserId { get; set; }
         public bool IsOffer { get; set; } //false=offering route, true=seeking for this route
         public string Name { get; set; }
-        public IEnumerable<RouteWayPoint> RouteWayPoint { get; set; }
-        public JsonResult JsonRoute { get; set; }
+        //public IEnumerable<RouteWayPoint> RouteWayPoint { get; set; }
+        //public JsonResult JsonRoute { get; set; }
 
         public RouteView()
         {
         }
 
-        public RouteView(Route route, IEnumerable<RouteWayPoint> routeWayPoint, JsonResult jsonRoute)
+        public RouteView(Route route) //, IEnumerable<RouteWayPoint> routeWayPoint, JsonResult jsonRoute)
         {
             Id = route.Id;
             UserId = route.UserId;
             IsOffer = route.IsOffer;
             Name = route.Name;
-            RouteWayPoint = routeWayPoint;
-            JsonRoute = jsonRoute;
+            //RouteWayPoint = routeWayPoint;
+            //JsonRoute = jsonRoute;
         }
     }
 

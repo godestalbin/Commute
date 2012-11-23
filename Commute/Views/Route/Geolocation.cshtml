@@ -1,0 +1,30 @@
+﻿@{
+    ViewBag.Title = "Geolocation";
+    Layout = "~/Views/Shared/_Mobile.cshtml";
+}
+
+<h2>Geolocation</h2>
+
+<p id="demo">Click the button to get your coordinates:</p>
+<button onclick="getLocation()">Try It</button>
+
+<script>
+var x=document.getElementById("demo");
+function getLocation()
+  {
+    if (navigator.geolocation)
+    {
+        navigator.geolocation.getCurrentPosition(showPosition, error);
+    }
+    else { x.innerHTML="Geolocation is not supported by this browser.";}
+  }
+function showPosition(position)
+{
+    x.innerHTML = "Latitude: " + position.coords.latitude +
+              "<br>Longitude: " + position.coords.longitude;
+}
+function error(error)
+{
+    x.innerHTML = "Error " + error.code + " - " + error.message;
+}
+</script>

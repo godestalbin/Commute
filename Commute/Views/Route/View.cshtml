@@ -6,14 +6,13 @@
 }
 
 
-@{ ViewBag.Title = @Resources.Route_create_update + " no " + @Model.Id; }
+@{ ViewBag.Title = @Resources.Route_view + " no " + @Model.Id; }
 
 
 <input id="hfId" type="hidden" value="@Model.Id"/>
 <input id="hfUserId" type="hidden" value="@Model.UserId"/>
-<input id="hfJsonRoute" type="hidden" value="@Model.JsonRoute"/>
 
-@using (Html.BeginForm()) {
+@*@using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
 <div style="position:absolute; left: 2px; top: 52px; right: 0px;">
     <div data-role="fieldcontain" style="display:inline; position:relative; margin-top: 15px; padding-top: 10px;">
@@ -33,9 +32,9 @@
     @Html.ValidationMessageFor(model => model.Name)
 <button id="btnSave" type="submit" data-mini="true" data-theme="b" data-inline="true" >@Resources.Save</button> <button id="btnCancel" type="button" data-mini="true" data-theme="b" data-inline="true" style="float:right;display:inline-block;">@Resources.Cancel</button>
 </div>
-}
+}*@
 
-<div id="divMap" style="width:100%;position: absolute; top: 100px; left: 0px; bottom: 0px;" /> @*style="width:700px;height:500px;">*@
+<div id="divMap" style="width:100%;position: absolute; top: 54px; left: 0px; bottom: 0px;" /> @*style="width:700px;height:500px;">*@
 
 
     <div id="debug0"></div>
@@ -45,7 +44,8 @@
 
 <script>
     //Global variables
-    var routeWayPoint //an array of WayPoint 0=start, 1=end, next are real way points
+    var routeWayPoint = []; //an array of WayPoint 0=start, 1=end, next are real way points
+    var myRouteWayPoint = [];
     var map //Google map
     var directionsDisplay //display route
 
@@ -107,10 +107,10 @@
         directionsDisplay.setMap(map);
         
         //Display the route
-        UpdateRoute();
+        UpdateRoute(routeWayPoint);
 
         //Add map click event
-        google.maps.event.addListener(map, 'click', function (event) {
+@*        google.maps.event.addListener(map, 'click', function (event) {
             if (routeWayPoint.length == 0) { //Start point not created yet
                 CreateMarker(event.latLng, 1, true, 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=A|6BC54D|000000'); //Create new marker with location clicked
                 //routeWayPoint.push({ RouteId: @Model.Id, LineId: 1, Latitude: event.latLng.lat(), Longitude: event.latLng.lng() });
@@ -129,7 +129,7 @@
                 //routeWayPoint.push({ RouteId: @Model.Id, LineId: 2, Latitude: event.latLng.lat(), Longitude: event.latLng.lng() });
                 UpdateRoute();
             }
-        });
+        });*@
 
     } //InitializeRouteMap
 
@@ -141,7 +141,7 @@ function CreateMarker(location, id, draggable, icon) {
     var marker = new google.maps.Marker({
         position: location,
         id: id,
-        draggable: draggable,
+        //draggable: draggable,
         icon: icon,
         map: map
     });
@@ -151,26 +151,26 @@ function CreateMarker(location, id, draggable, icon) {
         routeWayPoint.push({RouteId: @Model.Id, LineId: routeWayPoint.length + 1, Latitude: location.lat(), Longitude: location.lng(), marker: marker});
         }
 
-            //Add marker event to track drag end
-        google.maps.event.addListener(marker, 'dragend', function (event) {
-            //Update lat/lng in routeWayPoint array
-            routeWayPoint[marker.id - 1].Latitude = event.latLng.lat();
-            routeWayPoint[marker.id - 1].Longitude = event.latLng.lng();
-            UpdateRoute();
-        });
-            //Add marker event to track double click: remove marker
-        google.maps.event.addListener(marker, 'dblclick', function (event) {
-            if ( marker.id > 2 ) { //start/end point cannot be deleted
-                marker.setMap(null); //Delete marker
-                //Update next markers id
-                for (var i= marker.id; i < routeWayPoint.length; i++) {
-                    routeWayPoint[i].marker.id -= 1;
-                    routeWayPoint[i].LineId -= 1;
-                }
-                routeWayPoint.splice(marker.id - 1, 1) //Remove marker from way point
-                UpdateRoute();
-            }
-        });
+        //    //Add marker event to track drag end
+        //google.maps.event.addListener(marker, 'dragend', function (event) {
+        //    //Update lat/lng in routeWayPoint array
+        //    routeWayPoint[marker.id - 1].Latitude = event.latLng.lat();
+        //    routeWayPoint[marker.id - 1].Longitude = event.latLng.lng();
+        //    UpdateRoute();
+        //});
+        //    //Add marker event to track double click: remove marker
+        //google.maps.event.addListener(marker, 'dblclick', function (event) {
+        //    if ( marker.id > 2 ) { //start/end point cannot be deleted
+        //        marker.setMap(null); //Delete marker
+        //        //Update next markers id
+        //        for (var i= marker.id; i < routeWayPoint.length; i++) {
+        //            routeWayPoint[i].marker.id -= 1;
+        //            routeWayPoint[i].LineId -= 1;
+        //        }
+        //        routeWayPoint.splice(marker.id - 1, 1) //Remove marker from way point
+        //        UpdateRoute();
+        //    }
+        //});
         //TMP
         //Add maker event to display marker coordinates
         google.maps.event.addListener(marker, "mouseover", function(event) {
@@ -185,7 +185,7 @@ function CreateMarker(location, id, draggable, icon) {
     } //CreateMarker
 
     //Refresh the route on the map with data in routeWayPoint
-    function UpdateRoute() {
+    function UpdateRoute(routeWayPoint) {
 
         if (routeWayPoint.length < 2 ) return; //Less than 2 points no route to display
 
@@ -216,12 +216,12 @@ function CreateMarker(location, id, draggable, icon) {
                 directionsDisplay.setDirections(response); //Display route
                 //alert("Route displayed");
 
-                ////After the route is displayed first time do not allow the map viewport to resize
-                rendererOptions = {
-                    preserveViewport: true, //Do not resize map on start/end point
-                    suppressMarkers: true //Do not display default A, B, C makers
-                };
-                setTimeout(function () { directionsDisplay.setOptions(rendererOptions); }, 1000);
+                //////After the route is displayed first time do not allow the map viewport to resize
+                //rendererOptions = {
+                //    preserveViewport: true, //Do not resize map on start/end point
+                //    suppressMarkers: true //Do not display default A, B, C makers
+                //};
+                //setTimeout(function () { directionsDisplay.setOptions(rendererOptions); }, 1000);
                 
             }
             else alert(status + "/" + response);
@@ -229,11 +229,14 @@ function CreateMarker(location, id, draggable, icon) {
     }
 
     //Synchronous Ajax to get route and way points
-    function GetWayPoint() {
+    function GetWayPoint(routeId, routeWayPoint) {
+        
         $.ajax({ 
-            'async': false, 'url': '/Route/WayPoint/' + @Model.Id, 'type': 'get', 'dataType': 'json', //?id=
+            'async': false, 'url': '/Route/WayPoint/' + routeId, 'type': 'get', 'dataType': 'json', //?id=
             'success': function (data) {
-                routeWayPoint = data.Data;
+                for ( i = 0; i < data.Data.length; i++ ) {
+                    routeWayPoint.push(data.Data[i]);
+                }
             }
         });
     }
@@ -257,19 +260,23 @@ function CreateMarker(location, id, draggable, icon) {
         return routeToPost;
     }
 
-    function UpdateRoute(data) {
+@*    function UpdateRoute(data) {
         var j = $('#iptName').val();
         var i = $('#selIsSeek').val();
         $.ajax({ 
             url: '/Route/UpdateRoute/', type: 'post',
             data: { id: @Model.Id, isOffer: $('#selIsSeek').val(), name: $('#iptName').val()}
         });
-    }
+    }*@
 
     jQuery(document).ready(function () {
         //alert("Ready");
-        GetWayPoint(); //Synchronous AJAX to get waypoint necessary to draw map
+        GetWayPoint(@Model.Id, routeWayPoint); //Synchronous AJAX to get waypoint necessary to draw map for other user route
+        var querystring = location.search.split( '=' );
+        var myRouteId = querystring[1];
+        GetWayPoint(myRouteId, myRouteWayPoint); //Synchronous AJAX to get waypoint necessary to draw map for my route
         InitializeRouteMap();
+        UpdateRoute(myRouteWayPoint);
 
         //Useless if we move to UI dialog
         $("#btnSave").click(function() {

@@ -457,7 +457,7 @@ namespace Commute.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Define route.
+        ///   Looks up a localized string similar to Update route.
         /// </summary>
         public static string Route_create_update {
             get {
@@ -498,6 +498,15 @@ namespace Commute.Properties {
         public static string Route_search {
             get {
                 return ResourceManager.GetString("Route search", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View route.
+        /// </summary>
+        public static string Route_view {
+            get {
+                return ResourceManager.GetString("Route view", resourceCulture);
             }
         }
         

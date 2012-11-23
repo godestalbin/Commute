@@ -1,15 +1,17 @@
-﻿@model IEnumerable<Commute.Models.Route>
+﻿@model IEnumerable<Commute.Models.RouteSearch>
 @using Commute.Properties
 
 @{
     Layout = "~/Views/Shared/_Mobile.cshtml";
 }
 
-<div class="ui-grid-a"> @*2-columns*@
-    <div class="ui-block-a">@Resources.Route_id</div>
-    <div class="ui-block-b"></div>
+<div class="ui-grid-d"> @*2-columns*@
 @foreach (var item in Model) {
 	<div class="ui-block-a"><strong>@item.Id</strong><span> - @item.Name</span></div>
-	<div class="ui-block-b"><a href="/Route/View/@item.Id" data-role="button" data-mini="true" data-inline="true" data-ajax="false">@Resources.Map</a></div>
+    <div class="ui-block-b">@if (@item.IsOffer) { @Resources.Offer } else { @Resources.Seek }</div>
+	<div class="ui-block-c"><a href="/Route/View/@item.Id?routeId=@ViewBag.routeId" data-role="button" data-mini="true" data-inline="true" data-ajax="false">@Resources.Map</a></div>
+    <div class="ui-block-c">
+        @Html.DisplayFor(modelItem => item.StartDistance) / @Html.DisplayFor(modelItem => item.EndDistance)
+    </div>
 }
     </div><!-- /grid-a -->

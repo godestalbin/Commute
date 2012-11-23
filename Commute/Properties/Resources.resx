@@ -154,7 +154,7 @@
   <data name="Picture" xml:space="preserve"> <value>Picture</value> </data>
   <data name="Removed from car" xml:space="preserve"> <value>Removed from this car</value> </data>
   <data name="Route" xml:space="preserve"> <value>Route</value> </data>
-  <data name="Route create update" xml:space="preserve"> <value>Define route</value> </data>
+  <data name="Route create update" xml:space="preserve"> <value>Update route</value> </data>
   <data name="Route id" xml:space="preserve"> <value>Route no</value> </data>
   <data name="Route new" xml:space="preserve"> <value>New route</value> </data>
   <data name="Route list" xml:space="preserve"> <value>My routes</value> </data>
@@ -190,4 +190,5 @@
 &lt;div&gt;- Keep track of the expenses to share&lt;/div&gt;</value> </data>
   <data name="Logout" xml:space="preserve"> <value>Logout</value> </data>
   <data name="Guest" xml:space="preserve"> <value>Guest</value> </data>
+  <data name="Route view" xml:space="preserve"> <value>View route</value> </data>
 </root>
