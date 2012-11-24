@@ -45,3 +45,20 @@ input.email {
 .field-validation-error {
     color: red;
 }
+.seek {
+    background-color: #40b723; /*green*/
+    text-align:left;
+    font-weight: 100;
+}
+.offer {
+    background-color: #f12b2b; /*red*/
+    text-align:left;
+    font-weight: 100;
+}
+.like-button {
+    padding: 9px;
+    margin-top: 7px;
+    margin-bottom: 6px;
+    border-radius: 13px;
+    border: solid 1px;
+}

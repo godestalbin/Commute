@@ -115,8 +115,13 @@
         }
 
         //Create object to display route
+        var polyOptions = {
+            strokeColor: ("@Model.IsOffer" == "True") ? "#f12b2b" : "#40b723", //Offer=red, Seek=green
+            strokeWeight: 5
+        }
         var rendererOptions = {
             //preserveViewport: true, //Do not resize map on start/end point
+            polylineOptions: polyOptions,
             suppressMarkers: true //Do not display default A, B, C makers
         };
         directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions);

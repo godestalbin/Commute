@@ -11,12 +11,18 @@
         <a href="/Route/CreateUpdate/" id="btnRouteAdd" data-role="button" data-mini="true" data-ajax="false" data-theme="b" data-inline="true" >@Resources.Route_new</a>
     </div>
 @foreach (var item in Model) {
-	<div class="ui-block-a"><strong>@item.Id</strong> @item.Name</div>
-    @*<div class="ui-block-b"><a href="#popupMap" data-rel="popup" data-position-to="window" data-role="button" data-theme="b" data-inline="true">Open Map</a></div>*@
-	<div class="ui-block-b">
-        @if (@item.IsOffer) { @Resources.Offer } else { @Resources.Seek }
-        <a href="/Route/CreateUpdate/@item.Id" data-role="button" data-mini="true" data-ajax="false" data-theme="b" data-inline="true">@Resources.Map</a>
-        <a href="/Route/Search/@item.Id" data-role="button" data-mini="true" data-ajax="false" data-theme="b" data-inline="true">@Resources.Search</a>
-	</div>
+        <div class="ui-block-a">
+            @if (item.IsOffer) {
+            <a href="/Route/CreateUpdate/@item.Id" data-ajax="false" data-role="button" data-theme="b" class = "offer">@item.Id - @item.Name</a> }
+                                                                                                                                                    else {
+                            <a href="/Route/CreateUpdate/@item.Id" data-ajax="false" data-role="button" data-theme="b" class = "seek">@item.Id - @item.Name</a> }
+ @*@if (item.IsOffer) { @:(style = "background-color: #40b723;"); } else { @:("style = "background-color: #f12b2b;"); }*@
+        </div>
+        <div class="ui-block-b">
+            @*<div data-role="controlgroup"  data-type="horizontal">*@
+            <a href="/Route/Search/@item.Id" data-ajax="false" data-role="button" data-icon="search" data-theme="b" data-inline="true">&nbsp;</a>
+            @*</div>*@
+        </div>
+
 }
     </div><!-- /grid-a -->

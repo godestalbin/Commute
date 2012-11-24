@@ -87,9 +87,13 @@
         DisplayRouteMarker(routeWayPoint);
 
         //Create object to display route
+        var polyOptions = {
+            strokeColor: ("@Model.IsOffer" == "True") ? "#f12b2b" : "#40b723", //Offer=red, Seek=green
+            strokeWeight: 5
+        }
         var rendererOptions = {
             //preserveViewport: true, //Do not resize map on start/end point
-            //polylineOptions: polyOptions,
+            polylineOptions: polyOptions,
             suppressMarkers: true //Do not display default A, B, C makers
         };
         directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions);
@@ -234,9 +238,9 @@ function CreateMarker(location, id, draggable, icon) {
 
     //Synchronous Ajax to get route and way points
     function GetWayPoint(routeId, routeWayPoint) {
-        
+        var milliseconds = new Date().getMilliseconds();
         $.ajax({ 
-            'async': false, 'url': '/Route/WayPoint/' + routeId, 'type': 'get', 'dataType': 'json', //?id=
+            'async': false, 'url': '/Route/WayPoint/' + routeId + '?' + milliseconds, 'type': 'get', 'dataType': 'json', //?id=
             'success': function (data) {
                 for ( i = 0; i < data.Data.length; i++ ) {
                     routeWayPoint.push(data.Data[i]);
@@ -277,13 +281,14 @@ function CreateMarker(location, id, draggable, icon) {
         //alert("Ready");
         GetWayPoint(@Model.Id, routeWayPoint); //Synchronous AJAX to get waypoint necessary to draw map for other user route
         var querystring = location.search.split( '=' );
-        var myRouteId = querystring[1];
+        var myRouteId = querystring[1].split( '&' )[0];
+        var myIsOffer = querystring[2];
         GetWayPoint(myRouteId, myRouteWayPoint); //Synchronous AJAX to get waypoint necessary to draw map for my route
         InitializeRouteMap();
 
         DisplayRouteMarker(myRouteWayPoint);
         var polyOptions = {
-            strokeColor: "#40b723",
+            strokeColor: (myIsOffer == "True") ? "#f12b2b" : "#40b723", //Offer=red, Seek=green
             strokeWeight: 5
         }
         rendererOptions = {

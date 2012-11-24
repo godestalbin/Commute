@@ -100,6 +100,7 @@ namespace Commute.Controllers
 
             ViewBag.Title = Resources.Route_search;
             ViewBag.routeId = searchRoute.Id;
+            ViewBag.isOffer = searchRoute.IsOffer.ToString();
             return View(routeList.ToList());
         }
 

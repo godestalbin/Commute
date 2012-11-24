@@ -156,6 +156,7 @@
     <Content Include="Content\Commute mobile.css" />
     <Content Include="Content\Commute.css" />
     <Content Include="Content\Images\Blue car 32px.png" />
+    <Content Include="Content\Images\Blue car 48px.png" />
     <Content Include="Content\Images\Blue car 64px.png" />
     <Content Include="Content\Images\Commute icon.png" />
     <Content Include="Content\Images\Empty.png" />
