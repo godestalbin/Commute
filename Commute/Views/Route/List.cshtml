@@ -13,9 +13,9 @@
 @foreach (var item in Model) {
         <div class="ui-block-a">
             @if (item.IsOffer) {
-            <a href="/Route/CreateUpdate/@item.Id" data-ajax="false" data-role="button" data-theme="b" class = "offer">@item.Id - @item.Name</a> }
+            <a href="/Route/CreateUpdate/@item.Id" data-ajax="false" data-role="button" data-theme="b" class = "offer" style="background-color: red;">@item.Id - @item.Name</a> }
                                                                                                                                                     else {
-                            <a href="/Route/CreateUpdate/@item.Id" data-ajax="false" data-role="button" data-theme="b" class = "seek">@item.Id - @item.Name</a> }
+                            <a href="/Route/CreateUpdate/@item.Id" data-ajax="false" data-role="button" data-theme="b" class = "seek" style="background-color: green;">@item.Id - @item.Name</a> }
  @*@if (item.IsOffer) { @:(style = "background-color: #40b723;"); } else { @:("style = "background-color: #f12b2b;"); }*@
         </div>
         <div class="ui-block-b">
