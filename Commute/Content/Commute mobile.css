@@ -46,14 +46,16 @@ input.email {
     color: red;
 }
 .seek {
-    background-color: #40b723; /*green*/
+    background: #40b723; /*green*/
     text-align:left;
     font-weight: 100;
+    text-shadow: none;
 }
 .offer {
-    background-color: #f12b2b; /*red*/
+    background: #f12b2b; /*red*/
     text-align:left;
     font-weight: 100;
+    text-shadow: none;
 }
 .like-button {
     padding: 9px;
