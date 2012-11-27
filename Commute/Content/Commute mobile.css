@@ -45,17 +45,23 @@ input.email {
 .field-validation-error {
     color: red;
 }
+.ui-btn-inner { /*display as much as possible text on the route button*/
+    padding-left: 2px;
+    padding-right: 2px;
+}
 .seek {
     background: #40b723; /*green*/
     text-align:left;
     font-weight: 100;
     text-shadow: none;
+    padding-left: 0px;
 }
 .offer {
     background: #f12b2b; /*red*/
     text-align:left;
     font-weight: 100;
     text-shadow: none;
+    padding-left: 0px;
 }
 .like-button {
     padding: 9px;

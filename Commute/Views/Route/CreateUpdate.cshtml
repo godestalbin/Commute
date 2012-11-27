@@ -41,11 +41,11 @@
     <div style="display:inline-block; width: 45%; height: 0px;"> @*force button to be after input*@
     </div>
     <div style="display: inline-block; position:absolute; top: 0px;">
-        <button id="btnSave" type="submit" data-inline="true" data-theme="b" data-icon="check" data-iconpos="notext" ></button>
+        <button id="btnSave" type="submit" data-inline="true" data-ajax="false" data-theme="b" data-icon="check" data-iconpos="notext" ></button>
         @*style="display:block; position:absolute; top: -10px; margin-top: -10px; padding: 0px;"*@ 
             @* style="display:inline-block; position:absolute; top: -10px; margin-top: -10px;"*@
             @*position:absolute; top: 5px*@
-        <button id="btnCancel" type="button" data-inline="true" data-theme="b" data-icon="delete" data-iconpos="notext" ></button>
+        <button id="btnCancel" type="button" data-inline="true" data-ajax="false" data-theme="b" data-icon="delete" data-iconpos="notext" ></button>
         @*style="display:inline; float: right; "*@
     </div>
 </div>
@@ -72,8 +72,23 @@
     function InitializeRouteMap() {
         //alert(routeWayPoint.length);
 
-        //TMP - later we should get center in another way
-        var mapCenter = new google.maps.LatLng(39.907004, 116.39759); //Center on Beijing Tian An Men
+        //If no start point set center map on user's default location
+        if ( routeWayPoint.length == 0 ) {
+            var milliseconds = new Date().getMilliseconds();
+            var mapCenter;
+            $.ajax({ 
+                'async': false, 'url': '/User/Location/' + @ViewBag.userId + '?' + milliseconds, 'type': 'get', 'dataType': 'text',
+                'success': function (data) {
+                    var location = data.split('/');
+                    //mapCenter = data.Data;
+                    mapCenter = new google.maps.LatLng(location[0], location[1]);
+                }
+            });
+        }
+
+        else {
+            mapCenter = new google.maps.LatLng(39.907004, 116.39759); //Center on Beijing Tian An Men
+        }
 
         var zoomControl = {
             //position: google.maps.ControlPosition.TOP_LEFT,

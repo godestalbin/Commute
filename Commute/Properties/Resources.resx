@@ -134,16 +134,22 @@
   <data name="Connection not found" xml:space="preserve"> <value>Connection not found</value> </data>
   <data name="Email" xml:space="preserve"> <value>E-mail address</value> </data>
   <data name="Error database access" xml:space="preserve"> <value>Database error</value> </data>
+  <data name="Error duplicate account" xml:space="preserve"> <value>This account already exists</value> </data>
+  <data name="Error invalid mail" xml:space="preserve"> <value>This does not look like a valid mail address</value> </data>
   <data name="Error string too long" xml:space="preserve"> <value>String is too long</value> </data>
   <data name="Error unknown account" xml:space="preserve"> <value>This account does not exists</value> </data>
   <data name="Error wrong password" xml:space="preserve"> <value>Wrong password, did you forget it...too bad !</value> </data>
+  <data name="Forum" xml:space="preserve"> <value>Forum</value> </data>
   <data name="From" xml:space="preserve"> <value>From</value> </data>
+  <data name="Guest" xml:space="preserve"> <value>Guest</value> </data>
+  <data name="Help" xml:space="preserve"> <value>Help</value> </data>
   <data name="Location are the same" xml:space="preserve"> <value>The 2 locations are the same</value> </data>
   <data name="Location create" xml:space="preserve"> <value>Create new location</value> </data>
   <data name="Location name" xml:space="preserve"> <value>Location name</value> </data>
   <data name="Location update" xml:space="preserve"> <value>Update location</value> </data>
   <data name="Location type" xml:space="preserve"> <value>Type</value> </data>
   <data name="Login" xml:space="preserve"> <value>Login</value> </data>
+  <data name="Logout" xml:space="preserve"> <value>Logout</value> </data>
   <data name="Mandatory" xml:space="preserve"> <value>This field is mandatory</value> </data>
   <data name="Map" xml:space="preserve"> <value>Map</value> </data>
   <data name="Menu" xml:space="preserve"> <value>Menu</value> </data>
@@ -152,6 +158,7 @@
   <data name="Password" xml:space="preserve"> <value>Password</value> </data>
   <data name="Password confirm" xml:space="preserve"> <value>Confirm password</value> </data>
   <data name="Picture" xml:space="preserve"> <value>Picture</value> </data>
+  <data name="Register" xml:space="preserve"> <value>Register</value> </data>
   <data name="Removed from car" xml:space="preserve"> <value>Removed from this car</value> </data>
   <data name="Route" xml:space="preserve"> <value>Route</value> </data>
   <data name="Route create update" xml:space="preserve"> <value>Update route</value> </data>
@@ -159,6 +166,7 @@
   <data name="Route new" xml:space="preserve"> <value>New route</value> </data>
   <data name="Route list" xml:space="preserve"> <value>My routes</value> </data>
   <data name="Route search" xml:space="preserve"> <value>Search route</value> </data>
+  <data name="Route view" xml:space="preserve"> <value>View route</value> </data>
   <data name="Save" xml:space="preserve"> <value>Save</value> </data>
   <data name="Search" xml:space="preserve"> <value>Search</value> </data>
   <data name="Seek" xml:space="preserve"> <value>Seek</value> </data>
@@ -174,21 +182,18 @@
   <data name="User login" xml:space="preserve"> <value>User login</value> </data>
   <data name="User logout" xml:space="preserve"> <value>User logout</value> </data>
   <data name="User registration" xml:space="preserve"> <value>User registration</value> </data>
+  <data name="User set location" xml:space="preserve"> <value>Set location</value> </data>
   <data name="Welcome" xml:space="preserve"> <value>Welcome</value> </data>
-  <data name="Help" xml:space="preserve"> <value>Help</value> </data>
-  <data name="Forum" xml:space="preserve"> <value>Forum</value> </data>
-  <data name="Welcome view route" xml:space="preserve"> <value>Alternatively, you can view available routes for your commute path witout creating an account.</value> </data>
-  <data name="Register" xml:space="preserve"> <value>Register</value> </data>
-  <data name="Error duplicate account" xml:space="preserve"> <value>This account already exists</value> </data>
-  <data name="Error invalid mail" xml:space="preserve"> <value>This does not look like a valid mail address</value> </data>
   <data name="Welcome help" xml:space="preserve"> <value>Read the quick start documentation to have an overview of Commute features.</value> </data>
   <data name="Welcome join" xml:space="preserve"> <value>First, create an account to join Commute community</value> </data>
   <data name="Welcome message" xml:space="preserve"> <value>Welcome to Commute, the green and friendly way to commute.
-&lt;div&gt;- Define the commute route you seek/offer&lt;/div&gt;
+&lt;div&gt;- Define the commute routes you seek/offer&lt;/div&gt;
 &lt;div&gt;- Find other commuters with similar route&lt;/div&gt;
 &lt;div&gt;- Get in touch with them to commute together&lt;/div&gt;
 &lt;div&gt;- Keep track of the expenses to share&lt;/div&gt;</value> </data>
-  <data name="Logout" xml:space="preserve"> <value>Logout</value> </data>
-  <data name="Guest" xml:space="preserve"> <value>Guest</value> </data>
-  <data name="Route view" xml:space="preserve"> <value>View route</value> </data>
+  <data name="Welcome view route" xml:space="preserve"> <value>Alternatively, you can view available routes for your commute path witout creating an account.</value> </data>
+  <data name="Metadesc default" xml:space="preserve"> <value>Share your car to commute between home and work with others or find a car in your area to commute to work. Going to work can be fun: Save fuel, save money and make new friends to share a happy time when commuting. This is the green way to go to work. Help saving the planet. Reduce gaz emission</value> </data>
+  <data name="Metadesc home welcome" xml:space="preserve"> <value>Welcome to Commute the green and friendly way to commute. Find routes in your area. Get started with Commute. Joint Commute community. Share your car to commute between home and work with others or find a car in your area to commute to work. Going to work can be fun: Save fuel, save money and make new friends to share a happy time when commuting. This is the green way to go to work. Help saving the planet. Reduce gaz emission</value> </data>
+  <data name="Metadesc user setlocation" xml:space="preserve"> <value>Set default map location when creating new route. Commute is a friendly and green way to commute between home and work. Share your car to commute between home and work with others or find a car in your area to commute to work. Going to work can be fun: Save fuel, save money and make new friends to share a happy time when commuting. This is the green way to go to work. Help saving the planet. Reduce gaz emission</value> </data>
+  <data name="Metadesc route list" xml:space="preserve"> <value>This is the list of route you have defined. You can update the route. You can search route which are close match to your route. You can create new route. Share your car to commute between home and work with others or find a car in your area to commute to work. Going to work can be fun: Save fuel, save money and make new friends to share a happy time when commuting. This is the green way to go to work. Help saving the planet. Reduce gaz emission</value> </data>
 </root>

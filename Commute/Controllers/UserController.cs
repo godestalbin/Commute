@@ -144,6 +144,31 @@ namespace Commute.Controllers
             using (S3Response r = client.PutObject(request)) { }
         }
 
+        public ActionResult SetLocation()
+        {
+            if (userId == 0) RedirectToAction("Welcome", "Home");
+            User user = db.User.Find(userId);
+            return View(user);
+        }
+
+        [HttpPost]
+        public ActionResult SetLocation(User postUser)
+        {
+            User user = db.User.Find(postUser.Id);
+            user.LocationLatitude = postUser.LocationLatitude;
+            user.LocationLongitude = postUser.LocationLongitude;
+            db.SaveChanges();
+
+            return RedirectToAction("List", "Route");
+        }
+
+        //Get user default location
+        public string Location(int id)
+        {
+            User user = db.User.Find(id);
+            return user.LocationLatitude.ToString() + "/" + user.LocationLongitude.ToString();
+        }
+
         //-----------------------------------------
         //Default controller action auto generated - not used
 

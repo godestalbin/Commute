@@ -1,0 +1,92 @@
+﻿@model Commute.Models.User
+@using Commute.Properties
+
+@{
+    Layout = "~/Views/Shared/_Mobile.cshtml";
+    ViewBag.Title = @Resources.User_set_location;
+    ViewBag.Metadesc = Resources.Metadesc_user_setlocation;
+}
+
+<form id="userData" name="userData" method="POST" >
+<input id="id" name="id" type="hidden" value="@Model.Id"/>
+<input id="locationLatitude" name="locationLatitude" type="hidden" value="@Model.LocationLatitude"/>
+<input id="locationLongitude" name="locationLongitude" type="hidden" value="@Model.LocationLongitude"/>
+</form>
+
+<div id="divMap" style="width:100%;position: absolute; top: 54px; left: 0px; bottom: 0px;"></div>
+<div id="customMapControl">
+<button id="btnSave" type="submit" data-inline="true" data-ajax="false" data-theme="b" data-icon="check" data-iconpos="notext" ></button>
+</div>
+
+<script>
+    var map //Google map
+    
+    function InitializeMap() {
+
+        //Set map center: current user location or equator /Greenwitch
+        var mapCenter = new google.maps.LatLng( @( Model.LocationLatitude.HasValue ? Model.LocationLatitude : 0), @(Model.LocationLongitude.HasValue ? Model.LocationLongitude : 0 ) );
+
+        var zoomControl = {
+            style: google.maps.ZoomControlStyle.SMALL
+        }
+        //Define map properties
+        var mapProp = {
+            zoom: 1,
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            panControl: false,
+            streetViewControl: false,
+            mapTypeControl: false,
+            zoomControlOptions: zoomControl
+        };
+        //Display the map in the div
+        map = new google.maps.Map(document.getElementById("divMap"), mapProp);
+        //Force map to expand to div
+        setTimeout(function () { google.maps.event.trigger(map, 'resize'); map.setCenter(mapCenter); }, 100);
+
+        //Set original location
+        if ( @Model.LocationLongitude.HasValue.ToString().ToLower() ) {
+            AddMarker(mapCenter);
+        }
+
+        //Add control to the map - save button
+        var saveButton = document.createElement('customMapControl'); //Create a new control
+        saveButton.innerHTML = $('#customMapControl').html(); //Use the HTML of the button
+        $('#customMapControl').hide(); //Hide the original button
+        map.controls[google.maps.ControlPosition.TOP_RIGHT].push(saveButton);
+        google.maps.event.addDomListener(saveButton, 'click', function (event) {
+            SavePosition();
+        });
+
+        //Add map click event
+        google.maps.event.addListener(map, 'click', function (event) {
+            //Add marker if location not set yet
+            if ($('#locationLatitude').val() == 0) AddMarker(event.latLng);
+        });
+    } //InitializeMap
+
+    function AddMarker(location) {
+        //Create new marker at event location
+        var marker = new google.maps.Marker({
+            position: location,
+            draggable: true,
+            map: map
+        });
+        //Set original location
+        $('#locationLatitude').val(location.lat());
+        $('#locationLongitude').val(location.lng());
+        //Add marker event to track drag end
+        google.maps.event.addListener(marker, 'dragend', function (event) {
+            $('#locationLatitude').val(event.latLng.lat());
+            $('#locationLongitude').val(event.latLng.lng());
+        });
+    }
+
+    function SavePosition() {
+        document.userData.submit();
+    }
+
+    jQuery(document).ready(function () {
+        InitializeMap();
+    });
+
+</script>

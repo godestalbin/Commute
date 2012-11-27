@@ -24,10 +24,13 @@ namespace Commute.Models
         [Display(Name = "Email", ResourceType = typeof(Properties.Resources))]
         [Required]
         [StringLength(100)]
-        [RegularExpression(".+@.+\\..+", ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "Error_invalid mail")]
+        [RegularExpression(".+@.+\\..+", ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "Error_invalid_mail")]
         public string EmailAddress { get; set; }
         
         public bool Picture { get; set; }
+
+        public Nullable<decimal> LocationLatitude { get; set; }
+        public Nullable<decimal> LocationLongitude { get; set; }
     }
 
     //Class to register new account

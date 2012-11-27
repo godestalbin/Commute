@@ -21,6 +21,10 @@ namespace Commute.Models
 
             //Set the precision for decimal - does not work on AppHarbor
 
+            //User
+            modelBuilder.Entity<User>().Property(model => model.LocationLatitude).HasPrecision(18, 14);
+            modelBuilder.Entity<User>().Property(model => model.LocationLongitude).HasPrecision(18, 14);
+
             //Location
             modelBuilder.Entity<Location>().Property(location => location.Name).HasMaxLength(100);
             modelBuilder.Entity<Location>().Property(location => location.Latitude).HasPrecision(18, 14);

@@ -312,6 +312,7 @@
     <Content Include="Views\Home\NotImplemented.cshtml" />
     <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\User\RegisterOld.cshtml" />
+    <Content Include="Views\User\SetLocation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

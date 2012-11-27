@@ -23,14 +23,14 @@
         <tr>
             <td>@Html.LabelFor(model => model.Password)</td>
             <td>
-                @Html.TextBoxFor(model => model.Password, new { @class = "password" })
+                @Html.TextBoxFor(model => model.Password, new { @class = "password", type="password" })
                 @Html.ValidationMessageFor(model => model.Password)
             </td>
         </tr>
         <tr>
             <td>@Html.LabelFor(model => model.ConfirmedPassword)</td>
             <td>
-                @Html.TextBoxFor(model => model.ConfirmedPassword, new { @class = "password" })
+                @Html.TextBoxFor(model => model.ConfirmedPassword, new { @class = "password", type="password"  })
                 @Html.ValidationMessageFor(model => model.ConfirmedPassword)
             </td>
         </tr>

@@ -385,6 +385,42 @@ namespace Commute.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Share your car to commute between home and work with others or find a car in your area to commute to work. Going to work can be fun: Save fuel, save money and make new friends to share a happy time when commuting. This is the green way to go to work. Help saving the planet. Reduce gaz emission.
+        /// </summary>
+        public static string Metadesc_default {
+            get {
+                return ResourceManager.GetString("Metadesc default", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Welcome to Commute the green and friendly way to commute. Find routes in your area. Get started with Commute. Joint Commute community. Share your car to commute between home and work with others or find a car in your area to commute to work. Going to work can be fun: Save fuel, save money and make new friends to share a happy time when commuting. This is the green way to go to work. Help saving the planet. Reduce gaz emission.
+        /// </summary>
+        public static string Metadesc_home_welcome {
+            get {
+                return ResourceManager.GetString("Metadesc home welcome", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This is the list of route you have defined. You can update the route. You can search route which are close match to your route. You can create new route. Share your car to commute between home and work with others or find a car in your area to commute to work. Going to work can be fun: Save fuel, save money and make new friends to share a happy time when commuting. This is the green way to go to work. Help saving the planet. Reduce gaz emission.
+        /// </summary>
+        public static string Metadesc_route_list {
+            get {
+                return ResourceManager.GetString("Metadesc route list", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Set default map location when creating new route. Commute is a friendly and green way to commute between home and work. Share your car to commute between home and work with others or find a car in your area to commute to work. Going to work can be fun: Save fuel, save money and make new friends to share a happy time when commuting. This is the green way to go to work. Help saving the planet. Reduce gaz emission.
+        /// </summary>
+        public static string Metadesc_user_setlocation {
+            get {
+                return ResourceManager.GetString("Metadesc user setlocation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This record does not exists.
         /// </summary>
         public static string No_record {
@@ -646,6 +682,15 @@ namespace Commute.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Set location.
+        /// </summary>
+        public static string User_set_location {
+            get {
+                return ResourceManager.GetString("User set location", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Welcome.
         /// </summary>
         public static string Welcome {
@@ -674,7 +719,7 @@ namespace Commute.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to Welcome to Commute, the green and friendly way to commute.
-        ///&lt;div&gt;- Define the commute route you seek/offer&lt;/div&gt;
+        ///&lt;div&gt;- Define the commute routes you seek/offer&lt;/div&gt;
         ///&lt;div&gt;- Find other commuters with similar route&lt;/div&gt;
         ///&lt;div&gt;- Get in touch with them to commute together&lt;/div&gt;
         ///&lt;div&gt;- Keep track of the expenses to share&lt;/div&gt;.
