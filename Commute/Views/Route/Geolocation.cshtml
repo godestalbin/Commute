@@ -6,17 +6,28 @@
 <h2>Geolocation</h2>
 
 <p id="demo">Click the button to get your coordinates:</p>
-<button onclick="getLocation()"  data-ajax="false">Try It</button>
+<button onclick="getLocation()"  data-ajax="false">Get location</button>
+<div id="divInfoMessage"></div>
+<div id="divErrorMessage"><b></b></div>
 
 <script>
-var x=document.getElementById("demo");
-function getLocation()
-  {
+    var x = document.getElementById("demo");
+    var infoMessage = document.getElementById("divInfoMessage");
+    var errorMessage = document.getElementById("divErrorMessage");
+    function getLocation()
+    {
+        alert("getLocation called");
+        infoMessage.innerHTML = "getLocation called";
+       
     if (navigator.geolocation)
     {
+        infoMessage.innerHTML = infoMessage.innerHTML + "<br> navigator.geolocation: True"; // + navigator.geolocation;
         navigator.geolocation.getCurrentPosition(showPosition, error);
     }
-    else { x.innerHTML="Geolocation is not supported by this browser.";}
+    else {
+        errorMessage.innerHTML = "Geolocation is not supported by this browser.";
+        x.innerHTML = "Geolocation is not supported by this browser.";
+    }
   }
 function showPosition(position)
 {

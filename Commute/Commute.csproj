@@ -132,6 +132,7 @@
     <Compile Include="Controllers\HelpController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LocationController.cs" />
+    <Compile Include="Controllers\MailController.cs" />
     <Compile Include="Controllers\RouteController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
@@ -270,6 +271,8 @@
     <Content Include="Views\Home\Welcome.cshtml" />
     <Content Include="Views\Route\Geolocation.cshtml" />
     <Content Include="Views\Route\SearchOld.cshtml" />
+    <Content Include="Views\Help\Quick start.cshtml" />
+    <Content Include="Views\Mail\Send.cshtml" />
     <None Include="Views\Route\Map.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
