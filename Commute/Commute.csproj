@@ -43,6 +43,9 @@
       <HintPath>..\packages\AWSSDK.1.5.6.0\lib\AWSSDK.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Mvc.Mailer">
+      <HintPath>..\packages\MvcMailer.4.0\lib\40\Mvc.Mailer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
@@ -273,6 +276,8 @@
     <Content Include="Views\Route\SearchOld.cshtml" />
     <Content Include="Views\Help\Quick start.cshtml" />
     <Content Include="Views\Mail\Send.cshtml" />
+    <Content Include="Views\Mail\Welcome.cshtml" />
+    <Content Include="Views\Route\SearchAllOld.cshtml" />
     <None Include="Views\Route\Map.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -316,6 +321,8 @@
     <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\User\RegisterOld.cshtml" />
     <Content Include="Views\User\SetLocation.cshtml" />
+    <Content Include="Views\Shared\_Mail.cshtml" />
+    <Content Include="Views\User\EditOld.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

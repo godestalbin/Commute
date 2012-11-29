@@ -1,8 +1,8 @@
 ﻿@model Commute.Models.Entity
 @using Commute.Properties
 
-    <form action="/User/UploadFile" method="post" enctype="multipart/form-data">
+    <form action="/User/UploadFile" method="post" enctype="multipart/form-data"  data-ajax="false">
         <input class="input-file-upload" type="file" name="file" id="file" />
-        @Html.Hidden("Id", @Model.Id)
-        <input type="submit" value="@Resources.Update_picture" />
+        @Html.Hidden("Id", @Model.Id)<br>
+        <input type="submit" value="@Resources.Update_picture" data-inline="true"/>
     </form>

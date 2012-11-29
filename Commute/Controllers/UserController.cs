@@ -16,7 +16,7 @@ namespace Commute.Controllers
 {
     public class UserController : BaseController
     {
-        private Context db = new Context();
+        //private Context db = new Context();
         
         //Login
         [AllowAnonymous]
@@ -70,23 +70,35 @@ namespace Commute.Controllers
         {
             //Check account is free
             int count = db.User.Count(u => u.Account == user.Account);
-            if ( count > 0 ) {
+            if ( count > 0 && user.Account != "a" ) { //TMP allow 'a' account can be used to test account creation screen
                 ModelState.AddModelError("Account", Resources.Error_duplicate_account);
                 return View();
             }
             if (ModelState.IsValid)
             {
-                db.User.Add(user);
-                db.SaveChanges();
-                return RedirectToAction("Login", "User", user.Id); //Show user data in Edit view
+                if (user.Account != "a") //TMP 'a' account is not re-created
+                {
+                    db.User.Add(user);
+                    db.SaveChanges();
+                }
+                else user.Id = 1; //TMP need to set user Id for 'a' account
+                //Send welcome mail to user
+                Mail mail = new Mail();
+                mail.Welcome(user.Id).Send();
+
+                //Authenticate user
+                FormsAuthentication.SetAuthCookie(user.Account, true); //true=Persistent cookie
+                Session["userId"] = user.Id;
+
+                return RedirectToAction("Edit", "User", new { id = user.Id }); //Show user data in Edit view
             }
             return View();
         }
 
         //Edit
-        public ActionResult Edit(int id = 0)
+        public ActionResult Edit()
         {
-            User user = db.User.Find(id);
+            User user = db.User.Find(userId);
             if (user == null)
             {
                 return HttpNotFound(); //HTTP Error 404 - Not very friendly

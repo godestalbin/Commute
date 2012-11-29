@@ -12,7 +12,11 @@
 <input id="hfId" type="hidden" value="@Model.Id"/>
 <input id="hfUserId" type="hidden" value="@Model.UserId"/>
 
-@using (Html.BeginForm()) {
+@using (Html.BeginForm("CreateUpdate", "Route", FormMethod.Post, new Dictionary<string, object>
+    {
+        { "data-ajax", "false" }, 
+    }))
+{
     @Html.ValidationSummary(true)
 <div style="position:absolute; left: 2px; top: 52px; right: 0px;">
     <div data-role="fieldcontain" style="font-family: Tahoma; display:inline-block; margin-top: 2px"> 
