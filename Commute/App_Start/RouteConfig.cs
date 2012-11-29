@@ -17,7 +17,7 @@ namespace Commute
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 //defaults: new { controller = "Route", action = "List", id = UrlParameter.Optional }
-                defaults: new { controller = "User", action = "Edit", id = UrlParameter.Optional }
+                defaults: new { controller = "Route", action = "List", id = UrlParameter.Optional }
             );
         }
     }
