@@ -95,6 +95,14 @@ namespace Commute.Controllers
             return View();
         }
 
+        //Welcome message for registred users
+        public ActionResult WelcomeRegistered()
+        {
+            if (userId == 0) RedirectToAction("Welcome", "Home");
+            User user = db.User.Find(userId);
+            return View(user);
+        }
+
         //Edit
         public ActionResult Edit()
         {
@@ -125,6 +133,11 @@ namespace Commute.Controllers
             foreach (string file in Request.Files)
             {
                 HttpPostedFileBase postFile = Request.Files[file] as HttpPostedFileBase;
+                if (ViewBag.postFile == null)
+                {
+                    Session["postFile"] = postFile.FileName;
+                    Session["postFileLength"] = postFile.ContentLength;
+                }
                 if (postFile.ContentLength == 0)
                     continue;
                 //Save on the server - Cannot be used for App Harbour
@@ -136,7 +149,7 @@ namespace Commute.Controllers
                 //Now save to Amazon S3
                 UploadToAmazonService(postFile, String.Format("{0:00000000}", entity.Id) + Path.GetExtension(postFile.FileName));
             }
-            return RedirectToAction("Edit", new {id=entity.Id});
+            return RedirectToAction("Edit");
         }
 
         private void UploadToAmazonService(HttpPostedFileBase file, string filename)
@@ -144,6 +157,7 @@ namespace Commute.Controllers
             string bucketName = System.Configuration.ConfigurationManager.AppSettings["AWSPublicFilesBucket"]; //commute bucket
 
             string publicFile = "Pictures/" + filename; //We have Pictures folder in the bucket
+            Session["publicFile"] = publicFile;
 
             PutObjectRequest request = new PutObjectRequest();
             request.WithBucketName(bucketName);

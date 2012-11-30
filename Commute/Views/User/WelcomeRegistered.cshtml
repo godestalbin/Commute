@@ -1,0 +1,21 @@
+﻿@model Commute.Models.User
+@using Commute.Properties
+
+@{
+    Layout = "~/Views/Shared/_Mobile.cshtml";
+    ViewBag.Title = @Resources.Welcome;
+    ViewBag.Metadesc = Resources.Metadesc_home_welcome;
+}
+
+@Html.Raw( @Resources.Welcome ) <b>@Model.Account</b>
+@Html.Raw( @Resources.Welcome_registred.Replace("Commute", "<b>Commute</b>") )
+@Html.Raw( @Resources.Welcome_mail ) @Model.EmailAddress
+<br>
+@Html.Raw( @Resources.Welcome_set_location )
+<a href="/User/SetLocation" data-role="button" data-ajax="false" data-inline="true" data-mini="true">@Resources.User_set_location</a>
+<br>
+@Html.Raw( @Resources.Welcome_account )
+<a href="/User/Edit" data-role="button" data-ajax="false" data-inline="true" data-mini="true">@Resources.User_account</a>
+<br>
+@Html.Raw( @Resources.Welcome_route)
+<a href="/Route/CreateUpdate" data-role="button" data-ajax="false" data-inline="true" data-mini="true">@Resources.Route_create</a>

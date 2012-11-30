@@ -385,15 +385,6 @@ namespace Commute.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Share your car to commute between home and work with others or find a car in your area to commute to work. Going to work can be fun: Save fuel, save money and make new friends to share a happy time when commuting. This is the green way to go to work. Help saving the planet. Reduce gaz emission.
-        /// </summary>
-        public static string Metadesc_default {
-            get {
-                return ResourceManager.GetString("Metadesc default", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Welcome to Commute the green and friendly way to commute. Find routes in your area. Get started with Commute. Joint Commute community. Share your car to commute between home and work with others or find a car in your area to commute to work. Going to work can be fun: Save fuel, save money and make new friends to share a happy time when commuting. This is the green way to go to work. Help saving the planet. Reduce gaz emission.
         /// </summary>
         public static string Metadesc_home_welcome {
@@ -489,6 +480,15 @@ namespace Commute.Properties {
         public static string Route {
             get {
                 return ResourceManager.GetString("Route", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create route.
+        /// </summary>
+        public static string Route_create {
+            get {
+                return ResourceManager.GetString("Route create", resourceCulture);
             }
         }
         
@@ -700,6 +700,15 @@ namespace Commute.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You can now update data (upload picture) on your account.
+        /// </summary>
+        public static string Welcome_account {
+            get {
+                return ResourceManager.GetString("Welcome account", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Read the quick start documentation to have an overview of Commute features..
         /// </summary>
         public static string Welcome_help {
@@ -718,6 +727,15 @@ namespace Commute.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to We just sent you a welcome mail with more instructions at your address: .
+        /// </summary>
+        public static string Welcome_mail {
+            get {
+                return ResourceManager.GetString("Welcome mail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Welcome to Commute, the green and friendly way to commute.
         ///&lt;div&gt;- Define the commute routes you seek/offer&lt;/div&gt;
         ///&lt;div&gt;- Find other commuters with similar route&lt;/div&gt;
@@ -727,6 +745,33 @@ namespace Commute.Properties {
         public static string Welcome_message {
             get {
                 return ResourceManager.GetString("Welcome message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  to Commute community..
+        /// </summary>
+        public static string Welcome_registred {
+            get {
+                return ResourceManager.GetString("Welcome registred", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to And then your are ready to define your commute route.
+        /// </summary>
+        public static string Welcome_route {
+            get {
+                return ResourceManager.GetString("Welcome route", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Set your default location.
+        /// </summary>
+        public static string Welcome_set_location {
+            get {
+                return ResourceManager.GetString("Welcome set location", resourceCulture);
             }
         }
         

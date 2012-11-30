@@ -14,7 +14,13 @@
     <table>
         <tr>
             <td>@Html.LabelFor(model => model.Id)</td>
-            <td><div class="non-editable-data">@String.Format("{0:00000000}",@Model.Id)</div></td>
+            <td>@*<div class="non-editable-data">@String.Format("{0:00000000}",@Model.Id)</div>*@
+                @Html.TextBoxFor(model => model.Id, new Dictionary<string, object>
+    {
+        { "disabled", "true" },
+        { "class", "account non-editable-data" }, 
+    })
+            </td>
         </tr>
         <tr>
             <td>@Html.LabelFor(model => model.Account)</td>

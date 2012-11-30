@@ -183,16 +183,23 @@
   <data name="User logout" xml:space="preserve"> <value>User logout</value> </data>
   <data name="User registration" xml:space="preserve"> <value>User registration</value> </data>
   <data name="User set location" xml:space="preserve"> <value>Set location</value> </data>
+  <data name="Route create" xml:space="preserve"> <value>Create route</value> </data>
+
   <data name="Welcome" xml:space="preserve"> <value>Welcome</value> </data>
+  <data name="Welcome account" xml:space="preserve"> <value>You can now update data (upload picture) on your account</value> </data>
   <data name="Welcome help" xml:space="preserve"> <value>Read the quick start documentation to have an overview of Commute features.</value> </data>
   <data name="Welcome join" xml:space="preserve"> <value>First, create an account to join Commute community</value> </data>
+  <data name="Welcome mail" xml:space="preserve"> <value>We just sent you a welcome mail with more instructions at your address: </value> </data>
   <data name="Welcome message" xml:space="preserve"> <value>Welcome to Commute, the green and friendly way to commute.
 &lt;div&gt;- Define the commute routes you seek/offer&lt;/div&gt;
 &lt;div&gt;- Find other commuters with similar route&lt;/div&gt;
 &lt;div&gt;- Get in touch with them to commute together&lt;/div&gt;
 &lt;div&gt;- Keep track of the expenses to share&lt;/div&gt;</value> </data>
+  <data name="Welcome registred" xml:space="preserve"> <value> to Commute community.</value> </data>
+  <data name="Welcome route" xml:space="preserve"> <value>And then your are ready to define your commute route</value> </data>
+  <data name="Welcome set location" xml:space="preserve"> <value>Set your default location</value> </data>
   <data name="Welcome view route" xml:space="preserve"> <value>Alternatively, you can view available routes for your commute path witout creating an account.</value> </data>
-  <data name="Metadesc default" xml:space="preserve"> <value>Share your car to commute between home and work with others or find a car in your area to commute to work. Going to work can be fun: Save fuel, save money and make new friends to share a happy time when commuting. This is the green way to go to work. Help saving the planet. Reduce gaz emission</value> </data>
+
   <data name="Metadesc home welcome" xml:space="preserve"> <value>Welcome to Commute the green and friendly way to commute. Find routes in your area. Get started with Commute. Joint Commute community. Share your car to commute between home and work with others or find a car in your area to commute to work. Going to work can be fun: Save fuel, save money and make new friends to share a happy time when commuting. This is the green way to go to work. Help saving the planet. Reduce gaz emission</value> </data>
   <data name="Metadesc user setlocation" xml:space="preserve"> <value>Set default map location when creating new route. Commute is a friendly and green way to commute between home and work. Share your car to commute between home and work with others or find a car in your area to commute to work. Going to work can be fun: Save fuel, save money and make new friends to share a happy time when commuting. This is the green way to go to work. Help saving the planet. Reduce gaz emission</value> </data>
   <data name="Metadesc route list" xml:space="preserve"> <value>This is the list of route you have defined. You can update the route. You can search route which are close match to your route. You can create new route. Share your car to commute between home and work with others or find a car in your area to commute to work. Going to work can be fun: Save fuel, save money and make new friends to share a happy time when commuting. This is the green way to go to work. Help saving the planet. Reduce gaz emission</value> </data>

@@ -6,3 +6,6 @@
         @Html.Hidden("Id", @Model.Id)<br>
         <input type="submit" value="@Resources.Update_picture" data-inline="true"/>
     </form>
+Posted file: @Session["postFile"]<br>
+Posted file length: @Session["postFileLength"]<br>
+Public file: @Session["publicFile"]
