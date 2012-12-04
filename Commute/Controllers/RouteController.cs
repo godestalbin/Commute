@@ -122,6 +122,30 @@ namespace Commute.Controllers
             return View(routeList.ToList());
         }
 
+        //Update route: Update route non map data
+        public ActionResult Update(int id = 0)
+        {
+            Route route = db.Route.Find(id); //Retrieve route
+            RouteHeader routeHeader = new RouteHeader(route);
+
+            return View(routeHeader);
+        }
+
+        [HttpPost]
+        public int Update(int id, bool isOffer, string name)
+        //Return route Id - useful for new route
+        {
+            Route route = null;
+            if (id == 0) route = new Route(); //Create new route
+            else route = db.Route.Find(id); //Retrieve route
+            route.UserId = userId;
+            route.Name = name;
+            route.IsOffer = isOffer;
+            if (id == 0) db.Route.Add(route);
+            db.SaveChanges();
+            return route.Id;
+        }
+
         //Create or update route
         [AllowAnonymous]
         public ActionResult CreateUpdate(int id = 0)
@@ -146,13 +170,13 @@ namespace Commute.Controllers
             //Retrieve the route
             Route route = null;
             if( routeId > 0) route = db.Route.Find(routeId);
-            if (route == null)
-            {
-                //If we create a new route we need an active session to find user ID
-                if (Session["userId"] == null) return "/User/Login/"; // RedirectToAction("Login", "User"); //Expired session, go to User/Login
-                route = new Route();
-                route.UserId = (int)Session["userId"];
-            }
+            //if (route == null)
+            //{
+            //    //If we create a new route we need an active session to find user ID
+            //    if (Session["userId"] == null) return "/User/Login/"; // RedirectToAction("Login", "User"); //Expired session, go to User/Login
+            //    route = new Route();
+            //    route.UserId = (int)Session["userId"];
+            //}
             //Update the route
             //route.Name = routeView[0].
             route.StartLatitude = routeView[0].Latitude;
@@ -188,6 +212,7 @@ namespace Commute.Controllers
         [HttpPost]
         public string  UpdateRoute( int id, bool isOffer, string name ) {
             Route route = db.Route.Find(id);
+            route.UserId = userId;
             route.IsOffer = isOffer;
             route.Name = name;
             db.SaveChanges();

@@ -8,7 +8,6 @@
 
 @{ if (@Model.Id == 0) { ViewBag.Title = @Resources.Route_new; } else { ViewBag.Title = @Resources.Route_create_update + " no " + @Model.Id; } }
 
-
 <input id="hfId" type="hidden" value="@Model.Id"/>
 <input id="hfUserId" type="hidden" value="@Model.UserId"/>
 
@@ -19,11 +18,9 @@
 {
     @Html.ValidationSummary(true)
 *@
-    <div style="position:absolute; left: 2px; top: 52px; right: 0px;">
+@*    <div style="position:absolute; left: 2px; top: 52px; right: 0px;">
     <div data-role="fieldcontain" style="font-family: Tahoma; display:inline-block; margin-top: 2px"> 
-        @* position:relative; margin-top: 15px; padding-top: 10px;">*@
-	<select id="selIsSeek" data-role="slider" data-mini="true">
-        @* style="position:absolute; top: 100px; margin-top: 150px;" >*@
+	<select id="selIsSeek2" data-role="slider" data-mini="true">
 		@if (@Model.IsOffer)
   {
         <option value="false">@Resources.Seek</option>
@@ -35,28 +32,66 @@
         }
 	</select>
 </div>
-    @Html.TextBoxFor(model => model.Name, new { id="iptName", style = "width:45%; display:inline-block; position:absolute; top: 10px"})
-@*    @Html.TextBoxFor(model => model.Name, new Dictionary<string, object>
-    {
-        { "id", "iptName" }, 
-        { "style", "width:45%; display:inline-block; position:absolute; top: 2px" }, 
-        { "data-inline", "true" }, 
-    })*@
+    @Html.TextBoxFor(model => model.Name, new { id="iptName2", style = "width:45%; display:inline-block; position:absolute; top: 10px"})
     @Html.ValidationMessageFor(model => model.Name)
-    <div style="display:inline-block; width: 45%; height: 0px;"> @*force button to be after input*@
+    <div style="display:inline-block; width: 45%; height: 0px;">
     </div>
     <div style="display: inline-block; position:absolute; top: 0px;">
         <button id="btnSave" data-inline="true" data-ajax="false" data-theme="b" data-icon="check" data-iconpos="notext" ></button>
-        @*style="display:block; position:absolute; top: -10px; margin-top: -10px; padding: 0px;"*@ 
-            @* style="display:inline-block; position:absolute; top: -10px; margin-top: -10px;"*@
-            @*position:absolute; top: 5px*@
-        <button id="btnCancel" type="button" data-inline="true" data-ajax="false" data-theme="b" data-icon="delete" data-iconpos="notext" ></button>
-        @*style="display:inline; float: right; "*@
+        <a id="btnCancel" type="button" href="#popupLogin" data-rel="popup" data-inline="true" data-theme="b" data-icon="delete" data-iconpos="notext" ></a>
     </div>
+</div>*@
+
+@*---------------------------------*@
+@*Popup to update route header data*@
+@*---------------------------------*@
+<div id="popupRouteHeader" data-role="popup" data-rel="dialog" data-overlay-theme="a" class="ui-corner-all" style="width: 300px;">
+    <div data-role="header" class="ui-bar ui-bar-b">
+		<h1>@Resources.Route_create_update</h1>
+	</div>
+    <div data-role="content" class="ui-corner-bottom ui-content">
+    <fieldset>
+        <select id="selIsSeek" data-role="slider" data-mini="true">
+        @if (@Model.IsOffer)
+        {
+        <option value="false">@Resources.Seek</option>
+		<option value="true"  selected = "true" >@Resources.Offer</option>
+        }
+        else {
+        <option value="false" selected = "false" >@Resources.Seek</option>
+		<option value="true">@Resources.Offer</option>
+        }
+    	</select>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Name)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.Name, new { id = "iptName", style = "width: 300px;" })
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
+
+        @Html.HiddenFor(model => model.Id)
+
+        <button value="Save" onclick="UpdateRoute($('#hfId').val());" data-inline="true" data-ajax="false"></button>
+        </fieldset>
+        </div>
 </div>
+@*Popup to update route header data*@
+@*---------------------------------*@
 
-
-<div id="divMap" style="width:100%;position: absolute; top: 90px; left: 0px; bottom: 0px;" /> @*style="width:700px;height:500px;">*@
+<div id="divMap" style="width:100%;position: absolute; top: 54px; left: 0px; bottom: 0px;" ></div>
+<div id="customMapControl">
+</div>
+<div id="divSave">
+    <button id="btnSave2" type="submit" data-inline="true" data-ajax="false" data-theme="b" data-icon="check" data-iconpos="notext" ></button>
+</div>
+<div id="divInfo">
+    <a id="btnInfo" type="button" href="#popupRouteHeader" data-rel="popup" data-position-to="window" data-inline="true" data-theme="b" data-icon="info" data-iconpos="notext" ></a>
+</div>
+<div id="divCancel">
+    <button id="btnCancel2" type="button" data-inline="true" data-ajax="false" data-theme="b" data-icon="delete" data-iconpos="notext" ></button>
+</div>
 
 
     <div id="debug0"></div>
@@ -87,13 +122,15 @@
                     var location = data.split('/');
                     //mapCenter = data.Data;
                     mapCenter = new google.maps.LatLng(location[0], location[1]);
+                    if( mapCenter.lat() == 0 )
+                        mapCenter = new google.maps.LatLng(39.907004, 116.39759); //Center on Beijing Tian An Men
                 }
             });
         }
 
-        else {
-            mapCenter = new google.maps.LatLng(39.907004, 116.39759); //Center on Beijing Tian An Men
-        }
+        //else { //useless
+        //    mapCenter = new google.maps.LatLng(39.907004, 116.39759); //Center on Beijing Tian An Men
+        //}
 
         var zoomControl = {
             //position: google.maps.ControlPosition.TOP_LEFT,
@@ -105,6 +142,7 @@
             mapTypeId: google.maps.MapTypeId.ROADMAP,
             panControl: false,
             streetViewControl: false,
+            mapTypeControl: false,
             zoomControlOptions: zoomControl
         };
         //Display the map in the div
@@ -114,10 +152,33 @@
         //Force map to expand to div
         setTimeout(function () { google.maps.event.trigger(map, 'resize'); map.setCenter(mapCenter); }, 100);
 
-        //Display start and end point
-        //var p = new google.maps.LatLng(routeWayPoint[0].Latitude, routeWayPoint[0].Longitude)
-        //alert(routeWayPoint[0].Latitude + "/" + routeWayPoint[0].Longitude)
-        
+        //Add control to the map - save button
+        //var mapButton = document.createElement('customMapControl'); //Create a new control
+        var divSave = document.createElement('divSave'); //Create a new control
+        var divInfo = document.createElement('divInfo'); //Create a new control
+        var divCancel = document.createElement('divCancel'); //Create a new control
+        //alert($('#btnSave2').html());
+        divSave.innerHTML = $('#divSave').html(); //Use the HTML of the button
+        divInfo.innerHTML = $('#divInfo').html(); //Use the HTML of the button
+        divCancel.innerHTML = $('#divCancel').html(); //Use the HTML of the button
+        //$('#customMapControl').hide(); //Hide the original button
+        $('#divSave').hide(); //Hide the original button
+        $('#divInfo').hide(); //Hide the original button
+        $('#divCancel').hide(); //Hide the original button
+        map.controls[google.maps.ControlPosition.TOP_RIGHT].push(divCancel);
+        map.controls[google.maps.ControlPosition.TOP_RIGHT].push(divInfo);
+        map.controls[google.maps.ControlPosition.TOP_RIGHT].push(divSave);
+        //Add event to buttons
+        google.maps.event.addDomListener(divSave, 'click', function (event) {
+            SaveRoute();
+        });
+        google.maps.event.addDomListener(divInfo, 'click', function (event) { //Problem we want one event per button
+            $( "#popupRouteHeader" ).popup(); //Popup route header data
+        });
+        google.maps.event.addDomListener(divCancel, 'click', function (event) {
+            window.location = "/Route/List/"; //Return to my route
+        });
+       
 
         //Display the way points
         for (i = 0; i < routeWayPoint.length; i++) {
@@ -189,7 +250,7 @@ function CreateMarker(location, id, draggable, icon) {
     if ( routeWayPoint.length >= id )
         routeWayPoint[marker.id - 1].marker = marker; //Keep the marker in the array
     else {
-        routeWayPoint.push({RouteId: @Model.Id, LineId: routeWayPoint.length + 1, Latitude: location.lat(), Longitude: location.lng(), marker: marker});
+        routeWayPoint.push({ RouteId: $('#hfId').val(), LineId: routeWayPoint.length + 1, Latitude: location.lat(), Longitude: location.lng(), marker: marker });
         }
 
             //Add marker event to track drag end
@@ -273,14 +334,12 @@ function CreateMarker(location, id, draggable, icon) {
     function GetWayPoint() {
         var milliseconds = new Date().getMilliseconds();
         $.ajax({ 
-            'async': false, 'url': '/Route/WayPoint/' + @Model.Id + '?' + milliseconds, 'type': 'get', 'dataType': 'json',
+            'async': false, 'url': '/Route/WayPoint/' + $('#hfId').val() + '?' + milliseconds, 'type': 'get', 'dataType': 'json',
             'success': function (data) {
                 routeWayPoint = data.Data;
             }
         });
     }
-
-    //                
 
     function CheckResult() {
         for (i = 0; i < routeWayPoint.length; i++) {
@@ -299,12 +358,59 @@ function CreateMarker(location, id, draggable, icon) {
         return routeToPost;
     }
 
+    //Check if route name is set, if not open popup to set route name
+    //return false = not set
+    //return true = set
+    function RouteNameSet() {
+        if( $('#iptName').val().length == 0 ) {
+            $("#popupRouteHeader").popup( "open");
+            return false;
+        }
+        else return true;
+    }
+
+    function SaveRoute() {
+        if ( RouteNameSet() ) {
+            //Post route name - because we can leave popup without saving
+            //To avoid useless double save we could identify that save was done
+            var routeId = $('#hfId').val();
+            UpdateRoute(routeId);
+            for ( i=0; i<routeWayPoint.length; i++) {
+                delete routeWayPoint[i].marker;
+            }
+            var routeToPost = JSON.stringify(routeWayPoint); //JSON.stringify(RouteToPost());
+            $.ajax({ 
+                url: '/Route/CreateUpdate/', 'type': 'post',
+                data: routeToPost,
+                contentType: 'application/json; charset=utf-8',
+                success: function (routeId, textStatus, jqXHR) {
+                    window.location = "/Route/List/";
+                },
+                error: function (jqXHR, data) {
+                    alert("Error saving data");
+                    //window.location = data;
+                }
+            });
+        }
+    }
+
+    //Need to get new id for new route here - now this is not the case
     function UpdateRoute(routeId) {
-        var j = $('#iptName').val();
+        $( "#popupRouteHeader" ).popup( "close" ); //Close popup
+        var j = $('#iptName').val(); //Get data from popup form
         var i = $('#selIsSeek').val();
-        $.ajax({ 
-            url: '/Route/UpdateRoute/', type: 'post',
-            data: { id: routeId, isOffer: $('#selIsSeek').val(), name: $('#iptName').val()}
+        $.ajax({ //Save route data
+            url: '/Route/Update/', type: 'post',
+            data: { Id: routeId, IsOffer: $('#selIsSeek').val(), Name: $('#iptName').val()},
+            async: false,
+            success: function (routeId, textStatus, jqXHR) {
+                $('#hfId').val(routeId); //Save new route id
+                if ( @Model.Id == 0 ) { //New route update routeId routeWayPoint
+                    for ( i=0; i<routeWayPoint.length; i++) {
+                        routeWayPoint[i].RouteId = routeId;
+                    }
+                }
+            }
         });
     }
 
@@ -315,6 +421,8 @@ function CreateMarker(location, id, draggable, icon) {
 
         //Useless if we move to UI dialog
         $("#btnSave").click(function() {
+            SaveRoute();
+            alert("Here");
             for ( i=0; i<routeWayPoint.length; i++) {
                 delete routeWayPoint[i].marker;
             }
@@ -340,9 +448,13 @@ function CreateMarker(location, id, draggable, icon) {
             });
         });
 
-        $("#btnCancel").click(function() {
-            window.location = "/Route/List"; //Mobile?userId=" + @Model.UserId;
-        });
+
+        @*        $("#btnCancel").click(function() {
+            OpenPopup();
+            $("#popupRouteHeader").popup();
+            //window.location = "/Route/List"; //Mobile?userId=" + @Model.UserId;
+        });*@
+
     });
 
 </script>

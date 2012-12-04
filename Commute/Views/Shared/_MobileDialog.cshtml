@@ -1,0 +1,37 @@
+﻿@using Commute.Properties
+<!DOCTYPE html> 
+<html> 
+<head> 
+	<title>@ViewBag.title</title> 
+
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+    <meta name="description" content="@ViewBag.Metadesc" />
+    <link rel="shortcut icon" type="image/png" href="/Content/Images/Blue car 32px.png">
+    <link rel="apple-touch-icon" href="/Content/Images/Blue car 64px.png"/> @*Shortcut for web app link (iPhone & android)*@
+
+@*    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+    <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>*@
+    <link rel="stylesheet" href="/Content/UImobile/jquery.mobile-1.2.0.min.css" />
+    <link rel="stylesheet" href="/Content/Commute mobile.css" />
+    <script src="/Scripts/jquery-1.8.2.min.js"></script>
+    <script src="/Scripts/jquery.mobile-1.2.0.min.js"></script>
+</head> 
+<body> 
+
+<div data-role="page">
+
+
+	<div data-role="content">
+        @RenderBody()
+	</div><!-- /content -->
+
+</div><!-- /page -->
+
+@RenderSection("scripts", required: false)
+
+</body>
+</html>

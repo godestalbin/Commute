@@ -7,8 +7,23 @@ using System.Web.Mvc;
 
 namespace Commute.Models
 {
-    public class RouteView : Entity
+    public class RouteHeader : Entity
     {
+        public int UserId { get; set; }
+        public bool IsOffer { get; set; } //false=offering route, true=seeking for this route
+        public string Name { get; set; }
+
+        public RouteHeader(Route route)
+        {
+            Id = route.Id;
+            UserId = route.UserId;
+            IsOffer = route.IsOffer;
+            Name = route.Name;
+        }
+    }
+
+    public class RouteView : Entity
+        {
         public int UserId { get; set; }
         public bool IsOffer { get; set; } //false=offering route, true=seeking for this route
         public string Name { get; set; }

@@ -54,8 +54,8 @@ input.email {
     color: red;
 }
 .ui-btn-inner { /*display as much as possible text on the route button*/
-    padding-left: 2px;
-    padding-right: 2px;
+    /*padding-left: 2px; Affects all buttons
+    padding-right: 2px;*/
 }
 .seek {
     background: #40b723; /*green*/
@@ -63,6 +63,7 @@ input.email {
     font-weight: 100;
     text-shadow: none;
     padding-left: 0px;
+    width: 250px;
 }
 .offer {
     background: #f12b2b; /*red*/
@@ -70,6 +71,7 @@ input.email {
     font-weight: 100;
     text-shadow: none;
     padding-left: 0px;
+    width: 250px;
 }
 .like-button {
     padding: 9px;

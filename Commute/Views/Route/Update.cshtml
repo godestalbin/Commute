@@ -1,0 +1,51 @@
+﻿@model Commute.Models.RouteHeader
+
+@{
+    ViewBag.Title = "Update";
+    Layout = "~/Views/Shared/_MobileDialog.cshtml";
+}
+
+<h2>Update</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>RouteHeader</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.UserId)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.UserId)
+            @Html.ValidationMessageFor(model => model.UserId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.IsOffer)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.IsOffer)
+            @Html.ValidationMessageFor(model => model.IsOffer)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Name)
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
+
+        @Html.HiddenFor(model => model.Id)
+
+        <p>
+            <input type="submit" value="Save" onclick="$('.ui-dialog').dialog('close');" />
+        </p>
+    </fieldset>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

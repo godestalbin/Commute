@@ -7,24 +7,20 @@
     ViewBag.Metadesc = Resources.Metadesc_route_list;
 }
 
-<div class="ui-grid-a"> @*3-columns*@
-    <div class="ui-block-a"></div>
-    <div class="ui-block-b">
+
+    <div>
         <a href="/Route/CreateUpdate/" id="btnRouteAdd" data-role="button" data-mini="true" data-ajax="false" data-theme="b" data-inline="true" >@Resources.Route_new</a>
     </div>
 @foreach (var item in Model) {
-        <div class="ui-block-a">
+        <div>
             @if (item.IsOffer) {
-            <a href="/Route/CreateUpdate/@item.Id" data-ajax="false" data-role="button" class = "offer">@item.Id - @item.Name</a> }
+            <a href="/Route/CreateUpdate/@item.Id" data-ajax="false" data-role="button" data-inline="true" class = "offer">@item.Id - @item.Name</a> }
                                                                                                                                                     else {
-                            <a href="/Route/CreateUpdate/@item.Id" data-ajax="false" data-role="button" class = "seek">@item.Id - @item.Name</a> }
+            <a href="/Route/CreateUpdate/@item.Id" data-ajax="false" data-role="button" data-inline="true" class = "seek">@item.Id - @item.Name</a> }
  @*@if (item.IsOffer) { @:(style = "background-color: #40b723;"); } else { @:("style = "background-color: #f12b2b;"); }*@
-        </div>
-        <div class="ui-block-b">
             @*<div data-role="controlgroup"  data-type="horizontal">*@
             <a href="/Route/Search/@item.Id" data-ajax="false" data-role="button" data-icon="search" data-theme="b" data-inline="true">&nbsp;</a>
             @*</div>*@
         </div>
 
 }
-    </div><!-- /grid-a -->
