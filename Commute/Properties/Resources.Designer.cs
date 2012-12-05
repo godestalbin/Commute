@@ -412,6 +412,15 @@ namespace Commute.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to A mail will be sent to the other user with your mail.&lt;div&gt;Do you agree ?&lt;/div&gt;.
+        /// </summary>
+        public static string Msg_confirm_mail_sending {
+            get {
+                return ResourceManager.GetString("Msg confirm mail sending", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This record does not exists.
         /// </summary>
         public static string No_record {
@@ -426,6 +435,15 @@ namespace Commute.Properties {
         public static string Offer {
             get {
                 return ResourceManager.GetString("Offer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to OK.
+        /// </summary>
+        public static string Ok {
+            get {
+                return ResourceManager.GetString("Ok", resourceCulture);
             }
         }
         
@@ -781,6 +799,15 @@ namespace Commute.Properties {
         public static string Welcome_view_route {
             get {
                 return ResourceManager.GetString("Welcome view route", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please confirm.
+        /// </summary>
+        public static string Wtitle_confirmation {
+            get {
+                return ResourceManager.GetString("Wtitle confirmation", resourceCulture);
             }
         }
     }

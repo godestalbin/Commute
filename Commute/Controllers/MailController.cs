@@ -12,6 +12,8 @@ namespace Commute.Controllers
     public class MailController : BaseController
     {
         //Display mail sent as view - for testing purpose only
+
+        //Welcome - test mail sent
         public ActionResult Welcome(int userId)
         {
             //Send mail as test
@@ -19,6 +21,16 @@ namespace Commute.Controllers
             //mail.Welcome().Send();
             User user = db.User.Find(userId);
             return View(user); //Display /Views/Welcome the view used to generate mail
+        }
+
+        //Contact - test mail sent
+        public ActionResult Contact(int fromRouteId, int toRouteId)
+        {
+            //Send mail as test
+            Mail mail = new Mail();
+            mail.Contact(fromRouteId, toRouteId).Send();
+            RouteCompare routeCompare = new RouteCompare(fromRouteId, toRouteId);
+            return View(routeCompare); //Display /Views/Welcome the view used to generate mail
         }
 
         //Send manually a mail
@@ -51,6 +63,7 @@ namespace Commute.Controllers
     public class Mail : MailerBase
     {
         private Context db = new Context();
+
         //Generate welcome mail
         public virtual MvcMailMessage Welcome(int userId)
         {
@@ -63,6 +76,23 @@ namespace Commute.Controllers
                 x.ViewName = "Welcome"; //Views/Mail/Welcome
                 x.To.Add(user.EmailAddress);
             });
+        }
+
+        //Generate contact mail
+        public virtual MvcMailMessage Contact(int fromRouteId, int toRouteId)
+        {
+            RouteCompare routeCompare = new RouteCompare(fromRouteId, toRouteId);
+            ViewData.Model = routeCompare; //Set the strongly typed object for the view
+            return Populate(x =>
+            {
+                x.Subject = "Commute contact request";
+                x.ViewName = "Contact"; //Views/Mail/Contact
+                x.ReplyToList.Add(routeCompare.UserMail1); //from user
+                x.To.Add(routeCompare.UserMail2); //to user
+            });
+
+            //Example on hwo to use differente smtp client
+            //http://stackoverflow.com/questions/9130277/how-set-up-different-stmpclient-instances-in-web-config
         }
 
     }

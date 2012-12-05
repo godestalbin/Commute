@@ -1,0 +1,12 @@
+﻿@model Commute.Models.RouteCompare
+
+@{
+    ViewBag.Title = "Contact";
+    Layout = "~/Views/Shared/_Mail.cshtml";
+}
+
+<h2>We have matching routes</h2>
+<p>Hello @Model.User2,</p>
+<p>My name is @Model.User1</p>
+<p>I have found that our commute routes are quite similar, can we get in touch to see if we can commute togther ?</p>
+<p>Please reply to my E-mail address (@Model.UserMail1).</p>

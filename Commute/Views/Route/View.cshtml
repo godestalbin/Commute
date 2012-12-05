@@ -12,35 +12,31 @@
 <input id="hfId" type="hidden" value="@Model.Id"/>
 <input id="hfUserId" type="hidden" value="@Model.UserId"/>
 
-@*@using (Html.BeginForm()) {
-    @Html.ValidationSummary(true)
-<div style="position:absolute; left: 2px; top: 52px; right: 0px;">
-    <div data-role="fieldcontain" style="display:inline; position:relative; margin-top: 15px; padding-top: 10px;">
-	<select id="selIsSeek" data-role="slider" data-mini="true" style="position:absolute; top: 100px; margin-top: 150px;" >
-		@if (@Model.IsOffer)
-  {
-        <option value="false">@Resources.Seek</option>
-		<option value="true"  selected = "true" >@Resources.Offer</option>
-        }
-        else {
-        <option value="false" selected = "false" >@Resources.Seek</option>
-		<option value="true">@Resources.Offer</option>
-        }
-	</select>
+@*---------------------------------*@
+@*Popup to confirm mail sending    *@
+@*---------------------------------*@
+<div id="popupConfirmation" data-role="popup" data-rel="dialog" data-overlay-theme="a" class="ui-corner-all" style="width: 300px;">
+    <div data-role="header" class="ui-bar ui-bar-b">
+		<h1 style="margin-left: 5px; margin-right: 5px;">@Resources.Wtitle_confirmation</h1>
+	</div>
+    <div data-role="content" class="ui-corner-bottom ui-content">
+        @Html.Raw(@Resources.Msg_confirm_mail_sending)
+        <button value="@Resources.Ok" onclick="SendMail();"  data-inline="true" data-ajax="false"></button>
+        <button value="@Resources.Cancel" onclick="$( '#popupConfirmation' ).popup( 'close' );" data-inline="true" data-ajax="false"></button>
+    </div>
 </div>
-    @Html.TextBoxFor(model => model.Name, new { id="iptName", style = "width:30%;display:inline;"})
-    @Html.ValidationMessageFor(model => model.Name)
-<button id="btnSave" type="submit" data-mini="true" data-theme="b" data-inline="true" >@Resources.Save</button> <button id="btnCancel" type="button" data-mini="true" data-theme="b" data-inline="true" style="float:right;display:inline-block;">@Resources.Cancel</button>
+
+@*Map*@
+<div id="divMap" style="width:100%;position: absolute; top: 54px; left: 0px; bottom: 0px;"></div> @*style="width:700px;height:500px;">*@
+
+@*Contact button - send mail to contact with other user*@
+<div id="divContact">
+    <a id="btnContact" type="button" href="#popupConfirmation" data-rel="popup" data-position-to="window" data-inline="true" data-theme="b" data-icon="check" data-iconpos="notext" ></a>
 </div>
-}*@
-
-<div id="divMap" style="width:100%;position: absolute; top: 54px; left: 0px; bottom: 0px;" /> @*style="width:700px;height:500px;">*@
-
-
-    <div id="debug0"></div>
-    <div id="debug1"></div>
-    <div id="debug2"></div>
-
+@*Cancel button*@
+<div id="divCancel">
+    <button id="btnCancel" type="button" data-inline="true" data-ajax="false" data-theme="b" data-icon="delete" data-iconpos="notext" ></button>
+</div>
 
 <script>
     //Global variables
@@ -70,6 +66,7 @@
             mapTypeId: google.maps.MapTypeId.ROADMAP,
             panControl: false,
             streetViewControl: false,
+            mapTypeControl: false,
             zoomControlOptions: zoomControl
         };
         //Display the map in the div
@@ -79,10 +76,21 @@
         //Force map to expand to div
         setTimeout(function () { google.maps.event.trigger(map, 'resize'); map.setCenter(mapCenter); }, 100);
 
-        //Display start and end point
-        //var p = new google.maps.LatLng(routeWayPoint[0].Latitude, routeWayPoint[0].Longitude)
-        //alert(routeWayPoint[0].Latitude + "/" + routeWayPoint[0].Longitude)
-        
+        //Add control to the map - cancel button
+        var divContact = document.createElement('divContact'); //Create a new control
+        var divCancel = document.createElement('divCancel'); //Create a new control
+        divContact.innerHTML = $('#divContact').html(); //Use the HTML of the button
+        divCancel.innerHTML = $('#divCancel').html(); //Use the HTML of the button
+        $('#divContact').hide(); //Hide the original button
+        $('#divCancel').hide(); //Hide the original button
+        map.controls[google.maps.ControlPosition.TOP_RIGHT].push(divCancel);
+        map.controls[google.maps.ControlPosition.TOP_RIGHT].push(divContact);
+        google.maps.event.addDomListener(divContact, 'click', function (event) {
+            //$( "#popupConfirmation2" ).popup(); //Popup to confirm mail sending
+        });
+        google.maps.event.addDomListener(divCancel, 'click', function (event) {
+            window.location = "/Route/List/"; //Return to my route
+        });
 
         DisplayRouteMarker(routeWayPoint);
 
@@ -250,35 +258,13 @@ function CreateMarker(location, id, draggable, icon) {
     }
 
     //                
-
-    function CheckResult() {
-        for (i = 0; i < routeWayPoint.length; i++) {
-            alert(routeWayPoint[i].LineId + ", " + routeWayPoint[i].Latitude);
-        }
+    function SendMail() {
+        var querystring = location.search.split( '=' );
+        var myRouteId = querystring[1].split( '&' )[0];
+        window.location = '/Mail/Contact?fromRouteId=' + myRouteId + '&toRouteId=' + @Model.Id;
     }
-
-    function RouteToPost() {
-        var routeToPost = [];
-        for ( i=0; i<routeWayPoint.length; i++) {
-            routeToPost.push({ LineId: routeWayPoint[i].LineId, Latitude: routeWayPoint[i].Latitude, Longitude: routeWayPoint[i].Longitude })
-        }
-        for ( i=0; i<routeWayPoint.length; i++) {
-            routeWayPoint[i].marker = null;
-        }
-        return routeToPost;
-    }
-
-@*    function UpdateRoute(data) {
-        var j = $('#iptName').val();
-        var i = $('#selIsSeek').val();
-        $.ajax({ 
-            url: '/Route/UpdateRoute/', type: 'post',
-            data: { id: @Model.Id, isOffer: $('#selIsSeek').val(), name: $('#iptName').val()}
-        });
-    }*@
 
     jQuery(document).ready(function () {
-        //alert("Ready");
         GetWayPoint(@Model.Id, routeWayPoint); //Synchronous AJAX to get waypoint necessary to draw map for other user route
         var querystring = location.search.split( '=' );
         var myRouteId = querystring[1].split( '&' )[0];

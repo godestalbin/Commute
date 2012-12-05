@@ -10,6 +10,9 @@ left: 0px;
 border: 0px none transparent;
 padding: 0px;
 }
+div.inline {
+    display: inline;
+}
 div.ui-body-c {
     background: #ececfe;
     font-family: Tahoma;

@@ -55,4 +55,31 @@ namespace Commute.Models
         [DisplayFormat(DataFormatString = "{0:0.00}")]
         public double? EndDistance { get; set; } //Distance between end point
     }
+
+    //Used to display 2 routes in Google maps
+    public class RouteCompare : Entity
+    {
+        private Context db = new Context();
+        public int RouteId1;
+        public int RouteId2;
+        public string User1;
+        public string User2;
+        public string UserMail1;
+        public string UserMail2;
+
+        public RouteCompare(int routeId1, int routeId2)
+        {
+        RouteId1 = routeId1;
+        RouteId2 = routeId2;
+        Route route1 = db.Route.Find(routeId1);
+        Route route2 = db.Route.Find(routeId2);
+        User user1 = db.User.Find(route1.UserId);
+        User user2 = db.User.Find(route2.UserId);
+        User1 = user1.Account;
+        User2 = user2.Account;
+        UserMail1 = user1.EmailAddress;
+        UserMail2 = user2.EmailAddress;
+        }
+    }
+
 }

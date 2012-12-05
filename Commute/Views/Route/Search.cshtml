@@ -5,16 +5,29 @@
     Layout = "~/Views/Shared/_Mobile.cshtml";
 }
 
-<div class="ui-grid-a"> @*2-columns*@
 @foreach (var item in Model) {
-        <div class="ui-block-a">
-            @if (item.IsOffer) {
-            <a href="/Route/View/@item.Id?routeId=@ViewBag.routeId&isOffer=@ViewBag.isOffer" data-ajax="false" data-role="button" data-theme="b" class = "offer">@item.Id - @item.Name</a> }
-                                                                                                                                                    else {
-            <a href="/Route/View/@item.Id?routeId=@ViewBag.routeId&isOffer=@ViewBag.isOffer" data-ajax="false" data-role="button" data-theme="b" class = "seek">@item.Id - @item.Name</a> }
-        </div>
-    <div class="ui-block-b like-button">
+    <div id="divRouteButton" class="inline">
+        @if (item.IsOffer) {
+        <a href="/Route/View/@item.Id?routeId=@ViewBag.routeId&isOffer=@ViewBag.isOffer" data-ajax="false" data-role="button" data-theme="b" data-inline="true" class = "offer">@item.Id - @item.Name</a> }
+      else {
+        <a href="/Route/View/@item.Id?routeId=@ViewBag.routeId&isOffer=@ViewBag.isOffer" data-ajax="false" data-role="button" data-theme="b" data-inline="true" class = "seek">@item.Id - @item.Name</a> }
+    </div>
+    <div class="like-button inline">
         @Html.DisplayFor(modelItem => item.StartDistance) / @Html.DisplayFor(modelItem => item.EndDistance)
     </div>
 }
-    </div><!-- /grid-a -->
+
+<script>
+    jQuery(document).ready(function () {
+        //Remove the padding to save space on screen
+        $(".ui-content").css("padding", "2px");
+        //Almost no padding for route button (more space for route name)
+        $('#divRouteButton .ui-btn-inner').css("padding-left", "2px");
+        $('#divRouteButton .ui-btn-inner').css("padding-right", "2px");
+        //Reduce font size for route button, allow text to wrap
+        $('#divRouteButton .ui-btn-text').css("font-size", "0.6em");
+        $('#divRouteButton .ui-btn-text').css("white-space", "normal");
+        //Add padding to the search button
+        $('#divSearchButton .ui-btn').css("padding", "5px");
+    });
+</script>

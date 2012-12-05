@@ -73,7 +73,7 @@
 
         @Html.HiddenFor(model => model.Id)
 
-        <button value="Save" onclick="UpdateRoute($('#hfId').val());" data-inline="true" data-ajax="false"></button>
+        <button value="@Resources.Save" onclick="UpdateRoute($('#hfId').val());" data-inline="true" data-ajax="false"></button>
         </fieldset>
         </div>
 </div>
@@ -81,10 +81,8 @@
 @*---------------------------------*@
 
 <div id="divMap" style="width:100%;position: absolute; top: 54px; left: 0px; bottom: 0px;" ></div>
-<div id="customMapControl">
-</div>
 <div id="divSave">
-    <button id="btnSave2" type="submit" data-inline="true" data-ajax="false" data-theme="b" data-icon="check" data-iconpos="notext" ></button>
+    <button id="btnSave2" type="button" data-inline="true" data-ajax="false" data-theme="b" data-icon="check" data-iconpos="notext" ></button>
 </div>
 <div id="divInfo">
     <a id="btnInfo" type="button" href="#popupRouteHeader" data-rel="popup" data-position-to="window" data-inline="true" data-theme="b" data-icon="info" data-iconpos="notext" ></a>
@@ -152,7 +150,7 @@
         //Force map to expand to div
         setTimeout(function () { google.maps.event.trigger(map, 'resize'); map.setCenter(mapCenter); }, 100);
 
-        //Add control to the map - save button
+        //Add control to the map - save, data, cancel button
         //var mapButton = document.createElement('customMapControl'); //Create a new control
         var divSave = document.createElement('divSave'); //Create a new control
         var divInfo = document.createElement('divInfo'); //Create a new control
