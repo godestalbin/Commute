@@ -77,9 +77,12 @@ input.email {
     width: 250px;
 }
 .like-button {
-    padding: 9px;
-    margin-top: 7px;
+    position: absolute;
+    display: inline-block;
+    padding: 6px;
+    margin-top: 8px;
     margin-bottom: 6px;
     border-radius: 13px;
     border: solid 1px;
+    font-size: 0.7em;
 }

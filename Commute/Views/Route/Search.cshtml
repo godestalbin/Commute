@@ -6,15 +6,18 @@
 }
 
 @foreach (var item in Model) {
+<div>
     <div id="divRouteButton" class="inline">
         @if (item.IsOffer) {
         <a href="/Route/View/@item.Id?routeId=@ViewBag.routeId&isOffer=@ViewBag.isOffer" data-ajax="false" data-role="button" data-theme="b" data-inline="true" class = "offer">@item.Id - @item.Name</a> }
       else {
         <a href="/Route/View/@item.Id?routeId=@ViewBag.routeId&isOffer=@ViewBag.isOffer" data-ajax="false" data-role="button" data-theme="b" data-inline="true" class = "seek">@item.Id - @item.Name</a> }
     </div>
-    <div class="like-button inline">
-        @Html.DisplayFor(modelItem => item.StartDistance) / @Html.DisplayFor(modelItem => item.EndDistance)
+    <div class="like-button">
+        <div>@Html.DisplayFor(modelItem => item.StartDistance)</div>
+        <div>@Html.DisplayFor(modelItem => item.EndDistance)</div>
     </div>
+</div>    
 }
 
 <script>
