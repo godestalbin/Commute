@@ -70,24 +70,6 @@ namespace Commute.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Added to this car.
-        /// </summary>
-        public static string Added_to_car {
-            get {
-                return ResourceManager.GetString("Added to car", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Already in this car.
-        /// </summary>
-        public static string Already_in_car {
-            get {
-                return ResourceManager.GetString("Already in car", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to https://s3-eu-west-1.amazonaws.com/commute/Pictures/.
         /// </summary>
         public static string Amazon_picture_HTTP {
@@ -115,24 +97,6 @@ namespace Commute.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Connection agenda.
-        /// </summary>
-        public static string Connection_agenda {
-            get {
-                return ResourceManager.GetString("Connection agenda", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Connection not found.
-        /// </summary>
-        public static string Connection_not_found {
-            get {
-                return ResourceManager.GetString("Connection not found", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Create account.
         /// </summary>
         public static string Create_account {
@@ -147,51 +111,6 @@ namespace Commute.Properties {
         public static string Dir_image_upload {
             get {
                 return ResourceManager.GetString("Dir image upload", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to You are now a driver, drive safe.
-        /// </summary>
-        public static string Driver_created {
-            get {
-                return ResourceManager.GetString("Driver created", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Driver removed from connection.
-        /// </summary>
-        public static string Driver_deleted {
-            get {
-                return ResourceManager.GetString("Driver deleted", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to You are already the driver for this connection.
-        /// </summary>
-        public static string Driver_for_this_connection {
-            get {
-                return ResourceManager.GetString("Driver for this connection", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to You are the driver for this connection, not a passenger.
-        /// </summary>
-        public static string Driver_not_passenger {
-            get {
-                return ResourceManager.GetString("Driver not passenger", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to You are now the driver.
-        /// </summary>
-        public static string Driver_updated {
-            get {
-                return ResourceManager.GetString("Driver updated", resourceCulture);
             }
         }
         
@@ -286,20 +205,20 @@ namespace Commute.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Hello.
+        /// </summary>
+        public static string Hello {
+            get {
+                return ResourceManager.GetString("Hello", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Help.
         /// </summary>
         public static string Help {
             get {
                 return ResourceManager.GetString("Help", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The 2 locations are the same.
-        /// </summary>
-        public static string Location_are_the_same {
-            get {
-                return ResourceManager.GetString("Location are the same", resourceCulture);
             }
         }
         
@@ -358,6 +277,51 @@ namespace Commute.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The map below shows our two routes:.
+        /// </summary>
+        public static string Mail_contact_map {
+            get {
+                return ResourceManager.GetString("Mail contact map", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This map is just a picture. Click the map to view it as a Goole map in Commute (This does not work currently).
+        /// </summary>
+        public static string Mail_contact_map_title {
+            get {
+                return ResourceManager.GetString("Mail contact map title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to I have found that our commute routes are quite similar, can we get in touch to see if we can commute togther ?.
+        /// </summary>
+        public static string Mail_contact_msg {
+            get {
+                return ResourceManager.GetString("Mail contact msg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Just reply to this mail to contact me (you will see my mail address)..
+        /// </summary>
+        public static string Mail_contact_reply {
+            get {
+                return ResourceManager.GetString("Mail contact reply", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to We have matching routes.
+        /// </summary>
+        public static string Mail_contact_title {
+            get {
+                return ResourceManager.GetString("Mail contact title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This field is mandatory.
         /// </summary>
         public static string Mandatory {
@@ -381,6 +345,15 @@ namespace Commute.Properties {
         public static string Menu {
             get {
                 return ResourceManager.GetString("Menu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Share your car to commute between home and work with others or find a car in your area to commute to work. Going to work can be fun: Save fuel, save money and make new friends to share a happy time when commuting. This is the green way to go to work. Help saving the planet. Reduce gaz emission.
+        /// </summary>
+        public static string Metadesc_default {
+            get {
+                return ResourceManager.GetString("Metadesc default", resourceCulture);
             }
         }
         
@@ -417,6 +390,15 @@ namespace Commute.Properties {
         public static string Msg_confirm_mail_sending {
             get {
                 return ResourceManager.GetString("Msg confirm mail sending", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to My name is.
+        /// </summary>
+        public static string My_name {
+            get {
+                return ResourceManager.GetString("My name", resourceCulture);
             }
         }
         
@@ -480,15 +462,6 @@ namespace Commute.Properties {
         public static string Register {
             get {
                 return ResourceManager.GetString("Register", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Removed from this car.
-        /// </summary>
-        public static string Removed_from_car {
-            get {
-                return ResourceManager.GetString("Removed from car", resourceCulture);
             }
         }
         
@@ -588,24 +561,6 @@ namespace Commute.Properties {
         public static string Seek {
             get {
                 return ResourceManager.GetString("Seek", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Select the maximum number of passengers you can drive (driver not included).
-        /// </summary>
-        public static string Specify_seat_in_car {
-            get {
-                return ResourceManager.GetString("Specify seat in car", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Updated time.
-        /// </summary>
-        public static string Time_updated {
-            get {
-                return ResourceManager.GetString("Time updated", resourceCulture);
             }
         }
         
@@ -776,7 +731,7 @@ namespace Commute.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to And then your are ready to define your commute route.
+        ///   Looks up a localized string similar to And then your are ready to define your first commute route.
         /// </summary>
         public static string Welcome_route {
             get {

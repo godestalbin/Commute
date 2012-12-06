@@ -1,0 +1,202 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Account" xml:space="preserve"> <value>Compte utilisateur</value> </data>
+  <data name="Amazon picture HTTP" xml:space="preserve"> <value>https://s3-eu-west-1.amazonaws.com/commute/Pictures/</value> </data>
+  <data name="Application name" xml:space="preserve"> <value>Commute</value> </data>
+  <data name="Cancel" xml:space="preserve"> <value>Annuler</value> </data>
+  <data name="Create account" xml:space="preserve"> <value>Créer un compte</value> </data>
+  <data name="Dir image upload" xml:space="preserve"> <value>/Content/Images/Upload/</value> </data>
+  <data name="Email" xml:space="preserve"> <value>Adresse mail</value> </data>
+  <data name="Error database access" xml:space="preserve"> <value>Erreur d'accès a la base</value> </data>
+  <data name="Error duplicate account" xml:space="preserve"> <value>The compte existe déjà</value> </data>
+  <data name="Error invalid mail" xml:space="preserve"> <value>Ce n'est pas une addresse mail valide</value> </data>
+  <data name="Error string too long" xml:space="preserve"> <value>Chaine de caractères trop longue</value> </data>
+  <data name="Error unknown account" xml:space="preserve"> <value>Ce compte n'exista pas</value> </data>
+  <data name="Error wrong password" xml:space="preserve"> <value>Erreur de mot de passe</value> </data>
+  <data name="Forum" xml:space="preserve"> <value>Forum</value> </data>
+  <data name="From" xml:space="preserve"> <value>De</value> </data>
+  <data name="Guest" xml:space="preserve"> <value>Invité</value> </data>
+  <data name="Hello" xml:space="preserve"> <value>Bonjour</value> </data>
+  <data name="Help" xml:space="preserve"> <value>Aide</value> </data>
+  <data name="Location create" xml:space="preserve"> <value>xxx</value> </data>
+  <data name="Location name" xml:space="preserve"> <value>xxx</value> </data>
+  <data name="Location update" xml:space="preserve"> <value>xxx</value> </data>
+  <data name="Location type" xml:space="preserve"> <value>xxx</value> </data>
+  <data name="Login" xml:space="preserve"> <value>Se connecter</value> </data>
+  <data name="Logout" xml:space="preserve"> <value>Se deconnecter</value> </data>
+  <data name="Mandatory" xml:space="preserve"> <value>The champ est obligatoire</value> </data>
+  <data name="Map" xml:space="preserve"> <value>Carte</value> </data>
+  <data name="Menu" xml:space="preserve"> <value>Menu</value> </data>
+  <data name="My name" xml:space="preserve"> <value>Je m'appelle</value> </data>
+  <data name="Msg confirm mail sending" xml:space="preserve"> <value>Un mail de contact va être envoyé a l'autre utilisateur.&lt;div&gt;Etes vous d'accord ?&lt;/div&gt;</value> </data>
+  <data name="No record" xml:space="preserve"> <value>Cet enregistrement n'existe pas</value> </data>
+  <data name="Offer" xml:space="preserve"> <value>Offre</value> </data>
+  <data name="Ok" xml:space="preserve"> <value>OK</value> </data>
+  <data name="Password" xml:space="preserve"> <value>Mot de passe</value> </data>
+  <data name="Password confirm" xml:space="preserve"> <value>Confirmation mot de passe</value> </data>
+  <data name="Picture" xml:space="preserve"> <value>Photo</value> </data>
+  <data name="Register" xml:space="preserve"> <value>Enregistrement</value> </data>
+  <data name="Route" xml:space="preserve"> <value>Trajet</value> </data>
+  <data name="Route create" xml:space="preserve"> <value>Créer une route</value> </data>
+  <data name="Route create update" xml:space="preserve"> <value>Mise a jour route</value> </data>
+  <data name="Route id" xml:space="preserve"> <value>Trajet no</value> </data>
+  <data name="Route new" xml:space="preserve"> <value>Nouveau trajet</value> </data>
+  <data name="Route list" xml:space="preserve"> <value>Mes trajets</value> </data>
+  <data name="Route search" xml:space="preserve"> <value>Recherche de trajets</value> </data>
+  <data name="Route view" xml:space="preserve"> <value>Voir les trajets</value> </data>
+  <data name="Save" xml:space="preserve"> <value>Enregistrer</value> </data>
+  <data name="Search" xml:space="preserve"> <value>Recherche de trajets</value> </data>
+  <data name="Seek" xml:space="preserve"> <value>Recherche</value> </data>
+  <data name="To" xml:space="preserve"> <value>A</value> </data>
+  <data name="Update" xml:space="preserve"> <value>Mise a jour</value> </data>
+  <data name="Update account" xml:space="preserve"> <value>Mise a jour compte</value> </data>
+  <data name="Update data" xml:space="preserve"> <value>Mise a jour données</value> </data>
+  <data name="Update picture" xml:space="preserve"> <value>Mise a jour photo</value> </data>
+  <data name="User" xml:space="preserve"> <value>Utilisateur</value> </data>
+  <data name="User account" xml:space="preserve"> <value>Compte utilisateur</value> </data>
+  <data name="User login" xml:space="preserve"> <value>Se connecter</value> </data>
+  <data name="User logout" xml:space="preserve"> <value>Se deconnecter</value> </data>
+  <data name="User registration" xml:space="preserve"> <value>Créer un compte</value> </data>
+  <data name="User set location" xml:space="preserve"> <value>Position utilisateur</value> </data>
+  <data name="Welcome" xml:space="preserve"> <value>Bienvenue</value> </data>
+  <data name="Mail contact title" xml:space="preserve"> <value>Nous avons des trajets similaires</value> </data>
+  <data name="Mail contact msg" xml:space="preserve"> <value>J'ai identifié que nos routes sont similaires, est-ce que nous pouvons faire les trajets ensembles ?</value> </data>
+  <data name="Mail contact reply" xml:space="preserve"> <value>Pour me contacter il suffit de répondre à ce mail (vous verrez alors mon adresse mail).</value> </data>
+  <data name="Mail contact map" xml:space="preserve"> <value>La carte ci-dessous montre nos trajets:</value> </data>
+  <data name="Mail contact map title" xml:space="preserve"> <value>Cette carte est juste une image. Cliquez sur la carte pour visualiser cette carte Google avec Commute</value> </data>
+  <data name="Welcome account" xml:space="preserve"> <value>Complétez vos données personnelles (téléchargez votre photo)You can now update data (upload picture) on your account</value> </data>
+  <data name="Welcome help" xml:space="preserve"> <value>Lisez le guide de démarrage rapide pour avoir condensé des fonctionnalités de Commute.</value> </data>
+  <data name="Welcome join" xml:space="preserve"> <value>Créez d'abord un compte pour rejoindre la communauté de Commute</value> </data>
+  <data name="Welcome mail" xml:space="preserve"> <value>Nous venons de vous envoyer un mail de bienvenue avec quelques instructions supplémentaires à l'adresse:</value> </data>
+  <data name="Welcome message" xml:space="preserve"> <value>Bienvene à Commute, le moyen sympa et responsable de faire les trajets réguliers.
+&lt;div&gt;- Définissez les trajets que vous cherchez/offrez&lt;/div&gt;
+&lt;div&gt;- Trouvez d'autres membres avec des trajets similaires&lt;/div&gt;
+&lt;div&gt;- Contactez les pour effectuer les trajets ensembles&lt;/div&gt;
+&lt;div&gt;- Enregistrez les dépenses a partager&lt;/div&gt;</value> </data>
+  <data name="Welcome registred" xml:space="preserve"> <value> tola communauté Commute.</value> </data>
+  <data name="Welcome route" xml:space="preserve"> <value>Et maintanant vous êtes prêt à définir votre premier trajet</value> </data>
+  <data name="Welcome set location" xml:space="preserve"> <value>Définissez votre position par défaut</value> </data>
+  <data name="Welcome view route" xml:space="preserve"> <value>Vous pouvez également visualiser les routes disponibles pour votre trajet sans vous enregister.</value> </data>
+  <data name="Wtitle confirmation" xml:space="preserve"> <value>Veuillez confirmer</value> </data>
+  <data name="Metadesc default" xml:space="preserve"> <value>Share your car to commute between home and work with others or find a car in your area to commute to work. Going to work can be fun: Save fuel, save money and make new friends to share a happy time when commuting. This is the green way to go to work. Help saving the planet. Reduce gaz emission</value> </data>
+  <data name="Metadesc home welcome" xml:space="preserve"> <value>Welcome to Commute the green and friendly way to commute. Find routes in your area. Get started with Commute. Joint Commute community.</value> </data>
+  <data name="Metadesc user setlocation" xml:space="preserve"> <value>Set default map location when creating new route. Commute is a friendly and green way to commute between home and work.</value> </data>
+  <data name="Metadesc route list" xml:space="preserve"> <value>This is the list of route you have defined. You can update the route. You can search route which are close match to your route. You can create new route.</value> </data>
+</root>
