@@ -27,7 +27,7 @@
 </div>
 
 @*Map*@
-<div id="divMap" style="width:100%;position: absolute; top: 54px; left: 0px; bottom: 0px;"></div> @*style="width:700px;height:500px;">*@
+<div id="divMap" style="width:100%;position: absolute; top: 54px; left: 0px; bottom: 0px;"></div>
 
 @*Contact button - send mail to contact with other user*@
 <div id="divContact">
@@ -261,7 +261,15 @@ function CreateMarker(location, id, draggable, icon) {
     function SendMail() {
         var querystring = location.search.split( '=' );
         var myRouteId = querystring[1].split( '&' )[0];
-        window.location = '/Mail/Contact?fromRouteId=' + myRouteId + '&toRouteId=' + @Model.Id;
+        //Display the mail sent for testing purpose
+        //window.location = '/Mail/Contact?fromRouteId=' + myRouteId + '&toRouteId=' + @Model.Id;
+        $.ajax({ 
+            'async': false, 'url': '/Mail/MailContact?fromRouteId=' + myRouteId + '&toRouteId=' + @Model.Id,
+            'success': function (data) {
+                alert('Mail sent');
+            }
+        });
+        $( '#popupConfirmation' ).popup( 'close' );
     }
 
     jQuery(document).ready(function () {

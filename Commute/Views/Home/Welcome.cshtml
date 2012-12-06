@@ -12,7 +12,7 @@
 <a href="/User/Register" data-role="button" data-ajax="false" data-inline="true" data-mini="true">@Resources.Register</a>
 <br>
 @Html.Raw( @Resources.Welcome_help.Replace("Commute", "<b>Commute</b>") )
-<a href="/Help/Help" data-role="button" data-ajax="false" data-inline="true" data-mini="true">@Resources.Help</a>
+<a href="/Help/Help?helpFile=Commute documentation.html" data-role="button" data-ajax="false" data-inline="true" data-mini="true">@Resources.Help</a>
 <br>
 @Html.Raw( @Resources.Welcome_view_route.Replace("\r\n", "<br>") )
 <a href="/Route/SearchAll" data-role="button" data-ajax="false" data-inline="true" data-mini="true">@Resources.Route_search</a>

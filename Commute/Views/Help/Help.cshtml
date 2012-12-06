@@ -3,7 +3,8 @@
     Layout = "~/Views/Shared/_Mobile.cshtml";
 }
 
-<iframe id="ifrDocumentation" src="https://s3-eu-west-1.amazonaws.com/commute/Documentation/Commute+documentation.html" scrolling="no"></iframe>
+<iframe id="ifrDocumentation" src="@ViewBag.HelpFile" scrolling="no"></iframe>
+@*https://s3-eu-west-1.amazonaws.com/commute/Documentation/Commute+documentation.html*@
 
 <script>
     function resize() {

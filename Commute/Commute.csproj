@@ -280,6 +280,7 @@
     <Content Include="Views\Route\SearchAllOld.cshtml" />
     <Content Include="Views\User\WelcomeRegistered.cshtml" />
     <Content Include="Views\Mail\Contact.cshtml" />
+    <Content Include="Views\Help\Debug.cshtml" />
     <None Include="Views\Route\Map.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

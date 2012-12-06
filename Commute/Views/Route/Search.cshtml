@@ -5,6 +5,9 @@
     Layout = "~/Views/Shared/_Mobile.cshtml";
 }
 
+<label for="slider-1">Max distance (km):</label>
+<input type="range" id="sldMaxDistance" value="5" min="0" max="20" step=".5" />
+
 @foreach (var item in Model) {
 <div>
     <div id="divRouteButton" class="inline">
@@ -21,6 +24,12 @@
 }
 
 <script>
+    function RefreshPage() {
+        //var url = window.location.split('?');
+        //window.location = url + '?MaxDist=' + $('#sldMaxDistance')
+        alert("Not implemented yet");
+    }
+
     jQuery(document).ready(function () {
         //Remove the padding to save space on screen
         $(".ui-content").css("padding", "2px");
@@ -28,9 +37,12 @@
         $('#divRouteButton .ui-btn-inner').css("padding-left", "2px");
         $('#divRouteButton .ui-btn-inner').css("padding-right", "2px");
         //Reduce font size for route button, allow text to wrap
-        $('#divRouteButton .ui-btn-text').css("font-size", "0.6em");
+        $('#divRouteButton .ui-btn-text').css("font-size", "0.7em");
         $('#divRouteButton .ui-btn-text').css("white-space", "normal");
         //Add padding to the search button
         $('#divSearchButton .ui-btn').css("padding", "5px");
+
+        //Add event on slider to refresh the page
+        $("#sldMaxDistance").on('slidestop', function (event) { RefreshPage(); });
     });
 </script>

@@ -105,15 +105,8 @@ namespace Commute.Controllers
         }
 
         //Route list with jQuery mobile
-        [AllowAnonymous]
         public ActionResult List() //int userId = 1) //Route list for mobile
         {
-            //int userId = 0;
-            //if( Session["userId"] != null )
-            //{
-            //    userId = (int)Session["userId"];
-            //}
-
             if ( userId == 0 ) return RedirectToAction("Welcome", "Home");
             var routeList = from r in db.Route
                             where r.UserId == userId

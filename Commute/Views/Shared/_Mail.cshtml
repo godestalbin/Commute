@@ -1,4 +1,6 @@
-﻿<html>
+﻿@using Commute.Properties
+
+<html>
 <head>
     <title>Commute mail</title>
     <style>
@@ -10,11 +12,19 @@
             font-family: Arial;
             font-weight: 600;
         }
+        img.map {
+            border: solid 1px black;
+        }
+        img.noborder {
+            border: none;
+        }
     </style>
 </head>
 <body>
     <div>
         @RenderBody()
     </div>
+    <p></p>
+    <a href="http://commute.apphb.com" title="Click to go to Commute web site"><img src="@(ViewBag.HttpPicture)Commute mail signature.jpg" class="noborder"/></a>
 </body>
 </html>

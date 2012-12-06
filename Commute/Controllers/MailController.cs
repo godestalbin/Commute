@@ -27,10 +27,21 @@ namespace Commute.Controllers
         public ActionResult Contact(int fromRouteId, int toRouteId)
         {
             //Send mail as test
+            //Mail mail = new Mail();
+            //mail.Contact(fromRouteId, toRouteId).Send();
+            RouteCompare routeCompare = new RouteCompare(fromRouteId, toRouteId);
+            //Path where picture are stored
+            ViewBag.HttpPicture = System.Configuration.ConfigurationManager.AppSettings["Http.Picture"];
+            return View(routeCompare); //Display /Views/Welcome the view used to generate mail
+        }
+
+        //Send contact mail
+        public string MailContact(int fromRouteId, int toRouteId)
+        {
+            RouteCompare routeCompare = new RouteCompare(fromRouteId, toRouteId);
             Mail mail = new Mail();
             mail.Contact(fromRouteId, toRouteId).Send();
-            RouteCompare routeCompare = new RouteCompare(fromRouteId, toRouteId);
-            return View(routeCompare); //Display /Views/Welcome the view used to generate mail
+            return "OK";
         }
 
         //Send manually a mail
@@ -83,6 +94,8 @@ namespace Commute.Controllers
         {
             RouteCompare routeCompare = new RouteCompare(fromRouteId, toRouteId);
             ViewData.Model = routeCompare; //Set the strongly typed object for the view
+            //Path where picture are stored
+            ViewBag.HttpPicture = System.Configuration.ConfigurationManager.AppSettings["Http.Picture"];
             return Populate(x =>
             {
                 x.Subject = "Commute contact request";
