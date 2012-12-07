@@ -1,16 +1,22 @@
-﻿@model Commute.Models.RouteView
+﻿@model Commute.Models.RouteCompare
+@*RouteView*@
 @using Commute.Properties
 
 @{
     Layout = "~/Views/Shared/_Mobile.cshtml";
 }
 
+@*
+Route1 = my route
+Route2 = other user's route
+*@
 
-@{ ViewBag.Title = @Resources.Route_view + " no " + @Model.Id; }
 
+@{ ViewBag.Title = @Resources.Route_view + " no " + @Model.RouteId2; }
 
-<input id="hfId" type="hidden" value="@Model.Id"/>
-<input id="hfUserId" type="hidden" value="@Model.UserId"/>
+@*These div are only used to get color from CSS*@
+<div id="seekColor" class="seek"></div>
+<div id="offerColor" class="offer"></div>
 
 @*---------------------------------*@
 @*Popup to confirm mail sending    *@
@@ -44,7 +50,7 @@
     var myRouteWayPoint = [];
     var map //Google map
     var directionsDisplay //display route
-    var myRouteDirectionsDisplay //display route
+    //var myRouteDirectionsDisplay //display route
 
     //----------
     //Functions
@@ -92,11 +98,11 @@
             window.location = "/Route/List/"; //Return to my route
         });
 
-        DisplayRouteMarker(routeWayPoint);
+        DisplayRouteMarker(routeWayPoint, @Model.IsOffer2.ToString().ToLower());
 
         //Create object to display route
         var polyOptions = {
-            strokeColor: ("@Model.IsOffer" == "True") ? "#f12b2b" : "#40b723", //Offer=red, Seek=green
+            strokeColor: ("@Model.IsOffer2" == "True") ? $('#offerColor').css("background-color") : $('#seekColor').css("background-color"), //Offer=red, Seek=green
             strokeWeight: 5
         }
         var rendererOptions = {
@@ -106,48 +112,40 @@
         };
         directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions);
         directionsDisplay.setMap(map);
-        myRouteDirectionsDisplay = new google.maps.DirectionsRenderer(rendererOptions);
-        myRouteDirectionsDisplay.setMap(map);
+        //myRouteDirectionsDisplay = new google.maps.DirectionsRenderer(rendererOptions);
+        //myRouteDirectionsDisplay.setMap(map);
         
         //Display the route
         UpdateRoute(routeWayPoint, directionsDisplay);
 
-        //Add map click event
-@*        google.maps.event.addListener(map, 'click', function (event) {
-            if (routeWayPoint.length == 0) { //Start point not created yet
-                CreateMarker(event.latLng, 1, true, 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=A|6BC54D|000000'); //Create new marker with location clicked
-                //routeWayPoint.push({ RouteId: @Model.Id, LineId: 1, Latitude: event.latLng.lat(), Longitude: event.latLng.lng() });
-                //$('#hfStartLatitude').val(event.latLng.lat()); //Register start point
-                //$('#hfStartLongitude').val(event.latLng.lng());
-            }
-            else if (routeWayPoint.length == 1) { //End point not created yet
-                CreateMarker(event.latLng, 2, true, 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=B|6BC54D|000000'); //Create new marker with location clicked
-                //routeWayPoint.push({ RouteId: @Model.Id, LineId: 2, Latitude: event.latLng.lat(), Longitude: event.latLng.lng() });
-                //$('#hfEndLatitude').val(event.latLng.lat()); //Register end point
-                //$('#hfEndLongitude').val(event.latLng.lng());
-                UpdateRoute();
-            }
-            else {
-                CreateMarker(event.latLng, routeWayPoint.length + 1); //Create new marker with location clicked
-                //routeWayPoint.push({ RouteId: @Model.Id, LineId: 2, Latitude: event.latLng.lat(), Longitude: event.latLng.lng() });
-                UpdateRoute();
-            }
-        });*@
-
     } //InitializeRouteMap
 
-function DisplayRouteMarker(routeWayPoint) {
+    //Convert RGB color to hexa
+    function rgb2hex(rgb) {
+        rgb = rgb.match(/^rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d+))?\)$/);
+        function hex(x) {
+            return ("0" + parseInt(x).toString(16)).slice(-2);
+        }
+        return hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3]);
+    }
+
+function DisplayRouteMarker(routeWayPoint, isOffer) {
+    //Marker color according to CSS class
+    var markerColor;
+    if ( isOffer ) markerColor = rgb2hex($('#offerColor').css("background-color"));
+    else markerColor = rgb2hex($('#seekColor').css("background-color"));
+    
     //Display the way points
     for (i = 0; i < routeWayPoint.length; i++) {
         switch (i) {
             case 0: //Start point
-                CreateMarker(new google.maps.LatLng(routeWayPoint[0].Latitude, routeWayPoint[0].Longitude), 1, true, 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=A|6BC54D|000000');
+                CreateMarker(new google.maps.LatLng(routeWayPoint[0].Latitude, routeWayPoint[0].Longitude), 1, true, 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=A|' + markerColor +'|000000'); //6BC54D
                 break;
             case 1: //End point
-                CreateMarker(new google.maps.LatLng(routeWayPoint[1].Latitude, routeWayPoint[1].Longitude), 2, true, 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=B|6BC54D|000000');
+                CreateMarker(new google.maps.LatLng(routeWayPoint[1].Latitude, routeWayPoint[1].Longitude), 2, true, 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=B|' + markerColor +'|000000');
                 break;
             default: //Way points
-                CreateMarker(new google.maps.LatLng(routeWayPoint[i].Latitude, routeWayPoint[i].Longitude), i + 1, true);
+                CreateMarker(new google.maps.LatLng(routeWayPoint[i].Latitude, routeWayPoint[i].Longitude), i + 1, true, 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=' + (i - 1) + '|' + markerColor +'|000000');
         }
     }
 }
@@ -164,33 +162,8 @@ function CreateMarker(location, id, draggable, icon) {
         icon: icon,
         map: map
     });
-    if ( routeWayPoint.length >= id )
-        routeWayPoint[marker.id - 1].marker = marker; //Keep the marker in the array
-    else {
-        routeWayPoint.push({RouteId: @Model.Id, LineId: routeWayPoint.length + 1, Latitude: location.lat(), Longitude: location.lng(), marker: marker});
-        }
 
-        //    //Add marker event to track drag end
-        //google.maps.event.addListener(marker, 'dragend', function (event) {
-        //    //Update lat/lng in routeWayPoint array
-        //    routeWayPoint[marker.id - 1].Latitude = event.latLng.lat();
-        //    routeWayPoint[marker.id - 1].Longitude = event.latLng.lng();
-        //    UpdateRoute();
-        //});
-        //    //Add marker event to track double click: remove marker
-        //google.maps.event.addListener(marker, 'dblclick', function (event) {
-        //    if ( marker.id > 2 ) { //start/end point cannot be deleted
-        //        marker.setMap(null); //Delete marker
-        //        //Update next markers id
-        //        for (var i= marker.id; i < routeWayPoint.length; i++) {
-        //            routeWayPoint[i].marker.id -= 1;
-        //            routeWayPoint[i].LineId -= 1;
-        //        }
-        //        routeWayPoint.splice(marker.id - 1, 1) //Remove marker from way point
-        //        UpdateRoute();
-        //    }
-        //});
-        //TMP
+        //TMP - Would be useful to display some info to identify each route
         //Add maker event to display marker coordinates
         google.maps.event.addListener(marker, "mouseover", function(event) {
             //alert(marker.position.lat().toString() + "/" + marker.position.lng().toString());
@@ -259,12 +232,10 @@ function CreateMarker(location, id, draggable, icon) {
 
     //                
     function SendMail() {
-        var querystring = location.search.split( '=' );
-        var myRouteId = querystring[1].split( '&' )[0];
         //Display the mail sent for testing purpose
-        //window.location = '/Mail/Contact?fromRouteId=' + myRouteId + '&toRouteId=' + @Model.Id;
+        window.location = '/Mail/Contact?fromRouteId=' + @Model.RouteId1 + '&toRouteId=' + @Model.RouteId2;
         $.ajax({ 
-            'async': false, 'url': '/Mail/MailContact?fromRouteId=' + myRouteId + '&toRouteId=' + @Model.Id,
+            'async': false, 'url': '/Mail/MailContact?fromRouteId=' + @Model.RouteId1 + '&toRouteId=' + @Model.RouteId2,
             'success': function (data) {
                 alert('Mail sent');
             }
@@ -273,16 +244,18 @@ function CreateMarker(location, id, draggable, icon) {
     }
 
     jQuery(document).ready(function () {
-        GetWayPoint(@Model.Id, routeWayPoint); //Synchronous AJAX to get waypoint necessary to draw map for other user route
+        //alert( "route1=" + @Model.RouteId1 + ", "  + "route2=" + @Model.RouteId2 );
+        //alert( "route1=" + @Model.IsOffer1 + ", "  + "route2=" + @Model.IsOffer2 );
+        GetWayPoint(@Model.RouteId2, routeWayPoint); //Synchronous AJAX to get waypoint necessary to draw map for other user route
         var querystring = location.search.split( '=' );
-        var myRouteId = querystring[1].split( '&' )[0];
-        var myIsOffer = querystring[2];
-        GetWayPoint(myRouteId, myRouteWayPoint); //Synchronous AJAX to get waypoint necessary to draw map for my route
+        var myIsOffer = @Model.RouteId1; //querystring[2];
+        GetWayPoint(@Model.RouteId1, myRouteWayPoint); //Synchronous AJAX to get waypoint necessary to draw map for my route
         InitializeRouteMap();
 
-        DisplayRouteMarker(myRouteWayPoint);
+        DisplayRouteMarker(myRouteWayPoint, @Model.IsOffer1.ToString().ToLower());
         var polyOptions = {
-            strokeColor: (myIsOffer == "True") ? "#f12b2b" : "#40b723", //Offer=red, Seek=green
+            //To not hardcode color we get is from useless div assigned the class
+            strokeColor: ("@Model.IsOffer1" == "True") ? $('#offerColor').css("background-color") : $('#seekColor').css("background-color"), //Offer=red, Seek=green
             strokeWeight: 5
         }
         rendererOptions = {
@@ -290,40 +263,43 @@ function CreateMarker(location, id, draggable, icon) {
             polylineOptions: polyOptions,
             suppressMarkers: true //Do not display default A, B, C makers
         };
-        directionsDisplay.setOptions(rendererOptions);
+        myRouteDirectionsDisplay = new google.maps.DirectionsRenderer(rendererOptions);
+        myRouteDirectionsDisplay.setMap(map);
+
+        myRouteDirectionsDisplay.setOptions(rendererOptions);
         UpdateRoute(myRouteWayPoint, myRouteDirectionsDisplay);
 
         //Useless if we move to UI dialog
-        $("#btnSave").click(function() {
-            for ( i=0; i<routeWayPoint.length; i++) {
-                delete routeWayPoint[i].marker;
-            }
-            var routeToPost = JSON.stringify(routeWayPoint); //JSON.stringify(RouteToPost());
-            $.ajax({ 
-                url: '/Route/CreateUpdate/', 'type': 'post',
-                data: routeToPost,
-                //dataType: 'json',
-                contentType: 'application/json; charset=utf-8',
-                success: function (data, textStatus, jqXHR) {
-                    var nextView = data;
-                    UpdateRoute(data);
-                    window.location = data;
-                },
-                error: function (jqXHR, data) {
-                    window.location = data;
-                }
-                //statusCode: {
-                //    302: function(jqXHR) {
-                //        test(jqXHR);
-                //        // your code
-                //    }
-                //}
-            });
-        });
+        //$("#btnSave").click(function() {
+        //    for ( i=0; i<routeWayPoint.length; i++) {
+        //        delete routeWayPoint[i].marker;
+        //    }
+        //    var routeToPost = JSON.stringify(routeWayPoint); //JSON.stringify(RouteToPost());
+        //    $.ajax({ 
+        //        url: '/Route/CreateUpdate/', 'type': 'post',
+        //        data: routeToPost,
+        //        //dataType: 'json',
+        //        contentType: 'application/json; charset=utf-8',
+        //        success: function (data, textStatus, jqXHR) {
+        //            var nextView = data;
+        //            UpdateRoute(data);
+        //            window.location = data;
+        //        },
+        //        error: function (jqXHR, data) {
+        //            window.location = data;
+        //        }
+        //        //statusCode: {
+        //        //    302: function(jqXHR) {
+        //        //        test(jqXHR);
+        //        //        // your code
+        //        //    }
+        //        //}
+        //    });
+        //});
 
-        $("#btnCancel").click(function() {
-            window.location = "/Route/List"; //Mobile?userId=" + @Model.UserId;
-        });
+        //$("#btnCancel").click(function() {
+        //    window.location = "/Route/List"; //Mobile?userId=" + Model.UserId;
+        //});
     });
 
 </script>

@@ -17,19 +17,18 @@ namespace Commute.Controllers
 
         //Display route
         [AllowAnonymous]
-        public ActionResult View(int id = 0)
+        public ActionResult View(int id, int routeId)
+        //id=route2 (the matching route (from other users) found), routeId=route1 (the user's 
         {
-            Route route = db.Route.Find(id); //Retrieve route
-            if (route == null) route = new Route(); //Create a new route if none retrieved
-            IEnumerable<RouteWayPoint> routeWayPoint = from rwp in db.RouteWayPoint
-                                                       where rwp.RouteId == id
-                                                       select rwp;
-            JsonResult a = Json(routeWayPoint);
-
-            //if (routeWayPoint == null) routeWayPoint = new RouteWayPoint(); //Create new way points if none retrieved
-
-            RouteView routeView = new RouteView(route); //, routeWayPoint, Json(routeWayPoint));
-            return View(routeView);
+            //Route route2 = db.Route.Find(id); //Retrieve route
+            //Route route1 = db.Route.Find(routeId); //Retrieve route
+            //if (route == null) route = new Route(); //Create a new route if none retrieved
+            //IEnumerable<RouteWayPoint> routeWayPoint = from rwp in db.RouteWayPoint
+            //                                           where rwp.RouteId == id
+            //                                           select rwp;
+            //RouteView routeView = new RouteView(route); //, routeWayPoint, Json(routeWayPoint));
+            RouteCompare routeCompare = new RouteCompare(routeId, id);
+            return View(routeCompare);
         }
 
         //SearchAll - Search (for on the fly route) for non logged used
@@ -74,17 +73,10 @@ namespace Commute.Controllers
         }
 
         //Search - Search for logged used: Search route near another route
-        public ActionResult Search(int id) //First attempt to use jQuery mobile not completed
-            //id=route ID, search route closed to the provided route ID
+        public ActionResult Search(int id)
+        //id=route ID, search route close to the provided route ID
         {
             Route searchRoute = db.Route.Find(id);
-            //decimal maxDist = 0.5M;
-            //var routeList = from r in db.Route
-            //                where Math.Abs((decimal)(r.StartLatitude - searchRoute.StartLatitude)) + Math.Abs((decimal)(r.StartLongitude - searchRoute.StartLongitude)) + Math.Abs((decimal)(r.EndLatitude - searchRoute.EndLatitude)) + Math.Abs((decimal)(r.EndLongitude - searchRoute.EndLongitude)) < maxDist
-            //                && r.UserId != searchRoute.UserId
-            //                select r; // new { r.Id, dist = Math.Abs((decimal)(r.StartLatitude - searchRoute.StartLatitude)) + Math.Abs((decimal)(r.StartLongitude - searchRoute.StartLongitude)) + Math.Abs((decimal)(r.EndLatitude - searchRoute.EndLatitude)) + Math.Abs((decimal)(r.EndLongitude - searchRoute.EndLongitude)) };
-            //ViewBag.Title = Resources.Route_search;
-            //return View(routeList.ToList());
 
             decimal maxDist = 5; //Distance approximation allowed in kilometers
             double startLat = Math.PI * (double)searchRoute.StartLatitude / 180.0;
@@ -225,8 +217,10 @@ namespace Commute.Controllers
 
             //Add the start point and end point as first and second way point
             var routeWayPoint = (from r in linqRoute
+                                 where r.StartLatitude != null && r.StartLongitude != null
                                 select new RouteWayPointView { RouteId = r.Id, LineId = 1, Latitude = r.StartLatitude, Longitude = r.StartLongitude }).Union(from r in linqRoute
-                                select new RouteWayPointView { RouteId = r.Id, LineId = 2, Latitude = r.EndLatitude, Longitude = r.EndLongitude });
+                          where r.EndLatitude != null && r.EndLongitude != null
+                       select new RouteWayPointView { RouteId = r.Id, LineId = 2, Latitude = r.EndLatitude, Longitude = r.EndLongitude });
             //Add the remaining (real) way points
             routeWayPoint = routeWayPoint.Union(from rwp in db.RouteWayPoint
                                                 where rwp.RouteId == id

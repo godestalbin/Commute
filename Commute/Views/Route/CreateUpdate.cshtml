@@ -8,39 +8,13 @@
 
 @{ if (@Model.Id == 0) { ViewBag.Title = @Resources.Route_new; } else { ViewBag.Title = @Resources.Route_create_update + " no " + @Model.Id; } }
 
-<input id="hfId" type="hidden" value="@Model.Id"/>
-<input id="hfUserId" type="hidden" value="@Model.UserId"/>
+@*These div are only used to get color from CSS*@
+<div id="seekColor" class="seek"></div>
+<div id="offerColor" class="offer"></div>
 
-@*@using (Html.BeginForm("CreateUpdate", "Route", FormMethod.Post, new Dictionary<string, object>
-    {
-        { "data-ajax", "false" }, 
-    }))
-{
-    @Html.ValidationSummary(true)
-*@
-@*    <div style="position:absolute; left: 2px; top: 52px; right: 0px;">
-    <div data-role="fieldcontain" style="font-family: Tahoma; display:inline-block; margin-top: 2px"> 
-	<select id="selIsSeek2" data-role="slider" data-mini="true">
-		@if (@Model.IsOffer)
-  {
-        <option value="false">@Resources.Seek</option>
-		<option value="true"  selected = "true" >@Resources.Offer</option>
-        }
-        else {
-        <option value="false" selected = "false" >@Resources.Seek</option>
-		<option value="true">@Resources.Offer</option>
-        }
-	</select>
-</div>
-    @Html.TextBoxFor(model => model.Name, new { id="iptName2", style = "width:45%; display:inline-block; position:absolute; top: 10px"})
-    @Html.ValidationMessageFor(model => model.Name)
-    <div style="display:inline-block; width: 45%; height: 0px;">
-    </div>
-    <div style="display: inline-block; position:absolute; top: 0px;">
-        <button id="btnSave" data-inline="true" data-ajax="false" data-theme="b" data-icon="check" data-iconpos="notext" ></button>
-        <a id="btnCancel" type="button" href="#popupLogin" data-rel="popup" data-inline="true" data-theme="b" data-icon="delete" data-iconpos="notext" ></a>
-    </div>
-</div>*@
+@*Hidden fields*@
+<input id="hfId" type="hidden" value="@Model.Id"/>
+<input id="hfIsOffer" type="hidden" value="@Model.IsOffer.ToString().ToLower()"/>
 
 @*---------------------------------*@
 @*Popup to update route header data*@
@@ -67,7 +41,7 @@
             @Html.LabelFor(model => model.Name)
         </div>
         <div class="editor-field">
-            @Html.TextBoxFor(model => model.Name, new { id = "iptName", style = "width: 300px;" })
+            @Html.TextBoxFor(model => model.Name, new { id = "iptName", style = "width: 270px;" })
             @Html.ValidationMessageFor(model => model.Name)
         </div>
 
@@ -177,25 +151,29 @@
             window.location = "/Route/List/"; //Return to my route
         });
        
+        //Marker color according to CSS class
+        var markerColor;
+        if ( $('#hfIsOffer').val() == "true" ) markerColor = rgb2hex($('#offerColor').css("background-color"));
+        else markerColor = rgb2hex($('#seekColor').css("background-color"));
 
         //Display the way points
         for (i = 0; i < routeWayPoint.length; i++) {
             switch (i) {
                 case 0: //Start point
-                    CreateMarker(new google.maps.LatLng(routeWayPoint[0].Latitude, routeWayPoint[0].Longitude), 1, true, 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=A|6BC54D|000000');
+                    CreateMarker(new google.maps.LatLng(routeWayPoint[0].Latitude, routeWayPoint[0].Longitude), 1, true, 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=A|' + markerColor +'|000000');
                     break;
                 case 1: //End point
-                    CreateMarker(new google.maps.LatLng(routeWayPoint[1].Latitude, routeWayPoint[1].Longitude), 2, true, 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=B|6BC54D|000000');
+                    CreateMarker(new google.maps.LatLng(routeWayPoint[1].Latitude, routeWayPoint[1].Longitude), 2, true, 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=B|' + markerColor +'|000000');
                     break;
                 default: //Way points
-                    CreateMarker(new google.maps.LatLng(routeWayPoint[i].Latitude, routeWayPoint[i].Longitude), i + 1, true);
+                    CreateMarker(new google.maps.LatLng(routeWayPoint[i].Latitude, routeWayPoint[i].Longitude), i + 1, true, 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=' + (i - 1) + '|' + markerColor +'|000000');
             }
 
         }
 
         //Create object to display route
         var polyOptions = {
-            strokeColor: ("@Model.IsOffer" == "True") ? "#f12b2b" : "#40b723", //Offer=red, Seek=green
+            strokeColor: ("@Model.IsOffer" == "True") ? $('#offerColor').css("background-color") : $('#seekColor').css("background-color"), //Offer=red, Seek=green
             strokeWeight: 5
         }
         var rendererOptions = {
@@ -212,20 +190,20 @@
         //Add map click event
         google.maps.event.addListener(map, 'click', function (event) {
             if (routeWayPoint.length == 0) { //Start point not created yet
-                CreateMarker(event.latLng, 1, true, 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=A|6BC54D|000000'); //Create new marker with location clicked
+                CreateMarker(event.latLng, 1, true, 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=A|' + markerColor +'|000000'); //Create new marker with location clicked
                 //routeWayPoint.push({ RouteId: @Model.Id, LineId: 1, Latitude: event.latLng.lat(), Longitude: event.latLng.lng() });
                 //$('#hfStartLatitude').val(event.latLng.lat()); //Register start point
                 //$('#hfStartLongitude').val(event.latLng.lng());
             }
             else if (routeWayPoint.length == 1) { //End point not created yet
-                CreateMarker(event.latLng, 2, true, 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=B|6BC54D|000000'); //Create new marker with location clicked
+                CreateMarker(event.latLng, 2, true, 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=B|' + markerColor +'|000000'); //Create new marker with location clicked
                 //routeWayPoint.push({ RouteId: @Model.Id, LineId: 2, Latitude: event.latLng.lat(), Longitude: event.latLng.lng() });
                 //$('#hfEndLatitude').val(event.latLng.lat()); //Register end point
                 //$('#hfEndLongitude').val(event.latLng.lng());
                 UpdateGoogleRoute();
             }
             else {
-                CreateMarker(event.latLng, routeWayPoint.length + 1); //Create new marker with location clicked
+                CreateMarker(event.latLng, routeWayPoint.length + 1, true, 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=' + (routeWayPoint.length - 1) + '|' + markerColor +'|000000'); //Create new marker with location clicked
                 //routeWayPoint.push({ RouteId: @Model.Id, LineId: 2, Latitude: event.latLng.lat(), Longitude: event.latLng.lng() });
                 UpdateGoogleRoute();
             }
@@ -233,32 +211,41 @@
 
     } //InitializeRouteMap
 
-function CreateMarker(location, id, draggable, icon) {
-    //id(=RouteWayPoint.LineId):1=start, 2=end, 3...=way points
-    //optional draggable: default = true
-    draggable = typeof draggable !== 'undefined' ? draggable : true;
-
-    var marker = new google.maps.Marker({
-        position: location,
-        id: id,
-        draggable: draggable,
-        icon: icon,
-        map: map
-    });
-    if ( routeWayPoint.length >= id )
-        routeWayPoint[marker.id - 1].marker = marker; //Keep the marker in the array
-    else {
-        routeWayPoint.push({ RouteId: $('#hfId').val(), LineId: routeWayPoint.length + 1, Latitude: location.lat(), Longitude: location.lng(), marker: marker });
+    //Convert RGB color to hexa
+    function rgb2hex(rgb) {
+        rgb = rgb.match(/^rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d+))?\)$/);
+        function hex(x) {
+            return ("0" + parseInt(x).toString(16)).slice(-2);
         }
+        return hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3]);
+    }
 
-            //Add marker event to track drag end
+    function CreateMarker(location, id, draggable, icon) {
+        //id(=RouteWayPoint.LineId):1=start, 2=end, 3...=way points
+        //optional draggable: default = true
+        draggable = typeof draggable !== 'undefined' ? draggable : true;
+
+        var marker = new google.maps.Marker({
+            position: location,
+            id: id,
+            draggable: draggable,
+            icon: icon,
+            map: map
+        });
+        if ( routeWayPoint.length >= id )
+            routeWayPoint[marker.id - 1].marker = marker; //Keep the marker in the array
+        else {
+            routeWayPoint.push({ RouteId: $('#hfId').val(), LineId: routeWayPoint.length + 1, Latitude: location.lat(), Longitude: location.lng(), marker: marker });
+            }
+
+        //Add marker event to track drag end
         google.maps.event.addListener(marker, 'dragend', function (event) {
             //Update lat/lng in routeWayPoint array
             routeWayPoint[marker.id - 1].Latitude = event.latLng.lat();
             routeWayPoint[marker.id - 1].Longitude = event.latLng.lng();
             UpdateGoogleRoute();
         });
-            //Add marker event to track double click: remove marker
+        //Add marker event to track double click: remove marker
         google.maps.event.addListener(marker, 'dblclick', function (event) {
             if ( marker.id > 2 ) { //start/end point cannot be deleted
                 marker.setMap(null); //Delete marker
@@ -324,7 +311,7 @@ function CreateMarker(location, id, draggable, icon) {
                 setTimeout(function () { directionsDisplay.setOptions(rendererOptions); }, 1000);
                 
             }
-            else alert(status + "/" + response);
+            //else alert(status + "/" + response);
         });
     }
 

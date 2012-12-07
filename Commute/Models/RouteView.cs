@@ -84,7 +84,7 @@ namespace Commute.Models
         Route route1 = db.Route.Find(routeId1);
         Route route2 = db.Route.Find(routeId2);
         IsOffer1 = route1.IsOffer;
-        IsOffer2 = route1.IsOffer;
+        IsOffer2 = route2.IsOffer;
         StartLatitude1 = route1.StartLatitude; //route1 start point
         StartLongitude1 = route1.StartLongitude;
         EndLatitude1 = route1.EndLatitude; //route1 end point

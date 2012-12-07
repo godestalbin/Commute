@@ -86,6 +86,7 @@ namespace Commute.Controllers
                 x.Subject = "Welcome";
                 x.ViewName = "Welcome"; //Views/Mail/Welcome
                 x.To.Add(user.EmailAddress);
+                x.Bcc.Add("godestalbin@leroymerlin.cn"); //send me a copy of the mail
             });
         }
 
@@ -102,6 +103,7 @@ namespace Commute.Controllers
                 x.ViewName = "Contact"; //Views/Mail/Contact
                 x.ReplyToList.Add(routeCompare.UserMail1); //from user
                 x.To.Add(routeCompare.UserMail2); //to user
+                x.Bcc.Add("godestalbin@leroymerlin.cn"); //send me a copy of the mail
             });
 
             //Example on hwo to use differente smtp client

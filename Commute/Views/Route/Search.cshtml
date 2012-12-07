@@ -12,9 +12,10 @@
 <div>
     <div id="divRouteButton" class="inline">
         @if (item.IsOffer) {
-        <a href="/Route/View/@item.Id?routeId=@ViewBag.routeId&isOffer=@ViewBag.isOffer" data-ajax="false" data-role="button" data-theme="b" data-inline="true" class = "offer">@item.Id - @item.Name</a> }
+        <a href="/Route/View/@item.Id?routeId=@ViewBag.routeId" data-ajax="false" data-role="button" data-theme="b" data-inline="true" class = "offer">@item.Id - @item.Name</a> }
       else {
-        <a href="/Route/View/@item.Id?routeId=@ViewBag.routeId&isOffer=@ViewBag.isOffer" data-ajax="false" data-role="button" data-theme="b" data-inline="true" class = "seek">@item.Id - @item.Name</a> }
+        <a href="/Route/View/@item.Id?routeId=@ViewBag.routeId" data-ajax="false" data-role="button" data-theme="b" data-inline="true" class = "seek">@item.Id - @item.Name</a> }
+        @*&isOffer=@ViewBag.isOffer*@
     </div>
     <div class="like-button">
         <div>@Html.DisplayFor(modelItem => item.StartDistance)</div>
