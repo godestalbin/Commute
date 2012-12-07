@@ -73,15 +73,16 @@
 
 <script>
     //Global variables
-    var routeWayPoint //an array of WayPoint 0=start, 1=end, next are real way points
-    var map //Google map
-    var directionsDisplay //display route
+    var routeWayPoint; //an array of WayPoint 0=start, 1=end, next are real way points
+    var map; //Google map
+    var mapListener;
+    var directionsDisplay; //display route
 
     //----------
     //Functions
     //----------
 
-    function InitializeRouteMap() {
+    function InitializeMap() {
         //alert(routeWayPoint.length);
 
         //If no start point set center map on user's default location
@@ -144,13 +145,16 @@
         google.maps.event.addDomListener(divSave, 'click', function (event) {
             SaveRoute();
         });
-        google.maps.event.addDomListener(divInfo, 'click', function (event) { //Problem we want one event per button
+        google.maps.event.addDomListener(divInfo, 'click', function (event) {
             $( "#popupRouteHeader" ).popup(); //Popup route header data
         });
         google.maps.event.addDomListener(divCancel, 'click', function (event) {
             window.location = "/Route/List/"; //Return to my route
         });
+
+    } //InitializeMap
        
+    function InitializeRoute() {
         //Marker color according to CSS class
         var markerColor;
         if ( $('#hfIsOffer').val() == "true" ) markerColor = rgb2hex($('#offerColor').css("background-color"));
@@ -173,7 +177,7 @@
 
         //Create object to display route
         var polyOptions = {
-            strokeColor: ("@Model.IsOffer" == "True") ? $('#offerColor').css("background-color") : $('#seekColor').css("background-color"), //Offer=red, Seek=green
+            strokeColor: '#' + markerColor, //("@Model.IsOffer" == "True") ? $('#offerColor').css("background-color") : $('#seekColor').css("background-color"), //Offer=red, Seek=green
             strokeWeight: 5
         }
         var rendererOptions = {
@@ -188,7 +192,7 @@
         UpdateGoogleRoute();
 
         //Add map click event
-        google.maps.event.addListener(map, 'click', function (event) {
+        mapListener = google.maps.event.addListener(map, 'click', function (event) {
             if (routeWayPoint.length == 0) { //Start point not created yet
                 CreateMarker(event.latLng, 1, true, 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=A|' + markerColor +'|000000'); //Create new marker with location clicked
                 //routeWayPoint.push({ RouteId: @Model.Id, LineId: 1, Latitude: event.latLng.lat(), Longitude: event.latLng.lng() });
@@ -402,10 +406,12 @@
     jQuery(document).ready(function () {
         //alert("Ready");
         GetWayPoint(); //Synchronous AJAX to get waypoint necessary to draw map
-        InitializeRouteMap();
+        InitializeMap();
+        InitializeRoute();
 
         //Useless if we move to UI dialog
         $("#btnSave").click(function() {
+            alert("Not used ?");
             SaveRoute();
             alert("Here");
             for ( i=0; i<routeWayPoint.length; i++) {
@@ -439,6 +445,31 @@
             $("#popupRouteHeader").popup();
             //window.location = "/Route/List"; //Mobile?userId=" + @Model.UserId;
         });*@
+
+        $( "#selIsSeek" ).on( 'slidestop', function( event ) {
+            $('#hfIsOffer').val($('#selIsSeek').val());
+            //Delete all the markers
+            for ( i=0; i<routeWayPoint.length; i++) {
+                routeWayPoint[i].marker.setMap(null);
+            }
+            directionsDisplay.setMap(null);
+            google.maps.event.removeListener( mapListener );
+            InitializeRoute();
+
+            //var polyOptions = {
+            //    strokeColor: ($('#selIsSeek').val() == "true") ? $('#offerColor').css("background-color") : $('#seekColor').css("background-color"), //Offer=red, Seek=green
+            //    strokeWeight: 5
+            //}
+            //alert( polyOptions.strokeColor );
+            //var rendererOptions = {
+            //    //preserveViewport: true, //Do not resize map on start/end point
+            //    polylineOptions: polyOptions,
+            //    suppressMarkers: true //Do not display default A, B, C makers
+            //};
+            //directionsDisplay.setOptions(rendererOptions);
+            //UpdateGoogleRoute();
+            ////alert($('#selIsSeek').val());
+        });
 
     });
 

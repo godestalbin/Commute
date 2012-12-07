@@ -73,12 +73,12 @@ namespace Commute.Controllers
         }
 
         //Search - Search for logged used: Search route near another route
-        public ActionResult Search(int id)
+        public ActionResult Search(int id, decimal maxDist = 5)
         //id=route ID, search route close to the provided route ID
         {
             Route searchRoute = db.Route.Find(id);
 
-            decimal maxDist = 5; //Distance approximation allowed in kilometers
+            //decimal maxDist = 5; //Distance approximation allowed in kilometers
             double startLat = Math.PI * (double)searchRoute.StartLatitude / 180.0;
             double startLng = Math.PI * (double)searchRoute.StartLongitude / 180.0;
             double endLat = Math.PI * (double)searchRoute.EndLatitude / 180.0;

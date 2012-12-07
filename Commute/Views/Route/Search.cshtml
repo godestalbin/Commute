@@ -26,9 +26,9 @@
 
 <script>
     function RefreshPage() {
-        //var url = window.location.split('?');
-        //window.location = url + '?MaxDist=' + $('#sldMaxDistance')
-        alert("Not implemented yet");
+        var url = window.location.pathname.split('?');
+        window.location = url[0] + '?maxDist=' + $('#sldMaxDistance').val();
+        //alert("Not implemented yet");
     }
 
     jQuery(document).ready(function () {
@@ -45,5 +45,10 @@
 
         //Add event on slider to refresh the page
         $("#sldMaxDistance").on('slidestop', function (event) { RefreshPage(); });
+
+        //Set slider original value
+        var queryString = window.location.search.split('=');
+        if (parseInt(queryString[1], 10) > 0) $("#sldMaxDistance").val(queryString[1]);
+        $("#sldMaxDistance").slider('refresh');
     });
 </script>
