@@ -21,15 +21,41 @@
 <script>
     var map //Google map
     
+    function SetUserPosition(position)
+    {
+        map.setCenter( new google.maps.LatLng( position.coords.latitude, position.coords.longitude ) );
+        //alert( "map center set");
+    }
+
+    function error(error)
+    {
+        alert( "Error " + error.code + " - " + error.message);
+    }
+
     function InitializeMap() {
         //Set map center: current user location or equator /Greenwitch
         var mapCenter = new google.maps.LatLng(Globalize.parseFloat("@( Model.LocationLatitude.HasValue ? Model.LocationLatitude : 0)"), Globalize.parseFloat("@(Model.LocationLongitude.HasValue ? Model.LocationLongitude : 0 )"))
+@*        @if ( Model.LocationLatitude.HasValue )  {
+            @:mapCenter= new google.maps.LatLng(Globalize.parseFloat("@(Model.LocationLatitude)"), Globalize.parseFloat("@(Model.LocationLongitude)"));
+                }
+        else {
+            //Try to get user's location from browser
+            
+        }*@
+        
+        //Try to get user's location from browser - asynchonous response
+        if (navigator.geolocation && @( Model.LocationLatitude.HasValue ? Model.LocationLatitude : 0) == 0)
+        {
+            navigator.geolocation.getCurrentPosition(SetUserPosition);
+        }
+
 
         var zoomControl = {
             style: google.maps.ZoomControlStyle.SMALL
         }
         //Define map properties
         var mapProp = {
+            center: mapCenter,
             zoom: @( Model.LocationLatitude.HasValue ? 12 : 1),
             mapTypeId: google.maps.MapTypeId.ROADMAP,
             panControl: false,
@@ -39,8 +65,10 @@
         };
         //Display the map in the div
         map = new google.maps.Map(document.getElementById("divMap"), mapProp);
+        //alert("map created");
         //Force map to expand to div
-        setTimeout(function () { google.maps.event.trigger(map, 'resize'); map.setCenter(mapCenter); }, 100);
+        setTimeout(function () { google.maps.event.trigger(map, 'resize');  }, 100);
+        //map.setCenter(mapCenter);
 
         //Set original location
         if ( @Model.LocationLongitude.HasValue.ToString().ToLower() ) {
