@@ -24,6 +24,10 @@
     function SetUserPosition(position)
     {
         map.setCenter( new google.maps.LatLng( position.coords.latitude, position.coords.longitude ) );
+        var mapProp = {
+            zoom: 12
+        }
+        map.setOptions( mapProp );
         //alert( "map center set");
     }
 
@@ -56,7 +60,7 @@
         //Define map properties
         var mapProp = {
             center: mapCenter,
-            zoom: @( Model.LocationLatitude.HasValue ? 12 : 1),
+            zoom: @( Model.LocationLatitude.HasValue ? 12 : 2),
             mapTypeId: google.maps.MapTypeId.ROADMAP,
             panControl: false,
             streetViewControl: false,
