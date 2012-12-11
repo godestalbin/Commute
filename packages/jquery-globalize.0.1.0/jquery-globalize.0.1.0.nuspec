@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>jquery-globalize</id>
+    <version>0.1.0</version>
+    <title>jQuery Globalize</title>
+    <authors>https://github.com/jquery/globalize#readme</authors>
+    <owners>https://github.com/jquery/globalize#readme</owners>
+    <licenseUrl>https://github.com/jquery/globalize/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/jquery/globalize#readme</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>DOM-less simple JavaScript testing framework.</description>
+    <summary>A JavaScript library for globalization and localization. Enables complex culture-aware number and date parsing and formatting, including the raw culture information for hundreds of different languages and countries, as well as an extensible system for localization.</summary>
+    <tags>javascript jquery globalization localization</tags>
+  </metadata>
+</package>

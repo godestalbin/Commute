@@ -13,7 +13,7 @@
 <input id="locationLongitude" name="locationLongitude" type="hidden" value="@Model.LocationLongitude"/>
 </form>
 
-<div id="divMap" style="width:100%;position: absolute; top: 54px; left: 0px; bottom: 0px;"></div>
+<div id="divMap" style="width:100%;position: absolute; top: 48px; left: 0px; bottom: 0px;"></div>
 <div id="customMapControl">
 <button id="btnSave" type="submit" data-inline="true" data-ajax="false" data-theme="b" data-icon="check" data-iconpos="notext" ></button>
 </div>
@@ -22,16 +22,15 @@
     var map //Google map
     
     function InitializeMap() {
-
         //Set map center: current user location or equator /Greenwitch
-        var mapCenter = new google.maps.LatLng( @( Model.LocationLatitude.HasValue ? Model.LocationLatitude : 0), @(Model.LocationLongitude.HasValue ? Model.LocationLongitude : 0 ) );
+        var mapCenter = new google.maps.LatLng(Globalize.parseFloat("@( Model.LocationLatitude.HasValue ? Model.LocationLatitude : 0)"), Globalize.parseFloat("@(Model.LocationLongitude.HasValue ? Model.LocationLongitude : 0 )"))
 
         var zoomControl = {
             style: google.maps.ZoomControlStyle.SMALL
         }
         //Define map properties
         var mapProp = {
-            zoom: 1,
+            zoom: @( Model.LocationLatitude.HasValue ? 12 : 1),
             mapTypeId: google.maps.MapTypeId.ROADMAP,
             panControl: false,
             streetViewControl: false,
@@ -76,12 +75,15 @@
         $('#locationLongitude').val(location.lng());
         //Add marker event to track drag end
         google.maps.event.addListener(marker, 'dragend', function (event) {
-            $('#locationLatitude').val(event.latLng.lat());
-            $('#locationLongitude').val(event.latLng.lng());
+            //Values sent need to be converted back to user's language formatting
+            $('#locationLatitude').val( event.latLng.lat() );
+            $('#locationLongitude').val( event.latLng.lng() );
         });
     }
 
     function SavePosition() {
+        $('#locationLatitude').val(Globalize.format( parseFloat($('#locationLatitude').val()), "n14"));
+        $('#locationLongitude').val(Globalize.format( parseFloat($('#locationLongitude').val()), "n14"));
         document.userData.submit();
     }
 

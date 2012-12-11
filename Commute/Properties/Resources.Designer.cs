@@ -322,6 +322,51 @@ namespace Commute.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to has been sucessfuly created. &lt;p&gt;You can now register routes and find commuters with similar routes as yours.&lt;/p&gt;.
+        /// </summary>
+        public static string Mail_welcome_created {
+            get {
+                return ResourceManager.GetString("Mail welcome created", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to To register issues, ask for help, request features use the.
+        /// </summary>
+        public static string Mail_welcome_forum {
+            get {
+                return ResourceManager.GetString("Mail welcome forum", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wish you a safe and fun commute, the Commute Team..
+        /// </summary>
+        public static string Mail_welcome_safe_commute {
+            get {
+                return ResourceManager.GetString("Mail welcome safe commute", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to To get started, read the.
+        /// </summary>
+        public static string Mail_welcome_start {
+            get {
+                return ResourceManager.GetString("Mail welcome start", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Welcome to Commute !.
+        /// </summary>
+        public static string Mail_welcome_welcome {
+            get {
+                return ResourceManager.GetString("Mail welcome welcome", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This field is mandatory.
         /// </summary>
         public static string Mandatory {
@@ -358,7 +403,7 @@ namespace Commute.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Welcome to Commute the green and friendly way to commute. Find routes in your area. Get started with Commute. Joint Commute community. Share your car to commute between home and work with others or find a car in your area to commute to work. Going to work can be fun: Save fuel, save money and make new friends to share a happy time when commuting. This is the green way to go to work. Help saving the planet. Reduce gaz emission.
+        ///   Looks up a localized string similar to Welcome to Commute the green and friendly way to commute. Find routes in your area. Get started with Commute. Joint Commute community..
         /// </summary>
         public static string Metadesc_home_welcome {
             get {
@@ -367,7 +412,7 @@ namespace Commute.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This is the list of route you have defined. You can update the route. You can search route which are close match to your route. You can create new route. Share your car to commute between home and work with others or find a car in your area to commute to work. Going to work can be fun: Save fuel, save money and make new friends to share a happy time when commuting. This is the green way to go to work. Help saving the planet. Reduce gaz emission.
+        ///   Looks up a localized string similar to This is the list of route you have defined. You can update the route. You can search route which are close match to your route. You can create new route..
         /// </summary>
         public static string Metadesc_route_list {
             get {
@@ -376,7 +421,7 @@ namespace Commute.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Set default map location when creating new route. Commute is a friendly and green way to commute between home and work. Share your car to commute between home and work with others or find a car in your area to commute to work. Going to work can be fun: Save fuel, save money and make new friends to share a happy time when commuting. This is the green way to go to work. Help saving the planet. Reduce gaz emission.
+        ///   Looks up a localized string similar to Set default map location when creating new route. Commute is a friendly and green way to commute between home and work..
         /// </summary>
         public static string Metadesc_user_setlocation {
             get {
@@ -453,6 +498,15 @@ namespace Commute.Properties {
         public static string Picture {
             get {
                 return ResourceManager.GetString("Picture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Quick start guide.
+        /// </summary>
+        public static string Quick_start_guide {
+            get {
+                return ResourceManager.GetString("Quick start guide", resourceCulture);
             }
         }
         
@@ -763,6 +817,15 @@ namespace Commute.Properties {
         public static string Wtitle_confirmation {
             get {
                 return ResourceManager.GetString("Wtitle confirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your account.
+        /// </summary>
+        public static string Your_account {
+            get {
+                return ResourceManager.GetString("Your account", resourceCulture);
             }
         }
     }

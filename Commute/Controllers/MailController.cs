@@ -18,7 +18,8 @@ namespace Commute.Controllers
         {
             //Send mail as test
             //Mail mail = new Mail();
-            //mail.Welcome().Send();
+            //mail.Welcome(userId).Send();
+            ViewBag.HttpPicture = System.Configuration.ConfigurationManager.AppSettings["Http.Picture"];
             User user = db.User.Find(userId);
             return View(user); //Display /Views/Welcome the view used to generate mail
         }
@@ -81,6 +82,7 @@ namespace Commute.Controllers
             User user = db.User.Find(userId); //Retrieve user
             ViewBag.account = user.Account;
             ViewData.Model = user; //Set the strongly typed object for the view
+            ViewBag.HttpPicture = System.Configuration.ConfigurationManager.AppSettings["Http.Picture"];
             return Populate(x =>
             {
                 x.Subject = "Welcome";

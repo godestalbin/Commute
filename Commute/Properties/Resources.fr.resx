@@ -152,6 +152,7 @@
   <data name="Password" xml:space="preserve"> <value>Mot de passe</value> </data>
   <data name="Password confirm" xml:space="preserve"> <value>Confirmation mot de passe</value> </data>
   <data name="Picture" xml:space="preserve"> <value>Photo</value> </data>
+  <data name="Quick start guide" xml:space="preserve"> <value>Guide de démarrage rapide</value> </data>
   <data name="Register" xml:space="preserve"> <value>Enregistrement</value> </data>
   <data name="Route" xml:space="preserve"> <value>Trajet</value> </data>
   <data name="Route create" xml:space="preserve"> <value>Créer une route</value> </data>
@@ -175,12 +176,18 @@
   <data name="User logout" xml:space="preserve"> <value>Se deconnecter</value> </data>
   <data name="User registration" xml:space="preserve"> <value>Créer un compte</value> </data>
   <data name="User set location" xml:space="preserve"> <value>Position utilisateur</value> </data>
+  <data name="Your account" xml:space="preserve"> <value>Votre compte</value> </data>
   <data name="Welcome" xml:space="preserve"> <value>Bienvenue</value> </data>
   <data name="Mail contact title" xml:space="preserve"> <value>Nous avons des trajets similaires</value> </data>
   <data name="Mail contact msg" xml:space="preserve"> <value>J'ai identifié que nos routes sont similaires, est-ce que nous pouvons faire les trajets ensembles ?</value> </data>
   <data name="Mail contact reply" xml:space="preserve"> <value>Pour me contacter il suffit de répondre à ce mail (vous verrez alors mon adresse mail).</value> </data>
   <data name="Mail contact map" xml:space="preserve"> <value>La carte ci-dessous montre nos trajets:</value> </data>
   <data name="Mail contact map title" xml:space="preserve"> <value>Cette carte est juste une image. Cliquez sur la carte pour visualiser cette carte Google avec Commute</value> </data>
+  <data name="Mail welcome welcome" xml:space="preserve"> <value>Bienvene à Commute !</value> </data>
+  <data name="Mail welcome created" xml:space="preserve"> <value>a bien été créé. &lt;p&gt;Vous pouvez maintenant créer des trajets et rechercher des personnes avec des trajets similaires au votre.&lt;/p&gt;</value> </data>
+  <data name="Mail welcome start" xml:space="preserve"> <value>Pour bien démarrer, lisez notre</value> </data>
+  <data name="Mail welcome forum" xml:space="preserve"> <value>Pour reporter des problèmes, demander de l'aide, suggérer de nouvelles fonctionnalités utilisez le</value> </data>
+  <data name="Mail welcome safe commute" xml:space="preserve"> <value>Nous vous souhaitons un agréable et plaisant trajet, l'équipe de Commute.</value> </data>
   <data name="Welcome account" xml:space="preserve"> <value>Complétez vos données personnelles (téléchargez votre photo)You can now update data (upload picture) on your account</value> </data>
   <data name="Welcome help" xml:space="preserve"> <value>Lisez le guide de démarrage rapide pour avoir condensé des fonctionnalités de Commute.</value> </data>
   <data name="Welcome join" xml:space="preserve"> <value>Créez d'abord un compte pour rejoindre la communauté de Commute</value> </data>

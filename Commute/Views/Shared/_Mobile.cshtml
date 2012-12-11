@@ -9,6 +9,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 	<meta name="viewport" content="width=device-width, initial-scale=1"> 
     <meta name="description" content="@ViewBag.Metadesc" />
+    @Html.MetaAcceptLanguage()
     <link rel="shortcut icon" type="image/png" href="/Content/Images/Blue car 32px.png">
     <link rel="apple-touch-icon" href="/Content/Images/Blue car 64px.png"/> @*Shortcut for web app link (iPhone & android)*@
 
@@ -19,29 +20,36 @@
     <link rel="stylesheet" href="/Content/Commute mobile.css" />
     <script src="/Scripts/jquery-1.8.2.min.js"></script>
     <script src="/Scripts/jquery.mobile-1.2.0.min.js"></script>
+    <script src="/Scripts/jquery.globalize/globalize.js"></script>
+    <script src="/Scripts/jquery.globalize/cultures/globalize.cultures.js"></script>
+    <script src="/Scripts/google-analytics.js"></script>
 </head> 
 <body> 
 
 <div data-role="page">
 
-	<div <div class="ui-bar ui-bar-b">
-        @*<div class="ui-grid-b">*@
-            @*<div class="ui-block-a">*@<a href="#popupNested" data-rel="popup" data-role="button" data-mini="true" data-inline="true" data-icon="grid" data-iconpos="notext" title="@Resources.Menu"></a>@*</div>*@
-		    @*<div class="ui-block-b">*@<h5>@ViewBag.title</h5>@*</div>*@
+	<div class="ui-bar ui-bar-b" style="padding-left: 0px">
+		    @*Left button*@
+            <div style="float: left; ">
+            <a href="#popupNested" data-rel="popup" data-role="button" data-mini="true" data-inline="true" data-icon="grid" data-iconpos="notext" title="@Resources.Menu"></a>
+            </div>
+		    @*Right button*@
+            <div style="position:absolute;  top: 6px; right: 5px;">
             @*<div class="ui-block-c">*@ @if (@ViewBag.userId > 0 ) { 
-                <a href="/User/Logout/" data-role="button" data-ajax="false" data-mini="true" data-inline="true"  data-icon="alert" data-iconpos="notext" title="@Resources.Logout"></a>
+                <a href="/User/Logout/" data-role="button" data-ajax="false" data-mini="true" data-inline="true"  data-icon="alert" data-iconpos="notext" title="@Resources.Logout" style="margin-right: 0px;"></a>
                 <span>@ViewBag.userId - @ViewBag.userName</span>
             } 
                 else { 
                 <a href="/User/Login/" data-role="button" data-ajax="false" data-mini="true" data-inline="true" data-icon="home" data-iconpos="notext" title="@Resources.Login"></a>
                 <span>@Resources.Guest</span>
             }
-            @*</div>*@
-        @*</div>*@
+            </div>
+        @*Window title*@
+        <div class="inline" style="position:absolute; height: 1em; left: 20px; top: 13px; right: 20px; overflow:hidden;"><h5 style="width: 85%; text-align:center">@ViewBag.title</h5></div>
 	</div>
 
     @*Menu to be defined later*@
-    		<div data-role="popup" id="popupNested" data-theme="none">
+    <div data-role="popup" id="popupNested" data-theme="none">
 			<div data-role="collapsible-set" data-theme="b" data-content-theme="c" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" style="margin:0; width:250px;">
 				<div data-role="collapsible" data-inset="false">
 					<h2>@Resources.Route</h2>
@@ -79,6 +87,13 @@
 </div><!-- /page -->
 @RenderSection("scripts", required: false)
 <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyC0KjUdM6DpNQAggngGkuKLFvoHw-lJ0H4&sensor=false"></script>
+
+    <script>
+        //This a meta tag set by the custom HTML helper: @@Html.MetaAcceptLanguage()
+        var data = $("meta[name='accept-language']").attr("content")
+        //Tell jQuery the language used by user
+        Globalize.culture( data );
+    </script>
 
 @*<script src="//static.getclicky.com/js" type="text/javascript"></script>
 <script type="text/javascript">try{ clicky.init(100550157); }catch(e){}</script>

@@ -178,7 +178,7 @@ namespace Commute.Controllers
         }
 
         [HttpPost]
-        public ActionResult SetLocation(User postUser)
+        public ActionResult SetLocation(User postUser) //int id, decimal locationLatitude, decimal locationLongitude) //
         {
             User user = db.User.Find(postUser.Id);
             user.LocationLatitude = postUser.LocationLatitude;

@@ -54,7 +54,7 @@
 @*Popup to update route header data*@
 @*---------------------------------*@
 
-<div id="divMap" style="width:100%;position: absolute; top: 54px; left: 0px; bottom: 0px;" ></div>
+<div id="divMap" style="width:100%;position: absolute; top: 48px; left: 0px; bottom: 0px;" ></div>
 <div id="divSave">
     <button id="btnSave2" type="button" data-inline="true" data-ajax="false" data-theme="b" data-icon="check" data-iconpos="notext" ></button>
 </div>
@@ -94,7 +94,7 @@
                 'success': function (data) {
                     var location = data.split('/');
                     //mapCenter = data.Data;
-                    mapCenter = new google.maps.LatLng(location[0], location[1]);
+                    mapCenter = new google.maps.LatLng(Globalize.parseFloat(location[0]), Globalize.parseFloat(location[1]));
                     if( mapCenter.lat() == 0 )
                         mapCenter = new google.maps.LatLng(39.907004, 116.39759); //Center on Beijing Tian An Men
                 }
