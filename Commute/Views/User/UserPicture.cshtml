@@ -1,0 +1,55 @@
+﻿@model Commute.Models.User
+
+@{
+    ViewBag.Title = "Upload picture";
+    Layout = "~/Views/Shared/_Mobile.cshtml";
+}
+
+<div>
+UploadAgain: @ViewBag.UploadAgain
+
+@Html.Partial("UploadFile", new Commute.Models.Entity { Id = @Model.Id } )
+</div>
+
+<script type="text/javascript">
+
+    var webresizerAPI = new Object;
+    webresizerAPI.parameters = {
+        apikey: '95594110d3bf7dc22abe5bcabc14279a',
+        image_url: 'http://www.example.com/fred.jpg',
+        is_sample_image: 'no',
+        webresizer_allow_downloads: 'yes',
+        uplink_text: 'Add to My Gallery',
+        uplink_url: 'http://www.example.com/gallery/transfer.php'
+    };
+
+    //var webresizerAPI = new Object;
+    //webresizerAPI.parameters = {
+    //    apikey: '95594110d3bf7dc22abe5bcabc14279a',
+    //    language: 'en',
+    //    image_url: 'http://commute.apphb.com/Content/Images/Commute icon.png',
+    //    //image_url: 'http://s3-eu-west-1.amazonaws.com/commute/Pictures/Unknown.jpg',
+    //    default_image_size: '100',
+    //    single_image: 'yes',
+    //    uplink_text: 'Add to My Gallery',
+    //    uplink_url: 'http://localhost:61022/User/UploadAgain'
+
+    //};
+    //webresizerAPI.toolDisplay = {
+    //    rotate: 'no',
+    //    sharpen: 'no',
+    //    quality: 'no',
+    //    tint: 'no',
+    //    contrast: 'no',
+    //    exposure: 'no',
+    //    saturation: 'no',
+    //    border: 'no'
+    //}
+
+    //webresizer_apikey = '95594110d3bf7dc22abe5bcabc14279a' //'6854d5636935f6f039ea99e0a3c58925';
+    //webresizer_language = 'en';
+
+</script>
+
+<script type="text/javascript" src="http://api.webresizer.com/ext1.0/js/webresizer_api.js"></script>
+

@@ -683,6 +683,7 @@
     <Content Include="Views\User\EditOld.cshtml" />
     <Content Include="Views\Route\Update.cshtml" />
     <Content Include="Views\Shared\_MobileDialog.cshtml" />
+    <Content Include="Views\User\UserPicture.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -152,6 +152,8 @@ namespace Commute.Controllers
             return RedirectToAction("Edit");
         }
 
+        //webresizer key: 6854d5636935f6f039ea99e0a3c58925
+
         private void UploadToAmazonService(HttpPostedFileBase file, string filename)
         {
             string bucketName = System.Configuration.ConfigurationManager.AppSettings["AWSPublicFilesBucket"]; //commute bucket
@@ -168,6 +170,19 @@ namespace Commute.Controllers
 
             AmazonS3 client = Amazon.AWSClientFactory.CreateAmazonS3Client(); //uses AWSAccessKey and AWSSecretKey defined in Web.config
             using (S3Response r = client.PutObject(request)) { }
+        }
+
+        //UserPicture
+        public ActionResult UserPicture() {
+            User user = new User();
+            return View(user);
+        }
+
+        public ActionResult UploadAgain()
+        {
+            User user = new User();
+            ViewBag.UploadAgain = "Yes";
+            return View("UserPicture", user);
         }
 
         public ActionResult SetLocation()
