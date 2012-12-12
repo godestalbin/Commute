@@ -84,6 +84,7 @@
 
     function InitializeMap() {
         //alert(routeWayPoint.length);
+        var zoom = 12;
 
         //If no start point set center map on user's default location
         if ( routeWayPoint.length == 0 ) {
@@ -93,10 +94,12 @@
                 'async': false, 'url': '/User/Location/' + @ViewBag.userId + '?' + milliseconds, 'type': 'get', 'dataType': 'text',
                 'success': function (data) {
                     var location = data.split('/');
-                    //mapCenter = data.Data;
-                    mapCenter = new google.maps.LatLng(Globalize.parseFloat(location[0]), Globalize.parseFloat(location[1]));
-                    if( mapCenter.lat() == 0 )
-                        mapCenter = new google.maps.LatLng(39.907004, 116.39759); //Center on Beijing Tian An Men
+                    if ( location[0] != "" )
+                        mapCenter = new google.maps.LatLng(Globalize.parseFloat(location[0]), Globalize.parseFloat(location[1]));
+                    else {
+                        mapCenter = new google.maps.LatLng(0.0, 0.0); //Equator/Greenwitch
+                        zoom = 2;
+                    }
                 }
             });
         }
@@ -111,7 +114,8 @@
         }
         //Define map properties
         var mapProp = {
-            zoom: 12,
+            mapCenter: mapCenter,
+            zoom: zoom,
             mapTypeId: google.maps.MapTypeId.ROADMAP,
             panControl: false,
             streetViewControl: false,
@@ -123,7 +127,7 @@
         //Expand the size of the div for the map
         //$('#divMap').css("height", "200px");
         //Force map to expand to div
-        setTimeout(function () { google.maps.event.trigger(map, 'resize'); map.setCenter(mapCenter); }, 100);
+        setTimeout(function () { google.maps.event.trigger(map, 'resize'); map.setCenter(mapCenter);}, 100);
 
         //Add control to the map - save, data, cancel button
         //var mapButton = document.createElement('customMapControl'); //Create a new control

@@ -36,7 +36,7 @@
 		    @*Right button*@
             <div style="position:absolute;  top: 6px; right: 5px;">
             @*<div class="ui-block-c">*@ @if (@ViewBag.userId > 0 ) { 
-                <a href="/User/Logout/" data-role="button" data-ajax="false" data-mini="true" data-inline="true"  data-icon="alert" data-iconpos="notext" title="@Resources.Logout" style="margin-right: 0px;"></a>
+                <a href="/User/Logout/" data-role="button" data-ajax="false" data-mini="true" data-inline="true"  data-icon="alert" data-iconpos="notext" title="@Resources.Logout" ></a>
                 <span>@ViewBag.userId - @ViewBag.userName</span>
             } 
                 else { 
