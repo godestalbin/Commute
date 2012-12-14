@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -11,6 +12,7 @@ using Commute.Models;
 using Commute.Properties;
 using Amazon.S3.Model;
 using Amazon.S3;
+using Cloudinary;
 
 namespace Commute.Controllers
 {
@@ -104,6 +106,7 @@ namespace Commute.Controllers
         }
 
         //Edit
+        [OutputCache(Duration = 0, NoStore = true)]
         public ActionResult Edit()
         {
             User user = db.User.Find(userId);
@@ -133,11 +136,6 @@ namespace Commute.Controllers
             foreach (string file in Request.Files)
             {
                 HttpPostedFileBase postFile = Request.Files[file] as HttpPostedFileBase;
-                if (ViewBag.postFile == null)
-                {
-                    Session["postFile"] = postFile.FileName;
-                    Session["postFileLength"] = postFile.ContentLength;
-                }
                 if (postFile.ContentLength == 0)
                     continue;
                 //Save on the server - Cannot be used for App Harbour
@@ -146,13 +144,39 @@ namespace Commute.Controllers
 
                 //Need to save the extension in database if we want to display different type of files.
 
+                //Upload to Cloudinary
+                UploadToCloudinary(postFile, String.Format("{0:00000000}", entity.Id) + Path.GetExtension(postFile.FileName));
+
                 //Now save to Amazon S3
-                UploadToAmazonService(postFile, String.Format("{0:00000000}", entity.Id) + Path.GetExtension(postFile.FileName));
+                //UploadToAmazonService(postFile, String.Format("{0:00000000}", entity.Id) + Path.GetExtension(postFile.FileName));
             }
             return RedirectToAction("Edit");
         }
 
-        //webresizer key: 6854d5636935f6f039ea99e0a3c58925
+        private void UploadToCloudinary(HttpPostedFileBase file, string filename)
+        {
+            var settings = ConfigurationManager.AppSettings;
+            var configuration = new AccountConfiguration(settings["Cloudinary.CloudName"],
+                                                         settings["Cloudinary.ApiKey"],
+                                                         settings["Cloudinary.ApiSecret"]);
+            var uploader = new Uploader(configuration);
+            string publicId = Path.GetFileNameWithoutExtension(filename);
+            // Upload the file
+            var destroyResult = uploader.Destroy(publicId);
+            var uploadResult = uploader.Upload(new UploadInformation(filename, file.InputStream)
+                                {
+                                    // explicitly specify a public id (optional)
+                                    PublicId = publicId,
+                                    // set the format, (default is jpg)
+                                    Format = "png",
+                                    // Specify some eager transformations                                                        
+                                    Eager = new[]
+                                    {
+                                        new Transformation(100, 100) { Format = "png", Crop = CropMode.Thumb, Gravity = Gravity.Face, Radius = 10 },
+                                        //new Transformation(120, 360) { Crop = CropMode.Limit },
+                                    }
+                                });
+        }
 
         private void UploadToAmazonService(HttpPostedFileBase file, string filename)
         {

@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Cloudinary;
+using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
@@ -22,6 +24,14 @@ namespace Commute
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            //Cloudinary initialization
+            var settings = ConfigurationManager.AppSettings;
+            var configuration = new AccountConfiguration(settings["Cloudinary.CloudName"],
+                                                         settings["Cloudinary.ApiKey"],
+                                                         settings["Cloudinary.ApiSecret"]);
+
+            AccountConfiguration.Initialize(configuration);
         }
     }
 }

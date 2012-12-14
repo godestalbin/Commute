@@ -182,7 +182,7 @@
   <data name="Mail contact msg" xml:space="preserve"> <value>I have found that our commute routes are quite similar, can we get in touch to see if we can commute togther ?</value> </data>
   <data name="Mail contact reply" xml:space="preserve"> <value>Just reply to this mail to contact me (you will see my mail address).</value> </data>
   <data name="Mail contact map" xml:space="preserve"> <value>The map below shows our two routes:</value> </data>
-  <data name="Mail contact map title" xml:space="preserve"> <value>This map is just a picture. Click the map to view it as a Goole map in Commute (This does not work currently)</value> </data>
+  <data name="Mail contact map title" xml:space="preserve"> <value>This map is just a picture. Click the map to view it as a Goole map in Commute.</value> </data>
   <data name="Mail welcome welcome" xml:space="preserve"> <value>Welcome to Commute !</value> </data>
   <data name="Mail welcome created" xml:space="preserve"> <value>has been sucessfuly created. &lt;p&gt;You can now register routes and find commuters with similar routes as yours.&lt;/p&gt;</value> </data>
   <data name="Mail welcome start" xml:space="preserve"> <value>To get started, read the</value> </data>

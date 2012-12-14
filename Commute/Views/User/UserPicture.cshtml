@@ -1,27 +1,25 @@
 ﻿@model Commute.Models.User
+@using Cloudinary.Mvc;
 
 @{
     ViewBag.Title = "Upload picture";
     Layout = "~/Views/Shared/_Mobile.cshtml";
 }
 
-<div>
-UploadAgain: @ViewBag.UploadAgain
-
 @Html.Partial("UploadFile", new Commute.Models.Entity { Id = @Model.Id } )
-</div>
+<img src="@Url.CloudinaryImage(@String.Format("{0:00000000}", @Model.Id) + ".png?" + DateTime.Now.Millisecond)")" alt="sample"/>
 
 <script type="text/javascript">
 
-    var webresizerAPI = new Object;
-    webresizerAPI.parameters = {
-        apikey: '6854d5636935f6f039ea99e0a3c58925', //'95594110d3bf7dc22abe5bcabc14279a', local
-        image_url: 'http://www.example.com/fred.jpg',
-        is_sample_image: 'no',
-        webresizer_allow_downloads: 'yes',
-        uplink_text: 'Add to My Gallery',
-        uplink_url: 'http://www.example.com/gallery/transfer.php'
-    };
+    //var webresizerAPI = new Object;
+    //webresizerAPI.parameters = {
+    //    apikey: '6854d5636935f6f039ea99e0a3c58925', //'95594110d3bf7dc22abe5bcabc14279a', local
+    //    image_url: 'http://www.example.com/fred.jpg',
+    //    is_sample_image: 'no',
+    //    webresizer_allow_downloads: 'yes',
+    //    uplink_text: 'Add to My Gallery',
+    //    uplink_url: 'http://www.example.com/gallery/transfer.php'
+    //};
 
     //var webresizerAPI = new Object;
     //webresizerAPI.parameters = {
@@ -51,5 +49,5 @@ UploadAgain: @ViewBag.UploadAgain
 
 </script>
 
-<script type="text/javascript" src="http://api.webresizer.com/ext1.0/js/webresizer_api.js"></script>
+@*<script type="text/javascript" src="http://api.webresizer.com/ext1.0/js/webresizer_api.js"></script>*@
 

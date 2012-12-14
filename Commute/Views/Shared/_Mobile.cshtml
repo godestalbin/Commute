@@ -29,20 +29,23 @@
 <div data-role="page">
 
 	<div class="ui-bar ui-bar-b" style="padding-left: 0px">
+        @*<a href="index.html" data-role="button" data-icon="delete" data-iconpos="notext">Delete</a>*@
 		    @*Left button*@
-            <div style="float: left; ">
+            <div style="float: left; position: relative; z-index: 1;">
             <a href="#popupNested" data-rel="popup" data-role="button" data-mini="true" data-inline="true" data-icon="grid" data-iconpos="notext" title="@Resources.Menu"></a>
             </div>
 		    @*Right button*@
-            <div style="position:absolute;  top: 6px; right: 5px;">
-            @*<div class="ui-block-c">*@ @if (@ViewBag.userId > 0 ) { 
-                <a href="/User/Logout/" data-role="button" data-ajax="false" data-mini="true" data-inline="true"  data-icon="alert" data-iconpos="notext" title="@Resources.Logout" ></a>
+            <div style="position:absolute;  top: 6px; right: 5px; z-index: 1;"> @**@
+            @if (@ViewBag.userId > 0)
+            { 
+                <a href="/User/Logout/" data-role="button" data-ajax="false"  data-mini="true" data-inline="true"  data-icon="alert" data-iconpos="notext" title="@Resources.Logout" ></a>
                 <span>@ViewBag.userId - @ViewBag.userName</span>
-            } 
-                else { 
+            }
+            else
+            { 
                 <a href="/User/Login/" data-role="button" data-ajax="false" data-mini="true" data-inline="true" data-icon="home" data-iconpos="notext" title="@Resources.Login"></a>
                 <span>@Resources.Guest</span>
-            }
+                                         }
             </div>
         @*Window title*@
         <div class="inline" style="position:absolute; height: 1em; left: 20px; top: 13px; right: 20px; overflow:hidden;"><h5 style="width: 85%; text-align:center">@ViewBag.title</h5></div>

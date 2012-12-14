@@ -1,5 +1,7 @@
 ﻿@model Commute.Models.User
 @using Commute.Properties
+@using Cloudinary.Mvc;
+@using Cloudinary;
 
 @{ 
     Layout = "~/Views/Shared/_Mobile.cshtml";
@@ -48,18 +50,12 @@
     </table>
 }
 
-                <img id="userImage" class="user-image" src="@Url.Content(Resources.Amazon_picture_HTTP + @String.Format("{0:00000000}", @Model.Id) + ".jpg?" + DateTime.Now.Millisecond)"/>
+                @*<img id="userImage" class="user-image" src="@Url.Content(Resources.Amazon_picture_HTTP + @String.Format("{0:00000000}", @Model.Id) + ".jpg?" + DateTime.Now.Millisecond)"/>*@
+                @*<img id="userImage" class="user-image" src="@(@Url.CloudinaryImage(@String.Format("{0:00000000}", @Model.Id), new Transformation(100, 100)) + "?" + DateTime.Now.Millisecond)"/>*@
+                <img id="userImage" class="user-image" src="@(@Url.CloudinaryImage(@String.Format("{0:00000000}", @Model.Id), new Transformation(100, 100) { Format = "png", Crop = CropMode.Thumb, Gravity = Gravity.Face, Radius = 10 }) + "?" + DateTime.Now.Millisecond)"/>
                 @Html.Partial("UploadFile", new Commute.Models.Entity { Id = @Model.Id } )
 
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-<script type="text/javascript">
-
-    webresizer_apikey = '95594110d3bf7dc22abe5bcabc14279a' //'6854d5636935f6f039ea99e0a3c58925';
-    webresizer_language = 'en';
-
-</script>
-<script type="text/javascript"
-src="http://api.webresizer.com/ext1.0/js/webresizer_api.js"></script>
 }

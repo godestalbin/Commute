@@ -286,7 +286,7 @@ namespace Commute.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This map is just a picture. Click the map to view it as a Goole map in Commute (This does not work currently).
+        ///   Looks up a localized string similar to This map is just a picture. Click the map to view it as a Goole map in Commute..
         /// </summary>
         public static string Mail_contact_map_title {
             get {

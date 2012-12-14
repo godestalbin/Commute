@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>Cloudinary</id>
+    <version>0.0.4</version>
+    <authors>Thomas Van Machelen</authors>
+    <owners>Thomas Van Machelen</owners>
+    <licenseUrl>http://www.opensource.org/licenses/mit-license.php</licenseUrl>
+    <projectUrl>https://github.com/thomasvm/cloudinary-dotnet</projectUrl>
+    <iconUrl>https://raw.github.com/thomasvm/cloudinary-dotnet/master/build/cloudinary_logo.jpg</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A library for easy integration with Cloudinary</description>
+    <releaseNotes>Cloudinary api update
+* Add support for effect parameter
+* Add support for angle parameter
+* Add support for chained transformations</releaseNotes>
+    <copyright>Copyright 2012</copyright>
+    <tags>Cloudinary MVC Images</tags>
+  </metadata>
+</package>
