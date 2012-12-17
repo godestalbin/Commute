@@ -52,7 +52,8 @@
 
                 @*<img id="userImage" class="user-image" src="@Url.Content(Resources.Amazon_picture_HTTP + @String.Format("{0:00000000}", @Model.Id) + ".jpg?" + DateTime.Now.Millisecond)"/>*@
                 @*<img id="userImage" class="user-image" src="@(@Url.CloudinaryImage(@String.Format("{0:00000000}", @Model.Id), new Transformation(100, 100)) + "?" + DateTime.Now.Millisecond)"/>*@
-                <img id="userImage" class="user-image" src="@(@Url.CloudinaryImage(@String.Format("{0:00000000}", @Model.Id), new Transformation(100, 100) { Format = "png", Crop = CropMode.Thumb, Gravity = Gravity.Face, Radius = 10 }) + "?" + DateTime.Now.Millisecond)"/>
+                @*<img id="userImage" class="user-image" src="@(@Url.CloudinaryImage(@String.Format("{0:00000000}", @Model.Id), new Transformation(100, 100) { Format = "png", Crop = CropMode.Thumb, Gravity = Gravity.Face, Radius = 10 }) + "?" + DateTime.Now.Millisecond)"/>*@
+                <img id="userImage" class="user-image" src="@Url.CloudinaryImage("v" + @Model.PictureVersion + "/" + @String.Format("{0:00000000}", @Model.Id), new Transformation(100, 100) { Format = "png", Crop = CropMode.Thumb, Gravity = Gravity.Face, Radius = 8 })"/>
                 @Html.Partial("UploadFile", new Commute.Models.Entity { Id = @Model.Id } )
 
 

@@ -145,7 +145,12 @@ namespace Commute.Controllers
                 //Need to save the extension in database if we want to display different type of files.
 
                 //Upload to Cloudinary
-                UploadToCloudinary(postFile, String.Format("{0:00000000}", entity.Id) + Path.GetExtension(postFile.FileName));
+                string version = UploadToCloudinary(postFile, String.Format("{0:00000000}", entity.Id) + Path.GetExtension(postFile.FileName));
+                //Save picture version
+                User user;
+                user = db.User.Find(entity.Id);
+                user.PictureVersion = version;
+                db.SaveChanges();
 
                 //Now save to Amazon S3
                 //UploadToAmazonService(postFile, String.Format("{0:00000000}", entity.Id) + Path.GetExtension(postFile.FileName));
@@ -153,7 +158,7 @@ namespace Commute.Controllers
             return RedirectToAction("Edit");
         }
 
-        private void UploadToCloudinary(HttpPostedFileBase file, string filename)
+        private string UploadToCloudinary(HttpPostedFileBase file, string filename)
         {
             var settings = ConfigurationManager.AppSettings;
             var configuration = new AccountConfiguration(settings["Cloudinary.CloudName"],
@@ -172,10 +177,11 @@ namespace Commute.Controllers
                                     // Specify some eager transformations                                                        
                                     Eager = new[]
                                     {
-                                        new Transformation(100, 100) { Format = "png", Crop = CropMode.Thumb, Gravity = Gravity.Face, Radius = 10 },
+                                        new Transformation(100, 100) { Format = "png", Crop = CropMode.Thumb, Gravity = Gravity.Face, Radius = 8 },
                                         //new Transformation(120, 360) { Crop = CropMode.Limit },
                                     }
                                 });
+            return uploadResult.Version;
         }
 
         private void UploadToAmazonService(HttpPostedFileBase file, string filename)

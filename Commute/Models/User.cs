@@ -27,7 +27,7 @@ namespace Commute.Models
         [RegularExpression(".+@.+\\..+", ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "Error_invalid_mail")]
         public string EmailAddress { get; set; }
         
-        public bool Picture { get; set; }
+        public string PictureVersion { get; set; }
 
         public Nullable<decimal> LocationLatitude { get; set; }
         public Nullable<decimal> LocationLongitude { get; set; }
