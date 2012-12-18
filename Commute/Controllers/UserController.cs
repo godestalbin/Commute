@@ -279,7 +279,7 @@ namespace Commute.Controllers
             }
 
             //Control current password
-            if ( user.Password != Convert.ToBase64String(new MD5CryptoServiceProvider().ComputeHash(new UTF8Encoding().GetBytes(userPassword.OldPassword))))
+            if (user.Password != Convert.ToBase64String(new MD5CryptoServiceProvider().ComputeHash(new UTF8Encoding().GetBytes(userPassword.OldPassword))) && user.Password != userPassword.OldPassword)
             {
                 ModelState.AddModelError("OldPassword", Resources.Error_wrong_password);
                 return View(userPassword);
