@@ -8,7 +8,7 @@
     <meta name="MobileOptimized" content="320">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 	<meta name="viewport" content="width=device-width, initial-scale=1"> 
-    <meta name="description" content="@ViewBag.Metadesc" />
+    <meta name="description" content="@ViewBag.Metadesc @Resources.Metadesc_default" />
     @Html.MetaAcceptLanguage()
     <link rel="shortcut icon" type="image/png" href="/Content/Images/Blue car 32px.png">
     <link rel="apple-touch-icon" href="/Content/Images/Blue car 64px.png"/> @*Shortcut for web app link (iPhone & android)*@
@@ -68,8 +68,7 @@
 						<li><a href="/User/Edit"  data-ajax="false">@Resources.User_account</a></li>
 						<li><a href="/User/SetLocation"  data-ajax="false">@Resources.User_set_location</a></li>
 						<li><a href="/User/Register"  data-ajax="false">@Resources.Register</a></li>
-						<li><a href="/User/Login"  data-ajax="false">@Resources.Login</a></li>
-						<li><a href="/User/Logout"  data-ajax="false">@Resources.Logout</a></li>
+						<li><a href="/User/Password"  data-ajax="false">@Resources.Change_password</a></li>
 					</ul>
 				</div><!-- /collapsible -->
                 @*<div data-role="listview" data-inset="false">*@

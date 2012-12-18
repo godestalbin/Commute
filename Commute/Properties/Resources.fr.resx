@@ -121,6 +121,7 @@
   <data name="Amazon picture HTTP" xml:space="preserve"> <value>https://s3-eu-west-1.amazonaws.com/commute/Pictures/</value> </data>
   <data name="Application name" xml:space="preserve"> <value>Commute</value> </data>
   <data name="Cancel" xml:space="preserve"> <value>Annuler</value> </data>
+  <data name="Change password" xml:space="preserve"> <value>Modifier le mot de passe</value> </data>
   <data name="Create account" xml:space="preserve"> <value>Créer un compte</value> </data>
   <data name="Dir image upload" xml:space="preserve"> <value>/Content/Images/Upload/</value> </data>
   <data name="Email" xml:space="preserve"> <value>Adresse mail</value> </data>
@@ -146,11 +147,14 @@
   <data name="Menu" xml:space="preserve"> <value>Menu</value> </data>
   <data name="My name" xml:space="preserve"> <value>Je m'appelle</value> </data>
   <data name="Msg confirm mail sending" xml:space="preserve"> <value>Un mail de contact va être envoyé a l'autre utilisateur.&lt;div&gt;Etes vous d'accord ?&lt;/div&gt;</value> </data>
+  <data name="Msg password updated" xml:space="preserve"> <value>Votre mot de passe a été mis à jour.</value> </data>
   <data name="No record" xml:space="preserve"> <value>Cet enregistrement n'existe pas</value> </data>
   <data name="Offer" xml:space="preserve"> <value>Offre</value> </data>
   <data name="Ok" xml:space="preserve"> <value>OK</value> </data>
   <data name="Password" xml:space="preserve"> <value>Mot de passe</value> </data>
   <data name="Password confirm" xml:space="preserve"> <value>Confirmation mot de passe</value> </data>
+  <data name="Password old" xml:space="preserve"> <value>Ancien mot de passe</value> </data>
+  <data name="Password updated" xml:space="preserve"> <value>Mot de passe mis à jour</value> </data>
   <data name="Picture" xml:space="preserve"> <value>Photo</value> </data>
   <data name="Quick start guide" xml:space="preserve"> <value>Guide de démarrage rapide</value> </data>
   <data name="Register" xml:space="preserve"> <value>Enregistrement</value> </data>

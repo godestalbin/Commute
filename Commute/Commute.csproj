@@ -147,6 +147,7 @@
     <Compile Include="Models\Configuration.cs" />
     <Compile Include="Models\Context.cs" />
     <Compile Include="Models\CustomHelper.cs" />
+    <Compile Include="Models\Error.cs" />
     <Compile Include="Models\RouteView.cs" />
     <Compile Include="Models\RouteWayPoint.cs" />
     <Compile Include="Models\Entity.cs" />
@@ -639,6 +640,7 @@
     <Content Include="Views\User\WelcomeRegistered.cshtml" />
     <Content Include="Views\Mail\Contact.cshtml" />
     <Content Include="Views\Help\Debug.cshtml" />
+    <Content Include="Views\Home\Error.cshtml" />
     <None Include="Views\Route\Map.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -687,6 +689,8 @@
     <Content Include="Views\Route\Update.cshtml" />
     <Content Include="Views\Shared\_MobileDialog.cshtml" />
     <Content Include="Views\User\UserPicture.cshtml" />
+    <Content Include="Views\User\Password.cshtml" />
+    <Content Include="Views\User\PasswordUpdated.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

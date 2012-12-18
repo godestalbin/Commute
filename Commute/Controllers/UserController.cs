@@ -13,6 +13,8 @@ using Commute.Properties;
 using Amazon.S3.Model;
 using Amazon.S3;
 using Cloudinary;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace Commute.Controllers
 {
@@ -42,7 +44,7 @@ namespace Commute.Controllers
                          where u.Account == userLogin.Account
                          select u).FirstOrDefault();
             if (user == null) ModelState.AddModelError("Account", Resources.Error_unknown_account);
-            else if (user.Password == userLogin.Password)
+            else if (user.Password == Convert.ToBase64String(new MD5CryptoServiceProvider().ComputeHash(new UTF8Encoding().GetBytes(userLogin.Password))) || user.Password == userLogin.Password) //TMP until all passwords are converted
             {
                 FormsAuthentication.SetAuthCookie(user.Account,true); //true=Persistent cookie
                 Session["userId"] = user.Id;
@@ -238,6 +240,72 @@ namespace Commute.Controllers
         {
             User user = db.User.Find(id);
             return user.LocationLatitude.ToString() + "/" + user.LocationLongitude.ToString();
+        }
+
+        //Change password
+        public ActionResult Password()
+        {
+            User user;
+            try
+            {
+                user = db.User.Find(userId);
+            }
+            catch( Exception ex) {
+                return RedirectToAction("Error", "Home", new Error("User", "Password", ex.Message + ex.InnerException.Message));
+            }
+            if (user == null) return RedirectToAction("Error", "Home", new Error("User", "Password", "Cannot find user"));
+
+            //TMP
+            ViewBag.codedPassword = Convert.ToBase64String(new MD5CryptoServiceProvider().ComputeHash(new UTF8Encoding().GetBytes(user.Password)));
+
+            UserPassword userPassword = new UserPassword();
+            userPassword.Id = user.Id;
+            userPassword.Account = user.Account;
+            return View(userPassword);
+        }
+
+        [HttpPost]
+        public ActionResult Password(UserPassword userPassword)
+        {
+            //Retrieve current user
+            User user;
+            try
+            {
+                user = db.User.Find(userId);
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Error", "Home", new Error("User", "Password", ex.Message + ex.InnerException.Message));
+            }
+
+            //Control current password
+            if ( user.Password != Convert.ToBase64String(new MD5CryptoServiceProvider().ComputeHash(new UTF8Encoding().GetBytes(userPassword.OldPassword))))
+            {
+                ModelState.AddModelError("OldPassword", Resources.Error_wrong_password);
+                return View(userPassword);
+            }
+            
+            //Save updated password to database
+            if (user == null) return RedirectToAction("Error", "Home", new Error("User", "Password", "Cannot find user"));
+
+            user.Password = Convert.ToBase64String(new MD5CryptoServiceProvider().ComputeHash(new UTF8Encoding().GetBytes(userPassword.Password)));
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Error", "Home", new Error("User", "Password", ex.Message + (ex.InnerException != null  ? ex.InnerException.Message : "")));
+            }
+
+            //Confirm password update to user
+            return RedirectToAction("PasswordUpdated");
+        }
+
+        //Confirm password update to user
+        public ActionResult PasswordUpdated()
+        {
+            return View();
         }
 
         //-----------------------------------------

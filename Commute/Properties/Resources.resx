@@ -121,6 +121,7 @@
   <data name="Amazon picture HTTP" xml:space="preserve"> <value>https://s3-eu-west-1.amazonaws.com/commute/Pictures/</value> </data>
   <data name="Application name" xml:space="preserve"> <value>Commute</value> </data>
   <data name="Cancel" xml:space="preserve"> <value>Cancel</value> </data>
+  <data name="Change password" xml:space="preserve"> <value>Change password</value> </data>
   <data name="Create account" xml:space="preserve"> <value>Create account</value> </data>
   <data name="Dir image upload" xml:space="preserve"> <value>/Content/Images/Upload/</value> </data>
   <data name="Email" xml:space="preserve"> <value>E-mail address</value> </data>
@@ -146,11 +147,14 @@
   <data name="Menu" xml:space="preserve"> <value>Menu</value> </data>
   <data name="My name" xml:space="preserve"> <value>My name is</value> </data>
   <data name="Msg confirm mail sending" xml:space="preserve"> <value>A mail will be sent to the other user with your mail.&lt;div&gt;Do you agree ?&lt;/div&gt;</value> </data>
+  <data name="Msg password updated" xml:space="preserve"> <value>You password has been updated.</value> </data>
   <data name="No record" xml:space="preserve"> <value>This record does not exists</value> </data>
   <data name="Offer" xml:space="preserve"> <value>Offer</value> </data>
   <data name="Ok" xml:space="preserve"> <value>OK</value> </data>
   <data name="Password" xml:space="preserve"> <value>Password</value> </data>
   <data name="Password confirm" xml:space="preserve"> <value>Confirm password</value> </data>
+  <data name="Password old" xml:space="preserve"> <value>Old password</value> </data>
+  <data name="Password updated" xml:space="preserve"> <value>Password updated</value> </data>
   <data name="Picture" xml:space="preserve"> <value>Picture</value> </data>
   <data name="Quick start guide" xml:space="preserve"> <value>Quick start guide</value> </data>
   <data name="Register" xml:space="preserve"> <value>Register</value> </data>

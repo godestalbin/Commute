@@ -67,6 +67,18 @@ namespace Commute.Controllers
             return PartialView();
         }
 
+        //public ActionResult Error()
+        //{
+        //    Error error = new Error("C", "A", "M");
+        //    return View(error);
+        //}
+
+        [AllowAnonymous]
+        public ActionResult Error(Error error)
+        {
+            return View(error);
+        }
+
         public ActionResult Create(User user)
         {
             db.User.Add(user);

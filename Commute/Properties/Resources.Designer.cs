@@ -97,6 +97,15 @@ namespace Commute.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Change password.
+        /// </summary>
+        public static string Change_password {
+            get {
+                return ResourceManager.GetString("Change password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Create account.
         /// </summary>
         public static string Create_account {
@@ -439,6 +448,15 @@ namespace Commute.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You password has been updated..
+        /// </summary>
+        public static string Msg_password_updated {
+            get {
+                return ResourceManager.GetString("Msg password updated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to My name is.
         /// </summary>
         public static string My_name {
@@ -489,6 +507,24 @@ namespace Commute.Properties {
         public static string Password_confirm {
             get {
                 return ResourceManager.GetString("Password confirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Old password.
+        /// </summary>
+        public static string Password_old {
+            get {
+                return ResourceManager.GetString("Password old", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password updated.
+        /// </summary>
+        public static string Password_updated {
+            get {
+                return ResourceManager.GetString("Password updated", resourceCulture);
             }
         }
         

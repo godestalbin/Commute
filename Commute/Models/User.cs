@@ -12,12 +12,12 @@ namespace Commute.Models
     {
         [Display(Name = "Account", ResourceType = typeof(Properties.Resources))]
         [Required(ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "Mandatory")]
-        [StringLength(20, ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "Error_string_too_long")]
+        [StringLength(30, ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "Error_string_too_long")]
         public string Account { get; set; }
         
         [Display(Name = "Password", ResourceType = typeof(Properties.Resources))]
         [Required(ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "Mandatory")]
-        [StringLength(20, ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "Error_string_too_long")]
+        [StringLength(30, ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "Error_string_too_long")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
         
@@ -38,15 +38,15 @@ namespace Commute.Models
     {
         [Display(Name = "Account", ResourceType = typeof(Properties.Resources))]
         [Required(ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "Mandatory")]
-        [StringLength(20, ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "Error_string_too_long")]
+        [StringLength(30, ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "Error_string_too_long")]
         public string Account { get; set; }
         [Display(Name = "Password", ResourceType = typeof(Properties.Resources))]
         [Required(ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "Mandatory")]
-        [StringLength(20, ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "Error_string_too_long")]
+        [StringLength(30, ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "Error_string_too_long")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
         [Display(Name = "Password_confirm", ResourceType = typeof(Properties.Resources))]
-        [StringLength(20, ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "Error_string_too_long")]
+        [StringLength(30, ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "Error_string_too_long")]
         [DataType(DataType.Password)]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmedPassword { get; set; }
@@ -57,4 +57,25 @@ namespace Commute.Models
         public string EmailAddress { get; set; }
     }
 
+    //Class to change password
+    public class UserPassword : Entity
+    {
+        [Display(Name = "Account", ResourceType = typeof(Properties.Resources))]
+        public string Account { get; set; }
+        [Display(Name = "Password_old", ResourceType = typeof(Properties.Resources))]
+        [Required(ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "Mandatory")]
+        [StringLength(30, ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "Error_string_too_long")]
+        [DataType(DataType.Password)]
+        public string OldPassword { get; set; }
+        [Display(Name = "Password", ResourceType = typeof(Properties.Resources))]
+        [Required(ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "Mandatory")]
+        [StringLength(30, ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "Error_string_too_long")]
+        [DataType(DataType.Password)]
+        public string Password { get; set; }
+        [Display(Name = "Password_confirm", ResourceType = typeof(Properties.Resources))]
+        [StringLength(30, ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "Error_string_too_long")]
+        [DataType(DataType.Password)]
+        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        public string ConfirmedPassword { get; set; }
+    }
 }
