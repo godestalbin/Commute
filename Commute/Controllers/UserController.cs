@@ -44,7 +44,7 @@ namespace Commute.Controllers
                          where u.Account == userLogin.Account
                          select u).FirstOrDefault();
             if (user == null) ModelState.AddModelError("Account", Resources.Error_unknown_account);
-            else if (user.Password == Convert.ToBase64String(new MD5CryptoServiceProvider().ComputeHash(new UTF8Encoding().GetBytes(userLogin.Password))) || user.Password == userLogin.Password) //TMP until all passwords are converted
+            else if (user.Password == Convert.ToBase64String(new MD5CryptoServiceProvider().ComputeHash(new UTF8Encoding().GetBytes(userLogin.Password))))
             {
                 FormsAuthentication.SetAuthCookie(user.Account,true); //true=Persistent cookie
                 Session["userId"] = user.Id;
@@ -279,7 +279,7 @@ namespace Commute.Controllers
             }
 
             //Control current password
-            if (user.Password != Convert.ToBase64String(new MD5CryptoServiceProvider().ComputeHash(new UTF8Encoding().GetBytes(userPassword.OldPassword))) && user.Password != userPassword.OldPassword)
+            if (user.Password != Convert.ToBase64String(new MD5CryptoServiceProvider().ComputeHash(new UTF8Encoding().GetBytes(userPassword.OldPassword))))
             {
                 ModelState.AddModelError("OldPassword", Resources.Error_wrong_password);
                 return View(userPassword);
