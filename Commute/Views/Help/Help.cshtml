@@ -1,10 +1,16 @@
-﻿@{
+﻿@using Commute.Properties
+
+@{
     ViewBag.Title = "Help";
     Layout = "~/Views/Shared/_Mobile.cshtml";
 }
 
 <iframe id="ifrDocumentation" src="@ViewBag.HelpFile" scrolling="no"></iframe>
 @*https://s3-eu-west-1.amazonaws.com/commute/Documentation/Commute+documentation.html*@
+
+<div id="divBack" style="position:fixed; bottom: 10px; right: 10px;">
+     <a href="" title="@Resources.Previous_page" data-role="button" data-icon="arrow-l" data-ajax="false" data-inline="true" data-iconpos="notext"></a>
+</div>
 
 <script>
     function resize() {
@@ -48,5 +54,8 @@
 
     $(document).ready(function () {
         //$('#ifrDocumentation').css('height', 800);
+        $('#divBack').click(function () {
+            history.back();
+        });
     });
 </script>

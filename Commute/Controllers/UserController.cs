@@ -48,7 +48,7 @@ namespace Commute.Controllers
             {
                 FormsAuthentication.SetAuthCookie(user.Account,true); //true=Persistent cookie
                 Session["userId"] = user.Id;
-                return RedirectToAction("List", "Route"); //, new { userId = user.Id }); //Later should be Home/Index
+                return RedirectToAction("Start", "Home"); //, new { userId = user.Id }); //Later should be Home/Index
             }
             else ModelState.AddModelError("Password", Resources.Error_wrong_password);
             return View();
@@ -82,28 +82,37 @@ namespace Commute.Controllers
             {
                 if (user.Account != "a") //TMP 'a' account is not re-created
                 {
+                    //Computer password hash
+                    user.Password = Convert.ToBase64String(new MD5CryptoServiceProvider().ComputeHash(new UTF8Encoding().GetBytes(user.Password)));
                     db.User.Add(user);
                     db.SaveChanges();
                 }
                 else user.Id = 1; //TMP need to set user Id for 'a' account
-                //Send welcome mail to user
-                Mail mail = new Mail();
-                mail.Welcome(user.Id).Send();
 
                 //Authenticate user
                 FormsAuthentication.SetAuthCookie(user.Account, true); //true=Persistent cookie
                 Session["userId"] = user.Id;
 
-                return RedirectToAction("Edit", "User", new { id = user.Id }); //Show user data in Edit view
+                //TMP
+                //Go to /User/WelcomeRegistered screen
+                return RedirectToAction("WelcomeRegistered", new { mailJustSent = 1 });
+
+                //Send welcome mail to user
+                Mail mail = new Mail();
+                mail.Welcome(user.Id).Send();
+
+                //Go to /User/WelcomeRegistered screen
+                return RedirectToAction("WelcomeRegistered", new { mailJustSent = 1 });
             }
             return View();
         }
 
         //Welcome message for registred users
-        public ActionResult WelcomeRegistered()
+        public ActionResult WelcomeRegistered(int mailJustSent = 0)
         {
             if (userId == 0) RedirectToAction("Welcome", "Home");
             User user = db.User.Find(userId);
+            ViewBag.MailJustSent = mailJustSent; //Tell the view to display message that mail was just sent
             return View(user);
         }
 
@@ -253,10 +262,7 @@ namespace Commute.Controllers
             catch( Exception ex) {
                 return RedirectToAction("Error", "Home", new Error("User", "Password", ex.Message + ex.InnerException.Message));
             }
-            if (user == null) return RedirectToAction("Error", "Home", new Error("User", "Password", "Cannot find user"));
-
-            //TMP
-            ViewBag.codedPassword = Convert.ToBase64String(new MD5CryptoServiceProvider().ComputeHash(new UTF8Encoding().GetBytes(user.Password)));
+            if (user == null) return RedirectToAction("Error", "Home", new Error("User", "Password", Resources.Msg_error_db_user));
 
             UserPassword userPassword = new UserPassword();
             userPassword.Id = user.Id;

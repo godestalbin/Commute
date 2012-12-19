@@ -49,8 +49,12 @@ input.password {
     width: 10em;
     display: inline;
 }
+input.user-name {
+    width: 14em;
+    display: inline;
+}
 input.email {
-    width: 20em;
+    width: 14em;
     display: inline;
 }
 .field-validation-error {

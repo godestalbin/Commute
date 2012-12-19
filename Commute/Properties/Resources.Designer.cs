@@ -421,7 +421,7 @@ namespace Commute.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This is the list of route you have defined. You can update the route. You can search route which are close match to your route. You can create new route..
+        ///   Looks up a localized string similar to This is the list of routes you have defined. You can update the route. You can search route which are close match to your route. You can create new route..
         /// </summary>
         public static string Metadesc_route_list {
             get {
@@ -448,6 +448,24 @@ namespace Commute.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Database system error.
+        /// </summary>
+        public static string Msg_error_db {
+            get {
+                return ResourceManager.GetString("Msg error db", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot retrieve user data from database.
+        /// </summary>
+        public static string Msg_error_db_user {
+            get {
+                return ResourceManager.GetString("Msg error db user", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You password has been updated..
         /// </summary>
         public static string Msg_password_updated {
@@ -462,6 +480,15 @@ namespace Commute.Properties {
         public static string My_name {
             get {
                 return ResourceManager.GetString("My name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string Name {
+            get {
+                return ResourceManager.GetString("Name", resourceCulture);
             }
         }
         
@@ -534,6 +561,15 @@ namespace Commute.Properties {
         public static string Picture {
             get {
                 return ResourceManager.GetString("Picture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Previous page.
+        /// </summary>
+        public static string Previous_page {
+            get {
+                return ResourceManager.GetString("Previous page", resourceCulture);
             }
         }
         
@@ -763,7 +799,7 @@ namespace Commute.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You can now update data (upload picture) on your account.
+        ///   Looks up a localized string similar to Complete your account data and upload your picture.
         /// </summary>
         public static string Welcome_account {
             get {
@@ -821,7 +857,7 @@ namespace Commute.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to And then your are ready to define your first commute route.
+        ///   Looks up a localized string similar to And then you are ready to define your first commuting route.
         /// </summary>
         public static string Welcome_route {
             get {

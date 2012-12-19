@@ -147,6 +147,8 @@
   <data name="Menu" xml:space="preserve"> <value>Menu</value> </data>
   <data name="My name" xml:space="preserve"> <value>Je m'appelle</value> </data>
   <data name="Msg confirm mail sending" xml:space="preserve"> <value>Un mail de contact va être envoyé a l'autre utilisateur.&lt;div&gt;Etes vous d'accord ?&lt;/div&gt;</value> </data>
+  <data name="Msg error db" xml:space="preserve"> <value>Erreur système base de données</value> </data>
+  <data name="Msg error db user" xml:space="preserve"> <value>Impossible d'accéder les données utilisateur dans la base</value> </data>
   <data name="Msg password updated" xml:space="preserve"> <value>Votre mot de passe a été mis à jour.</value> </data>
   <data name="No record" xml:space="preserve"> <value>Cet enregistrement n'existe pas</value> </data>
   <data name="Offer" xml:space="preserve"> <value>Offre</value> </data>
@@ -156,6 +158,7 @@
   <data name="Password old" xml:space="preserve"> <value>Ancien mot de passe</value> </data>
   <data name="Password updated" xml:space="preserve"> <value>Mot de passe mis à jour</value> </data>
   <data name="Picture" xml:space="preserve"> <value>Photo</value> </data>
+  <data name="Previous page" xml:space="preserve"> <value>Page précédente</value> </data>
   <data name="Quick start guide" xml:space="preserve"> <value>Guide de démarrage rapide</value> </data>
   <data name="Register" xml:space="preserve"> <value>Enregistrement</value> </data>
   <data name="Route" xml:space="preserve"> <value>Trajet</value> </data>
@@ -192,7 +195,7 @@
   <data name="Mail welcome start" xml:space="preserve"> <value>Pour bien démarrer, lisez notre</value> </data>
   <data name="Mail welcome forum" xml:space="preserve"> <value>Pour reporter des problèmes, demander de l'aide, suggérer de nouvelles fonctionnalités utilisez le</value> </data>
   <data name="Mail welcome safe commute" xml:space="preserve"> <value>Nous vous souhaitons un agréable et plaisant trajet, l'équipe de Commute.</value> </data>
-  <data name="Welcome account" xml:space="preserve"> <value>Complétez vos données personnelles (téléchargez votre photo)You can now update data (upload picture) on your account</value> </data>
+  <data name="Welcome account" xml:space="preserve"> <value>Complétez vos données personnelles (+ photo)</value> </data>
   <data name="Welcome help" xml:space="preserve"> <value>Lisez le guide de démarrage rapide pour avoir condensé des fonctionnalités de Commute.</value> </data>
   <data name="Welcome join" xml:space="preserve"> <value>Créez d'abord un compte pour rejoindre la communauté de Commute</value> </data>
   <data name="Welcome mail" xml:space="preserve"> <value>Nous venons de vous envoyer un mail de bienvenue avec quelques instructions supplémentaires à l'adresse:</value> </data>
@@ -209,5 +212,5 @@
   <data name="Metadesc default" xml:space="preserve"> <value>Share your car to commute between home and work with others or find a car in your area to commute to work. Going to work can be fun: Save fuel, save money and make new friends to share a happy time when commuting. This is the green way to go to work. Help saving the planet. Reduce gaz emission</value> </data>
   <data name="Metadesc home welcome" xml:space="preserve"> <value>Welcome to Commute the green and friendly way to commute. Find routes in your area. Get started with Commute. Joint Commute community.</value> </data>
   <data name="Metadesc user setlocation" xml:space="preserve"> <value>Set default map location when creating new route. Commute is a friendly and green way to commute between home and work.</value> </data>
-  <data name="Metadesc route list" xml:space="preserve"> <value>This is the list of route you have defined. You can update the route. You can search route which are close match to your route. You can create new route.</value> </data>
+  <data name="Metadesc route list" xml:space="preserve"> <value>Liste des trajets que vous avez defini. Vous pouvez mettre à jour un trajet. Vous pouvez rechercher les trajets similaire au votre. Vous pouvez créer un nouveau trajet.</value> </data>
 </root>

@@ -641,6 +641,7 @@
     <Content Include="Views\Mail\Contact.cshtml" />
     <Content Include="Views\Help\Debug.cshtml" />
     <Content Include="Views\Home\Error.cshtml" />
+    <Content Include="Views\Home\Start.cshtml" />
     <None Include="Views\Route\Map.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

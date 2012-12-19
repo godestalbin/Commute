@@ -36,6 +36,13 @@
             @Html.Hidden("Account", @Model.Account) @*Account Account need to be posted because mandatory*@
         </tr>
         <tr>
+            <td>@Html.LabelFor(model => model.Name)</td>
+            <td>
+                @Html.TextBoxFor(model => model.Name, new { @class = "user-name" } )
+                @Html.ValidationMessageFor(model => model.Name)
+            </td>
+        </tr>
+        <tr>
             <td>@Html.LabelFor(model => model.EmailAddress)</td>
             <td>
                 @Html.TextBoxFor(model => model.EmailAddress, new { @class = "email" } )

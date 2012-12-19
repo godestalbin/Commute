@@ -14,7 +14,11 @@ namespace Commute.Models
         [Required(ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "Mandatory")]
         [StringLength(30, ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "Error_string_too_long")]
         public string Account { get; set; }
-        
+
+        [Display(Name = "Name", ResourceType = typeof(Properties.Resources))]
+        [StringLength(40, ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "Error_string_too_long")]
+        public string Name { get; set; }
+
         [Display(Name = "Password", ResourceType = typeof(Properties.Resources))]
         [Required(ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "Mandatory")]
         [StringLength(30, ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "Error_string_too_long")]

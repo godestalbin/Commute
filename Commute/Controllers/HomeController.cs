@@ -47,6 +47,38 @@ namespace Commute.Controllers
     {
         //private readonly Context _context = new Context();
 
+        //Start screen used to redirect user
+        //Not logged -> /Home/Welcome
+        //Logged profile not completed -> /User/WelcomeRegistered
+        //Logged profile completed -> /Route/List
+        [AllowAnonymous]
+        public ActionResult Start()
+        {
+            //Non authenticated user -> Welcome
+            if (!User.Identity.IsAuthenticated) return RedirectToAction("Welcome");
+
+            //User is authenticated
+            //Retrieve user's data
+            User user;
+            try
+            {
+                user = db.User.Find(userId);
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Error", "Home", new Error("Home", "Start", ex.Message + ex.InnerException.Message));
+            }
+            if (user == null) return RedirectToAction("Error", "Home", new Error("Home", "Start", Resources.Msg_error_db_user));
+
+            //Incomplete user's profile -> WelcomeRegitered
+            if (user.LocationLatitude == null || user.PictureVersion == null) return RedirectToAction("WelcomeRegistered", "User");
+
+            //User's location set and user's picture loaded
+            return RedirectToAction("List", "Route");
+            
+            //return View(); //View does not exist because this point is never reached
+        }
+
         [AllowAnonymous]
         public ActionResult Welcome()
         {

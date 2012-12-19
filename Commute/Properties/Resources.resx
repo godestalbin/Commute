@@ -147,7 +147,10 @@
   <data name="Menu" xml:space="preserve"> <value>Menu</value> </data>
   <data name="My name" xml:space="preserve"> <value>My name is</value> </data>
   <data name="Msg confirm mail sending" xml:space="preserve"> <value>A mail will be sent to the other user with your mail.&lt;div&gt;Do you agree ?&lt;/div&gt;</value> </data>
+  <data name="Msg error db" xml:space="preserve"> <value>Database system error</value> </data>
+  <data name="Msg error db user" xml:space="preserve"> <value>Cannot retrieve user data from database</value> </data>
   <data name="Msg password updated" xml:space="preserve"> <value>You password has been updated.</value> </data>
+  <data name="Name" xml:space="preserve"> <value>Name</value> </data>
   <data name="No record" xml:space="preserve"> <value>This record does not exists</value> </data>
   <data name="Offer" xml:space="preserve"> <value>Offer</value> </data>
   <data name="Ok" xml:space="preserve"> <value>OK</value> </data>
@@ -156,6 +159,7 @@
   <data name="Password old" xml:space="preserve"> <value>Old password</value> </data>
   <data name="Password updated" xml:space="preserve"> <value>Password updated</value> </data>
   <data name="Picture" xml:space="preserve"> <value>Picture</value> </data>
+  <data name="Previous page" xml:space="preserve"> <value>Previous page</value> </data>
   <data name="Quick start guide" xml:space="preserve"> <value>Quick start guide</value> </data>
   <data name="Register" xml:space="preserve"> <value>Register</value> </data>
   <data name="Route" xml:space="preserve"> <value>Route</value> </data>
@@ -192,7 +196,7 @@
   <data name="Mail welcome start" xml:space="preserve"> <value>To get started, read the</value> </data>
   <data name="Mail welcome forum" xml:space="preserve"> <value>To register issues, ask for help, request features use the</value> </data>
   <data name="Mail welcome safe commute" xml:space="preserve"> <value>Wish you a safe and fun commute, the Commute Team.</value> </data>
-  <data name="Welcome account" xml:space="preserve"> <value>You can now update data (upload picture) on your account</value> </data>
+  <data name="Welcome account" xml:space="preserve"> <value>Complete your account data and upload your picture</value> </data>
   <data name="Welcome help" xml:space="preserve"> <value>Read the quick start documentation to have an overview of Commute features.</value> </data>
   <data name="Welcome join" xml:space="preserve"> <value>First, create an account to join Commute community</value> </data>
   <data name="Welcome mail" xml:space="preserve"> <value>We just sent you a welcome mail with more instructions at your address: </value> </data>
@@ -202,12 +206,12 @@
 &lt;div&gt;- Get in touch with them to commute together&lt;/div&gt;
 &lt;div&gt;- Keep track of the expenses to share&lt;/div&gt;</value> </data>
   <data name="Welcome registred" xml:space="preserve"> <value> to Commute community.</value> </data>
-  <data name="Welcome route" xml:space="preserve"> <value>And then your are ready to define your first commute route</value> </data>
+  <data name="Welcome route" xml:space="preserve"> <value>And then you are ready to define your first commuting route</value> </data>
   <data name="Welcome set location" xml:space="preserve"> <value>Set your default location</value> </data>
   <data name="Welcome view route" xml:space="preserve"> <value>Alternatively, you can view available routes for your commute path witout creating an account.</value> </data>
   <data name="Wtitle confirmation" xml:space="preserve"> <value>Please confirm</value> </data>
   <data name="Metadesc default" xml:space="preserve"> <value>Share your car to commute between home and work with others or find a car in your area to commute to work. Going to work can be fun: Save fuel, save money and make new friends to share a happy time when commuting. This is the green way to go to work. Help saving the planet. Reduce gaz emission</value> </data>
   <data name="Metadesc home welcome" xml:space="preserve"> <value>Welcome to Commute the green and friendly way to commute. Find routes in your area. Get started with Commute. Joint Commute community.</value> </data>
   <data name="Metadesc user setlocation" xml:space="preserve"> <value>Set default map location when creating new route. Commute is a friendly and green way to commute between home and work.</value> </data>
-  <data name="Metadesc route list" xml:space="preserve"> <value>This is the list of route you have defined. You can update the route. You can search route which are close match to your route. You can create new route.</value> </data>
+  <data name="Metadesc route list" xml:space="preserve"> <value>This is the list of routes you have defined. You can update the route. You can search route which are close match to your route. You can create new route.</value> </data>
 </root>

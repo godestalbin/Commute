@@ -7,15 +7,26 @@
     ViewBag.Metadesc = Resources.Metadesc_home_welcome;
 }
 
-@Html.Raw( @Resources.Welcome ) <b>@Model.Account</b>
+@Html.Raw( @Resources.Welcome ) <b>@(Model.Name ?? Model.Account)</b>
 @Html.Raw( @Resources.Welcome_registred.Replace("Commute", "<b>Commute</b>") )
-@Html.Raw( @Resources.Welcome_mail ) @Model.EmailAddress
-<br>
+@if ( ViewBag.MailJustSent == 1 ) { @Html.Raw( @Resources.Welcome_mail ) @Model.EmailAddress; }
+@if ( ! Model.LocationLatitude.HasValue ) {
+@*<br>*@
+    <p>
 @Html.Raw( @Resources.Welcome_set_location )
 <a href="/User/SetLocation" data-role="button" data-ajax="false" data-inline="true" data-mini="true">@Resources.User_set_location</a>
-<br>
+        </p>
+}
+@if (Model.Name == null || Model.PictureVersion == null)
+{
+@*<br>*@
+<p>
 @Html.Raw( @Resources.Welcome_account )
 <a href="/User/Edit" data-role="button" data-ajax="false" data-inline="true" data-mini="true">@Resources.User_account</a>
-<br>
+</p>
+}    
+@*<br>*@
+<p>
 @Html.Raw( @Resources.Welcome_route)
 <a href="/Route/CreateUpdate" data-role="button" data-ajax="false" data-inline="true" data-mini="true">@Resources.Route_create</a>
+</p>
