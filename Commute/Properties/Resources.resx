@@ -128,6 +128,7 @@
   <data name="Error database access" xml:space="preserve"> <value>Database error</value> </data>
   <data name="Error duplicate account" xml:space="preserve"> <value>This account already exists</value> </data>
   <data name="Error invalid mail" xml:space="preserve"> <value>This does not look like a valid mail address</value> </data>
+  <data name="Error wrong mail" xml:space="preserve"> <value>This mail does not match this account</value> </data>
   <data name="Error string too long" xml:space="preserve"> <value>String is too long</value> </data>
   <data name="Error unknown account" xml:space="preserve"> <value>This account does not exists</value> </data>
   <data name="Error wrong password" xml:space="preserve"> <value>Wrong password, did you forget it...too bad !</value> </data>
@@ -155,9 +156,11 @@
   <data name="Offer" xml:space="preserve"> <value>Offer</value> </data>
   <data name="Ok" xml:space="preserve"> <value>OK</value> </data>
   <data name="Password" xml:space="preserve"> <value>Password</value> </data>
+  <data name="Password min" xml:space="preserve"> <value>password</value> </data>
   <data name="Password confirm" xml:space="preserve"> <value>Confirm password</value> </data>
   <data name="Password old" xml:space="preserve"> <value>Old password</value> </data>
   <data name="Password updated" xml:space="preserve"> <value>Password updated</value> </data>
+  <data name="Password reset" xml:space="preserve"> <value>Reset password</value> </data>
   <data name="Picture" xml:space="preserve"> <value>Picture</value> </data>
   <data name="Previous page" xml:space="preserve"> <value>Previous page</value> </data>
   <data name="Quick start guide" xml:space="preserve"> <value>Quick start guide</value> </data>
@@ -186,19 +189,29 @@
   <data name="User set location" xml:space="preserve"> <value>Set location</value> </data>
   <data name="Your account" xml:space="preserve"> <value>Your account</value> </data>
   <data name="Welcome" xml:space="preserve"> <value>Welcome</value> </data>
+  <data name="Mail contact mail title" xml:space="preserve"> <value>Commute – Contact request</value> </data>
   <data name="Mail contact title" xml:space="preserve"> <value>We have matching routes</value> </data>
   <data name="Mail contact msg" xml:space="preserve"> <value>I have found that our commute routes are quite similar, can we get in touch to see if we can commute togther ?</value> </data>
   <data name="Mail contact reply" xml:space="preserve"> <value>Just reply to this mail to contact me (you will see my mail address).</value> </data>
   <data name="Mail contact map" xml:space="preserve"> <value>The map below shows our two routes:</value> </data>
   <data name="Mail contact map title" xml:space="preserve"> <value>This map is just a picture. Click the map to view it as a Goole map in Commute.</value> </data>
+  <data name="Mail password reset" xml:space="preserve"> <value>We reset your password with the value: </value> </data>
+  <data name="Mail password first" xml:space="preserve"> <value>First,</value> </data>
+  <data name="Mail password login" xml:space="preserve"> <value>login</value> </data>
+  <data name="Mail password to" xml:space="preserve"> <value>to Commute with this new password.</value> </data>
+  <data name="Mail password use" xml:space="preserve"> <value>Then, use the</value> </data>
+  <data name="Mail password update" xml:space="preserve"> <value>screen to change your password.</value> </data>
   <data name="Mail welcome welcome" xml:space="preserve"> <value>Welcome to Commute !</value> </data>
   <data name="Mail welcome created" xml:space="preserve"> <value>has been sucessfuly created. &lt;p&gt;You can now register routes and find commuters with similar routes as yours.&lt;/p&gt;</value> </data>
   <data name="Mail welcome start" xml:space="preserve"> <value>To get started, read the</value> </data>
   <data name="Mail welcome forum" xml:space="preserve"> <value>To register issues, ask for help, request features use the</value> </data>
+  <data name="Mail commute end greeting" xml:space="preserve"> <value>Wish you a safe and fun commute, the Commute Team.</value> </data>
   <data name="Mail welcome safe commute" xml:space="preserve"> <value>Wish you a safe and fun commute, the Commute Team.</value> </data>
   <data name="Welcome account" xml:space="preserve"> <value>Complete your account data and upload your picture</value> </data>
   <data name="Welcome help" xml:space="preserve"> <value>Read the quick start documentation to have an overview of Commute features.</value> </data>
   <data name="Welcome join" xml:space="preserve"> <value>First, create an account to join Commute community</value> </data>
+  <data name="Welcome login button press" xml:space="preserve"> <value>Press the</value> </data>
+  <data name="Welcome login button" xml:space="preserve"> <value>button to login to Commute</value> </data>
   <data name="Welcome mail" xml:space="preserve"> <value>We just sent you a welcome mail with more instructions at your address: </value> </data>
   <data name="Welcome message" xml:space="preserve"> <value>Welcome to Commute, the green and friendly way to commute.
 &lt;div&gt;- Define the commute routes you seek/offer&lt;/div&gt;

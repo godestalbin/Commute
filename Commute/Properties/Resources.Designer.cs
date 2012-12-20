@@ -178,6 +178,15 @@ namespace Commute.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This mail does not match this account.
+        /// </summary>
+        public static string Error_wrong_mail {
+            get {
+                return ResourceManager.GetString("Error wrong mail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Wrong password, did you forget it...too bad !.
         /// </summary>
         public static string Error_wrong_password {
@@ -286,6 +295,24 @@ namespace Commute.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Wish you a safe and fun commute, the Commute Team..
+        /// </summary>
+        public static string Mail_commute_end_greeting {
+            get {
+                return ResourceManager.GetString("Mail commute end greeting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Commute – Contact request.
+        /// </summary>
+        public static string Mail_contact_mail_title {
+            get {
+                return ResourceManager.GetString("Mail contact mail title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The map below shows our two routes:.
         /// </summary>
         public static string Mail_contact_map {
@@ -327,6 +354,60 @@ namespace Commute.Properties {
         public static string Mail_contact_title {
             get {
                 return ResourceManager.GetString("Mail contact title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to First,.
+        /// </summary>
+        public static string Mail_password_first {
+            get {
+                return ResourceManager.GetString("Mail password first", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to login.
+        /// </summary>
+        public static string Mail_password_login {
+            get {
+                return ResourceManager.GetString("Mail password login", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to We reset your password with the value: .
+        /// </summary>
+        public static string Mail_password_reset {
+            get {
+                return ResourceManager.GetString("Mail password reset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to to Commute with this new password..
+        /// </summary>
+        public static string Mail_password_to {
+            get {
+                return ResourceManager.GetString("Mail password to", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to screen to change your password..
+        /// </summary>
+        public static string Mail_password_update {
+            get {
+                return ResourceManager.GetString("Mail password update", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Then, use the.
+        /// </summary>
+        public static string Mail_password_use {
+            get {
+                return ResourceManager.GetString("Mail password use", resourceCulture);
             }
         }
         
@@ -538,11 +619,29 @@ namespace Commute.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to password.
+        /// </summary>
+        public static string Password_min {
+            get {
+                return ResourceManager.GetString("Password min", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Old password.
         /// </summary>
         public static string Password_old {
             get {
                 return ResourceManager.GetString("Password old", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset password.
+        /// </summary>
+        public static string Password_reset {
+            get {
+                return ResourceManager.GetString("Password reset", resourceCulture);
             }
         }
         
@@ -822,6 +921,24 @@ namespace Commute.Properties {
         public static string Welcome_join {
             get {
                 return ResourceManager.GetString("Welcome join", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to button to login to Commute.
+        /// </summary>
+        public static string Welcome_login_button {
+            get {
+                return ResourceManager.GetString("Welcome login button", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Press the.
+        /// </summary>
+        public static string Welcome_login_button_press {
+            get {
+                return ResourceManager.GetString("Welcome login button press", resourceCulture);
             }
         }
         

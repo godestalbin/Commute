@@ -40,15 +40,31 @@ namespace Commute.Controllers
         [AllowAnonymous]
         public ActionResult Login(User userLogin)
         {
-            User user = (from u in db.User
-                         where u.Account == userLogin.Account
-                         select u).FirstOrDefault();
+            User user;
+            try
+            {
+                user = (from u in db.User
+                        where u.Account == userLogin.Account
+                        select u).FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Error", "Home", new Error("User", "Login", ex.Message + ex.InnerException.Message));
+            }
             if (user == null) ModelState.AddModelError("Account", Resources.Error_unknown_account);
-            else if (user.Password == Convert.ToBase64String(new MD5CryptoServiceProvider().ComputeHash(new UTF8Encoding().GetBytes(userLogin.Password))))
+            //Check password is right
+            else if (user.Password == Convert.ToBase64String(new MD5CryptoServiceProvider().ComputeHash(new UTF8Encoding().GetBytes(userLogin.Password ?? ""))))
             {
                 FormsAuthentication.SetAuthCookie(user.Account,true); //true=Persistent cookie
                 Session["userId"] = user.Id;
-                return RedirectToAction("Start", "Home"); //, new { userId = user.Id }); //Later should be Home/Index
+                //Check if we have a return URL (user attempted to access screen without beeing authenticated)
+                string[] returnUrl = HttpUtility.UrlDecode(Request.UrlReferrer.Query).Split('=');
+                string[] controllerAction = null;
+                if (returnUrl.Length == 2) controllerAction = returnUrl[1].Split('/');
+                //Go back to the return URL
+                if (controllerAction != null && controllerAction.Length > 1) return RedirectToAction(controllerAction[2], controllerAction[1]);
+                //No return URL go to the Start screen to redirect user
+                else return RedirectToAction("Start", "Home"); //, new { userId = user.Id }); //Later should be Home/Index
             }
             else ModelState.AddModelError("Password", Resources.Error_wrong_password);
             return View();
@@ -83,7 +99,7 @@ namespace Commute.Controllers
                 if (user.Account != "a") //TMP 'a' account is not re-created
                 {
                     //Computer password hash
-                    user.Password = Convert.ToBase64String(new MD5CryptoServiceProvider().ComputeHash(new UTF8Encoding().GetBytes(user.Password)));
+                    user.Password = Convert.ToBase64String(new MD5CryptoServiceProvider().ComputeHash(new UTF8Encoding().GetBytes(user.Password ?? "")));
                     db.User.Add(user);
                     db.SaveChanges();
                 }
@@ -95,7 +111,7 @@ namespace Commute.Controllers
 
                 //TMP
                 //Go to /User/WelcomeRegistered screen
-                return RedirectToAction("WelcomeRegistered", new { mailJustSent = 1 });
+                //return RedirectToAction("WelcomeRegistered", new { mailJustSent = 1 });
 
                 //Send welcome mail to user
                 Mail mail = new Mail();
@@ -188,8 +204,7 @@ namespace Commute.Controllers
                                     // Specify some eager transformations                                                        
                                     Eager = new[]
                                     {
-                                        new Transformation(100, 100) { Format = "png", Crop = CropMode.Thumb, Gravity = Gravity.Face, Radius = 8 },
-                                        //new Transformation(120, 360) { Crop = CropMode.Limit },
+                                        new Transformation(100, 100) { Format = "png", Crop = CropMode.Thumb, Gravity = Gravity.Face, Radius = 8 }, //, Angle = new Angle(90)
                                     }
                                 });
             return uploadResult.Version;
@@ -283,17 +298,16 @@ namespace Commute.Controllers
             {
                 return RedirectToAction("Error", "Home", new Error("User", "Password", ex.Message + ex.InnerException.Message));
             }
+            if (user == null) return RedirectToAction("Error", "Home", new Error("User", "Password", Resources.Msg_error_db_user));
 
             //Control current password
-            if (user.Password != Convert.ToBase64String(new MD5CryptoServiceProvider().ComputeHash(new UTF8Encoding().GetBytes(userPassword.OldPassword))))
+            if (user.Password != Convert.ToBase64String(new MD5CryptoServiceProvider().ComputeHash(new UTF8Encoding().GetBytes(userPassword.OldPassword ?? ""))))
             {
                 ModelState.AddModelError("OldPassword", Resources.Error_wrong_password);
                 return View(userPassword);
             }
             
             //Save updated password to database
-            if (user == null) return RedirectToAction("Error", "Home", new Error("User", "Password", "Cannot find user"));
-
             user.Password = Convert.ToBase64String(new MD5CryptoServiceProvider().ComputeHash(new UTF8Encoding().GetBytes(userPassword.Password)));
             try
             {
@@ -314,13 +328,74 @@ namespace Commute.Controllers
             return View();
         }
 
+        //Reset user's password
+        [AllowAnonymous]
+        public ActionResult ResetPassword()
+        {
+            //Retrieve current user
+            User user = new User();
+            
+            return View(user);
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult ResetPassword(User postUser)
+        {
+            //Retrieve current user
+            User user;
+            try
+            {
+                user = (from u in db.User
+                        where u.Account == postUser.Account
+                        select u).FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Error", "Home", new Error("User", "ResetPassword", ex.Message + ex.InnerException.Message));
+            }
+            //Account not found
+            if (user == null) ModelState.AddModelError("Account", Resources.Error_unknown_account);
+
+            //Control mail match the one registered for this account
+            if (user.EmailAddress != postUser.EmailAddress) ModelState.AddModelError("EmailAddress", Resources.Error_wrong_mail);
+
+            //Password is mandatory we removed from ModelState
+            ModelState.Remove("Password");
+
+            //Generate a new password - password is mandatory in the model
+            string password = Membership.GeneratePassword(12, 1);
+
+            if (ModelState.IsValid)
+            {
+                //Update user password
+                try
+                {
+                    user.Password = Convert.ToBase64String(new MD5CryptoServiceProvider().ComputeHash(new UTF8Encoding().GetBytes(password)));
+                    db.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    return RedirectToAction("Error", "Home", new Error("User", "ResetPassword", ex.Message + ex.InnerException.Message));
+                }
+
+                //Send new reset password mail
+                user.Password = password; //we need to send to user the password not the hash we saved to database
+                //Mail mail = new Mail();
+                //mail.Welcome(user.Id).Send();
+                //return RedirectToAction("Login");
+                return RedirectToAction("Password", "Mail", user);
+            }
+            else return View(user); //Cannot send mail
+        }
+
         //-----------------------------------------
         //Default controller action auto generated - not used
 
         //
         // GET: /User/
 
-        public ActionResult Index()
+        public ActionResult List()
         {
             return View(db.User.ToList());
         }

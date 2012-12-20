@@ -34,12 +34,19 @@
     </table>
 }
 
-@section Scripts {
+@if (!ViewData.ModelState.IsValid)
+{
+    <div>
+        <p></p>
+        <a href="/User/ResetPassword" data-role="button" data-ajax="false" data-inline="true" data-mini="true">@Resources.Password_reset</a>
+    </div>
+}    
 
+@section Scripts {
+     @Scripts.Render("~/bundles/jqueryval")
 <script>
     jQuery(document).ready(function () {
         $('#iptAccount').focus();
     });
 </script>
-
 }

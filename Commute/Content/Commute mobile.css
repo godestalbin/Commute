@@ -13,6 +13,22 @@ padding: 0px;
 div.inline {
     display: inline;
 }
+div.float {
+    float: left;
+    /*width: 100%;*/
+}
+div.size100 {
+    width: 100%;
+}
+div.size30 {
+    width: 30%;
+}
+div.size60 {
+    width: 60%;
+}
+div.size70 {
+    width: 70%;
+}
 div.ui-body-c {
     background: #ececfe;
     font-family: Tahoma;
@@ -91,4 +107,9 @@ input.email {
     border-radius: 13px;
     border: solid 1px;
     font-size: 0.7em;
+}
+
+/*For test*/
+.border {
+    border: solid 1px;
 }

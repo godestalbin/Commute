@@ -642,6 +642,7 @@
     <Content Include="Views\Help\Debug.cshtml" />
     <Content Include="Views\Home\Error.cshtml" />
     <Content Include="Views\Home\Start.cshtml" />
+    <Content Include="Views\Mail\Password.cshtml" />
     <None Include="Views\Route\Map.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -668,7 +669,7 @@
     <Content Include="Views\Route\CreateUpdateOld.cshtml" />
     <Content Include="Views\Route\CreateUpdate %28route%29.cshtml" />
     <Content Include="Views\Route\Base.cshtml" />
-    <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\User\List.cshtml" />
     <Content Include="Views\User\Details.cshtml" />
     <Content Include="Views\User\Create.cshtml" />
     <Content Include="Views\User\Edit.cshtml" />
@@ -692,6 +693,7 @@
     <Content Include="Views\User\UserPicture.cshtml" />
     <Content Include="Views\User\Password.cshtml" />
     <Content Include="Views\User\PasswordUpdated.cshtml" />
+    <Content Include="Views\User\ResetPassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

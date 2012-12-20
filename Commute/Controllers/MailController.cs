@@ -4,8 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Mvc.Mailer;
-using Commute.Models;
 using System.Net.Mail;
+using Commute.Models;
+using Commute.Properties;
 
 namespace Commute.Controllers
 {
@@ -34,6 +35,18 @@ namespace Commute.Controllers
             //Path where picture are stored
             ViewBag.HttpPicture = System.Configuration.ConfigurationManager.AppSettings["Http.Picture"];
             return View(routeCompare); //Display /Views/Welcome the view used to generate mail
+        }
+
+        //Password - Password reset, send new password to user
+        [AllowAnonymous]
+        public ActionResult Password(User user)
+        {
+            //Send mail as test
+            //Mail mail = new Mail();
+            //mail.Contact(fromRouteId, toRouteId).Send();
+            //Path where picture are stored
+            ViewBag.HttpPicture = System.Configuration.ConfigurationManager.AppSettings["Http.Picture"];
+            return View(user);
         }
 
         //Send contact mail
@@ -85,8 +98,24 @@ namespace Commute.Controllers
             ViewBag.HttpPicture = System.Configuration.ConfigurationManager.AppSettings["Http.Picture"];
             return Populate(x =>
             {
-                x.Subject = "Welcome";
+                x.Subject = Resources.Welcome;
                 x.ViewName = "Welcome"; //Views/Mail/Welcome
+                x.To.Add(user.EmailAddress);
+                x.Bcc.Add("godestalbin@leroymerlin.cn"); //send me a copy of the mail
+            });
+        }
+
+        //Generate reset password mail
+        [AllowAnonymous]
+        public virtual MvcMailMessage Password(User user)
+        {
+            ViewData.Model = user; //Set the strongly typed object for the view
+            //Path where picture are stored
+            ViewBag.HttpPicture = System.Configuration.ConfigurationManager.AppSettings["Http.Picture"];
+            return Populate(x =>
+            {
+                x.Subject = Resources.Password_reset;
+                x.ViewName = "Password"; //Views/Mail/Pasword
                 x.To.Add(user.EmailAddress);
                 x.Bcc.Add("godestalbin@leroymerlin.cn"); //send me a copy of the mail
             });
@@ -101,14 +130,14 @@ namespace Commute.Controllers
             ViewBag.HttpPicture = System.Configuration.ConfigurationManager.AppSettings["Http.Picture"];
             return Populate(x =>
             {
-                x.Subject = "Commute contact request";
+                x.Subject = Resources.Mail_contact_mail_title;
                 x.ViewName = "Contact"; //Views/Mail/Contact
                 x.ReplyToList.Add(routeCompare.UserMail1); //from user
                 x.To.Add(routeCompare.UserMail2); //to user
                 x.Bcc.Add("godestalbin@leroymerlin.cn"); //send me a copy of the mail
             });
 
-            //Example on hwo to use differente smtp client
+            //Example on how to use differente smtp client
             //http://stackoverflow.com/questions/9130277/how-set-up-different-stmpclient-instances-in-web-config
         }
 

@@ -150,6 +150,7 @@
   <data name="Msg error db" xml:space="preserve"> <value>Erreur système base de données</value> </data>
   <data name="Msg error db user" xml:space="preserve"> <value>Impossible d'accéder les données utilisateur dans la base</value> </data>
   <data name="Msg password updated" xml:space="preserve"> <value>Votre mot de passe a été mis à jour.</value> </data>
+  <data name="Name" xml:space="preserve"> <value>Nom</value> </data>
   <data name="No record" xml:space="preserve"> <value>Cet enregistrement n'existe pas</value> </data>
   <data name="Offer" xml:space="preserve"> <value>Offre</value> </data>
   <data name="Ok" xml:space="preserve"> <value>OK</value> </data>
@@ -195,9 +196,11 @@
   <data name="Mail welcome start" xml:space="preserve"> <value>Pour bien démarrer, lisez notre</value> </data>
   <data name="Mail welcome forum" xml:space="preserve"> <value>Pour reporter des problèmes, demander de l'aide, suggérer de nouvelles fonctionnalités utilisez le</value> </data>
   <data name="Mail welcome safe commute" xml:space="preserve"> <value>Nous vous souhaitons un agréable et plaisant trajet, l'équipe de Commute.</value> </data>
-  <data name="Welcome account" xml:space="preserve"> <value>Complétez vos données personnelles (+ photo)</value> </data>
+  <data name="Welcome account" xml:space="preserve"> <value>Complétez vos données personnelles et chargez votre photo</value> </data>
   <data name="Welcome help" xml:space="preserve"> <value>Lisez le guide de démarrage rapide pour avoir condensé des fonctionnalités de Commute.</value> </data>
   <data name="Welcome join" xml:space="preserve"> <value>Créez d'abord un compte pour rejoindre la communauté de Commute</value> </data>
+  <data name="Welcome login button press" xml:space="preserve"> <value>Appuyer sur le bouton</value> </data>
+  <data name="Welcome login button" xml:space="preserve"> <value>pour vous connecter a Commute</value> </data>
   <data name="Welcome mail" xml:space="preserve"> <value>Nous venons de vous envoyer un mail de bienvenue avec quelques instructions supplémentaires à l'adresse:</value> </data>
   <data name="Welcome message" xml:space="preserve"> <value>Bienvene à Commute, le moyen sympa et responsable de faire les trajets réguliers.
 &lt;div&gt;- Définissez les trajets que vous cherchez/offrez&lt;/div&gt;
