@@ -381,10 +381,10 @@ namespace Commute.Controllers
 
                 //Send new reset password mail
                 user.Password = password; //we need to send to user the password not the hash we saved to database
-                //Mail mail = new Mail();
-                //mail.Welcome(user.Id).Send();
-                //return RedirectToAction("Login");
-                return RedirectToAction("Password", "Mail", user);
+                Mail mail = new Mail();
+                mail.Password(user).Send();
+                return RedirectToAction("Login");
+                //return RedirectToAction("Password", "Mail", user);
             }
             else return View(user); //Cannot send mail
         }
