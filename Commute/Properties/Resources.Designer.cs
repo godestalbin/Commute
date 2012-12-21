@@ -556,6 +556,15 @@ namespace Commute.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to We are now sending you a mail with the new password.
+        /// </summary>
+        public static string Msg_sending_mail {
+            get {
+                return ResourceManager.GetString("Msg sending mail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to My name is.
         /// </summary>
         public static string My_name {

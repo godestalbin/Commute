@@ -151,6 +151,7 @@
   <data name="Msg error db" xml:space="preserve"> <value>Erreur système base de données</value> </data>
   <data name="Msg error db user" xml:space="preserve"> <value>Impossible d'accéder les données utilisateur dans la base</value> </data>
   <data name="Msg password updated" xml:space="preserve"> <value>Votre mot de passe a été mis à jour.</value> </data>
+  <data name="Msg sending mail" xml:space="preserve"> <value>Nous vous envoyons un mail avec le nouveau mot de passe</value> </data>
   <data name="Name" xml:space="preserve"> <value>Nom</value> </data>
   <data name="No record" xml:space="preserve"> <value>Cet enregistrement n'existe pas</value> </data>
   <data name="Offer" xml:space="preserve"> <value>Offre</value> </data>

@@ -20,7 +20,6 @@ namespace Commute.Controllers
             //Send mail as test
             //Mail mail = new Mail();
             //mail.Welcome(userId).Send();
-            ViewBag.HttpPicture = System.Configuration.ConfigurationManager.AppSettings["Http.Picture"];
             User user = db.User.Find(userId);
             return View(user); //Display /Views/Welcome the view used to generate mail
         }
@@ -32,8 +31,6 @@ namespace Commute.Controllers
             //Mail mail = new Mail();
             //mail.Contact(fromRouteId, toRouteId).Send();
             RouteCompare routeCompare = new RouteCompare(fromRouteId, toRouteId);
-            //Path where picture are stored
-            ViewBag.HttpPicture = System.Configuration.ConfigurationManager.AppSettings["Http.Picture"];
             return View(routeCompare); //Display /Views/Welcome the view used to generate mail
         }
 
@@ -44,8 +41,6 @@ namespace Commute.Controllers
             //Send mail as test
             //Mail mail = new Mail();
             //mail.Contact(fromRouteId, toRouteId).Send();
-            //Path where picture are stored
-            ViewBag.HttpPicture = System.Configuration.ConfigurationManager.AppSettings["Http.Picture"];
             return View(user);
         }
 
@@ -95,13 +90,16 @@ namespace Commute.Controllers
             User user = db.User.Find(userId); //Retrieve user
             ViewBag.account = user.Account;
             ViewData.Model = user; //Set the strongly typed object for the view
-            ViewBag.HttpPicture = System.Configuration.ConfigurationManager.AppSettings["Http.Picture"];
+            //Add embedded pictures
+            var resources = new Dictionary<string, string>();
+            resources["signature"] = HttpContext.Current.Server.MapPath("~/Content/Images/Commute mail signature.png");
             return Populate(x =>
             {
                 x.Subject = Resources.Welcome;
                 x.ViewName = "Welcome"; //Views/Mail/Welcome
                 x.To.Add(user.EmailAddress);
                 x.Bcc.Add("godestalbin@leroymerlin.cn"); //send me a copy of the mail
+                x.LinkedResources = resources; //Embedded images - Commute signature
             });
         }
 
@@ -110,14 +108,16 @@ namespace Commute.Controllers
         public virtual MvcMailMessage Password(User user)
         {
             ViewData.Model = user; //Set the strongly typed object for the view
-            //Path where picture are stored
-            ViewBag.HttpPicture = System.Configuration.ConfigurationManager.AppSettings["Http.Picture"];
+            //Add embedded pictures
+            var resources = new Dictionary<string, string>();
+            resources["signature"] = HttpContext.Current.Server.MapPath("~/Content/Images/Commute mail signature.png");
             return Populate(x =>
             {
                 x.Subject = Resources.Password_reset;
                 x.ViewName = "Password"; //Views/Mail/Pasword
                 x.To.Add(user.EmailAddress);
                 x.Bcc.Add("godestalbin@leroymerlin.cn"); //send me a copy of the mail
+                x.LinkedResources = resources; //Embedded images - Commute signature
             });
         }
 
@@ -126,8 +126,9 @@ namespace Commute.Controllers
         {
             RouteCompare routeCompare = new RouteCompare(fromRouteId, toRouteId);
             ViewData.Model = routeCompare; //Set the strongly typed object for the view
-            //Path where picture are stored
-            ViewBag.HttpPicture = System.Configuration.ConfigurationManager.AppSettings["Http.Picture"];
+            //Add embedded pictures
+            var resources = new Dictionary<string, string>();
+            resources["signature"] = HttpContext.Current.Server.MapPath("~/Content/Images/Commute mail signature.png");
             return Populate(x =>
             {
                 x.Subject = Resources.Mail_contact_mail_title;
@@ -135,6 +136,7 @@ namespace Commute.Controllers
                 x.ReplyToList.Add(routeCompare.UserMail1); //from user
                 x.To.Add(routeCompare.UserMail2); //to user
                 x.Bcc.Add("godestalbin@leroymerlin.cn"); //send me a copy of the mail
+                x.LinkedResources = resources; //Embedded images - Commute signature
             });
 
             //Example on how to use differente smtp client

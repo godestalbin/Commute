@@ -29,6 +29,23 @@ div.size60 {
 div.size70 {
     width: 70%;
 }
+div.message {
+    display: block;
+    position: absolute;
+    top: 200px;
+    background-color: #c3cdd9;
+    opacity: 0.5;
+    margin-left: 5em;
+    margin-right: 5em;
+    border-radius: 15px;
+    visibility: hidden;
+    padding: 1em;
+    text-align: center;
+}
+.ui-loading .ui-loader
+{
+    display:none;
+}
 div.ui-body-c {
     background: #ececfe;
     font-family: Tahoma;

@@ -358,7 +358,7 @@ namespace Commute.Controllers
             if (user == null) ModelState.AddModelError("Account", Resources.Error_unknown_account);
 
             //Control mail match the one registered for this account
-            if (user.EmailAddress != postUser.EmailAddress) ModelState.AddModelError("EmailAddress", Resources.Error_wrong_mail);
+            else if (user.EmailAddress != postUser.EmailAddress) ModelState.AddModelError("EmailAddress", Resources.Error_wrong_mail);
 
             //Password is mandatory we removed from ModelState
             ModelState.Remove("Password");

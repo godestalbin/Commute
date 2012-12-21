@@ -1,4 +1,5 @@
 ﻿@using Commute.Properties
+@using Mvc.Mailer;
 
 <html>
 <head>
@@ -25,6 +26,7 @@
         @RenderBody()
     </div>
     <p></p>
-    <a href="http://commute.apphb.com" title="Click to go to Commute web site"><img src="@(ViewBag.HttpPicture)Commute mail signature.png" class="noborder"/></a>
+    <a href="http://commute.apphb.com" title="Click to go to Commute web site">@Html.InlineImage("signature", "Commute signature")</a>
+    @*<img src="@(ViewBag.HttpPicture)Commute mail signature.png" class="noborder"/>*@
 </body>
 </html>
