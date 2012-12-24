@@ -145,15 +145,31 @@ namespace Commute.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(User user)
+        public ActionResult Edit(User postUser)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(user).State = EntityState.Modified;
-                db.SaveChanges();
+                //Retrieve current user
+                //In the postUser we don't have all user's data
+                User user;
+                try
+                {
+                    user = (from u in db.User
+                            where u.Account == postUser.Account
+                            select u).FirstOrDefault();
+                    //db.Entry(user).State = EntityState.Modified;
+                    user.Name = postUser.Name;
+                    user.EmailAddress = postUser.EmailAddress;
+                    db.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    return RedirectToAction("Error", "Home", new Error("User", "Edit", ex.Message + ex.InnerException.Message));
+                }
+ 
                 return View(user);  //RedirectToAction("Index");
             }
-            return View(user);
+            return View(postUser);
         }
 
         //Upload (post only)
