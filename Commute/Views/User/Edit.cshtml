@@ -48,6 +48,7 @@
                 @Html.TextBoxFor(model => model.EmailAddress, new { @class = "email" } )
                 @Html.ValidationMessageFor(model => model.EmailAddress)
                 @Html.Hidden("Password", @Model.Password) @*Password is mandatory so we include it here*@
+                @Html.Hidden("PictureVersion", @Model.PictureVersion) @*We add it here to keep the value when saving*@
             </td>
         </tr>
         <tr>
@@ -66,6 +67,22 @@
                 @Html.Partial("UploadFile", new Commute.Models.Entity { Id = @Model.Id } )
 
 
+@*<div class="custom-upload">
+    <input type="file">
+    <div class="fake-file">
+        @if( Model.PictureVersion != null ) {
+                <img id="userImage2" class="user-image" src="@Url.CloudinaryImage("v" + @Model.PictureVersion + "/" + @String.Format("{0:00000000}", @Model.Id), new Transformation(100, 100) { Format = "png", Crop = CropMode.Thumb, Gravity = Gravity.Face, Radius = 8 })"/> } 
+                else { <img id="userImage2" class="user-image" src="@Url.CloudinaryImage("Unknown")"/> }
+        <input disabled="disabled" >
+    </div>
+</div>​*@
+
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+<script>
+    $('.custom-upload input[type=file]').change(function(){
+        $(this).next().find('input').val($(this).val());
+        alert("we can upload here");
+    });​
+</script>
 }
