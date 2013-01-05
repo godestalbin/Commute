@@ -117,13 +117,20 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+
   <data name="Account" xml:space="preserve"> <value>Compte utilisateur</value> </data>
   <data name="Amazon picture HTTP" xml:space="preserve"> <value>https://s3-eu-west-1.amazonaws.com/commute/Pictures/</value> </data>
   <data name="Application name" xml:space="preserve"> <value>Commute</value> </data>
   <data name="Cancel" xml:space="preserve"> <value>Annuler</value> </data>
   <data name="Change password" xml:space="preserve"> <value>Modifier le mot de passe</value> </data>
+  <data name="Co2 per person" xml:space="preserve"> <value>CO2 par personne</value> </data>
+  <data name="Co2 saved" xml:space="preserve"> <value>CO2 économisé</value> </data>
+  <data name="Compute cost" xml:space="preserve"> <value>Calculer les dépenses</value> </data>
+  <data name="Consumption" xml:space="preserve"> <value>Consommation</value> </data>
+  <data name="Cost per person" xml:space="preserve"> <value>Coût par personne</value> </data>
   <data name="Create account" xml:space="preserve"> <value>Créer un compte</value> </data>
   <data name="Dir image upload" xml:space="preserve"> <value>/Content/Images/Upload/</value> </data>
+  <data name="Distance" xml:space="preserve"> <value>Distance</value> </data>
   <data name="Email" xml:space="preserve"> <value>Adresse mail</value> </data>
   <data name="Error database access" xml:space="preserve"> <value>Erreur d'accès a la base</value> </data>
   <data name="Error duplicate account" xml:space="preserve"> <value>The compte existe déjà</value> </data>
@@ -134,6 +141,8 @@
   <data name="Error wrong password" xml:space="preserve"> <value>Erreur de mot de passe</value> </data>
   <data name="Forum" xml:space="preserve"> <value>Forum</value> </data>
   <data name="From" xml:space="preserve"> <value>De</value> </data>
+  <data name="Fuel cost" xml:space="preserve"> <value>Coût essence</value> </data>
+  <data name="Fuel used" xml:space="preserve"> <value>Essence utilisé</value> </data>
   <data name="Guest" xml:space="preserve"> <value>Invité</value> </data>
   <data name="Hello" xml:space="preserve"> <value>Bonjour</value> </data>
   <data name="Help" xml:space="preserve"> <value>Aide</value> </data>
@@ -162,6 +171,7 @@
   <data name="Password old" xml:space="preserve"> <value>Ancien mot de passe</value> </data>
   <data name="Password updated" xml:space="preserve"> <value>Mot de passe mis à jour</value> </data>
   <data name="Password reset" xml:space="preserve"> <value>Reinitialise le mot de passe</value> </data>
+  <data name="Person in car" xml:space="preserve"> <value>Nombre de personnes</value> </data>
   <data name="Picture" xml:space="preserve"> <value>Photo</value> </data>
   <data name="Previous page" xml:space="preserve"> <value>Page précédente</value> </data>
   <data name="Quick start guide" xml:space="preserve"> <value>Guide de démarrage rapide</value> </data>
@@ -178,6 +188,7 @@
   <data name="Search" xml:space="preserve"> <value>Recherche de trajets</value> </data>
   <data name="Seek" xml:space="preserve"> <value>Recherche</value> </data>
   <data name="To" xml:space="preserve"> <value>A</value> </data>
+  <data name="Toll" xml:space="preserve"> <value>Péage</value> </data>
   <data name="Update" xml:space="preserve"> <value>Mise a jour</value> </data>
   <data name="Update account" xml:space="preserve"> <value>Mise a jour compte</value> </data>
   <data name="Update data" xml:space="preserve"> <value>Mise a jour données</value> </data>
@@ -209,7 +220,7 @@
   <data name="Mail commute end greeting" xml:space="preserve"> <value>Nous vous souhaitons bonne route, l'équipe de Commute.</value> </data>
   <data name="Mail welcome safe commute" xml:space="preserve"> <value>Nous vous souhaitons bonne route, l'équipe de Commute.</value> </data>
   <data name="Welcome account" xml:space="preserve"> <value>Complétez vos données personnelles et chargez votre photo</value> </data>
-  <data name="Welcome help" xml:space="preserve"> <value>Lisez le guide de démarrage rapide pour avoir condensé des fonctionnalités de Commute.</value> </data>
+  <data name="Welcome help" xml:space="preserve"> <value>Lisez le guide de démarrage rapide pour avoir un condensé des fonctionnalités de Commute.</value> </data>
   <data name="Welcome join" xml:space="preserve"> <value>Créez d'abord un compte pour rejoindre la communauté de Commute</value> </data>
   <data name="Welcome login button press" xml:space="preserve"> <value>Appuyer sur le bouton</value> </data>
   <data name="Welcome login button" xml:space="preserve"> <value>pour vous connecter a Commute</value> </data>
@@ -219,13 +230,15 @@
 &lt;div&gt;- Trouvez d'autres membres avec des trajets similaires&lt;/div&gt;
 &lt;div&gt;- Contactez les pour effectuer les trajets ensembles&lt;/div&gt;
 &lt;div&gt;- Enregistrez les dépenses a partager&lt;/div&gt;</value> </data>
-  <data name="Welcome registred" xml:space="preserve"> <value> tola communauté Commute.</value> </data>
+  <data name="Welcome registred" xml:space="preserve"> <value>à la communauté Commute.</value> </data>
   <data name="Welcome route" xml:space="preserve"> <value>Et maintanant vous êtes prêt à définir votre premier trajet</value> </data>
   <data name="Welcome set location" xml:space="preserve"> <value>Définissez votre position par défaut</value> </data>
   <data name="Welcome view route" xml:space="preserve"> <value>Vous pouvez également visualiser les routes disponibles pour votre trajet sans vous enregister.</value> </data>
   <data name="Wtitle confirmation" xml:space="preserve"> <value>Veuillez confirmer</value> </data>
-  <data name="Metadesc default" xml:space="preserve"> <value>Share your car to commute between home and work with others or find a car in your area to commute to work. Going to work can be fun: Save fuel, save money and make new friends to share a happy time when commuting. This is the green way to go to work. Help saving the planet. Reduce gaz emission</value> </data>
-  <data name="Metadesc home welcome" xml:space="preserve"> <value>Welcome to Commute the green and friendly way to commute. Find routes in your area. Get started with Commute. Joint Commute community.</value> </data>
-  <data name="Metadesc user setlocation" xml:space="preserve"> <value>Set default map location when creating new route. Commute is a friendly and green way to commute between home and work.</value> </data>
-  <data name="Metadesc route list" xml:space="preserve"> <value>Liste des trajets que vous avez defini. Vous pouvez mettre à jour un trajet. Vous pouvez rechercher les trajets similaire au votre. Vous pouvez créer un nouveau trajet.</value> </data>
+  <data name="Metadesc default" xml:space="preserve"> <value>Le covoiturage c'est partager votre voiture pour faire les trajets réguliers maison - travail ou trouver une voiture dans votre quartier pour faire ces trajets avec quelqu'un qui conduit. Allez au travail peut devenir un plaisir: Economisez de l'essence, de l'argent et rencontrez de nouveaux amis pour partagez un moment agréable en allant au travail. C'est le nouveau moyen écologique d'aller au travail. Aidez à sauver la planète. Réduisez les émissions de gaz à effet de serre.</value> </data>
+
+  <data name="Metadesc compute cost" xml:space="preserve"> <value>Evaluez le coût de votre trajet et comment le partager avec les autres utilisateurs qui partagent votre voiture. Le covoiturage c'est partager votre voiture pour faire les trajets réguliers maison - travail ou trouver une voiture dans votre quartier pour faire ces trajets avec quelqu'un qui conduit. Allez au travail peut devenir un plaisir: Economisez de l'essence, de l'argent et rencontrez de nouveaux amis pour partagez un moment agréable en allant au travail. C'est le nouveau moyen écologique d'aller au travail. Aidez à sauver la planète. Réduisez les émissions de gaz à effet de serre.</value> </data>
+  <data name="Metadesc home welcome" xml:space="preserve"> <value>Welcome to Commute the green and friendly way to commute. Find routes in your area. Get started with Commute. Joint Commute community. Le covoiturage c'est partager votre voiture pour faire les trajets réguliers maison - travail ou trouver une voiture dans votre quartier pour faire ces trajets avec quelqu'un qui conduit. Allez au travail peut devenir un plaisir: Economisez de l'essence, de l'argent et rencontrez de nouveaux amis pour partagez un moment agréable en allant au travail. C'est le nouveau moyen écologique d'aller au travail. Aidez à sauver la planète. Réduisez les émissions de gaz à effet de serre.</value> </data>
+  <data name="Metadesc user setlocation" xml:space="preserve"> <value>Set default map location when creating new route. Commute is a friendly and green way to commute between home and work. Le covoiturage c'est partager votre voiture pour faire les trajets réguliers maison - travail ou trouver une voiture dans votre quartier pour faire ces trajets avec quelqu'un qui conduit. Allez au travail peut devenir un plaisir: Economisez de l'essence, de l'argent et rencontrez de nouveaux amis pour partagez un moment agréable en allant au travail. C'est le nouveau moyen écologique d'aller au travail. Aidez à sauver la planète. Réduisez les émissions de gaz à effet de serre.</value> </data>
+  <data name="Metadesc route list" xml:space="preserve"> <value>Liste des trajets que vous avez defini. Vous pouvez mettre à jour un trajet. Vous pouvez rechercher les trajets similaire au votre. Vous pouvez créer un nouveau trajet. Le covoiturage c'est partager votre voiture pour faire les trajets réguliers maison - travail ou trouver une voiture dans votre quartier pour faire ces trajets avec quelqu'un qui conduit. Allez au travail peut devenir un plaisir: Economisez de l'essence, de l'argent et rencontrez de nouveaux amis pour partagez un moment agréable en allant au travail. C'est le nouveau moyen écologique d'aller au travail. Aidez à sauver la planète. Réduisez les émissions de gaz à effet de serre.</value> </data>
 </root>

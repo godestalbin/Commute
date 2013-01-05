@@ -1,0 +1,87 @@
+﻿@using Commute.Properties
+
+@{
+    Layout = "~/Views/Shared/_Mobile.cshtml";
+    ViewBag.Title = @Resources.Compute_cost;
+    ViewBag.Metadesc = Resources.Metadesc_compute_cost;
+}
+
+<div class="ui-grid-a">
+	<div class="ui-block-a">@Resources.Distance</div>
+	<div class="ui-block-b"><input data-bind="value: distance" /></div>
+	<div class="ui-block-a">@Resources.Consumption</div>
+	<div class="ui-block-b"><input data-bind="value: consumption" /></div>
+	<div class="ui-block-a">@Resources.Fuel_cost</div>
+	<div class="ui-block-b"><input data-bind="value: fuelUnitCost" /></div>
+	<div class="ui-block-a">@Resources.Toll</div>
+	<div class="ui-block-b"><input data-bind="value: toll" /></div>
+	<div class="ui-block-a">@Resources.Person_in_car</div>
+	<div class="ui-block-b"><input data-bind="value: personInCar" /></div>
+</div><!-- /grid-a -->
+
+<div class="size100">
+
+<div class="size40 float">&nbsp;</div>
+<div class="size30 float">1-way</div>
+<div class="size30 float">2-way</div>
+
+<div class="size40 float">@Resources.Fuel_used</div>
+<div class="size30 float"><input class="non-editable-data" data-bind="value: fuelUsed" /></div>
+<div class="size30 float"><input class="non-editable-data" data-bind="value: fuelUsed2" /></div>
+
+<div class="size40 float">@Resources.Fuel_cost</div>
+<div class="size30 float"><input class="non-editable-data" data-bind="value: fuelCost" /></div>
+<div class="size30 float"><input class="non-editable-data" data-bind="value: fuelCost2" /></div>
+
+<div class="size40 float">@Resources.Cost_per_person</div>
+<div class="size30 float"><input class="non-editable-data" data-bind="value: costPerPerson" /></div>
+<div class="size30 float"><input class="non-editable-data" data-bind="value: costPerPerson2" /></div>
+
+</div> @*size100*@
+
+@section Scripts {
+<script>
+// Here's my data model
+    var ViewModel = function (distance, consumption, fuelUnitCost, toll, personInCar) {
+    this.distance = ko.observable(distance);
+    this.consumption = ko.observable(consumption);
+    this.fuelUnitCost = ko.observable(fuelUnitCost);
+    this.toll = ko.observable(toll);
+    this.personInCar = ko.observable(personInCar);
+
+    //Fuel used
+    this.fuelUsed = ko.computed(function () {
+        //route length x fuel consumption / 100
+        return this.distance() * this.consumption() / 100;
+    }, this);
+    this.fuelUsed2 = ko.computed(function () {
+        //2-ways: multiply by 2
+        return this.fuelUsed() * 2;
+    }, this);
+
+    //Fuel cost
+    this.fuelCost = ko.computed(function () {
+        //=fuel used x route km
+        return this.fuelUsed() * this.fuelUnitCost();
+    }, this);
+    this.fuelCost2 = ko.computed(function () {
+        //2-ways: multiply by 2
+        return this.fuelCost() * 2;
+    }, this);
+
+    //Cost per person
+    this.costPerPerson = ko.computed(function () {
+        //=(fuel cost + toll) / person
+        //alert(this.fuelCost() + parseFloat( this.toll()));
+        return (this.fuelCost() + parseFloat( this.toll() ) ) / this.personInCar();
+    }, this);
+    this.costPerPerson2 = ko.computed(function () {
+        //2-ways: multiply by 2
+        return this.costPerPerson() * 2;
+    }, this);
+
+    };
+ 
+ko.applyBindings(new ViewModel(12, 7.3, 1.4, 0.0, 1));
+</script>
+}

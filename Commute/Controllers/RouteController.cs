@@ -13,7 +13,7 @@ namespace Commute.Controllers
 {
     public class RouteController : BaseController
     {
-        private Context db = new Context();
+        //private Context db = new Context();
 
         //Display route
         [AllowAnonymous]
@@ -117,7 +117,7 @@ namespace Commute.Controllers
         }
 
         [HttpPost]
-        public int Update(int id, bool isOffer, string name)
+        public int Update(int id, bool isOffer, string name, int distance)
         //Return route Id - useful for new route
         {
             Route route = null;
@@ -126,6 +126,7 @@ namespace Commute.Controllers
             route.UserId = userId;
             route.Name = name;
             route.IsOffer = isOffer;
+            route.Distance = distance;
             if (id == 0) db.Route.Add(route);
             db.SaveChanges();
             return route.Id;

@@ -117,13 +117,20 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+
   <data name="Account" xml:space="preserve"> <value>Account name</value> </data>
   <data name="Amazon picture HTTP" xml:space="preserve"> <value>https://s3-eu-west-1.amazonaws.com/commute/Pictures/</value> </data>
   <data name="Application name" xml:space="preserve"> <value>Commute</value> </data>
   <data name="Cancel" xml:space="preserve"> <value>Cancel</value> </data>
   <data name="Change password" xml:space="preserve"> <value>Change password</value> </data>
+  <data name="Co2 per person" xml:space="preserve"> <value>CO2 per person</value> </data>
+  <data name="Co2 saved" xml:space="preserve"> <value>CO2 saved</value> </data>
+  <data name="Compute cost" xml:space="preserve"> <value>Compute cost</value> </data>
+  <data name="Consumption" xml:space="preserve"> <value>Consumption</value> </data>
+  <data name="Cost per person" xml:space="preserve"> <value>Cost per person</value> </data>
   <data name="Create account" xml:space="preserve"> <value>Create account</value> </data>
   <data name="Dir image upload" xml:space="preserve"> <value>/Content/Images/Upload/</value> </data>
+  <data name="Distance" xml:space="preserve"> <value>Distance</value> </data>
   <data name="Email" xml:space="preserve"> <value>E-mail address</value> </data>
   <data name="Error database access" xml:space="preserve"> <value>Database error</value> </data>
   <data name="Error duplicate account" xml:space="preserve"> <value>This account already exists</value> </data>
@@ -134,6 +141,8 @@
   <data name="Error wrong password" xml:space="preserve"> <value>Wrong password, did you forget it...too bad !</value> </data>
   <data name="Forum" xml:space="preserve"> <value>Forum</value> </data>
   <data name="From" xml:space="preserve"> <value>From</value> </data>
+  <data name="Fuel cost" xml:space="preserve"> <value>Fuel cost</value> </data>
+  <data name="Fuel used" xml:space="preserve"> <value>Fuel used</value> </data>
   <data name="Guest" xml:space="preserve"> <value>Guest</value> </data>
   <data name="Hello" xml:space="preserve"> <value>Hello</value> </data>
   <data name="Help" xml:space="preserve"> <value>Help</value> </data>
@@ -162,6 +171,7 @@
   <data name="Password old" xml:space="preserve"> <value>Old password</value> </data>
   <data name="Password updated" xml:space="preserve"> <value>Password updated</value> </data>
   <data name="Password reset" xml:space="preserve"> <value>Reset password</value> </data>
+  <data name="Person in car" xml:space="preserve"> <value>Person in car</value> </data>
   <data name="Picture" xml:space="preserve"> <value>Picture</value> </data>
   <data name="Previous page" xml:space="preserve"> <value>Previous page</value> </data>
   <data name="Quick start guide" xml:space="preserve"> <value>Quick start guide</value> </data>
@@ -178,6 +188,7 @@
   <data name="Search" xml:space="preserve"> <value>Search</value> </data>
   <data name="Seek" xml:space="preserve"> <value>Seek</value> </data>
   <data name="To" xml:space="preserve"> <value>To</value> </data>
+  <data name="Toll" xml:space="preserve"> <value>Toll</value> </data>
   <data name="Update" xml:space="preserve"> <value>Update</value> </data>
   <data name="Update account" xml:space="preserve"> <value>Update account</value> </data>
   <data name="Update data" xml:space="preserve"> <value>Update data</value> </data>
@@ -219,13 +230,15 @@
 &lt;div&gt;- Find other commuters with similar route&lt;/div&gt;
 &lt;div&gt;- Get in touch with them to commute together&lt;/div&gt;
 &lt;div&gt;- Keep track of the expenses to share&lt;/div&gt;</value> </data>
-  <data name="Welcome registred" xml:space="preserve"> <value> to Commute community.</value> </data>
+  <data name="Welcome registred" xml:space="preserve"> <value>to Commute community.</value> </data>
   <data name="Welcome route" xml:space="preserve"> <value>And then you are ready to define your first commuting route</value> </data>
   <data name="Welcome set location" xml:space="preserve"> <value>Set your default location</value> </data>
   <data name="Welcome view route" xml:space="preserve"> <value>Alternatively, you can view available routes for your commute path witout creating an account.</value> </data>
   <data name="Wtitle confirmation" xml:space="preserve"> <value>Please confirm</value> </data>
-  <data name="Metadesc default" xml:space="preserve"> <value>Share your car to commute between home and work with others or find a car in your area to commute to work. Going to work can be fun: Save fuel, save money and make new friends to share a happy time when commuting. This is the green way to go to work. Help saving the planet. Reduce gaz emission</value> </data>
-  <data name="Metadesc home welcome" xml:space="preserve"> <value>Welcome to Commute the green and friendly way to commute. Find routes in your area. Get started with Commute. Joint Commute community.</value> </data>
-  <data name="Metadesc user setlocation" xml:space="preserve"> <value>Set default map location when creating new route. Commute is a friendly and green way to commute between home and work.</value> </data>
-  <data name="Metadesc route list" xml:space="preserve"> <value>This is the list of routes you have defined. You can update the route. You can search route which are close match to your route. You can create new route.</value> </data>
+  <data name="Metadesc default" xml:space="preserve"> <value>Carpooling consists in sharing your car to commute between home and work with others or find a car in your area with someone driving. Going to work can be fun: Save fuel, save money and make new friends to share a happy time when commuting. This is the green way to go to work. Help saving the planet. Reduce gaz emission.</value> </data>
+
+  <data name="Metadesc compute cost" xml:space="preserve"> <value>Evaluate the cost of your route and how to share it with users sharing your car. Carpooling consists in sharing your car to commute between home and work with others or find a car in your area with someone driving. Going to work can be fun: Save fuel, save money and make new friends to share a happy time when commuting. This is the green way to go to work. Help saving the planet. Reduce gaz emission.</value> </data>
+  <data name="Metadesc home welcome" xml:space="preserve"> <value>Welcome to Commute the green and friendly way to commute. Find routes in your area. Get started with Commute. Joint Commute community. Carpooling consists in sharing your car to commute between home and work with others or find a car in your area with someone driving. Going to work can be fun: Save fuel, save money and make new friends to share a happy time when commuting. This is the green way to go to work. Help saving the planet. Reduce gaz emission.</value> </data>
+  <data name="Metadesc user setlocation" xml:space="preserve"> <value>Set default map location when creating new route. Commute is a friendly and green way to commute between home and work. Carpooling consists in sharing your car to commute between home and work with others or find a car in your area with someone driving. Going to work can be fun: Save fuel, save money and make new friends to share a happy time when commuting. This is the green way to go to work. Help saving the planet. Reduce gaz emission.</value> </data>
+  <data name="Metadesc route list" xml:space="preserve"> <value>This is the list of routes you have defined. You can update the route. You can search route which are close match to your route. You can create new route. Carpooling consists in sharing your car to commute between home and work with others or find a car in your area with someone driving. Going to work can be fun: Save fuel, save money and make new friends to share a happy time when commuting. This is the green way to go to work. Help saving the planet. Reduce gaz emission.</value> </data>
 </root>

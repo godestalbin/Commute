@@ -27,6 +27,7 @@ namespace Commute.Models
         public int UserId { get; set; }
         public bool IsOffer { get; set; } //false=offering route, true=seeking for this route
         public string Name { get; set; }
+        public int Distance { get; set; } //in meters
         //public IEnumerable<RouteWayPoint> RouteWayPoint { get; set; }
         //public JsonResult JsonRoute { get; set; }
 

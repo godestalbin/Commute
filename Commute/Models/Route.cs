@@ -20,5 +20,6 @@ namespace Commute.Models
         public Nullable<decimal> EndLatitude { get; set; }
         [DisplayFormat(DataFormatString = "{0:###.##############}")]
         public Nullable<decimal> EndLongitude { get; set; }
+        public Nullable<int> Distance { get; set; } //in kilometers
     }
 }

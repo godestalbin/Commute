@@ -23,6 +23,9 @@ div.size100 {
 div.size30 {
     width: 30%;
 }
+div.size40 {
+    width: 40%;
+}
 div.size60 {
     width: 60%;
 }
@@ -100,6 +103,8 @@ input.email {
 .seek {
     background-color: #40b723; /*green*/
     background: #40b723; /*green*/
+    /*background: -webkit-radial-gradient(white,#40b723);*/ /*green*/
+    /*filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFFFFF', endColorstr='#f7f7f7');*/
     text-align:left;
     font-weight: 100;
     text-shadow: none;

@@ -106,6 +106,51 @@ namespace Commute.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to CO2 per person.
+        /// </summary>
+        public static string Co2_per_person {
+            get {
+                return ResourceManager.GetString("Co2 per person", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CO2 saved.
+        /// </summary>
+        public static string Co2_saved {
+            get {
+                return ResourceManager.GetString("Co2 saved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Compute cost.
+        /// </summary>
+        public static string Compute_cost {
+            get {
+                return ResourceManager.GetString("Compute cost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Consumption.
+        /// </summary>
+        public static string Consumption {
+            get {
+                return ResourceManager.GetString("Consumption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cost per person.
+        /// </summary>
+        public static string Cost_per_person {
+            get {
+                return ResourceManager.GetString("Cost per person", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Create account.
         /// </summary>
         public static string Create_account {
@@ -120,6 +165,15 @@ namespace Commute.Properties {
         public static string Dir_image_upload {
             get {
                 return ResourceManager.GetString("Dir image upload", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Distance.
+        /// </summary>
+        public static string Distance {
+            get {
+                return ResourceManager.GetString("Distance", resourceCulture);
             }
         }
         
@@ -210,6 +264,24 @@ namespace Commute.Properties {
         public static string From {
             get {
                 return ResourceManager.GetString("From", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fuel cost.
+        /// </summary>
+        public static string Fuel_cost {
+            get {
+                return ResourceManager.GetString("Fuel cost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fuel used.
+        /// </summary>
+        public static string Fuel_used {
+            get {
+                return ResourceManager.GetString("Fuel used", resourceCulture);
             }
         }
         
@@ -484,7 +556,16 @@ namespace Commute.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Share your car to commute between home and work with others or find a car in your area to commute to work. Going to work can be fun: Save fuel, save money and make new friends to share a happy time when commuting. This is the green way to go to work. Help saving the planet. Reduce gaz emission.
+        ///   Looks up a localized string similar to Evaluate the cost of your route and how to share it with users sharing your car. Carpooling consists in sharing your car to commute between home and work with others or find a car in your area with someone driving. Going to work can be fun: Save fuel, save money and make new friends to share a happy time when commuting. This is the green way to go to work. Help saving the planet. Reduce gaz emission..
+        /// </summary>
+        public static string Metadesc_compute_cost {
+            get {
+                return ResourceManager.GetString("Metadesc compute cost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Carpooling consists in sharing your car to commute between home and work with others or find a car in your area with someone driving. Going to work can be fun: Save fuel, save money and make new friends to share a happy time when commuting. This is the green way to go to work. Help saving the planet. Reduce gaz emission..
         /// </summary>
         public static string Metadesc_default {
             get {
@@ -493,7 +574,7 @@ namespace Commute.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Welcome to Commute the green and friendly way to commute. Find routes in your area. Get started with Commute. Joint Commute community..
+        ///   Looks up a localized string similar to Welcome to Commute the green and friendly way to commute. Find routes in your area. Get started with Commute. Joint Commute community. Carpooling consists in sharing your car to commute between home and work with others or find a car in your area with someone driving. Going to work can be fun: Save fuel, save money and make new friends to share a happy time when commuting. This is the green way to go to work. Help saving the planet. Reduce gaz emission..
         /// </summary>
         public static string Metadesc_home_welcome {
             get {
@@ -502,7 +583,7 @@ namespace Commute.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This is the list of routes you have defined. You can update the route. You can search route which are close match to your route. You can create new route..
+        ///   Looks up a localized string similar to This is the list of routes you have defined. You can update the route. You can search route which are close match to your route. You can create new route. Carpooling consists in sharing your car to commute between home and work with others or find a car in your area with someone driving. Going to work can be fun: Save fuel, save money and make new friends to share a happy time when commuting. This is the green way to go to work. Help saving the planet. Reduce gaz emission..
         /// </summary>
         public static string Metadesc_route_list {
             get {
@@ -511,7 +592,7 @@ namespace Commute.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Set default map location when creating new route. Commute is a friendly and green way to commute between home and work..
+        ///   Looks up a localized string similar to Set default map location when creating new route. Commute is a friendly and green way to commute between home and work. Carpooling consists in sharing your car to commute between home and work with others or find a car in your area with someone driving. Going to work can be fun: Save fuel, save money and make new friends to share a happy time when commuting. This is the green way to go to work. Help saving the planet. Reduce gaz emission..
         /// </summary>
         public static string Metadesc_user_setlocation {
             get {
@@ -664,6 +745,15 @@ namespace Commute.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Person in car.
+        /// </summary>
+        public static string Person_in_car {
+            get {
+                return ResourceManager.GetString("Person in car", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Picture.
         /// </summary>
         public static string Picture {
@@ -804,6 +894,15 @@ namespace Commute.Properties {
         public static string To {
             get {
                 return ResourceManager.GetString("To", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Toll.
+        /// </summary>
+        public static string Toll {
+            get {
+                return ResourceManager.GetString("Toll", resourceCulture);
             }
         }
         
@@ -974,7 +1073,7 @@ namespace Commute.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to  to Commute community..
+        ///   Looks up a localized string similar to to Commute community..
         /// </summary>
         public static string Welcome_registred {
             get {
