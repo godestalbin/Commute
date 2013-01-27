@@ -1,0 +1,3 @@
+http://localhost:61022/api/GetUser/1
+{"Account":"a","Name":"GuyO","Password":"DMF1ucDxtqgxw5niaXcmYQ==","EmailAddress":"godestalbin@leroymerlin.cn","PictureVersion":"1355996439","LocationLatitude":47.18971246448422,"LocationLongitude":-1.53808593750000,"Id":1}
+
