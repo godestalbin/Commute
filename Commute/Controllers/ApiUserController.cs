@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Web;
 using System.Web.Http;
 using Commute.Models;
+using System.Security.Cryptography;
 
 namespace Commute.Controllers
 {
@@ -17,9 +18,31 @@ namespace Commute.Controllers
         private Context db = new Context();
 
         // GET api/ApiUser
-        public IEnumerable<User> GetUsers()
+        //public IEnumerable<User> GetUsers()
+        //{
+        //    return db.User.AsEnumerable();
+        //}
+
+        //Check user password
+        //0=user/password does not match, otherwise return User.Id
+        [HttpGet]
+        public int CheckUser(String userName, String password)
         {
-            return db.User.AsEnumerable();
+            User user;
+            try
+            {
+                user = (from u in db.User
+                        where u.Account == userName
+                        select u).FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                return 0; //Database failure or other
+            }
+
+            if (user == null) return 0; //Unknown account
+            else if (user.Password == Convert.ToBase64String(new MD5CryptoServiceProvider().ComputeHash(new System.Text.UTF8Encoding().GetBytes(password ?? "")))) return user.Id; 
+            else return 0; //Wrong password
         }
 
         // GET api/ApiUser/5
@@ -74,17 +97,6 @@ namespace Commute.Controllers
             {
                 return Request.CreateResponse(HttpStatusCode.BadRequest);
             }
-        }
-
-        //Check user password
-        public HttpResponseMessage CheckUser(String userName, String password)
-        {;
-        HttpResponseMessage response;
-            if ( userName == "godestalbin" && password == "cpc" )
-                response = Request.CreateResponse(HttpStatusCode.OK, true);
-            else
-                response = Request.CreateResponse(HttpStatusCode.Unauthorized, false);
-            return response;
         }
 
         // DELETE api/ApiUser/5
