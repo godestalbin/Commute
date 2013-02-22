@@ -10,6 +10,7 @@ namespace Commute.Models
     {
         [DisplayFormat(DataFormatString = "{0:###}")]
         public int UserId { get; set; }
+        public int RouteId { get; set; } //UserId * 1000 + Route id from Android
         public bool IsOffer { get; set; } //false=seeking for this route, true=offering route
         public string Name { get; set; }
         [DisplayFormat(DataFormatString = "{0:###.##############}")]
