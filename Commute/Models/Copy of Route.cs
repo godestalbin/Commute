@@ -3,16 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Commute.Models
 {
-    public class Route
+    public class CopyRoute : Entity
     {
-        [Required, Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int RouteId { get; set; } //UserId * 1000 + Route id from Android
         [DisplayFormat(DataFormatString = "{0:###}")]
         public int UserId { get; set; }
+        public int RouteId { get; set; } //UserId * 1000 + Route id from Android
         public bool IsOffer { get; set; } //false=seeking for this route, true=offering route
         public string Name { get; set; }
         [DisplayFormat(DataFormatString = "{0:###.##############}")]

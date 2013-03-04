@@ -15,12 +15,12 @@
     <div>
         <div id="divRouteButton" class="inline">
             @if (item.IsOffer) {
-            <a href="/Route/CreateUpdate/@item.Id" data-ajax="false" data-role="button" data-inline="true" class = "offer">@item.Id - @item.Name</a> }
+            <a href="/Route/CreateUpdate/@item.RouteId" data-ajax="false" data-role="button" data-inline="true" class = "offer">@item.RouteId - @item.Name</a> }
                                                                                                                                                     else {
-            <a href="/Route/CreateUpdate/@item.Id" data-ajax="false" data-role="button" data-inline="true" class = "seek">@item.Id - @item.Name</a> }
+            <a href="/Route/CreateUpdate/@item.RouteId" data-ajax="false" data-role="button" data-inline="true" class = "seek">@item.RouteId - @item.Name</a> }
         </div>
         <div id="divSearchButton" class="inline">
-            <a href="/Route/Search/@item.Id" data-ajax="false" data-role="button" data-icon="search" data-theme="b" data-iconpos="notext" data-inline="true"></a> @*&nbsp;*@
+            <a href="/Route/Search/@item.RouteId" data-ajax="false" data-role="button" data-icon="search" data-theme="b" data-iconpos="notext" data-inline="true"></a> @*&nbsp;*@
         </div>
     </div>
 }

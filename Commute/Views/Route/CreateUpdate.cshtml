@@ -6,14 +6,14 @@
 }
 
 
-@{ if (@Model.Id == 0) { ViewBag.Title = @Resources.Route_new; } else { ViewBag.Title = @Resources.Route_create_update + " no " + @Model.Id; } }
+@{ if (@Model.RouteId == 0) { ViewBag.Title = @Resources.Route_new; } else { ViewBag.Title = @Resources.Route_create_update + " no " + @Model.RouteId; } }
 
 @*These div are only used to get color from CSS*@
 <div id="seekColor" class="seek"></div>
 <div id="offerColor" class="offer"></div>
 
 @*Hidden fields*@
-<input id="hfId" type="hidden" value="@Model.Id"/>
+<input id="hfId" type="hidden" value="@Model.RouteId"/>
 <input id="hfIsOffer" type="hidden" value="@Model.IsOffer.ToString().ToLower()"/>
 <input id="hfDistance" type="hidden" value="@Model.Distance"/>
 
@@ -46,7 +46,7 @@
             @Html.ValidationMessageFor(model => model.Name)
         </div>
 
-        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.RouteId)
 
         <button value="@Resources.Save" onclick="UpdateRoute($('#hfId').val());" data-inline="true" data-ajax="false"></button>
         </fieldset>
@@ -200,20 +200,20 @@
         mapListener = google.maps.event.addListener(map, 'click', function (event) {
             if (routeWayPoint.length == 0) { //Start point not created yet
                 CreateMarker(event.latLng, 1, true, 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=A|' + markerColor +'|000000'); //Create new marker with location clicked
-                //routeWayPoint.push({ RouteId: @Model.Id, LineId: 1, Latitude: event.latLng.lat(), Longitude: event.latLng.lng() });
+                //routeWayPoint.push({ RouteId: @Model.RouteId, LineId: 1, Latitude: event.latLng.lat(), Longitude: event.latLng.lng() });
                 //$('#hfStartLatitude').val(event.latLng.lat()); //Register start point
                 //$('#hfStartLongitude').val(event.latLng.lng());
             }
             else if (routeWayPoint.length == 1) { //End point not created yet
                 CreateMarker(event.latLng, 2, true, 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=B|' + markerColor +'|000000'); //Create new marker with location clicked
-                //routeWayPoint.push({ RouteId: @Model.Id, LineId: 2, Latitude: event.latLng.lat(), Longitude: event.latLng.lng() });
+                //routeWayPoint.push({ RouteId: @Model.RouteId, LineId: 2, Latitude: event.latLng.lat(), Longitude: event.latLng.lng() });
                 //$('#hfEndLatitude').val(event.latLng.lat()); //Register end point
                 //$('#hfEndLongitude').val(event.latLng.lng());
                 UpdateGoogleRoute();
             }
             else {
                 CreateMarker(event.latLng, routeWayPoint.length + 1, true, 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=' + (routeWayPoint.length - 1) + '|' + markerColor +'|000000'); //Create new marker with location clicked
-                //routeWayPoint.push({ RouteId: @Model.Id, LineId: 2, Latitude: event.latLng.lat(), Longitude: event.latLng.lng() });
+                //routeWayPoint.push({ RouteId: @Model.RouteId, LineId: 2, Latitude: event.latLng.lat(), Longitude: event.latLng.lng() });
                 UpdateGoogleRoute();
             }
         });
@@ -375,7 +375,7 @@
             //Post route name - because we can leave popup without saving
             //To avoid useless double save we could identify that save was done
             var routeId = $('#hfId').val();
-            UpdateRoute(routeId);
+            //UpdateRoute(routeId);
             for ( i=0; i<routeWayPoint.length; i++) {
                 delete routeWayPoint[i].marker;
             }
@@ -406,10 +406,11 @@
             async: false,
             success: function (routeId, textStatus, jqXHR) {
                 $('#hfId').val(routeId); //Save new route id
-                if ( @Model.Id == 0 ) { //New route update routeId routeWayPoint
+                if ( @Model.RouteId == 0 ) { //New route update routeId routeWayPoint
                     for ( i=0; i<routeWayPoint.length; i++) {
                         routeWayPoint[i].RouteId = routeId;
                     }
+                    SaveRoute();
                 }
             }
         });

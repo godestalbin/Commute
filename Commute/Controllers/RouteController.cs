@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using System.Data.Objects.SqlClient;
 using Commute.Models;
 using Commute.Properties;
+using System.Data.Objects;
 
 namespace Commute.Controllers
 {
@@ -41,7 +42,7 @@ namespace Commute.Controllers
             if (startLat == 0 || startLng == 0 || endLat == 0 || endLng == 0)
             { //All routes
                 routeList = from r in db.Route
-                            select new RouteSearch { Id = r.Id, UserId = r.UserId, IsOffer = r.IsOffer, Name = r.Name, StartDistance = 0, EndDistance = 0 };
+                            select new RouteSearch { Id = r.RouteId, UserId = r.UserId, IsOffer = r.IsOffer, Name = r.Name, StartDistance = 0, EndDistance = 0 };
             }
             else //Search matching routes
             {
@@ -50,7 +51,7 @@ namespace Commute.Controllers
                 routeList = from r in db.Route
                             where SqlFunctions.Acos(SqlFunctions.Sin((double) SqlFunctions.Radians(r.StartLatitude)) * SqlFunctions.Sin((double)SqlFunctions.Radians(startLat)) + SqlFunctions.Cos((double)SqlFunctions.Radians(r.StartLatitude)) * SqlFunctions.Cos((double)SqlFunctions.Radians(startLat)) * SqlFunctions.Cos((double)SqlFunctions.Radians(startLng) - (double)SqlFunctions.Radians(r.StartLongitude))) * 6371 < (double)maxDist &&
                             SqlFunctions.Acos(SqlFunctions.Sin((double)SqlFunctions.Radians(r.EndLatitude)) * SqlFunctions.Sin((double)SqlFunctions.Radians(endLat)) + SqlFunctions.Cos((double)SqlFunctions.Radians(r.EndLatitude)) * SqlFunctions.Cos((double)SqlFunctions.Radians(endLat)) * SqlFunctions.Cos((double)SqlFunctions.Radians(endLng) - (double)SqlFunctions.Radians(r.EndLongitude))) * 6371 < (double)maxDist
-                            select new RouteSearch { Id = r.Id, UserId = r.UserId, IsOffer = r.IsOffer, Name = r.Name, StartDistance = SqlFunctions.Acos(SqlFunctions.Sin((double)SqlFunctions.Radians(r.StartLatitude)) * SqlFunctions.Sin((double)SqlFunctions.Radians(startLat)) + SqlFunctions.Cos((double)SqlFunctions.Radians(r.StartLatitude)) * SqlFunctions.Cos((double)SqlFunctions.Radians(startLat)) * SqlFunctions.Cos((double)SqlFunctions.Radians(startLng) - (double)SqlFunctions.Radians(r.StartLongitude))) * 6371, EndDistance = SqlFunctions.Acos(SqlFunctions.Sin((double)SqlFunctions.Radians(r.EndLatitude)) * SqlFunctions.Sin((double)SqlFunctions.Radians(endLat)) + SqlFunctions.Cos((double)SqlFunctions.Radians(r.EndLatitude)) * SqlFunctions.Cos((double)SqlFunctions.Radians(endLat)) * SqlFunctions.Cos((double)SqlFunctions.Radians(endLng) - (double)SqlFunctions.Radians(r.EndLongitude))) * 6371 };
+                            select new RouteSearch { Id = r.RouteId, UserId = r.UserId, IsOffer = r.IsOffer, Name = r.Name, StartDistance = SqlFunctions.Acos(SqlFunctions.Sin((double)SqlFunctions.Radians(r.StartLatitude)) * SqlFunctions.Sin((double)SqlFunctions.Radians(startLat)) + SqlFunctions.Cos((double)SqlFunctions.Radians(r.StartLatitude)) * SqlFunctions.Cos((double)SqlFunctions.Radians(startLat)) * SqlFunctions.Cos((double)SqlFunctions.Radians(startLng) - (double)SqlFunctions.Radians(r.StartLongitude))) * 6371, EndDistance = SqlFunctions.Acos(SqlFunctions.Sin((double)SqlFunctions.Radians(r.EndLatitude)) * SqlFunctions.Sin((double)SqlFunctions.Radians(endLat)) + SqlFunctions.Cos((double)SqlFunctions.Radians(r.EndLatitude)) * SqlFunctions.Cos((double)SqlFunctions.Radians(endLat)) * SqlFunctions.Cos((double)SqlFunctions.Radians(endLng) - (double)SqlFunctions.Radians(r.EndLongitude))) * 6371 };
             }
             ViewBag.Title = Resources.Route_search;
             return View(routeList.ToList());
@@ -88,10 +89,10 @@ namespace Commute.Controllers
                             where SqlFunctions.Acos(SqlFunctions.Sin((double) SqlFunctions.Radians(r.StartLatitude)) * SqlFunctions.Sin(startLat) + SqlFunctions.Cos((double)SqlFunctions.Radians(r.StartLatitude)) * SqlFunctions.Cos(startLat) * SqlFunctions.Cos(startLng - (double)SqlFunctions.Radians(r.StartLongitude))) * 6371 < (double)maxDist &&
                             SqlFunctions.Acos(SqlFunctions.Sin((double)SqlFunctions.Radians(r.EndLatitude)) * SqlFunctions.Sin(endLat) + SqlFunctions.Cos((double)SqlFunctions.Radians(r.EndLatitude)) * SqlFunctions.Cos(endLat) * SqlFunctions.Cos(endLng - (double)SqlFunctions.Radians(r.EndLongitude))) * 6371 < (double)maxDist &&
                             r.UserId != searchRoute.UserId
-                            select new RouteSearch { Id = r.Id, UserId = r.UserId, IsOffer = r.IsOffer, Name = r.Name, StartDistance = SqlFunctions.Acos(SqlFunctions.Sin((double) SqlFunctions.Radians(r.StartLatitude)) * SqlFunctions.Sin(startLat) + SqlFunctions.Cos((double)SqlFunctions.Radians(r.StartLatitude)) * SqlFunctions.Cos(startLat) * SqlFunctions.Cos(startLng - (double)SqlFunctions.Radians(r.StartLongitude))) * 6371, EndDistance = SqlFunctions.Acos(SqlFunctions.Sin((double)SqlFunctions.Radians(r.EndLatitude)) * SqlFunctions.Sin(endLat) + SqlFunctions.Cos((double)SqlFunctions.Radians(r.EndLatitude)) * SqlFunctions.Cos(endLat) * SqlFunctions.Cos(endLng - (double)SqlFunctions.Radians(r.EndLongitude))) * 6371 };
+                            select new RouteSearch { Id = r.RouteId, UserId = r.UserId, IsOffer = r.IsOffer, Name = r.Name, StartDistance = SqlFunctions.Acos(SqlFunctions.Sin((double)SqlFunctions.Radians(r.StartLatitude)) * SqlFunctions.Sin(startLat) + SqlFunctions.Cos((double)SqlFunctions.Radians(r.StartLatitude)) * SqlFunctions.Cos(startLat) * SqlFunctions.Cos(startLng - (double)SqlFunctions.Radians(r.StartLongitude))) * 6371, EndDistance = SqlFunctions.Acos(SqlFunctions.Sin((double)SqlFunctions.Radians(r.EndLatitude)) * SqlFunctions.Sin(endLat) + SqlFunctions.Cos((double)SqlFunctions.Radians(r.EndLatitude)) * SqlFunctions.Cos(endLat) * SqlFunctions.Cos(endLng - (double)SqlFunctions.Radians(r.EndLongitude))) * 6371 };
 
             ViewBag.Title = Resources.Route_search;
-            ViewBag.routeId = searchRoute.Id;
+            ViewBag.routeId = searchRoute.RouteId;
             ViewBag.isOffer = searchRoute.IsOffer.ToString();
             return View(routeList.ToList());
         }
@@ -116,20 +117,39 @@ namespace Commute.Controllers
             return View(routeHeader);
         }
 
+        //Create/Update route
         [HttpPost]
         public int Update(int id, bool isOffer, string name, int distance)
         //Return route Id - useful for new route
         {
             Route route = null;
-            if (id == 0) route = new Route(); //Create new route
+            if (id == 0) //Create new route
+            {
+                route = new Route();
+                //Retrieve next RouteId
+                //var maxId = from r in db.Route select new { maxId = r.Max(s => s.RouteId) };
+                var maxId = (from r in db.Route where r.UserId == userId select (int?)r.RouteId).Max();
+                route.RouteId = ( maxId ?? userId * 1000 ) + 1;
+            }
+
             else route = db.Route.Find(id); //Retrieve route
             route.UserId = userId;
             route.Name = name;
             route.IsOffer = isOffer;
             route.Distance = distance;
             if (id == 0) db.Route.Add(route);
-            db.SaveChanges();
-            return route.Id;
+            //db.SaveChanges();
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (OptimisticConcurrencyException)
+            {
+                //db.Refresh(RefreshMode.ClientWins, db.Route);
+                
+                db.SaveChanges();
+            }
+            return route.RouteId;
         }
 
         //Create or update route
@@ -155,7 +175,7 @@ namespace Commute.Controllers
             
             //Retrieve the route
             Route route = null;
-            if( routeId > 0) route = db.Route.Find(routeId);
+            if (routeId > 0) route = db.Route.Find(routeId);
             //if (route == null)
             //{
             //    //If we create a new route we need an active session to find user ID
@@ -174,7 +194,7 @@ namespace Commute.Controllers
 
             //Delete previous way points
             var linqWayPoint = from wp in db.RouteWayPoint
-                           where wp.RouteId == route.Id
+                               where wp.RouteId == route.RouteId
                            select wp;
             // wayPoint; // = new RouteWayPoint();
             foreach ( RouteWayPoint wayPoint in linqWayPoint ) {
@@ -186,7 +206,7 @@ namespace Commute.Controllers
             }
             db.SaveChanges();
             //return RedirectToAction("ListMobile", "Route", new { userId = Session["userId"] }); //View(CreateUpdate(route.Id));
-            return route.Id.ToString(); //Mobile?userId=" + Session["userId"];
+            return route.RouteId.ToString(); //Mobile?userId=" + Session["userId"];
         }
 
         //On post we use CreateUpdate
@@ -213,15 +233,15 @@ namespace Commute.Controllers
         {
             //Get the specified route
             var linqRoute = from r in db.Route
-                            where r.Id == id
+                            where r.RouteId == id
                             select r;
 
             //Add the start point and end point as first and second way point
             var routeWayPoint = (from r in linqRoute
                                  where r.StartLatitude != null && r.StartLongitude != null
-                                select new RouteWayPointView { RouteId = r.Id, LineId = 1, Latitude = r.StartLatitude, Longitude = r.StartLongitude }).Union(from r in linqRoute
+                                 select new RouteWayPointView { RouteId = r.RouteId, LineId = 1, Latitude = r.StartLatitude, Longitude = r.StartLongitude }).Union(from r in linqRoute
                           where r.EndLatitude != null && r.EndLongitude != null
-                       select new RouteWayPointView { RouteId = r.Id, LineId = 2, Latitude = r.EndLatitude, Longitude = r.EndLongitude });
+                                                                                                                                                                   select new RouteWayPointView { RouteId = r.RouteId, LineId = 2, Latitude = r.EndLatitude, Longitude = r.EndLongitude });
             //Add the remaining (real) way points
             routeWayPoint = routeWayPoint.Union(from rwp in db.RouteWayPoint
                                                 where rwp.RouteId == id

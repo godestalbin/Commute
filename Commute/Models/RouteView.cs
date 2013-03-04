@@ -7,23 +7,25 @@ using System.Web.Mvc;
 
 namespace Commute.Models
 {
-    public class RouteHeader : Entity
+    public class RouteHeader //: Entity
     {
+        public int RouteId { get; set; }
         public int UserId { get; set; }
         public bool IsOffer { get; set; } //false=offering route, true=seeking for this route
         public string Name { get; set; }
 
         public RouteHeader(Route route)
         {
-            Id = route.Id;
+            RouteId = route.RouteId;
             UserId = route.UserId;
             IsOffer = route.IsOffer;
             Name = route.Name;
         }
     }
 
-    public class RouteView : Entity
+    public class RouteView //: Entity
         {
+        public int RouteId { get; set; }
         public int UserId { get; set; }
         public bool IsOffer { get; set; } //false=offering route, true=seeking for this route
         public string Name { get; set; }
@@ -37,7 +39,7 @@ namespace Commute.Models
 
         public RouteView(Route route) //, IEnumerable<RouteWayPoint> routeWayPoint, JsonResult jsonRoute)
         {
-            Id = route.Id;
+            RouteId = route.RouteId;
             UserId = route.UserId;
             IsOffer = route.IsOffer;
             Name = route.Name;
