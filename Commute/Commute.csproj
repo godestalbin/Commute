@@ -668,7 +668,6 @@
     <Content Include="Views\Location\List.cshtml" />
     <Content Include="Views\Location\CreateUpdate.cshtml" />
     <Content Include="Views\Route\Create.cshtml" />
-    <Content Include="Views\Route\Edit.cshtml" />
     <Content Include="Views\Route\Delete.cshtml" />
     <Content Include="Views\Route\CreateUpdate %28route%29.cshtml" />
     <Content Include="Views\Route\Base.cshtml" />
