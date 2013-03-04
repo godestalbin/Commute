@@ -639,11 +639,9 @@
     <Content Include="Views\Route\SetRoute.cshtml" />
     <Content Include="Views\Home\Welcome.cshtml" />
     <Content Include="Views\Route\Geolocation.cshtml" />
-    <Content Include="Views\Route\SearchOld.cshtml" />
     <Content Include="Views\Help\Quick start.cshtml" />
     <Content Include="Views\Mail\Send.cshtml" />
     <Content Include="Views\Mail\Welcome.cshtml" />
-    <Content Include="Views\Route\SearchAllOld.cshtml" />
     <Content Include="Views\User\WelcomeRegistered.cshtml" />
     <Content Include="Views\Mail\Contact.cshtml" />
     <Content Include="Views\Help\Debug.cshtml" />
@@ -673,7 +671,6 @@
     <Content Include="Views\Route\Create.cshtml" />
     <Content Include="Views\Route\Edit.cshtml" />
     <Content Include="Views\Route\Delete.cshtml" />
-    <Content Include="Views\Route\CreateUpdateOld.cshtml" />
     <Content Include="Views\Route\CreateUpdate %28route%29.cshtml" />
     <Content Include="Views\Route\Base.cshtml" />
     <Content Include="Views\User\List.cshtml" />
@@ -695,7 +692,6 @@
     <Content Include="Views\User\SetLocation.cshtml" />
     <Content Include="Views\Shared\_Mail.cshtml" />
     <Content Include="Views\User\EditOld.cshtml" />
-    <Content Include="Views\Route\Update.cshtml" />
     <Content Include="Views\Shared\_MobileDialog.cshtml" />
     <Content Include="Views\User\UserPicture.cshtml" />
     <Content Include="Views\User\Password.cshtml" />
