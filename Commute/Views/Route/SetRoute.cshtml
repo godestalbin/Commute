@@ -9,7 +9,7 @@
 @{ ViewBag.Title = @Resources.Route_create_update; }
 
 
-<input id="hfId" type="hidden" value="@Model.Id"/>
+<input id="hfId" type="hidden" value="@Model.RouteId"/>
 <input id="hfUserId" type="hidden" value="@Model.UserId"/>
 @*<input id="hfJsonRoute" type="hidden" value="@Model.JsonRoute"/>*@
 
@@ -90,13 +90,13 @@
         google.maps.event.addListener(map, 'click', function (event) {
             if (routeWayPoint.length == 0) { //Start point not created yet
                 CreateMarker(event.latLng, 1, true, 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=A|6BC54D|000000'); //Create new marker with location clicked
-                //routeWayPoint.push({ RouteId: @Model.Id, LineId: 1, Latitude: event.latLng.lat(), Longitude: event.latLng.lng() });
+                //routeWayPoint.push({ RouteId: @Model.RouteId, LineId: 1, Latitude: event.latLng.lat(), Longitude: event.latLng.lng() });
                 //$('#hfStartLatitude').val(event.latLng.lat()); //Register start point
                 //$('#hfStartLongitude').val(event.latLng.lng());
             }
             else if (routeWayPoint.length == 1) { //End point not created yet
                 CreateMarker(event.latLng, 2, true, 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=B|6BC54D|000000'); //Create new marker with location clicked
-                //routeWayPoint.push({ RouteId: @Model.Id, LineId: 2, Latitude: event.latLng.lat(), Longitude: event.latLng.lng() });
+                //routeWayPoint.push({ RouteId: @Model.RouteId, LineId: 2, Latitude: event.latLng.lat(), Longitude: event.latLng.lng() });
                 //$('#hfEndLatitude').val(event.latLng.lat()); //Register end point
                 //$('#hfEndLongitude').val(event.latLng.lng());
                 UpdateRoute();
@@ -120,7 +120,7 @@ function CreateMarker(location, id, draggable, icon) {
     if ( routeWayPoint.length >= id )
         routeWayPoint[marker.id - 1].marker = marker; //Keep the marker in the array
     else {
-        routeWayPoint.push({RouteId: @Model.Id, LineId: routeWayPoint.length + 1, Latitude: location.lat(), Longitude: location.lng(), marker: marker});
+        routeWayPoint.push({RouteId: @Model.RouteId, LineId: routeWayPoint.length + 1, Latitude: location.lat(), Longitude: location.lng(), marker: marker});
         }
 
             //Add marker event to track drag end
@@ -203,7 +203,7 @@ function CreateMarker(location, id, draggable, icon) {
     //Synchronous Ajax to get route and way points
     function GetWayPoint() {
         $.ajax({ 
-            'async': false, 'url': '/Route/WayPoint/' + @Model.Id, 'type': 'get', 'dataType': 'json', //?id=
+            'async': false, 'url': '/Route/WayPoint/' + @Model.RouteId, 'type': 'get', 'dataType': 'json', //?id=
             'success': function (data) {
                 routeWayPoint = data.Data;
             }
@@ -234,7 +234,7 @@ function CreateMarker(location, id, draggable, icon) {
         var i = $('#selIsSeek').val();
         $.ajax({ 
             url: '/Route/UpdateRoute/', type: 'post',
-            data: { id: @Model.Id, isOffer: $('#selIsSeek').val(), name: $('#iptName').val()}
+            data: { id: @Model.RouteId, isOffer: $('#selIsSeek').val(), name: $('#iptName').val()}
         });
     }
 
