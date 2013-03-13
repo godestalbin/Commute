@@ -81,23 +81,59 @@ namespace Commute.Controllers
             }
         }
 
-        // POST api/ApiUser
-        public HttpResponseMessage PostUser(User user)
+        [HttpPost]
+        public int CreateUser(User user)
+            ///xx=Success, account created, return user id
+            ///-1=Failure, account already exists
+            ///-2=Data model validation failed
         {
+            //Check account does not already exist
             if (ModelState.IsValid)
             {
-                db.User.Add(user);
-                db.SaveChanges();
+                try
+                {
+                    //Encode user password
+                    user.Password = Convert.ToBase64String(new MD5CryptoServiceProvider().ComputeHash(new System.Text.UTF8Encoding().GetBytes(user.Password ?? "")));
+                    db.User.Add(user);
+                    db.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    return -1; //Account already exists or other database error
+                }
+                try
+                {
+                    //Send welcome mail to user
+                    Mail mail = new Mail();
+                    mail.Welcome(user.Id).Send();
+                }
+                catch (Exception e)
+                {
+                }
 
-                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created, user);
-                response.Headers.Location = new Uri(Url.Link("DefaultApi", new { id = user.Id }));
-                return response;
+                return user.Id; //Success
             }
-            else
-            {
-                return Request.CreateResponse(HttpStatusCode.BadRequest);
-            }
+
+            return -2; //Data model validation failed
         }
+
+        // POST api/ApiUser
+        //public HttpResponseMessage PostUser(User user)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.User.Add(user);
+        //        db.SaveChanges();
+
+        //        HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created, user);
+        //        response.Headers.Location = new Uri(Url.Link("DefaultApi", new { id = user.Id }));
+        //        return response;
+        //    }
+        //    else
+        //    {
+        //        return Request.CreateResponse(HttpStatusCode.BadRequest);
+        //    }
+        //}
 
         // DELETE api/ApiUser/5
         public HttpResponseMessage DeleteUser(int id)
