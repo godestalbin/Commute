@@ -13,6 +13,9 @@ using System.Security.Cryptography;
 
 namespace Commute.Controllers
 {
+    /// Commute API for users
+
+    /// This API is called by Commute android
     public class ApiUserController : ApiController
     {
         private Context db = new Context();

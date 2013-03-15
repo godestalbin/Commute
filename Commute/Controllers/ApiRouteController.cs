@@ -14,12 +14,16 @@ using System.Web.Http.Controllers;
 
 namespace Commute.Controllers
 {
+    /// Route API called by Commute Android
+
+    /// The API URL is http://commute.apphb.com/api/apiroute
+    /// Get request action should be prefixed by get
     public class ApiRouteController : ApiController
     {
         private Context db = new Context();
 
         // GET api/ApiRoute
-        //get all routes for the specified user - not used currently (HttpActivity). Could be useful to update local database
+        /// Get all routes for the specified user - not used currently (HttpActivity). Could be useful to update local database
         public IEnumerable<Route> GetRoutes(int userId)
         {
             var routeList = from r in db.Route
@@ -29,9 +33,11 @@ namespace Commute.Controllers
             //return db.Route.AsEnumerable();
         }
 
-        //Get the list of route matching the route with id matchingRouteId
-        //api/ApiRoute?matchingRouteId=xx
-        public IEnumerable<RouteSearch> GetMatchingRoute(int matchingRouteId, int maxDist = 500)
+        /// Get the list of route matching the route with id matchingRouteId
+
+        /// Example call: api/ApiRoute?matchingRouteId=xx&maxDist=xx
+        /// Default maxDist is set to 5 km
+        public IEnumerable<RouteSearch> GetMatchingRoute(int matchingRouteId, int maxDist = 5)
         {
             //Route searchRoute = db.Route.Find(matchingRouteId);
             Route searchRoute = (from r in db.Route
@@ -47,8 +53,8 @@ namespace Commute.Controllers
 
             var routeList = from r in db.Route
                             where SqlFunctions.Acos(SqlFunctions.Sin((double)SqlFunctions.Radians(r.StartLatitude)) * SqlFunctions.Sin(startLat) + SqlFunctions.Cos((double)SqlFunctions.Radians(r.StartLatitude)) * SqlFunctions.Cos(startLat) * SqlFunctions.Cos(startLng - (double)SqlFunctions.Radians(r.StartLongitude))) * 6371 < (double)maxDist &&
-                            SqlFunctions.Acos(SqlFunctions.Sin((double)SqlFunctions.Radians(r.EndLatitude)) * SqlFunctions.Sin(endLat) + SqlFunctions.Cos((double)SqlFunctions.Radians(r.EndLatitude)) * SqlFunctions.Cos(endLat) * SqlFunctions.Cos(endLng - (double)SqlFunctions.Radians(r.EndLongitude))) * 6371 < (double)maxDist //&&
-                            //r.UserId != searchRoute.UserId //TMP allow to display same user route for debugging
+                            SqlFunctions.Acos(SqlFunctions.Sin((double)SqlFunctions.Radians(r.EndLatitude)) * SqlFunctions.Sin(endLat) + SqlFunctions.Cos((double)SqlFunctions.Radians(r.EndLatitude)) * SqlFunctions.Cos(endLat) * SqlFunctions.Cos(endLng - (double)SqlFunctions.Radians(r.EndLongitude))) * 6371 < (double)maxDist &&
+                            r.UserId != searchRoute.UserId //TMP allow to display same user route for debugging
                             select new RouteSearch { Id = r.RouteId, UserId = r.UserId, IsOffer = r.IsOffer, Name = r.Name, StartDistance = SqlFunctions.Acos(SqlFunctions.Sin((double)SqlFunctions.Radians(r.StartLatitude)) * SqlFunctions.Sin(startLat) + SqlFunctions.Cos((double)SqlFunctions.Radians(r.StartLatitude)) * SqlFunctions.Cos(startLat) * SqlFunctions.Cos(startLng - (double)SqlFunctions.Radians(r.StartLongitude))) * 6371, EndDistance = SqlFunctions.Acos(SqlFunctions.Sin((double)SqlFunctions.Radians(r.EndLatitude)) * SqlFunctions.Sin(endLat) + SqlFunctions.Cos((double)SqlFunctions.Radians(r.EndLatitude)) * SqlFunctions.Cos(endLat) * SqlFunctions.Cos(endLng - (double)SqlFunctions.Radians(r.EndLongitude))) * 6371 };
 
             return routeList.AsEnumerable();
@@ -69,7 +75,25 @@ namespace Commute.Controllers
             return route;
         }
 
-        // PUT api/ApiRoute/5 - Not used currently
+        /// Send a mail to inform a user with a matching route wish to contact
+
+        /// Result 0=success, 1=error (sending mail failed) \n
+        /// Call example: http://commute.apphb.com/api/apiroute?routeId=1&matchingRouteId=2
+        public int GetSendMatchingRouteMail(int routeId, int matchingRouteId)
+        {
+            try
+            {
+                //Send welcome mail to user
+                Mail mail = new Mail();
+                mail.Contact(routeId, matchingRouteId).Send();
+                return 0; //Success
+            }
+            catch ( Exception e ) {
+                return 1; //Something wrong happened
+            }
+        }
+
+        /// PUT api/ApiRoute/5 - Not used currently
         public HttpResponseMessage PutRoute(int id, Route route)
         {
             if (ModelState.IsValid && id == route.RouteId)
@@ -94,7 +118,9 @@ namespace Commute.Controllers
         }
 
         // POST api/ApiRoute
-        //Create or update route: local db -> central db
+        /// Create or update route: local db -> central db
+        
+        /// If the route is not found in database it will be created, otherwise it is updated
         public HttpResponseMessage PostRoute(Route route)
         {
             if (ModelState.IsValid)
@@ -129,6 +155,7 @@ namespace Commute.Controllers
         }
 
         // DELETE api/ApiRoute/5
+        /// Not used currently
         public HttpResponseMessage DeleteRoute(int id)
         {
             Route route = db.Route.Find(id);
