@@ -57,7 +57,10 @@ namespace Commute.Controllers
                             r.UserId != searchRoute.UserId //TMP allow to display same user route for debugging
                             select new RouteSearch { Id = r.RouteId, UserId = r.UserId, IsOffer = r.IsOffer, Name = r.Name, StartDistance = SqlFunctions.Acos(SqlFunctions.Sin((double)SqlFunctions.Radians(r.StartLatitude)) * SqlFunctions.Sin(startLat) + SqlFunctions.Cos((double)SqlFunctions.Radians(r.StartLatitude)) * SqlFunctions.Cos(startLat) * SqlFunctions.Cos(startLng - (double)SqlFunctions.Radians(r.StartLongitude))) * 6371, EndDistance = SqlFunctions.Acos(SqlFunctions.Sin((double)SqlFunctions.Radians(r.EndLatitude)) * SqlFunctions.Sin(endLat) + SqlFunctions.Cos((double)SqlFunctions.Radians(r.EndLatitude)) * SqlFunctions.Cos(endLat) * SqlFunctions.Cos(endLng - (double)SqlFunctions.Radians(r.EndLongitude))) * 6371 };
 
-            return routeList.AsEnumerable();
+            //Sort the result by smallest distance first
+            var routeListSorted = from t in routeList orderby t.StartDistance, t.EndDistance select t;
+
+            return routeListSorted.AsEnumerable();
 
         }
 
