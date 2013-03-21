@@ -24,5 +24,6 @@ namespace Commute.Models
         [DisplayFormat(DataFormatString = "{0:###.##############}")]
         public Nullable<decimal> EndLongitude { get; set; }
         public Nullable<int> Distance { get; set; } //in kilometers
+        public string CovoiturageLink { get; set; } ///Link to 3rd party coivoiturage.fr, if set it all tells this is not user created
     }
 }

@@ -11,6 +11,10 @@ using System.Web;
 using System.Web.Http;
 using Commute.Models;
 using System.Web.Http.Controllers;
+using System.IO;
+using System.Web.Script.Serialization;
+using Newtonsoft.Json;
+using System.Globalization;
 
 namespace Commute.Controllers
 {
@@ -132,7 +136,10 @@ namespace Commute.Controllers
                                 where r.RouteId == route.RouteId
                                   select r).FirstOrDefault();
                 if (dbRoute == null)
+                {
                     db.Route.Add(route);
+                    getRouteFromCovoiturageFr(route);
+                }
                 else //Update existing route    
                 {
                     dbRoute.Name = route.Name;
@@ -181,10 +188,218 @@ namespace Commute.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, route);
         }
 
+        //TMP API to call getRouteFromCovoiturageFr
+        public void getRouteCovoiturage(decimal lat, decimal lng)
+        {
+            Route route = new Route();
+            route.StartLatitude = lat; //47.90320650
+            route.StartLongitude = lng; //1.90921890
+            route.EndLatitude = 50.629250M; //Lille
+            route.EndLongitude = 3.0572560M;
+
+            getRouteFromCovoiturageFr(route);
+        }
+
+        /// Use the route provided to create new routes using data from covoiturage.fr
+         
+        /// Convert the route start/end lat/lng to city
+        /// Query covoiturage.fr with this start.end city and take first non club route
+        /// Save this route for UserId=0
+        private void getRouteFromCovoiturageFr(Route route)
+        {
+            CityGeoCode startCity = getLocalityFromGoogle(route.StartLatitude ?? 0, route.StartLongitude ?? 0);
+            CityGeoCode endCity = getLocalityFromGoogle(route.EndLatitude ?? 0, route.EndLongitude ?? 0);
+
+            //We got some city as start/end
+            String routeLink = "";
+            if (startCity != null && endCity != null)
+                routeLink = getLinkFromCovoiturageFr(startCity.city, endCity.city);
+            if (routeLink != "") //Create a new covoiturage route
+            {
+                try
+                {
+                    //Get last ID
+                    var userRoute = from r in db.Route where r.UserId == 0 select r;
+                    int id;
+                    if (userRoute.Any()) id = userRoute.Max(r => r.RouteId);
+                    else id = 0;
+                    if (id == 999) id = 0; //Currently we are limited to 999 route per user
+                    id += 1; //increment RouteId
+                    //Set new route data
+                    Route newRoute = new Route();
+                    newRoute.RouteId = id;
+                    newRoute.Name = startCity.city + " - " + endCity.city;
+                    newRoute.IsOffer = true;
+                    newRoute.UserId = 0;
+                    newRoute.StartLatitude = startCity.lat; //Later should the city lat
+                    newRoute.StartLongitude = startCity.lng;
+                    newRoute.EndLatitude = endCity.lat;
+                    newRoute.EndLongitude = endCity.lng;
+                    newRoute.CovoiturageLink = routeLink;
+                    newRoute.Distance = 0; //Need to get a Google route to know it
+                    //Add the route in dabase
+                    db.Route.Add(newRoute);
+                    db.SaveChanges();
+                }
+                catch (Exception e) { }
+            }
+        }
+
+        /// Convert lat/lng to city using Google geocode
+        private CityGeoCode getLocalityFromGoogle(decimal lat, decimal lng)
+        {
+            string url = "http://maps.googleapis.com/maps/api/geocode/json?latlng=" + lat + "," + lng + "&sensor=false";
+            CityGeoCode cityGeoCode = new CityGeoCode(); //result returned
+            WebResponse response = null;
+
+            try
+            {
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+                request.Method = "GET";
+                response = request.GetResponse();
+                if (response != null)
+                {
+                    string str = null;
+                    using (Stream stream = response.GetResponseStream())
+                    {
+                        using (StreamReader streamReader = new StreamReader(stream))
+                        {
+                            str = streamReader.ReadToEnd();
+                        }
+                    }
+
+                    GeoResponse geoResponse = JsonConvert.DeserializeObject<GeoResponse>(str);
+                    if (geoResponse.status == "OK")
+                    {
+                        //Iterate the results
+                        int coutResult = geoResponse.results.Length;
+                        for ( int k = 0; k < coutResult; k++)
+                        {
+                            if (geoResponse.results[k].types[0] == "locality" ) {
+                                //Iterate the address_components
+                                int count = geoResponse.results[k].address_components.Length;
+                                for (int i = 0; i < count; i++)
+                                {
+                                    //Iterate the types
+                                    int typeCount = geoResponse.results[k].address_components[i].types.Length;
+                                    for (int j = 0; j < typeCount; j++)
+                                        if (geoResponse.results[k].address_components[i].types[j] == "locality")
+                                        {
+                                        
+                                            cityGeoCode.city = geoResponse.results[k].address_components[i].long_name;
+                                            cityGeoCode.lat = geoResponse.results[k].Geometry.Location.Lat;
+                                            cityGeoCode.lng = geoResponse.results[k].Geometry.Location.Lng;
+                                            return cityGeoCode;
+                                        }
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("JSON response failed, status is '{0}'", geoResponse.status);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            //If we get here it means we did not get locality from Google
+            return cityGeoCode;
+        }
+
+        /// Query covoiturage.fr
+        private String getLinkFromCovoiturageFr(String startLocality, String endLocality) {
+                //Request to covoiturage.fr
+                WebResponse response = null;
+                try
+                {
+                    HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://www.covoiturage.fr/recherche?fc=" + startLocality + "&tc=" + endLocality + "&to=BOTH&p=1&n=20&t=tripsearch&a=searchtrip ");
+                    request.Method = "GET";
+                    response = request.GetResponse();
+                    if (response != null)
+                    {
+                        string html = null;
+                        using (Stream stream = response.GetResponseStream())
+                        {
+                            using (StreamReader streamReader = new StreamReader(stream))
+                            {
+                                html = streamReader.ReadToEnd();
+                            }
+                        }
+                        //Keep only the part after the non club member
+                        int index = html.IndexOf("search-results search-results-v2");
+                        if ( index == -1 ) return "";
+                        html = html.Substring(index);
+                        index = html.IndexOf("href=\"/trajet"); //Find the firs href
+                        if ( index == -1 ) return "";
+                        html = html.Substring(index + 6); //Cut before the link
+                        index = html.IndexOf("\""); //Find the first " (end of the link)
+                        html = html.Substring(0, index);
+
+                        return html;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            return "";
+            }
+
         protected override void Dispose(bool disposing)
         {
             db.Dispose();
             base.Dispose(disposing);
         }
     }
+
+    ///Class to store Google geocode API usefull result
+    public class CityGeoCode
+    {
+        public string city { get; set; }
+        public decimal lat { get; set; }
+        public decimal lng { get; set; }
+
+    }
+
+    /// Class to decode Google geocode API JSON response
+    public class GeoLocation
+    {
+        public decimal Lat { get; set; }
+        public decimal Lng { get; set; }
+    }
+
+    public class GeoGeometry
+    {
+        public GeoLocation Location { get; set; }
+    }
+
+    public class GeoTypes
+    {
+        public String types { get; set; }
+    }
+
+    public class GeoAddressComponents
+    {
+        public String long_name { get; set; }
+        public String short_name { get; set; }
+        public String[] types { get; set; }
+    }
+
+    public class GeoResult
+    {
+        public GeoAddressComponents[] address_components { get; set; }
+        public GeoGeometry Geometry { get; set; }
+        public String[] types { get; set; }
+    }
+
+    public class GeoResponse
+    {
+        public string status { get; set; }
+        public GeoResult[] results { get; set; }
+    }
+
 }

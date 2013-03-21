@@ -2,7 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Globalization;
 using System.Linq;
+using System.Threading;
 using System.Web;
 using System.Web.Http;
 using System.Web.Http.Validation.Providers;
@@ -31,7 +33,7 @@ namespace Commute
             var configuration = new AccountConfiguration(settings["Cloudinary.CloudName"],
                                                          settings["Cloudinary.ApiKey"],
                                                          settings["Cloudinary.ApiSecret"]);
-            
+
             //Fix issue related to manually generated key for Route.RouteId
             //http://stackoverflow.com/questions/12305784/dataannotation-for-required-property
             GlobalConfiguration.Configuration.Services.RemoveAll(
@@ -39,6 +41,12 @@ typeof(System.Web.Http.Validation.ModelValidatorProvider),
 v => v is InvalidModelValidatorProvider);
 
             AccountConfiguration.Initialize(configuration);
+        }
+
+        protected void Application_BeginRequest(Object sender, EventArgs e)
+        {
+            //Set specifically culture for server - avoid comma problem when running on local computer set with French
+            Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("en-US");
         }
     }
 }
