@@ -43,10 +43,10 @@ v => v is InvalidModelValidatorProvider);
             AccountConfiguration.Initialize(configuration);
         }
 
-        //protected void Application_BeginRequest(Object sender, EventArgs e)
-        //{
-        //    //Set specifically culture for server - avoid comma problem when running on local computer set with French
-        //    Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("en-US");
-        //}
+        protected void Application_BeginRequest(Object sender, EventArgs e)
+        {
+            //Set specifically culture for server - avoid comma problem when running on local computer set with French
+            Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("en-US");
+        }
     }
 }
