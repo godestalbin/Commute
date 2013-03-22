@@ -41,28 +41,31 @@ namespace Commute.Controllers
 
         /// Example call: api/ApiRoute?matchingRouteId=xx&maxDist=xx
         /// Default maxDist is set to 5 km
+        /// matchingRouteId is actuallty the route id to match
         public IEnumerable<RouteSearch> GetMatchingRoute(int matchingRouteId, int maxDist = 5)
         {
-            //Route searchRoute = db.Route.Find(matchingRouteId);
-            Route searchRoute = (from r in db.Route
-                                 where r.RouteId == matchingRouteId
-                                 select r).FirstOrDefault();
-            if (searchRoute == null) return null;
+            IEnumerable<RouteSearch> routeMatchList = searchMatchingRoute(matchingRouteId, maxDist);
 
-            //decimal maxDist = 5; //Distance approximation allowed in kilometers
-            double startLat = Math.PI * (double)searchRoute.StartLatitude / 180.0;
-            double startLng = Math.PI * (double)searchRoute.StartLongitude / 180.0;
-            double endLat = Math.PI * (double)searchRoute.EndLatitude / 180.0;
-            double endLng = Math.PI * (double)searchRoute.EndLongitude / 180.0;
+            ////Route searchRoute = db.Route.Find(matchingRouteId);
+            //Route searchRoute = (from r in db.Route
+            //                     where r.RouteId == matchingRouteId
+            //                     select r).FirstOrDefault();
+            //if (searchRoute == null) return null;
 
-            var routeList = from r in db.Route
-                            where SqlFunctions.Acos(SqlFunctions.Sin((double)SqlFunctions.Radians(r.StartLatitude)) * SqlFunctions.Sin(startLat) + SqlFunctions.Cos((double)SqlFunctions.Radians(r.StartLatitude)) * SqlFunctions.Cos(startLat) * SqlFunctions.Cos(startLng - (double)SqlFunctions.Radians(r.StartLongitude))) * 6371 < (double)maxDist &&
-                            SqlFunctions.Acos(SqlFunctions.Sin((double)SqlFunctions.Radians(r.EndLatitude)) * SqlFunctions.Sin(endLat) + SqlFunctions.Cos((double)SqlFunctions.Radians(r.EndLatitude)) * SqlFunctions.Cos(endLat) * SqlFunctions.Cos(endLng - (double)SqlFunctions.Radians(r.EndLongitude))) * 6371 < (double)maxDist &&
-                            r.UserId != searchRoute.UserId //TMP allow to display same user route for debugging
-                            select new RouteSearch { Id = r.RouteId, UserId = r.UserId, IsOffer = r.IsOffer, Name = r.Name, StartDistance = SqlFunctions.Acos(SqlFunctions.Sin((double)SqlFunctions.Radians(r.StartLatitude)) * SqlFunctions.Sin(startLat) + SqlFunctions.Cos((double)SqlFunctions.Radians(r.StartLatitude)) * SqlFunctions.Cos(startLat) * SqlFunctions.Cos(startLng - (double)SqlFunctions.Radians(r.StartLongitude))) * 6371, EndDistance = SqlFunctions.Acos(SqlFunctions.Sin((double)SqlFunctions.Radians(r.EndLatitude)) * SqlFunctions.Sin(endLat) + SqlFunctions.Cos((double)SqlFunctions.Radians(r.EndLatitude)) * SqlFunctions.Cos(endLat) * SqlFunctions.Cos(endLng - (double)SqlFunctions.Radians(r.EndLongitude))) * 6371 };
+            ////decimal maxDist = 5; //Distance approximation allowed in kilometers
+            //double startLat = Math.PI * (double)searchRoute.StartLatitude / 180.0;
+            //double startLng = Math.PI * (double)searchRoute.StartLongitude / 180.0;
+            //double endLat = Math.PI * (double)searchRoute.EndLatitude / 180.0;
+            //double endLng = Math.PI * (double)searchRoute.EndLongitude / 180.0;
+
+            //var routeList = from r in db.Route
+            //                where SqlFunctions.Acos(SqlFunctions.Sin((double)SqlFunctions.Radians(r.StartLatitude)) * SqlFunctions.Sin(startLat) + SqlFunctions.Cos((double)SqlFunctions.Radians(r.StartLatitude)) * SqlFunctions.Cos(startLat) * SqlFunctions.Cos(startLng - (double)SqlFunctions.Radians(r.StartLongitude))) * 6371 < (double)maxDist &&
+            //                SqlFunctions.Acos(SqlFunctions.Sin((double)SqlFunctions.Radians(r.EndLatitude)) * SqlFunctions.Sin(endLat) + SqlFunctions.Cos((double)SqlFunctions.Radians(r.EndLatitude)) * SqlFunctions.Cos(endLat) * SqlFunctions.Cos(endLng - (double)SqlFunctions.Radians(r.EndLongitude))) * 6371 < (double)maxDist &&
+            //                r.UserId != searchRoute.UserId //TMP allow to display same user route for debugging
+            //                select new RouteSearch { Id = r.RouteId, UserId = r.UserId, IsOffer = r.IsOffer, Name = r.Name, StartDistance = SqlFunctions.Acos(SqlFunctions.Sin((double)SqlFunctions.Radians(r.StartLatitude)) * SqlFunctions.Sin(startLat) + SqlFunctions.Cos((double)SqlFunctions.Radians(r.StartLatitude)) * SqlFunctions.Cos(startLat) * SqlFunctions.Cos(startLng - (double)SqlFunctions.Radians(r.StartLongitude))) * 6371, EndDistance = SqlFunctions.Acos(SqlFunctions.Sin((double)SqlFunctions.Radians(r.EndLatitude)) * SqlFunctions.Sin(endLat) + SqlFunctions.Cos((double)SqlFunctions.Radians(r.EndLatitude)) * SqlFunctions.Cos(endLat) * SqlFunctions.Cos(endLng - (double)SqlFunctions.Radians(r.EndLongitude))) * 6371 };
 
             //Sort the result by smallest distance first
-            var routeListSorted = from t in routeList orderby t.StartDistance, t.EndDistance select t;
+            var routeListSorted = from t in routeMatchList orderby t.StartDistance, t.EndDistance select t;
 
             return routeListSorted.AsEnumerable();
 
@@ -139,6 +142,7 @@ namespace Commute.Controllers
                 {
                     db.Route.Add(route);
                     getRouteFromCovoiturageFr(route);
+                    searchMatchingRoute(route);
                 }
                 else //Update existing route    
                 {
@@ -348,6 +352,44 @@ namespace Commute.Controllers
                 }
             return "";
             }
+        
+        /// Search matching route for the specified route and send mail to users
+
+        /// Search database for matching route
+        /// Send mail to the user (skip route collected from covoiturage.fr)
+        private void searchMatchingRoute(Route route)
+        {
+            IEnumerable<RouteSearch> routeMatchList = searchMatchingRoute(route.RouteId);
+
+            //Send mail to user for all matches found
+            foreach ( RouteSearch matchRoute in routeMatchList ) {
+                if ( matchRoute.Id > 999 ) //Send mail only if this is not a route from covoiturage.fr
+                    GetSendMatchingRouteMail(route.RouteId, matchRoute.Id);
+            }
+        }
+
+        private IEnumerable<RouteSearch> searchMatchingRoute(int matchingRouteId, int maxDist = 5)
+        {
+            //Route searchRoute = db.Route.Find(matchingRouteId);
+            Route searchRoute = (from r in db.Route
+                                 where r.RouteId == matchingRouteId
+                                 select r).FirstOrDefault();
+            if (searchRoute == null) return null;
+
+            //decimal maxDist = 5; //Distance approximation allowed in kilometers
+            double startLat = Math.PI * (double)searchRoute.StartLatitude / 180.0;
+            double startLng = Math.PI * (double)searchRoute.StartLongitude / 180.0;
+            double endLat = Math.PI * (double)searchRoute.EndLatitude / 180.0;
+            double endLng = Math.PI * (double)searchRoute.EndLongitude / 180.0;
+
+            var routeList = from r in db.Route
+                            where SqlFunctions.Acos(SqlFunctions.Sin((double)SqlFunctions.Radians(r.StartLatitude)) * SqlFunctions.Sin(startLat) + SqlFunctions.Cos((double)SqlFunctions.Radians(r.StartLatitude)) * SqlFunctions.Cos(startLat) * SqlFunctions.Cos(startLng - (double)SqlFunctions.Radians(r.StartLongitude))) * 6371 < (double)maxDist &&
+                            SqlFunctions.Acos(SqlFunctions.Sin((double)SqlFunctions.Radians(r.EndLatitude)) * SqlFunctions.Sin(endLat) + SqlFunctions.Cos((double)SqlFunctions.Radians(r.EndLatitude)) * SqlFunctions.Cos(endLat) * SqlFunctions.Cos(endLng - (double)SqlFunctions.Radians(r.EndLongitude))) * 6371 < (double)maxDist &&
+                            r.UserId != searchRoute.UserId
+                            select new RouteSearch { Id = r.RouteId, UserId = r.UserId, IsOffer = r.IsOffer, Name = r.Name, StartDistance = SqlFunctions.Acos(SqlFunctions.Sin((double)SqlFunctions.Radians(r.StartLatitude)) * SqlFunctions.Sin(startLat) + SqlFunctions.Cos((double)SqlFunctions.Radians(r.StartLatitude)) * SqlFunctions.Cos(startLat) * SqlFunctions.Cos(startLng - (double)SqlFunctions.Radians(r.StartLongitude))) * 6371, EndDistance = SqlFunctions.Acos(SqlFunctions.Sin((double)SqlFunctions.Radians(r.EndLatitude)) * SqlFunctions.Sin(endLat) + SqlFunctions.Cos((double)SqlFunctions.Radians(r.EndLatitude)) * SqlFunctions.Cos(endLat) * SqlFunctions.Cos(endLng - (double)SqlFunctions.Radians(r.EndLongitude))) * 6371 };
+
+            return routeList;
+        }
 
         protected override void Dispose(bool disposing)
         {
