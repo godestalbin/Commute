@@ -16,6 +16,13 @@ namespace Commute.Controllers
     {
         //private Context db = new Context();
 
+        [AllowAnonymous]
+        public ActionResult AndroidTraffic()
+        {
+            return View();
+        }
+
+
         //Display route
         [AllowAnonymous]
         public ActionResult View(int id, int routeId)

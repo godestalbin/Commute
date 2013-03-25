@@ -168,8 +168,9 @@ namespace Commute.Controllers
             }
         }
 
-        // DELETE api/ApiRoute/5
-        /// Not used currently
+        /// Delete route
+
+        /// DELETE api/ApiRoute/5
         public HttpResponseMessage DeleteRoute(int id)
         {
             Route route = db.Route.Find(id);
