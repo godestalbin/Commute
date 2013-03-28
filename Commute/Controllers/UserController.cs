@@ -173,6 +173,7 @@ namespace Commute.Controllers
         }
 
         //Upload (post only)
+        [AllowAnonymous] //TMP to test post request with Send HTTP tool
         [HttpPost]
         public ActionResult UploadFile(Entity entity)
         {
@@ -188,7 +189,9 @@ namespace Commute.Controllers
                 //Need to save the extension in database if we want to display different type of files.
 
                 //Upload to Cloudinary
-                string version = UploadToCloudinary(postFile, String.Format("{0:00000000}", entity.Id) + Path.GetExtension(postFile.FileName));
+                string version = Upload2Cloudinary(postFile, String.Format("{0:00000000}", entity.Id) + Path.GetExtension(postFile.FileName));
+                //Non official Cloudiray NuGet API
+                //string version = UploadToCloudinary(postFile, String.Format("{0:00000000}", entity.Id) + Path.GetExtension(postFile.FileName));
                 //Save picture version
                 User user;
                 user = db.User.Find(entity.Id);
@@ -199,6 +202,25 @@ namespace Commute.Controllers
                 //UploadToAmazonService(postFile, String.Format("{0:00000000}", entity.Id) + Path.GetExtension(postFile.FileName));
             }
             return RedirectToAction("Edit");
+        }
+
+        private string Upload2Cloudinary(HttpPostedFileBase file, string filename)
+        {
+            var settings = ConfigurationManager.AppSettings;
+            CloudinaryDotNet.Account cloudinaryAccount = new CloudinaryDotNet.Account(settings["Cloudinary.CloudName"],
+                                                                                      settings["Cloudinary.ApiKey"],
+                                                                                      settings["Cloudinary.ApiSecret"]);
+            string PublicId = Path.GetFileNameWithoutExtension(filename);
+            CloudinaryDotNet.Actions.ImageUploadParams uploadParams = new CloudinaryDotNet.Actions.ImageUploadParams()
+            {
+                //File = new CloudinaryDotNet.Actions.FileDescription(@"E:\godestalbin - Pictures\circle_blue.png"),
+                File = new CloudinaryDotNet.Actions.FileDescription(filename, file.InputStream),
+                PublicId = PublicId
+            };
+            CloudinaryDotNet.Cloudinary cloudinary = new CloudinaryDotNet.Cloudinary(cloudinaryAccount);
+            cloudinary.DeleteResources(new string[] { PublicId });
+            CloudinaryDotNet.Actions.ImageUploadResult uploadResult = cloudinary.Upload(uploadParams);
+            return uploadResult.Version;
         }
 
         private string UploadToCloudinary(HttpPostedFileBase file, string filename)
