@@ -10,6 +10,9 @@ using System.Web;
 using System.Web.Http;
 using Commute.Models;
 using System.Security.Cryptography;
+using System.IO;
+using System.Configuration;
+using System.Threading.Tasks;
 
 namespace Commute.Controllers
 {
@@ -120,23 +123,49 @@ namespace Commute.Controllers
             return -2; //Data model validation failed
         }
 
-        // POST api/ApiUser
-        //public HttpResponseMessage PostUser(User user)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.User.Add(user);
-        //        db.SaveChanges();
+        /// Upload user picture
+        /// Sample call: /api/apiuser/1
+        public Task<string> PostUploadFile(int id)
+        //<IEnumerable<string>>
+        {
+            if (!Request.Content.IsMimeMultipartContent())
+            {
+                throw new HttpResponseException(Request.CreateResponse(
+                HttpStatusCode.NotAcceptable,
+                "This request is not properly formatted"));
+            }
 
-        //        HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created, user);
-        //        response.Headers.Location = new Uri(Url.Link("DefaultApi", new { id = user.Id }));
-        //        return response;
-        //    }
-        //    else
-        //    {
-        //        return Request.CreateResponse(HttpStatusCode.BadRequest);
-        //    }
-        //}
+            try
+            {
+                var streamProvider = new MultipartMemoryStreamProvider();
+                var task = Request.Content.ReadAsMultipartAsync(streamProvider).ContinueWith<string>(t =>
+                      {
+                          if (t.IsFaulted || t.IsCanceled)
+                          {
+                              throw new HttpResponseException(HttpStatusCode.InternalServerError);
+                          }
+
+                          string addedId = streamProvider.Contents.Select(i =>
+                          {
+                              Stream stream = i.ReadAsStreamAsync().Result;
+                            string version = Upload2Cloudinary(stream, String.Format("{0:00000000}", id));
+                            User user;
+                            user = db.User.Find(id);
+                            user.PictureVersion = version;
+                            db.SaveChanges();
+                            return version;
+                          }).First();
+                          return addedId;
+                      });
+                return task;
+            }
+            catch (Exception ex)
+            {
+                throw new HttpResponseException(Request.CreateResponse(
+                HttpStatusCode.NotAcceptable,
+                "Error: " + ex.Message));
+            }
+        }
 
         // DELETE api/ApiUser/5
         public HttpResponseMessage DeleteUser(int id)
@@ -166,5 +195,25 @@ namespace Commute.Controllers
             db.Dispose();
             base.Dispose(disposing);
         }
+
+        private string Upload2Cloudinary(Stream file, string filename)
+        {
+            var settings = ConfigurationManager.AppSettings;
+            CloudinaryDotNet.Account cloudinaryAccount = new CloudinaryDotNet.Account(settings["Cloudinary.CloudName"],
+                                                                                      settings["Cloudinary.ApiKey"],
+                                                                                      settings["Cloudinary.ApiSecret"]);
+            string PublicId = Path.GetFileNameWithoutExtension(filename);
+            CloudinaryDotNet.Actions.ImageUploadParams uploadParams = new CloudinaryDotNet.Actions.ImageUploadParams()
+            {
+                //File = new CloudinaryDotNet.Actions.FileDescription(@"E:\godestalbin - Pictures\circle_blue.png"),
+                File = new CloudinaryDotNet.Actions.FileDescription(filename, file),
+                PublicId = PublicId
+            };
+            CloudinaryDotNet.Cloudinary cloudinary = new CloudinaryDotNet.Cloudinary(cloudinaryAccount);
+            cloudinary.DeleteResources(new string[] { PublicId });
+            CloudinaryDotNet.Actions.ImageUploadResult uploadResult = cloudinary.Upload(uploadParams);
+            return uploadResult.Version;
+        }
+
     }
 }
