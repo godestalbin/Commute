@@ -203,11 +203,17 @@ namespace Commute.Controllers
                                                                                       settings["Cloudinary.ApiKey"],
                                                                                       settings["Cloudinary.ApiSecret"]);
             string PublicId = Path.GetFileNameWithoutExtension(filename);
+
+            CloudinaryDotNet.Transformation et = new CloudinaryDotNet.Transformation().Angle(new string[] { "exif" }).Width(100).Height(100).Crop("thumb").Gravity("face").Radius(8);
+            CloudinaryDotNet.Transformation et2 = new CloudinaryDotNet.Transformation().Effect("grayscale");
             CloudinaryDotNet.Actions.ImageUploadParams uploadParams = new CloudinaryDotNet.Actions.ImageUploadParams()
             {
-                //File = new CloudinaryDotNet.Actions.FileDescription(@"E:\godestalbin - Pictures\circle_blue.png"),
                 File = new CloudinaryDotNet.Actions.FileDescription(filename, file),
-                PublicId = PublicId
+                PublicId = PublicId,
+                //Format = "png", //That makes the file much bigger 3,5Kb -> 55Kb
+                //EagerTransforms = new List<CloudinaryDotNet.Transformation>{ et },
+                Transformation =  et
+                //Exif = true //Rotate automatically according to EXIF data
             };
             CloudinaryDotNet.Cloudinary cloudinary = new CloudinaryDotNet.Cloudinary(cloudinaryAccount);
             cloudinary.DeleteResources(new string[] { PublicId });
