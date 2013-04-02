@@ -66,9 +66,18 @@ namespace Commute.Controllers
         // PUT api/ApiUser/5
         public HttpResponseMessage PutUser(int id, User user)
         {
-            if (ModelState.IsValid && id == user.Id)
+            //Retrieve user in database
+            User dbUser = db.User.Find(id);
+            if (dbUser != null)
             {
-                db.Entry(user).State = EntityState.Modified;
+                //Currently only these 2 fields can be updated in Commute android
+                dbUser.Name = user.Name;
+                dbUser.EmailAddress = user.EmailAddress;
+            }
+            //Original code
+            if (id == user.Id) //ModelState.IsValid &&
+            {
+                db.Entry(dbUser).State = EntityState.Modified;
 
                 try
                 {
