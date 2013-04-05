@@ -22,6 +22,7 @@ namespace Commute.Controllers
                 userName = User.Identity.Name;
                 Session["userName"] = User.Identity.Name;
                 ViewBag.userName = Session["userName"];
+                if ( userId == 0 ) Session["userId"] = 0;
                 if (Session["userId"] == null) //Need to get user ID from database
                 {
                     User user = (from u in db.User
@@ -56,6 +57,9 @@ namespace Commute.Controllers
         {
             //Non authenticated user -> Welcome
             if (!User.Identity.IsAuthenticated) return RedirectToAction("Welcome");
+
+            //Identified user 0, to see covoiturage route
+            if (userId == 0) return RedirectToAction("List", "Route");
 
             //User is authenticated
             //Retrieve user's data
